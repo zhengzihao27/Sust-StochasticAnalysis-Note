@@ -1,0 +1,52 @@
+% !TeX root = ../main.tex
+\chapter{Intro}
+
+\section{week 1}
+
+\propp{If $X$ is adapted to the filtration ($\mathcal{F}_t$) and every sample path is right-continuous or left-continuous, then $X$ is also progressively measurable.}{
+    Assume right-continuity $\forall~t > 0$, $\forall~ n \geq 1$, $\forall~ 0 \leq k \leq 2^n -1,$
+    $$
+    X_s^{(n)}(\omega) = X_{\frac{k+1}{2^n}t}(\omega),\quad \forall~ \frac{kt}{2^n} < s \leq \frac{k+1}{2^n}t
+    $$
+}
+
+\propp{stopping time $\subseteq$ optional time and stopping $=$ optional if the filtration is right-continuous.}{
+    ``$\Rightarrow$'' $\{T<t\} = \bigcup_{n=1}^{\infty}\{T \leq t - \frac{1}{n}\} \in \mathcal{F}_t$.
+    
+    ``$\Leftarrow$'' If $T$ is an optional time, then $\forall~ m \geq 1,$
+    $$
+        \{T \leq t\} = \bigcap_{n=m}^{\infty}\left\{T < t+\frac{1}{n}\right\}.
+    $$
+    Because $\{T < t + \frac{1}{n}\} \in \mathcal{F}_{t+\frac{1}{n}} \subseteq \mathcal{F}_{t+\frac{1}{m}}$.
+    
+    $\Rightarrow~ \{T \leq t\} \in \mathcal{F}_{t+\frac{1}{m}}$
+    
+    $\Rightarrow~ \{T \leq t\} \in \bigcap_{m=1}^{\infty}\mathcal{F}_{t+\frac{1}{m}}= \mathcal{F}_{t^+} = \mathcal{F}_t$.
+}
+
+\lemnn{If $T$ and $S$ are stopping times, then $T \wedge S$, $T \vee S $, $T+S$ are stopping times.}
+
+\pf{}
+
+\lemnn{If $\{T_n\}_{n \geq 1}$ are stopping times, then $\sup_{n \geq 1} T_n$ is a stopping time.}
+
+\pf{
+    $\forall~t \geq 0,$ 
+    $
+        \{\sup_{n \geq 1} T_n \leq t\} = \bigcap_{n=1}^{\infty}\{T_n \leq t\} \in \mathcal{F}_t.
+    $
+}
+
+\defnn{The stopping $\sigma$-algebra is $\mathcal{F}_T = \{A \in \mathcal{F} \mid \forall~t \geq 0,~ A \bigcap \{T \leq t\} \in \mathcal{F}_t\}$.}
+
+\prop{If $T \equiv t_0$, then $\mathcal{F}_T = \mathcal{F}_{t_0}$.}
+
+\pf{$\forall~ t \geq 0$
+    $$
+        \{T \leq t\} = \begin{cases}
+            \varnothing,& t_0 > t\\
+            \Omega, &t_0 \leq t
+        \end{cases}
+    $$
+
+}

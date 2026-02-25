@@ -1,0 +1,127 @@
+% --------------------------------------------------------------
+% This is all preamble stuff that you don't have to worry about.
+% Head down to where it says "Start here"
+% --------------------------------------------------------------
+ 
+\documentclass[11pt,oneside]{book}
+ 
+% \usepackage{amsmath,amsthm,amssymb}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage{microtype} 
+\usepackage{fontawesome5}
+\usepackage{amsmath, amsthm, amssymb, amsfonts}
+\usepackage{mathrsfs}
+\usepackage{dsfont}
+\usepackage{mathtools}
+\usepackage{relsize}
+\usepackage{thmtools}
+\usepackage{graphicx}
+\usepackage{setspace}
+\usepackage{geometry}
+\usepackage{float}
+\usepackage{hyperref}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{framed}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{environ}
+\usepackage{tcolorbox}
+\usepackage{ulem}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{tikz}
+\usetikzlibrary{intersections, calc}
+\usetikzlibrary{patterns}
+\usepackage{circuitikz}
+\usepackage{cancel}
+\usepackage{changepage}
+\usepackage{extarrows}
+
+\usetikzlibrary{calc}
+\usetikzlibrary{tikzmark}
+
+\tcbuselibrary{theorems,skins,breakable}
+
+\setstretch{1.2}
+\geometry{
+    margin=1in,
+    headheight=12pt,
+    headsep=25pt,
+    footskip=30pt
+}
+
+ 
+\newenvironment{theorem}[2][Theorem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{lemma}[2][Lemma]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{exercise}[2][Exercise]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries \textcolor{blue} {#1}}\hskip \labelsep {\bfseries \textcolor{blue} {#2.}}]}{\end{trivlist}}
+\newenvironment{reflection}[2][Reflection]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{proposition}[2][Proposition]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{corollary}[2][Corollary]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+
+ 
+% Variables
+\def\notetitle{Stochastic Analysis}
+\def\noteauthor{
+    \textbf{Phd.Student} \\ 
+    {\LaTeX} by Zheng.zh\\
+    SUST University}
+\def\notedate{\today}
+
+
+% The theorem system and user-defined commands
+\input{commands.tex}
+\input{theorems.tex}
+\newtheorem{definition}{Definition}
+
+\includeonly{chapter/chapter1}
+\begin{document} 
+% --------------------------------------------------------------
+%                         Start here
+% --------------------------------------------------------------
+ 
+%\renewcommand{\qedsymbol}{\filledbox}
+
+\title{\textbf{
+    \LARGE{\notetitle}} \\
+    LectureNotes{
+    \vspace*{10\baselineskip}}
+    }
+\author{\noteauthor}
+\date{\notedate}
+
+\maketitle
+\newpage
+
+\tableofcontents
+\newpage
+
+
+
+\include{chapter/chapter1}
+\include{chapter/chapter2}
+\include{chapter/chapter3}
+\include{chapter/chapter4}
+\include{chapter/chapter5}
+\defn{defn example}{Example}
+\thm{thm example}{Example}
+\pf{proof}
+\lemp{lemma example}{Example}{proof for lemma example}
+\propp{pro example}{Example}
+\clmp{claim example}{Example}{proof for claim example}
+\corp{cor example}{example}{proof for corollary example}
+\fact{Example fact}
+\rmkb{Example remark}
+
+% --------------------------------------------------------------
+%     You don't have to mess with anything below this line.
+% --------------------------------------------------------------
+
+\noindent \email{zhengzh2025@mail.sustech.edu.cn}
+\end{document}

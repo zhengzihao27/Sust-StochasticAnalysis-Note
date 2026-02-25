@@ -1,0 +1,436 @@
+% Theorem System
+% The following boxes are provided:
+%   Definition:     \defn 
+%   Theorem:        \thm 
+%   Lemma:          \lem
+%   Corollary:      \cor
+%   Proposition:    \prop   
+%   Claim:          \clm
+%   Fact:           \fact
+%   Proof:          \pf
+%   Example:        \ex
+%   Remark:         \rmk (sentence), \rmkb (block)
+% Suffix
+%   r:              Allow Theorem/Definition to be referenced, e.g. thmr
+%   p:              Add a short proof block for Lemma, Corollary, Proposition or Claim, e.g. lemp
+%                   For theorems, use \pf for proof blocks
+
+\newenvironment{foldblock}{}{}
+
+
+
+% --------------------------------------------------------------
+%     Definition
+% --------------------------------------------------------------
+\newtheoremstyle{def}
+    {\topsep}
+    {\topsep}
+    {\normalfont}       % Body font
+    {}         
+    {\color{ForestGreen}\bfseries}
+    {.}
+    {0.5em}
+    {}
+\theoremstyle{def}
+\newtheorem{mydefinition}{Definition}[section]
+
+\NewDocumentCommand{\defnn}{+m}{
+  \begin{mydefinition}
+    #1
+  \end{mydefinition}
+}
+
+\NewDocumentCommand{\defn}{m+m}{
+  \begin{mydefinition}[#1]
+    #2
+  \end{mydefinition}
+}
+
+\NewDocumentCommand{\defnr}{mm+m}{
+  \begin{mydefinition}[#1]\label{defn:#2}
+    #3
+  \end{mydefinition}
+}
+
+
+
+
+% --------------------------------------------------------------
+%     Theorem
+% --------------------------------------------------------------
+\newtheoremstyle{thm}
+  {\topsep}           % Space above
+  {\topsep}           % Space below
+  {\normalfont}       % Body font
+  {}                  % Indent
+  {\color{red}\bfseries} % Head font
+  {.}                 % Punctuation after heading
+  {0.5em}             % Space after heading
+  {} 
+\theoremstyle{thm}
+\newtheorem{mytheorem}{Theorem}[section]
+
+\NewDocumentCommand{\thm}{m+m}{
+    \begin{mytheorem}[#1]{}{}
+        \leavevmode
+        \begin{adjustwidth}{1.5em}{0pt}
+            \setlength{\parskip}{0.3\baselineskip} % 统一段落间距（柔和）
+            #2
+        \end{adjustwidth}
+        \vspace{0.2\baselineskip}
+    \end{mytheorem}
+}
+
+\NewDocumentCommand{\thmnn}{+m}{
+    \begin{mytheorem}{}
+        \leavevmode
+        \begin{adjustwidth}{1.5em}{0pt}
+            \setlength{\parskip}{0.3\baselineskip} % 统一段落间距（柔和）
+            #1
+        \end{adjustwidth}
+        \vspace{0.2\baselineskip}
+    \end{mytheorem}
+}
+
+\NewDocumentCommand{\thmr}{mm+m}{
+    \begin{mytheorem}[#1]{}
+        \leavevmode
+        \phantomsection        % ← 强制插入 anchor
+        \label{thm:#2}         
+        \begin{adjustwidth}{1.5em}{0pt}
+            \setlength{\parskip}{0.3\baselineskip} % 统一段落间距（柔和）
+            #3
+        \end{adjustwidth}
+        \vspace{0.2\baselineskip}
+    \end{mytheorem}
+}
+
+\NewDocumentCommand{\thmnnr}{m+m}{
+    \begin{mytheorem}{}       
+        \phantomsection        % ← 强制插入 anchor
+        \label{thm:#1}         
+        \begin{adjustwidth}{1.5em}{0pt}
+            \setlength{\parskip}{0.3\baselineskip} % 统一段落间距（柔和）
+            #2
+        \end{adjustwidth}
+        \vspace{0.2\baselineskip}
+    \end{mytheorem}
+}
+
+
+% --------------------------------------------------------------
+%     Lemma
+% --------------------------------------------------------------
+\newtheoremstyle{lemma}
+    {\topsep}
+    {\topsep}
+    {\normalfont}       % Body font
+    {}                    % Indent
+    {\color{NavyBlue}\bfseries}
+    {.}
+    {0.5em}
+    {}
+\theoremstyle{lemma}
+\newtheorem{mylemma}{Lemma}[section]
+
+\NewDocumentCommand{\lem}{m+m}{
+    \begin{mylemma}[#1]{}
+        \leavevmode
+        \begin{adjustwidth}{1.5em}{0pt}
+            \setlength{\parskip}{0.3\baselineskip} % 统一段落间距（柔和）
+            #2
+        \end{adjustwidth}
+        \vspace{0.2\baselineskip}
+    \end{mylemma}
+}
+
+\NewDocumentCommand{\lemnn}{+m}{
+    \begin{mylemma}{}
+        \leavevmode
+        \begin{adjustwidth}{1.5em}{0pt}
+            \setlength{\parskip}{0.3\baselineskip} % 统一段落间距（柔和）
+            #1
+        \end{adjustwidth}
+        \vspace{0.2\baselineskip}
+    \end{mylemma}
+}
+
+\NewDocumentCommand{\lemr}{mm+m}{
+    \begin{mylemma}[#1]{\label{lemma:#2}}
+        #3
+    \end{mylemma}
+}
+
+
+\newenvironment{lempf}{%
+  \vspace{3pt}
+  \noindent\textbf{\textit{Proof for Lemma.}}\par
+  \vspace{5pt}
+  \noindent\textcolor{NavyBlue}{\rule[0.5ex]{1ex}{1ex}}.\hspace{0.5em}\ignorespaces
+}{
+  \hfill\qedsymbol\par\vspace{3pt}
+}
+
+
+\NewDocumentCommand{\lemp}{m+m+m}{
+    \begin{mylemma}[#1]{}
+        #2
+    \end{mylemma}
+
+    \begin{lempf}
+        #3
+    \end{lempf}
+}
+
+
+% --------------------------------------------------------------
+%     Corollary
+% --------------------------------------------------------------
+\newtheoremstyle{cor}
+    {\topsep}
+    {\topsep}
+    {\normalfont}       % Body font
+    {}                   % Indent
+    {\color{Violet}\bfseries}
+    {.}
+    {.5em}
+    {}
+\theoremstyle{cor}
+\newtheorem{mycorollary}{Corollary}[section]
+
+\NewDocumentCommand{\cor}{+m}{
+    \begin{mycorollary}{}{}
+        #1
+    \end{mycorollary}
+}
+
+\newenvironment{corpf}{%
+  \vspace{3pt}
+  \noindent\textbf{\textit{Proof for Corollary.}}\par
+  \vspace{5pt}
+  \noindent\textcolor{Violet}{\rule[0.5ex]{1ex}{1ex}}.\hspace{0.5em}\ignorespaces
+}{
+  \hfill\qedsymbol\par\vspace{3pt}
+}
+
+\NewDocumentCommand{\ncor}{m+m}{
+    \begin{mycorollary}[#1]{}
+        \leavevmode
+        \begin{adjustwidth}{1.5em}{0pt}
+            \setlength{\parskip}{0.3\baselineskip} % 统一段落间距（柔和）
+            #2
+        \end{adjustwidth}
+        \vspace{0.2\baselineskip}
+    \end{mycorollary}
+}
+
+\NewDocumentCommand{\corp}{m+m+m}{
+    \begin{mycorollary}[#1]{}
+        \leavevmode
+        \begin{adjustwidth}{1.5em}{0pt}
+            \setlength{\parskip}{0.3\baselineskip} % 统一段落间距（柔和）
+            #2
+        \end{adjustwidth}
+        \vspace{0.2\baselineskip}
+    \end{mycorollary}
+
+    \begin{corpf}
+        #3
+    \end{corpf}
+}
+
+\NewDocumentCommand{\cornnp}{+m+m}{
+    \begin{mycorollary}{}
+        \leavevmode
+        \begin{adjustwidth}{1.5em}{0pt}
+            \setlength{\parskip}{0.3\baselineskip} % 统一段落间距（柔和）
+            #1
+        \end{adjustwidth}
+        \vspace{0.2\baselineskip}
+    \end{mycorollary}
+
+    \begin{corpf}
+        #2
+    \end{corpf}
+}
+
+
+% --------------------------------------------------------------
+%     Proposition
+% --------------------------------------------------------------
+\newtheoremstyle{prop}
+    {\topsep}
+    {\topsep}
+    {\normalfont}       % Body font
+    {}                     % Indent
+    {\color{MidnightBlue}\bfseries}
+    {.}
+    {.5em}
+    {}
+\theoremstyle{prop}
+\newtheorem{myproposition}{Proposition}[section]
+
+
+\NewDocumentCommand{\prop}{+m}{
+    \begin{myproposition}{}{}
+        #1
+    \end{myproposition}
+}
+
+\newenvironment{proppf}{%
+  \vspace{3pt}
+  \noindent\textbf{\textit{Proof for Proposition.}}\par
+  \vspace{5pt}
+  \noindent\textcolor{MidnightBlue}{\rule[0.5ex]{1ex}{1ex}}.\hspace{0.5em}\ignorespaces
+}{
+  \hfill\qedsymbol\par\vspace{3pt}
+}
+
+
+\NewDocumentCommand{\propp}{+m+m}{
+    \begin{myproposition}{}{}
+        #1
+    \end{myproposition}
+
+    \begin{proppf}
+        #2
+    \end{proppf}
+}
+
+% --------------------------------------------------------------
+%     Claim
+% --------------------------------------------------------------
+\newtheoremstyle{claim}
+    {\topsep}
+    {\topsep}
+    {\normalfont}       % Body font
+    {}                     % Indent
+    {\color{Blue}\bfseries}
+    {.}
+    {.5em}
+    {}
+\theoremstyle{claim}
+\newtheorem{myclaim}{Claim}[section]
+
+\NewDocumentCommand{\clm}{m+m}{
+    \begin{myclaim}{#1}{}
+        #2
+    \end{myclaim}
+}
+
+\newenvironment{clmpf}{%
+  \vspace{3pt}
+  \noindent\textbf{\textit{Proof for Claim.}}\par
+  \vspace{5pt}
+  \noindent\textcolor{Blue}{\rule[0.5ex]{1ex}{1ex}}.\hspace{0.5em}\ignorespaces
+}{
+  \hfill\qedsymbol\par\vspace{3pt}
+}
+
+\NewDocumentCommand{\clmp}{m+m+m}{
+    \begin{myclaim}{#1}{}
+        #2
+    \end{myclaim}
+
+    \begin{clmpf}
+        #3
+    \end{clmpf}
+}
+
+% --------------------------------------------------------------
+%     Fact
+% --------------------------------------------------------------
+\newtheoremstyle{fact}
+    {\topsep}
+    {\topsep}
+    {\normalfont}       % Body font
+    {}                    % Indent
+    {\color{CadetBlue}\bfseries}
+    {.}
+    {.5em}
+    {}
+\theoremstyle{fact}
+\newtheorem{myfact}{Fact}[section]
+
+\NewDocumentCommand{\fact}{+m}{
+    \begin{myfact}{}{}
+        #1
+    \end{myfact}
+}
+
+\newenvironment{factpf}{%
+  \vspace{3pt}
+  \noindent\textbf{\textit{Proof for fact.}}\par
+  \vspace{5pt}
+  \noindent\textcolor{CadetBlue}{\rule[0.5ex]{1ex}{1ex}}.\hspace{0.5em}\ignorespaces
+}{
+  \hfill\qedsymbol\par\vspace{3pt}
+}
+
+\NewDocumentCommand{\factp}{+m}{
+    \begin{factpf}
+        #1
+    \end{factpf}
+}
+
+
+% --------------------------------------------------------------
+%     proof
+% --------------------------------------------------------------
+\NewDocumentCommand{\pf}{+m}{
+    \begin{proof}
+        [\noindent\textbf{Proof.}]
+        #1
+    \end{proof}
+}
+
+\NewDocumentCommand{\pff}{m+m}{
+    \begin{proof}
+        [\noindent\textbf{Proof for #1.}]
+        #2
+    \end{proof}
+}
+
+
+
+% --------------------------------------------------------------
+%     Example
+% --------------------------------------------------------------
+\newenvironment{example}[2][Example]{\begin{trivlist}
+\item[\hskip \labelsep {\textcolor{blue}{\bfseries #1}}\hskip \labelsep {\textcolor{blue}{\bfseries #2}}]}{\end{trivlist}}
+
+% \newenvironment{example}{%
+%     \par\vspace{5pt}%
+%     \noindent{\textbf{Example.}}\ %
+% }{%
+%     \par\vspace{5pt}%
+% }
+
+
+\NewDocumentCommand{\ex}{m+m}{
+    \begin{example}{#1.}
+        #2
+    \end{example}
+}
+
+
+
+
+% --------------------------------------------------------------
+%     Remark
+% --------------------------------------------------------------
+\NewDocumentCommand{\rmk}{+m}{
+    {\it \color{blue!50!white}#1}
+}
+\newenvironment{remark}{%
+    \par\vspace{5pt}%
+    \noindent\textcolor{Gray}{\textbf{Remark.}}\ %
+}{%
+    \par\vspace{5pt}%
+}
+
+\NewDocumentCommand{\rmkb}{+m}{
+    \begin{remark}
+        #1
+    \end{remark}
+}

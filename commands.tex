@@ -1,0 +1,47 @@
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\duedate}[1]{\date{\textbf{\textcolor{red}{Deadline: #1}}}}
+\newcommand{\email}[1]{\faEnvelope\ \href{mailto:#1}{#1}}
+
+
+% \newcommand{\命令名}[参数个数]{命令内容}
+\newcommand{\redbox}[1]{%
+    \fcolorbox{red}{white}{#1}%
+}
+
+
+
+\newcommand{\contrad}{%
+  \mathrel{
+    \ooalign{
+        \rule[0.5ex]{2em}{0.13ex}\cr
+        \hidewidth$\times$\hidewidth
+        }~~
+    }
+}
+
+\newcommand{\refthm}[1]{thm:\ref{thm:#1}}
+
+\def\Xint#1{\mathchoice
+{\XXint\displaystyle\textstyle{#1}}%
+{\XXint\textstyle\scriptstyle{#1}}%
+{\XXint\scriptstyle\scriptscriptstyle{#1}}%
+{\XXint\scriptscriptstyle\scriptscriptstyle{#1}}%
+\!\int}
+\def\XXint#1#2#3{{\setbox0=\hbox{$#1{#2#3}{\int}$ }
+\vcenter{\hbox{$#2#3$ }}\kern-.6\wd0}}
+\def\ddashint{\Xint=}
+\def\dashint{\Xint-}
+
+\newcommand{\vertiii}[1]{{\left\vert\kern-0.25ex\left\vert\kern-0.25ex\left\vert #1 
+   \right\vert\kern-0.25ex\right\vert\kern-0.25ex\right\vert}}
+
+\newcommand{\vertii}[1]{\left\|#1\right\|}
+
+\newcommand{\norm}[1]{\left\|#1\right\|}
+
+\newcommand{\abs}[1]{\left|#1\right|}
+
+\newcommand{\embed}{\hookrightarrow}
+\newcommand{\xembed}[1]{\stackrel{\mathrm{#1}}{\hookrightarrow}}
+\newcommand{\cptembed}{\xembed{cpt}}
