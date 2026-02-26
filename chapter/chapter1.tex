@@ -1,7 +1,54 @@
 % !TeX root = ../main.tex
 \chapter{Intro}
 
-\section{week 1}
+\underline{Riemann-Stieltjes Integral}: If $f$ is continuous and $g$ is of \underline{finite variation} then $\int_{a}^{b} f(x) ~ \mathrm{d}g(x)$ is well-defined and is defined to be 
+$$
+    \int_{a}^{b} f(x) ~ \mathrm{d}g(x):=\lim_{n\to \infty} \sum_{i=0}^{n-1}f(\xi_{i})\left(g(x_{i+1}) - g(x_{i})\right)
+$$
+with $a \leq x_{0} < x_{1} < \cdots < x_{n} \leq b$ and $\xi_{i} \in [x_{i}, x_{i+1}]$.
+
+\underline{Main Task}: It\^o integral $(H\cdot X)_{t} = \int_{0}^{t} H_{s} ~\mathrm{d}X_{s}$.
+
+E.g $X$ is Brownian motion.
+
+\thmnn{$\displaystyle\sum_{k=1}^{2^{n}}\left(B_{\frac{k}{2^{n}}} - B_{\frac{k-1}{2^{n}}}\right)^{2} \xlongrightarrow{a.s.} 1 .$}
+
+Finite Variation of a function $g:[a,b] \to \mathbb{R}$ is 
+$$
+    V_{g}([a,b]) = \int_{a}^{b} \abs{ \mathrm{d}g(x)} = \sup_{n}\sum_{i=1}^{n}\abs{g(x_{i+1}) - g(x_{i})}
+$$
+
+\cornnp{$V_{B}([0,1]) = \infty$ a.s.}{
+    \begin{equation*}
+        \begin{aligned}
+                    \textcolor{red}{(\star)}\sum_{k=1}^{2^{n}}\left( B_{\frac{k}{2^{n}}} - B_{\frac{k-1}{2^{n}}}\right)^{2} &\leq \sup_{1 \leq k \leq 2^{n}} \abs{B_{\frac{k}{2^{n}}} - B_{\frac{k-1}{2^{n}}}}\cdot \sum_{k=1}^{2^{n}}\abs{B_{\frac{k}{2^{n}}} - B_{\frac{k-1}{2^{n}}}}\\
+        & \leq V_{B}([0,1]) \cdot \sup_{1 \leq k \leq 2^{n}}\abs{B_{\frac{k}{2^{n}}} - B_{\frac{k-1}{2^{n}}}}
+        \end{aligned}
+    \end{equation*}
+    If $V_{B}([0,1]) < \infty$, then $\textcolor{red}{(\star)} \to 0$.
+    
+    Contradiction with $\textcolor{red}{(\star)} \to 1$, so w.p.1 $V_{B}([0,1]) = \infty.$
+}
+
+$(H\cdot X)_{t} = \int_{0}^{t} H_{s}~\mathrm{d}X_{s}$, where $H_{s}$ is previsible or predictable, $X_{s}$ is semi martingale.
+
+\ex{}{Let $H_{n} \in \mathcal{F}_{n-1}$, $(M_{n})$ be a mart. 
+
+Then $(H\cdot M)_{n} = \sum_{k=1}^{n}H_{k}(M_{k} - M_{k-1})$ is a martingale.}
+
+\section{Set-up}
+
+Given a probability space $(\Omega, \mathcal{F}, \mathsf{P})$. A stochastic process $X=(X_{t})_{t \geq 0}$ is a collection of random variables taking values in $(\mathbb{R}^{d},\mathcal{B}(\mathbb{R}^{d})).$
+$$
+\begin{aligned}
+    X\colon [0,\infty) \times \Omega &\to \mathbb{R}^{d}\\
+   (t,\omega) &\mapsto X_{t}(\omega).
+\end{aligned}
+$$
+
+Fix $\omega$, then the function $t \mapsto X_{t}(\omega)$ is called a sample path.
+
+\defnn{For two stochastic process $X$ and $Y$, we say $Y$ is a modification of $X$ if $$\forall~t \geq 0,\quad \mathsf{P}(X_{t}= Y_{t}) = 1$$}
 
 \propp{If $X$ is adapted to the filtration ($\mathcal{F}_t$) and every sample path is right-continuous or left-continuous, then $X$ is also progressively measurable.}{
     Assume right-continuity $\forall~t > 0$, $\forall~ n \geq 1$, $\forall~ 0 \leq k \leq 2^n -1,$
@@ -37,11 +84,11 @@
     $
 }
 
-\defnn{The stopping $\sigma$-algebra is $\mathcal{F}_T = \{A \in \mathcal{F} \mid \forall~t \geq 0,~ A \bigcap \{T \leq t\} \in \mathcal{F}_t\}$.}
+\defnn{The stopping $\sigma$-algebra is $\mathcal{F}_T = \{A \in \mathcal{F} \mid \forall~t \geq 0,~ A \cap \{T \leq t\} \in \mathcal{F}_t\}$.}
 
 \prop{If $T \equiv t_0$, then $\mathcal{F}_T = \mathcal{F}_{t_0}$.}
 
-\pf{$\forall~ t \geq 0$
+\pf{$\forall~ t \geq 0$,
     $$
         \{T \leq t\} = \begin{cases}
             \varnothing,& t_0 > t\\
@@ -49,4 +96,21 @@
         \end{cases}
     $$
 
+    \noindent``$\mathcal{F}_{t_{0}} \subseteq \mathcal{F}_{T}$''
+
+    $\forall~ A \in \mathcal{F}_{t_{0}}$, $\forall~ t \geq 0$,
+    \begin{enumerate}[label=\textcircled{\arabic*}]
+        \item $t \geq t_{0}$, $A \cap \{T \leq t\} = A \in \mathcal{F}_{t_{0}} \subseteq \mathcal{F}_{t};$
+        \item $t < t_{0}$, $A \cap \{T \leq t\} = \varnothing \in \mathcal{F}_{t}$.
+    \end{enumerate}
+    Hence $A \in \mathcal{F}_{T} \Rightarrow~ \mathcal{F}_{t_{0}}\subseteq \mathcal{F}_{T}.$
+
+     \noindent``$\mathcal{F}_{T} \subseteq \mathcal{F}_{t_{0}}$''
+
+    $\forall~ A \in \mathcal{F}_{T}$, we have $A \cap \{T \leq t\} \in \mathcal{F}_{t}$ by definition. Let $t = t_{0}$, then $\{T \leq t_{0}\}= \Omega$, so
+
+    $$
+        A \cap \{T \leq t_{0}\} \in \mathcal{F}_{t_{0}} \Rightarrow~ A \cap \Omega \in \mathcal{F}_{t_{0}} \Rightarrow~ A \in \mathcal{F}_{t_{0}}.
+    $$
+    Hence $A \in \mathcal{F}_{t_{0}} \Rightarrow~ \mathcal{F}_{T}\subseteq \mathcal{F}_{t_{0}} $
 }

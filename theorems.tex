@@ -72,36 +72,20 @@
 
 \NewDocumentCommand{\thm}{m+m}{
     \begin{mytheorem}[#1]{}{}
-        \leavevmode
-        \begin{adjustwidth}{1.5em}{0pt}
-            \setlength{\parskip}{0.3\baselineskip} % 统一段落间距（柔和）
             #2
-        \end{adjustwidth}
-        \vspace{0.2\baselineskip}
     \end{mytheorem}
 }
 
 \NewDocumentCommand{\thmnn}{+m}{
     \begin{mytheorem}{}
-        \leavevmode
-        \begin{adjustwidth}{1.5em}{0pt}
-            \setlength{\parskip}{0.3\baselineskip} % 统一段落间距（柔和）
             #1
-        \end{adjustwidth}
-        \vspace{0.2\baselineskip}
     \end{mytheorem}
 }
 
 \NewDocumentCommand{\thmr}{mm+m}{
     \begin{mytheorem}[#1]{}
-        \leavevmode
-        \phantomsection        % ← 强制插入 anchor
         \label{thm:#2}         
-        \begin{adjustwidth}{1.5em}{0pt}
-            \setlength{\parskip}{0.3\baselineskip} % 统一段落间距（柔和）
             #3
-        \end{adjustwidth}
-        \vspace{0.2\baselineskip}
     \end{mytheorem}
 }
 
@@ -135,23 +119,13 @@
 
 \NewDocumentCommand{\lem}{m+m}{
     \begin{mylemma}[#1]{}
-        \leavevmode
-        \begin{adjustwidth}{1.5em}{0pt}
-            \setlength{\parskip}{0.3\baselineskip} % 统一段落间距（柔和）
             #2
-        \end{adjustwidth}
-        \vspace{0.2\baselineskip}
     \end{mylemma}
 }
 
 \NewDocumentCommand{\lemnn}{+m}{
     \begin{mylemma}{}
-        \leavevmode
-        \begin{adjustwidth}{1.5em}{0pt}
-            \setlength{\parskip}{0.3\baselineskip} % 统一段落间距（柔和）
             #1
-        \end{adjustwidth}
-        \vspace{0.2\baselineskip}
     \end{mylemma}
 }
 
@@ -215,23 +189,13 @@
 
 \NewDocumentCommand{\ncor}{m+m}{
     \begin{mycorollary}[#1]{}
-        \leavevmode
-        \begin{adjustwidth}{1.5em}{0pt}
-            \setlength{\parskip}{0.3\baselineskip} % 统一段落间距（柔和）
             #2
-        \end{adjustwidth}
-        \vspace{0.2\baselineskip}
     \end{mycorollary}
 }
 
 \NewDocumentCommand{\corp}{m+m+m}{
     \begin{mycorollary}[#1]{}
-        \leavevmode
-        \begin{adjustwidth}{1.5em}{0pt}
-            \setlength{\parskip}{0.3\baselineskip} % 统一段落间距（柔和）
             #2
-        \end{adjustwidth}
-        \vspace{0.2\baselineskip}
     \end{mycorollary}
 
     \begin{corpf}
@@ -241,12 +205,7 @@
 
 \NewDocumentCommand{\cornnp}{+m+m}{
     \begin{mycorollary}{}
-        \leavevmode
-        \begin{adjustwidth}{1.5em}{0pt}
-            \setlength{\parskip}{0.3\baselineskip} % 统一段落间距（柔和）
             #1
-        \end{adjustwidth}
-        \vspace{0.2\baselineskip}
     \end{mycorollary}
 
     \begin{corpf}
