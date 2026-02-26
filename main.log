@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.6.6)  26 FEB 2026 09:43
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.6.6)  26 FEB 2026 20:02
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
@@ -931,13 +931,61 @@ Package microtype Info: Loading generic protrusion settings for font family
 
 ]
 Package hyperref Info: bookmark level for unknown mydefinition defaults to 0 on input line 51.
-Package hyperref Info: bookmark level for unknown myproposition defaults to 0 on input line 58.
-Package hyperref Info: bookmark level for unknown mylemma defaults to 0 on input line 74.
 
 
-[3])
+[3]
+pdfTeX warning (ext4): destination with the same identifier (name{mydefinition.1}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.136 }
+       
+pdfTeX warning (ext4): destination with the same identifier (name{mydefinition.2}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.138 ...t. $A \subseteq N$, $\mathsf{P}(N) = 0$.}
+                                                  
+pdfTeX warning (ext4): destination with the same identifier (name{mydefinition.3}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.142 }
+       
 
-[4{c:/texlive/2025/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}]
+[4]
+Package hyperref Info: bookmark level for unknown myproposition defaults to 0 on input line 189.
+
+pdfTeX warning (ext4): destination with the same identifier (name{mydefinition.1}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.195 }
+       
+pdfTeX warning (ext4): destination with the same identifier (name{mydefinition.2}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.198 }
+       
+
+[5
+pdfTeX warning (ext4): destination with the same identifier (name{myproposition.1}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.212 }
+       ]
+Package hyperref Info: bookmark level for unknown mylemma defaults to 0 on input line 214.
+
+pdfTeX warning (ext4): destination with the same identifier (name{mydefinition.3}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.248 ... \cap \{T \leq t\} \in \mathcal{F}_t\}$.}
+                                                  
+
+[6])
+
+[7{c:/texlive/2025/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}]
+pdfTeX warning (ext4): destination with the same identifier (name{mydefinition.4}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.112 \defn{defn example}{Example}
+                                  
 pdfTeX warning (ext4): destination with the same identifier (name{mytheorem.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
@@ -954,7 +1002,7 @@ Package hyperref Info: bookmark level for unknown myfact defaults to 0 on input 
 LaTeX Font Info:    Trying to load font information for U+fontawesomefree1 on input line 126.
  (c:/texlive/2025/texmf-dist/tex/latex/fontawesome5/ufontawesomefree1.fd)
 
-[5
+[8
 
 
 
@@ -972,21 +1020,21 @@ LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-01-18>
  ***********
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 09EB3D1074FE43E11AD0D719AABF575D;152.
+(rerunfilecheck)             Checksum: 53BC5F5AD0083B18B22F47A5D4A1675B;383.
  ) 
 Here is how much of TeX's memory you used:
- 61183 strings out of 473190
- 1538086 string characters out of 5719980
- 2327591 words of memory out of 5000000
- 83550 multiletter control sequences out of 15000+600000
- 574090 words of font info for 125 fonts, out of 8000000 for 9000
+ 61221 strings out of 473190
+ 1538571 string characters out of 5719980
+ 2329740 words of memory out of 5000000
+ 83562 multiletter control sequences out of 15000+600000
+ 574252 words of font info for 128 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 98i,12n,101p,1087b,609s stack positions out of 10000i,1000n,20000p,200000b,200000s
-<c:/texlive/2025/texmf-dist/fonts/type1/public/fontawesome5/FontAwesome5Free-Solid.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmbxti10.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsl10.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfrm1095.pfb>
-Output written on main.pdf (6 pages, 216696 bytes).
+ 98i,13n,101p,1087b,609s stack positions out of 10000i,1000n,20000p,200000b,200000s
+<c:/texlive/2025/texmf-dist/fonts/type1/public/fontawesome5/FontAwesome5Free-Solid.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmbxti10.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsl10.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm7.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfrm1095.pfb>
+Output written on main.pdf (9 pages, 252294 bytes).
 PDF statistics:
- 192 PDF objects out of 1000 (max. 8388607)
- 142 compressed objects within 2 object streams
- 41 named destinations out of 1000 (max. 500000)
- 43037 words of extra memory for PDF output out of 51595 (max. 10000000)
+ 245 PDF objects out of 1000 (max. 8388607)
+ 188 compressed objects within 2 object streams
+ 61 named destinations out of 1000 (max. 500000)
+ 43053 words of extra memory for PDF output out of 51595 (max. 10000000)
 

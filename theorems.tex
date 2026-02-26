@@ -17,6 +17,15 @@
 
 \newenvironment{foldblock}{}{}
 
+\newenvironment{Exercise}[2][Exercise]{\begin{trivlist}
+\item[\hskip \labelsep {\textcolor{blue}{\bfseries #1}}\hskip \labelsep {\textcolor{blue}{\bfseries #2}}]}{\end{trivlist}}
+
+
+\NewDocumentCommand{\exe}{m+m}{
+    \begin{Exercise}{#1.}
+        #2
+    \end{Exercise}
+}
 
 
 % --------------------------------------------------------------

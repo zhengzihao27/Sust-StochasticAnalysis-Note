@@ -48,19 +48,159 @@ $$
 
 Fix $\omega$, then the function $t \mapsto X_{t}(\omega)$ is called a sample path.
 
-\defnn{For two stochastic process $X$ and $Y$, we say $Y$ is a modification of $X$ if $$\forall~t \geq 0,\quad \mathsf{P}(X_{t}= Y_{t}) = 1$$}
+\defnn{For two stochastic process $X$ and $Y$, we say $Y$ is a modification of $X$ if $$\forall~ t \geq 0,\quad \mathsf{P}(X_{t}= Y_{t}) = 1$$}
+
+\defnn{We say $X$ and $Y$ are indistinguishable if 
+$$\mathsf{P}(X_{t} = Y_{t},~ \forall~ t \geq 0) = 1.$$ 
+And then $Y$ is a version of $X$.}
+
+\ex{}{Let $Y$ be a modification of $X$ and suppose $X$ and $Y$ both have a.s. right continuous sample paths. Then $X$ \& $Y$ are indistinguishable.}
+
+\defnn{A function f is right-continuous if $\displaystyle f(x)= f(x+) = \lim_{t\downarrow x} f(t)$. }
+
+\pf{Since $\forall~  t \geq 0$, $\mathsf{P}(X_{t} \neq Y_{t}) = 0,$ we get
+    $$
+        \mathsf{P}\left(\bigcup_{q\in \mathbb{Q}^{+}} X_{q} \neq Y_{q}\right) \leq \sum_{q\in \mathbb{Q}^{+}} \mathsf{P} (X_{q} \neq Y_{q}) = 0.
+    $$
+    $$
+        \Rightarrow~ \mathsf{P}\left(\bigcap_{q\in \mathbb{Q}^{+}} X_{q} = Y_{q}\right) = 1.
+    $$
+    For two right-continuous functions $f$ and $g$, if $f(q) = g(q)$, $\forall~ q \in \mathbb{Q}^{+}$, then $f(t) = g(t)$, $\forall~ t \geq 0.$
+
+    Hence $\mathsf{P}\left(X_{t} = Y_{t},~ \forall~ t \geq 0\right) = 1.$
+}
+
+\ex{}{Let $T \sim \mathrm{Exp}(1)$. Define 
+    $$
+    \begin{aligned}
+        &X_{t} \equiv 0,\quad\forall~ t \geq 0 \\
+        &Y_{t} = \begin{cases}
+            0,& t \neq T\\
+            1,&t = T.
+        \end{cases}
+    \end{aligned}
+    $$
+    $\forall~  t \geq 0$, $\mathsf{P}(X_{t} \neq Y_{t}) = \mathsf{P}(Y_{t} = 1) = \mathsf{P}(t = T) = 0.$
+}
+
+\section{Filtration}
+
+Let $(\mathcal{F}_{t})_{t \geq 0}$ be a filtration of $(\Omega, \mathcal{F})$ such that $\forall~  0 \leq s < t < \infty$, $\mathcal{F}_{s} \subseteq \mathcal{F}_{t} \subseteq \mathcal{F}.$
+
+\ex{}{(Natural Filtration) Let $(X_{t})_{t \geq 0}$ be a stochastic process, Define
+    $$
+        \mathcal{F}_{t}^{X} = \sigma(X_{s},0 \leq s \leq t).
+    $$
+    Then $(\mathcal{F}_{t}^{X})$ is a filtration.
+}
+Obviously, $X_{t} \in \mathcal{F}_{t}^{X}.$
+
+\exe{1.7}{Let $X$ be a process, every sample path of which is \underline{RCLL}. Let 
+    $$
+        A = \{\omega\colon X(\omega)\text{ is continuous on }[0,t_{0})\}
+    $$    
+    for some fixed $t_{0} > 0$. Show that $A \in \mathcal{F}_{t_{0}}^{X}.$
+}
+
+\underline{RCLL}: $f(x) = f(x+)$ and $f(x-)$ exists.
+
+\pf{
+    $$
+    \begin{aligned}
+        A &= \{\omega\colon \forall~ s\in (0,t_{0}) ,~ X(s-,\omega)= X(s,\omega) \}\\
+        &=\{\omega\colon \forall~q \in (0,t_{0})\cap \mathbb{Q},~X(q-,\omega) = X(q,\omega) \}
+    \end{aligned}
+    $$
+    Let $(0, t_{0})\cap \mathbb{Q} = (q_{m})_{m \geq 1}$, then 
+    $$
+    \begin{aligned}
+        A &= \left\{
+            \omega \colon \forall~ q_{m}\text{ with } m \geq 1,~\forall~k \geq 1,~\exists~ N \geq 1,~\forall~ n \geq N, \abs{X(q_{m}-\frac{1}{n},\omega) - X(q_{m},\omega)} < \frac{1}{k}
+        \right\}\\
+        &= \bigcap_{m=1}^{\infty}\bigcap_{k=1}^{\infty}\bigcup_{N=1}^{\infty}\bigcap_{n=N}^{\infty}\left\{\abs{X(q_{m} - \frac{1}{n}, X(q_{m})) < \frac{1}{k}}\right\}\in \mathcal{F}_{t_{0}}^{X}.
+    \end{aligned}
+    $$
+}
+
+\exe{1.8}{Let $X$ be a process whose sample paths are RCLL a.s. Then $A \notin \mathcal{F}_{t_{0}}^{X}$ is possible.}
+
+\pf{
+    [TODO]
+}
+
+\defnn{A filtration $\{\mathcal{F}_{t}\}_{t \geq 0}$ is said to satisfy the \underline{usual condition} if 
+    \begin{enumerate}[label=(\alph*)]
+        \item $\displaystyle \mathcal{F}_{t} = \mathcal{F}_{t+} = \bigcap_{s>t} \mathcal{F}_{s}$;
+        \item $\mathcal{F}_{0}$ contains all the \underline{$\mathsf{P}-$negligible} sets in $\mathcal{F}$.
+    \end{enumerate}
+}
+
+\defnn{An even A is $\mathsf{P}$-negligible if $\exists~N \in \mathcal{F}$ s.t. $A \subseteq N$, $\mathsf{P}(N) = 0$.}
+
+\defnn{
+    $\mathcal{F}_{t+} = \bigcap_{s >t}\mathcal{F}_{s}$, $\mathcal{F}_{t-}= \sigma\left(\bigcup_{s<t}\mathcal{F}_{s}\right)$. We say a filtration is right-continuous if $\mathcal{F}_{t} = \mathcal{F}_{t+}.$
+}
+
+\defnn{
+    The stochastic process $X$ is \underline{adapted} to the filtration $\{\mathcal{F}_{t}\}_{t \geq 0}$ if $\forall~t \geq 0$, $X_{t} \in \mathcal{F}_{t}$.
+}
+
+Obviously $(X_{t})$ is adapted to the natural filtration.
+
+\defnn{The stochastic process $X$ is called progressively measurable with respect to $(\mathcal{F}_{t})$ if $\forall~t \geq 0$, the map
+    $$
+        \begin{aligned}
+            (s,\omega) &\mapsto X_{s}(\omega)\\
+            ([0,t]\times \Omega,\mathcal{B}([0,t])\otimes \mathcal{F}_{t}) & \to (\mathbb{R}^{d}, \mathcal{B}(\mathbb{R}^{d}))
+        \end{aligned}
+    $$
+    is measurable.
+}
+
+\rmk{adapted $\supseteq$ progressively measurable $\supseteq$ previsible
+}
+
+
 
 \propp{If $X$ is adapted to the filtration ($\mathcal{F}_t$) and every sample path is right-continuous or left-continuous, then $X$ is also progressively measurable.}{
-    Assume right-continuity $\forall~t > 0$, $\forall~ n \geq 1$, $\forall~ 0 \leq k \leq 2^n -1,$
+    Assume right-continuity $\forall~ t > 0$, $\forall~  n \geq 1$, $\forall~  0 \leq k \leq 2^n -1,$
     $$
-    X_s^{(n)}(\omega) = X_{\frac{k+1}{2^n}t}(\omega),\quad \forall~ \frac{kt}{2^n} < s \leq \frac{k+1}{2^n}t
+    X_s^{(n)}(\omega) = X_{\frac{k+1}{2^n}t}(\omega),\quad \forall~  \frac{kt}{2^n} < s \leq \frac{k+1}{2^n}t
     $$
+    Then $\displaystyle \lim_{n \to \infty}X_{s}^{n}(\omega) = X_{s}(\omega)$ for all $(s,\omega) \in [0,t]\times \Omega.$
+
+    It suffices to prove 
+    $$
+    \begin{aligned}
+        (s,\omega) &\mapsto X_{s}^{(n)}(\omega)\\
+        ([0,t]\times \Omega,\mathcal{B}([0,t])\otimes \mathcal{F}_{t}) & \to (\mathbb{R}^{d}, \mathcal{B}(\mathbb{R}^{d}))
+    \end{aligned}
+    $$
+    is measurable.
+
+    $\forall~ A \in \mathcal{B}(\mathbb{R}^{d})$,
+    $$
+    \begin{aligned}
+        &\left\{(s,\omega)\colon X_{s}^{(n)}(\omega) \in A\right\}\\
+        =&\bigcup_{k=0}^{2^{n} -1}\left(\frac{k}{2^{n}}t , \frac{k+1}{2^{n}}t \right]\times \left\{X_{\frac{k+1}{2^{n}}t} \in A\right\}\in \mathcal{B}([0,t])\otimes \mathcal{F}_{t}
+    \end{aligned}
+    $$
+    We get $X_{s}^{(n)}(\omega)$ is measurable. Hence $X_{s} = \lim_{n\to \infty}X_{s}^{(n)}$ is also measurable.
+}
+
+\section{Stopping Times}
+$(\Omega, \mathcal{F},\mathsf{P})$ and $(\mathcal{F}_{t})_{t \geq 0}$.
+
+\defnn{A random time $T$ is a \underline{stopping time} of $(\mathcal{F}_{t})$ if $\forall~ t \geq 0$, $\{T \leq t  \} \in \mathcal{F}_{t}.$
+}
+
+\defnn{A random time $T$ is an \underline{optional time} of $(\mathcal{F}_{t})$ if $\forall~ t \geq 0$, $\{T < t\} \in \mathcal{F}_{t}.$
 }
 
 \propp{stopping time $\subseteq$ optional time and stopping $=$ optional if the filtration is right-continuous.}{
     ``$\Rightarrow$'' $\{T<t\} = \bigcup_{n=1}^{\infty}\{T \leq t - \frac{1}{n}\} \in \mathcal{F}_t$.
     
-    ``$\Leftarrow$'' If $T$ is an optional time, then $\forall~ m \geq 1,$
+    ``$\Leftarrow$'' If $T$ is an optional time, then $\forall~  m \geq 1,$
     $$
         \{T \leq t\} = \bigcap_{n=m}^{\infty}\left\{T < t+\frac{1}{n}\right\}.
     $$
@@ -73,22 +213,43 @@ Fix $\omega$, then the function $t \mapsto X_{t}(\omega)$ is called a sample pat
 
 \lemnn{If $T$ and $S$ are stopping times, then $T \wedge S$, $T \vee S $, $T+S$ are stopping times.}
 
-\pf{}
+\pf{$\forall~ t \geq 0$, 
+    \begin{enumerate}
+        \item $\{T \wedge S \leq t\} = \{T \leq t\} \cup \{S \leq t\} \in \mathcal{F}_{t}.$
+        \item $\{ T \vee S \leq t\} = \{T \leq t\}\cap \{S \leq t\} \in \mathcal{F}_{t}.$
+        \item $\{T+S \leq t\} \in \mathcal{F}_{t} \Leftrightarrow \{T+S > t\} \in \mathcal{F}_{t}$.
+        $$
+        \begin{aligned}
+            &\{T + S > t\} \\
+            = &\{T = 0,~S >t\}\cup \{S=0,~ T> t\}\cup\{0<T<t,~T+S > t\}\cup \{S>0,~ T \geq t\}\\
+             \in &\mathcal{F}_{t} \cup \mathcal{F}_{t} \cup \{0<T<t,~T+S > t\} \cup  \mathcal{F}_{t}.
+        \end{aligned}
+        $$
+        It suffices to show
+        $$\{0< T < t ,~ T+S > t\} = \bigcup_{\stackrel{r\in \mathbb{Q}^{+}}{0 < r <t}}\{r < T < t,~ S> t-r\}.
+        $$
+        Because the right term belong $\mathcal{F}_{t}.$
+        
+        ``$\Leftarrow~$'' $S > t-r > t - T$, so $S+T > t$.
+
+        ``$\Rightarrow~$'' $\exists~ r\in (0,T)$, $S+r > t$ since $S+T > t.$
+    \end{enumerate}
+}
 
 \lemnn{If $\{T_n\}_{n \geq 1}$ are stopping times, then $\sup_{n \geq 1} T_n$ is a stopping time.}
 
 \pf{
-    $\forall~t \geq 0,$ 
+    $\forall~ t \geq 0,$ 
     $
         \{\sup_{n \geq 1} T_n \leq t\} = \bigcap_{n=1}^{\infty}\{T_n \leq t\} \in \mathcal{F}_t.
     $
 }
 
-\defnn{The stopping $\sigma$-algebra is $\mathcal{F}_T = \{A \in \mathcal{F} \mid \forall~t \geq 0,~ A \cap \{T \leq t\} \in \mathcal{F}_t\}$.}
+\defnn{The stopping $\sigma$-algebra is $\mathcal{F}_T = \{A \in \mathcal{F} \mid \forall~ t \geq 0, A \cap \{T \leq t\} \in \mathcal{F}_t\}$.}
 
 \prop{If $T \equiv t_0$, then $\mathcal{F}_T = \mathcal{F}_{t_0}$.}
 
-\pf{$\forall~ t \geq 0$,
+\pf{$\forall~  t \geq 0$,
     $$
         \{T \leq t\} = \begin{cases}
             \varnothing,& t_0 > t\\
@@ -98,7 +259,7 @@ Fix $\omega$, then the function $t \mapsto X_{t}(\omega)$ is called a sample pat
 
     \noindent``$\mathcal{F}_{t_{0}} \subseteq \mathcal{F}_{T}$''
 
-    $\forall~ A \in \mathcal{F}_{t_{0}}$, $\forall~ t \geq 0$,
+    $\forall~  A \in \mathcal{F}_{t_{0}}$, $\forall~  t \geq 0$,
     \begin{enumerate}[label=\textcircled{\arabic*}]
         \item $t \geq t_{0}$, $A \cap \{T \leq t\} = A \in \mathcal{F}_{t_{0}} \subseteq \mathcal{F}_{t};$
         \item $t < t_{0}$, $A \cap \{T \leq t\} = \varnothing \in \mathcal{F}_{t}$.
@@ -107,7 +268,7 @@ Fix $\omega$, then the function $t \mapsto X_{t}(\omega)$ is called a sample pat
 
      \noindent``$\mathcal{F}_{T} \subseteq \mathcal{F}_{t_{0}}$''
 
-    $\forall~ A \in \mathcal{F}_{T}$, we have $A \cap \{T \leq t\} \in \mathcal{F}_{t}$ by definition. Let $t = t_{0}$, then $\{T \leq t_{0}\}= \Omega$, so
+    $\forall~  A \in \mathcal{F}_{T}$, we have $A \cap \{T \leq t\} \in \mathcal{F}_{t}$ by definition. Let $t = t_{0}$, then $\{T \leq t_{0}\}= \Omega$, so
 
     $$
         A \cap \{T \leq t_{0}\} \in \mathcal{F}_{t_{0}} \Rightarrow~ A \cap \Omega \in \mathcal{F}_{t_{0}} \Rightarrow~ A \in \mathcal{F}_{t_{0}}.
