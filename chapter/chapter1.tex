@@ -247,9 +247,9 @@ $(\Omega, \mathcal{F},\mathsf{P})$ and $(\mathcal{F}_{t})_{t \geq 0}$.
 
 \defnn{The stopping $\sigma$-algebra is $\mathcal{F}_T = \{A \in \mathcal{F} \mid \forall~ t \geq 0, A \cap \{T \leq t\} \in \mathcal{F}_t\}$.}
 
-\prop{If $T \equiv t_0$, then $\mathcal{F}_T = \mathcal{F}_{t_0}$.}
+\prop{If $T(\omega) = t_0$ for some fixed $t_0 \geq 0$, $\forall~ \omega \in \Omega$, then $\mathcal{F}_T = \mathcal{F}_{t_0}$.}
 
-\pf{$\forall~  t \geq 0$,
+\pf{Note that $\forall~  t \geq 0$,
     $$
         \{T \leq t\} = \begin{cases}
             \varnothing,& t_0 > t\\
@@ -274,4 +274,251 @@ $(\Omega, \mathcal{F},\mathsf{P})$ and $(\mathcal{F}_{t})_{t \geq 0}$.
         A \cap \{T \leq t_{0}\} \in \mathcal{F}_{t_{0}} \Rightarrow~ A \cap \Omega \in \mathcal{F}_{t_{0}} \Rightarrow~ A \in \mathcal{F}_{t_{0}}.
     $$
     Hence $A \in \mathcal{F}_{t_{0}} \Rightarrow~ \mathcal{F}_{T}\subseteq \mathcal{F}_{t_{0}} $
+}
+    
+\lemnn{$\forall~$ stopping time $T$ and $S$, $\forall~A \in \mathcal{F}_S$, we have $A\cap \{S \leq T\} \in \mathcal{F}_T.$ In particular, if $S \leq T$ for all $\omega \in \Omega$, then $\mathcal{F}_S \subseteq \mathcal{F}_T.$}
+
+\pf{
+    $T \wedge t$ is also a stopping time. $\{T \wedge t \leq s\} \in \mathcal{F}_s \subseteq \mathcal{F}_t.$ Hence $T \wedge t \in \mathcal{F}_t.$
+
+    To prove $A\cap \{S \leq T \} \in \mathcal{F}_T$, we need to prove $\forall~ t \geq 0$, $A \cap \{S \leq T\} \cap \{T \leq t\}\in \mathcal{F}_t.$
+
+    We have 
+    $$
+    A \cap \{S \leq T\} \cap \{T \leq t\} = \underbrace{A \cap \{S \leq t\}}_{\in \mathcal{F}_t} \cap \underbrace{\{T \leq t\}}_{\in \mathcal{F}_t} \cap \underbrace{\{S \wedge t \leq T \wedge t\}}_{\mathcal{F}_t}.
+    $$
+    ($S \leq T $ on $S \leq t$, $T \leq t \Leftrightarrow \{S \wedge t \leq T \wedge t\}$)
+}
+
+\lemnn{
+    Let $S,T$ be two stopping times. Then $\mathcal{F}_{T \wedge S} = \mathcal{F}_T \cap \mathcal{F}_S$ and $\{T < S\}$, $\{S < T\}$, $\{T \leq S\}$, $\{S \leq T\}$, $\{T = S\}$ belong to $\mathcal{F}_S \cap \mathcal{F}_T = \mathcal{F}_{S \wedge T}.$
+}
+
+\pf{
+    $\mathcal{F}_{T \wedge S} \subseteq \mathcal{F}_S$ and $\mathcal{F}_{T \wedge S} \subseteq \mathcal{F}_T \Rightarrow~\mathcal{F}_{T \wedge S} \subseteq \mathcal{F}_T \cap \mathcal{F}_S$.
+    
+    To prove $\mathcal{F}_T \cap \mathcal{F}_S \subseteq \mathcal{F}_{T \wedge S}$, $\forall~ A \in \mathcal{F}_T \cap \mathcal{F}_S$, we will prove $\forall~ t \geq 0$, $A \cap \{T \wedge S \leq t\} \in \mathcal{F}_t.$
+
+    $$
+    \begin{aligned}
+        A \cap \{T \wedge S \leq t\} &= A \cap \left(\{T \leq t\} \cup \{S \leq t\}\right)\\
+        &= \left(A \cap \{T \leq t\}\right)\cup \left(A \cap \{S \leq t\}\right)\in \mathcal{F}_t.
+    \end{aligned}
+    $$
+
+    Next $\{S \leq T\}\in \mathcal{F}_T$, $\{S > t\}\in \mathcal{F}_T$. It remains to prove $\{S <T\} \in \mathcal{F}_T.$
+
+    Assuming this, by interchanging $T$ and $S$, we get $\{T \leq S\}$, $\{T > S\}$, $\{T <S\}\in \mathcal{F}_S$.
+
+    Then $\{S \leq T\} \in \mathcal{F}_T$, $\{S > T\}^\complement \in \mathcal{F}_S.$
+
+    $\Rightarrow~ \{S \leq T\} \in \mathcal{F}_S \cap \mathcal{F}_T.$
+
+    $\{T= S\} = \{ S \leq T\}\cap \{T \leq S\}\in \mathcal{F}_S \cap \mathcal{F}_T$.
+
+    To prove $\{S < T\}\in \mathcal{F}_T$, we define $R = S \wedge T$ such that $\{S < T\}= \{R < T\}$. Notice that $R \in \mathcal{F}_R \subseteq \mathcal{F}_T$. Hence $\{R < T\} \in \mathcal{F}_T.$
+}
+
+\textbf{Summary:}
+\begin{enumerate}[label=(\roman*)]
+    \item $T \in \mathcal{F}_T$;
+    \item If $S \leq T$, $\mathcal{F}_S \subseteq \mathcal{ F}_T$;
+    \item $T \wedge t \in \mathcal{F}_{T \wedge t} \subseteq \mathcal{F}_t$;
+    \item $\mathcal{F}_{T \wedge S} = \mathcal{F}_T \cap \mathcal{F}_S.$
+\end{enumerate}
+
+For each $\omega \in \Omega$, $T(\omega) \in [0,\infty)$ and $X_t(\omega) \in \mathbb{R}^d$, $\forall~ t \geq 0$, we define $X _T(\omega) = X _{T(\omega)}(\omega).$
+
+\prop{
+    Let $\{X_t\}_{t \geq 0}$ 
+    be a progressively measurable process, Let $T$ be a stopping time. Then $X_T$ defined on $\{T < \infty\}$ is $\mathcal{F}_T$-measurable and the stopped process $\{X _{T \wedge t}\}_{t \geq 0}$ is progressively measurable.
+}
+
+\pf{
+    $\forall~B \in \mathcal{B}(\mathbb{R}^d)$, $\{X_T \in B\} \in \mathcal{F}_T \Leftrightarrow$ $\forall~ t \geq 0$, $\underbrace{\{ X _T \in B\}\cap \{T \leq t\}}_{=\{X _{T \wedge t} \in B\} \cap \{T \leq t\}}\in \mathcal{F}_t$.
+
+    We only need to prove $X_{T \wedge t} \in \mathcal{F}_t.$
+
+    Observe $(s,\omega)\to (T(\omega) \wedge s, \omega)$ is $\mathcal{B}([0,t])\otimes \mathcal{F}_t$-measurable.
+
+    By assumption, $(s,\omega)\mapsto X_s(\omega)$ is $\mathcal{B}([0,t])\otimes \mathcal{F}_t$-measurable.
+
+    So $(s,\omega)\to(T(\omega)\wedge s, \omega)\to (X_{T(\omega) \wedge s},\omega)$ is $\mathcal{B}([0,t])\otimes \mathcal{F}_t$-measurable.
+}
+
+\section{Cts-time martingale}
+\defnn{For $(\Omega,\mathcal{F},(\mathcal{F}_{t})_{t \geq 0},\mathbb{P})$, a martingale is an adapted stochastic process $(X_t)_{t \geq 0}$ such that
+    $$
+    \begin{cases}
+        (i)~ \forall~ t \geq 0,~\mathbb{E}|X_t| < \infty \\
+        (ii)~ \forall~ t \geq s \geq 0,~\mathbb{E}(X_t \mid \mathcal{F}_s) = X _s.
+    \end{cases}
+    $$
+
+    If $\mathbb{E}(X_t \mid \mathcal{F}_s) \geq X _s$, we call it a submartingale.
+
+    If $\mathbb{E}(X_t \mid \mathcal{F}_s) \leq X _s$, we call it a supmartingale.
+}
+
+\prop{Let $\varphi: \mathbb{R} \to \mathbb{R}$ be a convex (concave up) function. If $(X_t)_{t \geq 0}$ is a martingale, then $(\varphi(X _t))_{t \geq 0}$ is a submartingale.}
+
+\textbf{E.g.} $\abs{X_t}$, $X _{t}^2$, $\abs{X _t}^p$ for all $p \geq 1$, $(X _t)^+$ are all submartingale.
+
+\rmk{We assume $\mathbb{E}\abs{\varphi(X_t)}<\infty$, $\forall~ t \geq 0$.}
+
+\pf{
+    Jensen's inequality.
+}
+
+\thmnn{Continuous-time Doob's upcrossing inequality}
+
+$$
+\begin{aligned}
+&T_{b}^{(0)} = -\infty,\\
+& T_a^{(1)} = \inf \{t \geq (T _b^{(0)})^+\colon X _t \leq a\},\\
+&T_b^{(1)} = \inf \{t \geq T _a^{(1)}\colon X _t \geq b\}.
+\end{aligned}
+$$
+
+$\forall~ l \geq 2$,
+$$
+\begin{aligned}
+    &T_a^{(l)} = \inf \{t \geq T _b^{(l-1)} \colon X _t \leq a\},\\
+    &T_b^{l} = \inf \{ t \geq T _a^{l}\colon X _t \geq b\}
+\end{aligned}
+$$
+
+Define $U_{ab}^X [0,n] = \max \{k \geq 0\colon T_{b}^{(k)} \leq n\}$ to be the \# of upcrossing in an interval [0,n].
+
+\thmnn{Let $(X_{t})_{t \geq 0}$ be a right-continuous submartingale. For all $T > 0$,
+    $$
+    \mathbb{E}\left(U_{ab}^X [0,T]\right) \leq \frac{\mathbb{E}(X_{T} -a )^+}{b-a}
+    $$
+}
+
+\pf{
+    For each $n \geq 1$, we let $D_n = \mathbb{Z}/ 2^n = \{0, \frac{\pm 1}{2^n}, \frac{\pm 2}{2^n},\cdots\}$.
+
+    Consider the upcrossing of $X$ on $[0,T]\cap D_{n}$, $\left\{\frac{X_{j}}{2^n}\right\}_{j=0}^\infty$ is a discrete-time martingale. Then $U_{ab}^X\left([0,T]\cap D_{n}\right) \leq U_{ab}^X [0,T]$,
+    $U_{ab}^X\left([0,T]\cap D_{n}\right) \uparrow U_{ab}^X([0,T])$.
+
+    By using discrete-time upcrossing
+    $$
+        \mathbb{E}\left(U_{ab}^X\left([0,T]\cap D_{n}\right)\right) \leq \frac{1}{b-a}\mathbb{E}(X_{T_n} - a)^+,
+    $$
+    where $T_n = \frac{[T \cdot 2^n]}{2^n}$. Let $n\to \infty$ to get
+    $$
+        \mathbb{E}\left(U_{ab}^X([0,T])\right) \leq \frac{1}{b-a}\mathbb{E}(X_{T} - a)^+.
+    $$  
+}
+
+\prop{
+    If $(X_{t})_{t \geq 0}$ is a right continuous sub-martingale, and $\sup_{t \geq 0} \mathbb{E} X_{t}^+ < \infty$, then $\exists~ X \in L^1$ s.t. $X_t \xlongrightarrow{a.s.}X$ as $t \to \infty.$ 
+}
+
+\pf{
+    $$
+    \begin{aligned}
+        \mathbb{E}\left(U_{ab}^X([0,\infty))\right) &= \lim_{n \to \infty} \mathbb{E}\left(U_{ab}^X([0,n])\right)\\
+        &\leq \limsup_{n\to \infty}\frac{1}{b-a}\mathbb{E}(X_{n} - a)^+ \\
+        &\leq \limsup_{n\to \infty}\frac{1}{b-a}\left(\mathbb{E}(X_n^+)+ \abs{a}\right) < \infty.
+    \end{aligned}
+    $$
+    Hence $\forall~ a < b$, $U_{ab}^X[0,\infty)< \infty$ a.s. 
+    
+    $\Rightarrow~$w.p.1, $\forall~ a < b \in \mathbb{Q}$, $U_{ab}^X[0,\infty) < \infty$.
+
+    Hence $\liminf_{t\to \infty}X_{t} \leq a \leq b < \limsup_{t \to \infty} X_t$ does not occur.
+
+    $\Leftrightarrow \liminf_{t\to \infty} X_{t} = \limsup_{t \to \infty}X_t.$
+}
+
+\defnn{
+    A family of random variables $(X_t)_{t \geq 0}$ is uniformly integrable (U.I.) if 
+    $$
+        \lim_{M \to \infty}\sup_{t \geq 0} \mathbb{E}\left(\abs{X_t} \mathsf{1}_{\abs{X _t} > M}\right) = 0.
+    $$
+}
+
+\rmkb{If $\sup_{t \geq 0} \mathbb{E} \abs{X_t}^p < \infty$ for some $p > 1$, then U.I.}
+
+\thmnn{
+    If $X_n \xlongrightarrow{P} X$, then equivalent
+    $$
+    \begin{cases}
+        X_n \xlongrightarrow{L^1} X, \\
+        \mathbb{E}\abs{X_n} \to \mathbb{E}\abs{X},\\
+        \{X_n\} \text{ is U.I.}.
+    \end{cases}
+    $$
+}
+
+\prop{Let $Z \in L^1$. Then $\{\mathbb{E}(Z\mid \mathcal{G}) \colon \mathcal{G}\text{ is a sub }\sigma \text{-field of }\mathcal{F}\}$ is U.I.
+
+In particular $\{\mathbb{E}(Z \mid \mathcal{F}_t)\}_{t \geq 0}$ is U.I. and it is a martingale. (By Tower's property)
+}
+
+\prop{
+    A right continuous martingale $(X_t)_{t \geq 0}$ is U.I. if and only if $\exists~ X _{\infty} \in L^1$ such that $X _t = \mathbb{E}(X _\infty \mid \mathcal{F}_t).$
+}
+
+\pf{
+    ``$\Rightarrow$'' U.I. implies $\sup_{t \geq 0}\mathbb{E}\abs{X_t} < \infty.$
+
+    Then the martingale convergence theorem implies that $\exists~X_{\infty}$ s.t. $X_n \xlongrightarrow{a.s.} X$ and $\mathbb{E}\abs{X _{\infty}} = \mathbb{E}\left(\lim _{t \to \infty} \abs{X _t}\right) \leq \liminf _{t \to \infty} \mathbb{E}\abs{X _t} < \infty$.
+
+    To prove $\forall~ t \geq 0$, $X_t = \mathbb{E}(X _{\infty} \mid \mathcal{F}_t) \Leftrightarrow \forall~A \in \mathcal{F}_t$, $\mathbb{E}(X _t \mathsf{1}_A)=\mathbb{E}(X _{\infty}\mathsf{1}_A)$.
+
+    For any $s \geq 0$, we have $\mathbb{E}(X_{t+s} \mid \mathcal{F}_{t}) = X_{t} \implies \mathbb{E}(X_{t+s}\mathsf{1}_{A}) = \mathbb{E}(X_{t}\mathsf{1}_{A})$
+    $$\abs{\mathbb{E}(X_{t+s}\mathsf{1}_A) - \mathbb{E}(X_{\infty} \mathsf{ 1}_A)} \leq \mathbb{ E}\abs{X_{t+s} - X_{\infty}}\abs{\mathsf{1}_A} \leq \mathbb{E}\abs{X_{t+s}-X_{\infty}} \to 0.$$
+
+    Let $s\to \infty$, $\mathbb{E}(X_{t+s} \mathsf{1}_{A}) \xlongrightarrow{a.s.} \mathbb{E}(X_{\infty} \mathsf{1}_{A})$.
+
+    Recall U.I. + a.s. $\implies L^1$ convergence.
+
+    ``$\Leftarrow$'' If $\exists~ X_\infty \in L^1$ s.t. $X_t = \mathbb{E}(X_\infty \mid \mathcal{F}_t)$, then $\{X_t\}_{t \geq 0}$ is U.I.
+}
+
+\thm{Optional sampling Theorem}{
+    Let $(X_t)_{t \geq 0}$ be a right continuous martingale. Let $S \leq T$ be two stopping time. Suppose either
+    \begin{enumerate}[label=\textcircled{\arabic*}]
+        \item $\{X_t\}$ U.I.,
+        \item $\exists~$constant $K >0$, $S,T \leq K$.
+    \end{enumerate}
+    Then $\mathbb{E}(X_T \mid \mathcal{F}_S) = X _S \implies \mathbb{E}(X _T) = \mathbb{E}(X _S) = \mathbb{E}(X _0).$
+}
+
+\pf{
+    Define \textcircled{1} $Z = X_\infty$, \textcircled{2} $Z=X_{K}$.
+
+    In either case, $X_t = \mathbb{E}(Z\mid \mathcal{F}_t)$, \textcircled{1} $\forall~ t \geq 0$, \textcircled{2} $\forall~ t \leq K$.
+
+    It suffices to prove $X_T = \mathbb{E}(Z \mid \mathcal{F}_T)$. Then $X _S = \mathbb{E}(Z \mid \mathcal{F}_S)$.
+
+    Hence 
+    $$
+    \begin{aligned}
+    \mathbb{E}(X_T \mid \mathcal{F}_S) &= \mathbb{E}\left(\mathbb{E}(Z \mid \mathcal{F}_T) \mid \mathcal{F}_S\right)\\
+    &= \mathbb{E}(Z \mid \mathcal{F}_S)\\
+    &= X_S.
+    \end{aligned}    
+    $$
+
+    \textcircled{1} Suppose $T \in \{t_1,t_2,\dots\}$. Then $\forall~ A \in \mathcal{F}_T$, 
+    $$
+    \begin{aligned}
+    \mathbb{E}(X_T \mathsf{1}_A) &= \mathbb{E}(Z \mathsf{1}_A) \\
+    &= \sum_{n=1}^{\infty}\mathbb{E}(X_{t_n}\mathsf{1}_{\{T=t_n\}} \mathsf{1}_A)\\
+    &=\sum_{n=1}^{\infty}\mathbb{E}\left(\mathsf{1}_{A \cap \{T = t_n\}} Z\right)\\
+    &= \mathbb{E}(\mathsf{1}_A Z)
+    \end{aligned}$$
+    because \textcircled{1} $A \cap \{T = t_n\}\in \mathcal{F}_{t_n}$, \textcircled{2} $\mathbb{E}(Z \mid \mathcal{F}_{t_n}) = X_{t_n}$
+
+    \textcircled{2} General T. Define $T_k = \frac{[2^k T] + 1}{2^k}.$
+
+    To prove $X_T = \mathbb{E}(Z \mid \mathcal{F}_T)$, $\forall~ A \in \mathcal{F}_T \subseteq \mathcal{F}_{T _k}$, we get $\mathbb{E}(Z \mid \mathcal{F}_{T _k}) = X _{T _k} \implies \mathbb{E}(Z \mathsf{1}_A) = \mathbb{E}(X_{T_k} \mathsf{1}_A)$.
+
+    Send $k \to \infty$ to see $\mathbb{E}(Z \mathsf{1}_A) = \mathbb{E}(X_T \mathsf{1}_A).$
+
+    Because \textcircled{1} $X_{T_k} \xlongrightarrow{a.s.} X_T$ by right-continuity, \textcircled{2} $\{X_{T_k}\}$ is U.I. by $X_{T_k} = \mathbb{E}(Z \mid \mathcal{F}_{T_k})$, \textcircled{3} $\implies X_{T_k} \xlongrightarrow{L^1}X_T.$
 }
