@@ -522,3 +522,395 @@ In particular $\{\mathbb{E}(Z \mid \mathcal{F}_t)\}_{t \geq 0}$ is U.I. and it i
 
     Because \textcircled{1} $X_{T_k} \xlongrightarrow{a.s.} X_T$ by right-continuity, \textcircled{2} $\{X_{T_k}\}$ is U.I. by $X_{T_k} = \mathbb{E}(Z \mid \mathcal{F}_{T_k})$, \textcircled{3} $\implies X_{T_k} \xlongrightarrow{L^1}X_T.$
 }
+
+\thm{Doob's Maximal Inequality}{
+    Let $(X_t)_{t \geq 0}$ be a right-continuous submartingale. Then $\forall~\lambda > 0,$
+
+    $$
+        \begin{aligned}
+            &\mathsf{P}(\sup_{0 \leq s \leq t} X_s > \lambda) \leq \frac{1}{\lambda}\mathbb{E}X_t^+,\\
+            &\mathsf{P}(\inf_{0 \leq s \leq t} X_s < -\lambda) \leq \frac{1}{\lambda}(\mathbb{E}X_t^+ - \mathbb{E}X_0).
+        \end{aligned}
+    $$
+}
+
+\pf{
+    $\forall~ \lambda > 0$, $T = \inf \{t \geq 0: X_t > \lambda\},$ then
+    $$
+        \mathsf{P}(\sup_{0 \leq s \leq t}X_s > \lambda) = \mathsf{P}(T \leq t).
+    $$
+    
+    Consider $\{X_{t \wedge T}, t \geq 0\}$,
+    $$
+        \begin{aligned}
+        \lambda \mathsf{P}(T \leq t) = \lambda \mathbb{E}(\mathsf{1}_{T \leq t}) &\leq \mathbb{E}(X_T \mathsf{1}_{T \leq t})\\
+        & = \mathbb{E}(X_{T \wedge t} \mathsf{1}_{T \leq t}) \\
+        &= \mathbb{E}(X_{T \wedge t}^+ \mathsf{1}_{T \leq t})\\
+        &= \mathbb{E}(X_{T \wedge t}^+) \leq \mathbb{E}(X_t^+).
+        \end{aligned}
+    $$
+
+    Define $S = \inf\{t \geq 0 : X_t < -\lambda\}$, then
+    $$
+        \mathsf{P}(\inf_{0 \leq s \leq t}X_s < -\lambda) = \mathsf{P}(S \leq t).
+    $$
+    and
+    $$
+        \lambda \mathsf{P}(S \leq t) = \lambda \mathbb{E}(\mathsf{1}_{S \leq t}).
+    $$
+    
+    Because $X_S \leq - \lambda$, $\lambda \leq - X_S$, so
+    $$
+        \lambda \mathsf{P}(S \leq t) \leq \mathbb{E}(-X_S \mathsf{1}_{S \leq t}) = - \mathbb{E}(X_{S \wedge t} \mathsf{1}_{S \leq t}).
+    $$
+
+    By submartingale optional stopping
+    $$
+    \begin{aligned}
+    \mathbb{E}X_0 \leq \mathbb{E}X_{t \wedge S}&= \mathbb{E}(X_{t \wedge S}\mathsf{1}_{S \leq t}) + \mathbb{E}(X_{t \wedge S}\mathsf{1}_{S > t})\\
+    &\leq - \lambda \mathsf{P}(S \leq t) + \mathbb{E}(X_{t \wedge S}^+) \\
+    & \leq -\lambda \mathsf{P}(S \leq t)+ \mathbb{E}(X_t^+).
+    \end{aligned}
+    $$
+}
+
+\thmnn{$\forall~p > 1$, $\displaystyle\mathbb{E}\left(\sup_{s \leq t}\abs{X_s} \right)^p \leq \left(\frac{p}{p-1}\right)^p \mathbb{E}\abs{X_t}^p.$}
+
+\pf{
+    Define $Y= \sup_{0 \leq s \leq t}\abs{X_s}.$
+    $$
+    \begin{aligned}
+    \lambda \mathsf{P}(Y \geq \lambda) &\leq \mathbb{E}(\abs{X_{T \wedge t}}\mathsf{1}_{T \leq t}) \\
+    & = \mathbb{E}\left( \abs{X_{T \wedge t}} \right) - \mathbb{E}\left( \abs{X_{T \wedge t}} \mathsf{1}_{T > t} \right)\\
+    & \leq \mathbb{E}\left( \abs{X_t} \right) - \mathbb{E}\left( \abs{X_t}\mathsf{1}_{T >t} \right)\\
+    &= \mathbb{E} \abs{X_t} - \mathbb{E}\left( \abs{X_t} \mathsf{1}_{Y < \lambda} \right)\\
+    &= \mathbb{E}\left( \abs{X_t}\mathsf{1}_{Y \geq \lambda} \right).
+    \end{aligned}
+    $$
+    Hence $\mathsf{P}(Y \geq \lambda) \leq \frac{1}{\lambda}\mathbb{E}\left( \abs{X_t}\mathsf{1}_{Y \geq \lambda} \right).$
+    $$
+    \begin{aligned}
+        \mathbb{E}Y^p &= \int_{0}^{\infty} p \lambda^{p-1}\mathsf{P}(Y \geq \lambda) ~d \lambda \\
+        &\leq \int_{0}^{\infty} p \lambda^{p-2}\mathbb{E}\left( \abs{X_t}\mathsf{1}_{Y \geq \lambda} \right)~d \lambda\\
+        &=\mathbb{E}\left( \abs{X_t} \int_{0}^{\infty} p \lambda^{p-2}\mathsf{1}_{Y \geq \lambda} ~d\lambda \right)\\
+        &=\mathbb{E}\left( \abs{X_t}\int_{0}^{Y}p \lambda^{p-2}~d\lambda \right)\\
+        &= \mathbb{E}\left(\abs{X_t}\frac{p}{p-1}Y^{p-1}\right)\\
+        &\leq \frac{p}{p-1}\left( \mathbb{E}\abs{X_t}^p \right)^{\frac{1}{p}}\left( \mathbb{E}(Y^{p-1})^q \right)^{\frac{1}{q}}\\
+        &=\frac{p}{p-1}\left( \mathbb{E}\abs{X_t}^p \right)^{\frac{1}{p}}\left( \mathbb{E}Y^p \right)^{\frac{1}{q}}.
+    \end{aligned}
+    $$
+    $\implies \left( \mathbb{E}Y^p \right)^{\frac{1}{p}} \leq \frac{p}{p-1}\left( \mathbb{E}\abs{X_t}^p \right)^{\frac{1}{p}}.$
+
+    Consider $Y \wedge k$, $\forall~ k > 0$, 
+    $$
+    \begin{aligned}
+        \mathbb{E}\left( Y \wedge k \right)^p &= \int_{0}^{\infty} p \lambda^{p-1}\mathsf{P}(Y\wedge k \geq \lambda)~d \lambda \\
+        &= \int_{0}^{k}p \lambda^{p-1}\mathsf{P}(Y \wedge k \geq \lambda)~d \lambda + \underbrace{\int_{k}^{\infty} p \lambda^{p-1}\mathsf{P}(Y\wedge k \geq \lambda)~d \lambda}_{=0} \\
+        &= \int_{0}^{k}p \lambda^{p-1}\mathsf{P}(Y \wedge k \geq \lambda)~d\lambda\\
+        &= \int_{0}^{k}p \lambda^{p-1}\mathsf{P}(Y \geq \lambda) ~d \lambda\\
+        &\leq \mathbb{E}\left( \abs{X_t}
+        \int_{0}^{k} p \lambda^{p-1} \mathsf{1}_{Y \geq \lambda}~d \lambda \right)\\
+        &= \mathbb{E}\left( \abs{X_t}\int_{0}^{k \wedge Y} p \lambda^{p-2}~d \lambda \right)\\
+        &= \mathbb{E}\left[ 
+            \abs{X_t} \frac{p}{p-1}(Y \wedge k )^{p-1}
+         \right].
+    \end{aligned}
+    $$
+
+    $\implies \mathbb{E}(Y \wedge k)^p \leq \frac{p}{p-1}\left( \mathbb{E}\abs{X_t}^p \right)^{\frac{1}{p}}\left( 
+        \mathbb{E}(Y \wedge k)^p
+     \right)^{\frac{1}{q}}.$
+
+    $\implies \left( \mathbb{E}(Y \wedge k)^p \right)^{\frac{1}{p}} \leq \frac{p}{p-1}\left( \mathbb{E}\abs{X_t}^p \right)^{\frac{1}{p}}$.
+
+    Let $k\to \infty$, we get
+    $$
+        \left( \mathbb{E} Y^p \right)^{\frac{1}{p}} \leq \frac{p}{p-1}\left( \mathbb{E}\abs{X_t}^p \right)^{\frac{1}{p}}.
+    $$
+}
+
+\subsection{The Doob-Meyer Decomposition}
+Recall the Doob Decomposition
+$$
+    X_n = M_n + A_n,
+$$
+where $X_n$ is a submartingale, $M_n$ is a martingale, and $A_n$ is a predictable increasing process.
+
+$$
+    \begin{aligned}
+        &\mathbb{E}\left( M_{n+1} \mid \mathcal{F}_n \right) = M_n \\
+        \implies& \mathbb{E}(X_{n+1}- A_{n+1}\mid \mathcal{F}_n) = X_n - A_n \\
+        \implies& \mathbb{E}(X_{n+1}\mid \mathcal{F}_n) - A_{n+1} = X_n - A_n \\
+        \implies& A_{n+1} - A_n = \mathbb{E}(X_{n+1}\mid \mathcal{F}_n) - X_ n \geq 0.
+    \end{aligned}
+$$
+
+$$
+\begin{cases}
+A_n = \sum_{k=0}^{n-1}\left( \mathbb{E}(X_{k+1} \mid \mathcal{F}_k) - X_k \right)\\
+A_0 = 0.
+\end{cases}
+$$
+
+Next, for a right-continuous submartingale $(X_t)_{t \geq 0}$, $X_t = M_t + A_t$, where $M_t$ is a martingale, $A_t$ is a increasing \& ``predictable''.
+
+Consider $(A_t)_{t \geq 0}$ adapted.
+
+\defnn{
+        An adapted process $A$ is called increasing if a.s.
+    \begin{enumerate}[label=(\alph*)]
+        \item $A_0 = 0$;
+        \item $t \mapsto A_t$ is nondecreasing and right-continuous;
+        \item $\mathbb{E}(A_t) < \infty$, $\forall~ t \geq 0 $. 
+    \end{enumerate}
+    Integrable: $\mathbb{E}(A_\infty) = \mathbb{E}(\lim_{t \to \infty}A_t) < \infty.$
+}
+
+\defnn{
+    An increasing process $A$ is called natural if $\forall~$bounded, right-continuous martingale $(M_t)_{t \geq 0}$, we have $\forall~ t > 0$,
+    $$
+    \mathbb{E}\int_{0}^{t} M_s ~d A_s = \mathbb{E} \int_{0}^{t} M_{s-} ~d A_s.
+    $$
+}
+\rmkb{If $s \mapsto A_s$ is a.s. continuous, then $A$ is natural.}
+
+\defnn{
+    An increasing sequence ($A_n,\mathcal{F}_n$) is called natural if $\forall~$bounded martingale $\{M_n,\mathcal{F}_n\}$,
+    $$
+    \mathbb{E}(M_n A_n) = \mathbb{E}\left( \sum_{k=1}^n M_{k-1}(A_k - A_{k-1}) \right).
+    $$
+}
+
+\prop{
+    A predictable $\Longleftrightarrow$ A natural.
+}
+
+\pf{
+    ``$\Rightarrow~$'' To prove
+    $$
+    \begin{aligned}
+        &\mathbb{E}(M_n A_n) = \sum_{k=1}^n \mathbb{E}M_{k-1}(A_k - A_{k-1}) - \sum_{k=1}^n(M_{k-1} A_k) - \mathbb{E}(M_{k-1}A_{k-1})\\
+        \Longleftrightarrow& \sum_{k=2}^n \mathbb{E}(M_{k-1}A_{k-1}) + \mathbb{E}(M_n A_n) = \sum_{k=1}^n \mathbb{E}(M_{k-1}A_k)\\
+        \Longleftrightarrow &
+        \sum_{k=1}^n \mathbb{E}(M_k A_k) = \sum_{k=1}^n \mathbb{E}(M_{k-1}A_k)\\
+        \Longleftrightarrow &
+        \sum_{k=1}^n \mathbb{E}\left[ 
+            (M_k - M_{k-1})A_{k} = 0.
+         \right]
+    \end{aligned}
+    $$
+
+    So if $A_n \in \mathcal{F}_{n-1}$, 
+    $$
+    \mathbb{E}\left( 
+        A_n (M_n - M_{n-1})
+     \right) = \mathbb{E} \left[ 
+        \underbrace{\mathbb{E}(M_n - M_{n-1} \mid \mathcal{F}_n )}_{=0}A_n 
+      \right]=0.
+    $$
+
+    ``$\Leftarrow~$'' Assume $A$ is natural. Then $\forall~$bounded $(M_n)$,
+    $$
+    \mathbb{E}\left[ 
+        A_n (M_n - M_{n-1})
+     \right] = 0,\quad \forall~ n \geq 1.
+    $$
+
+    \textbf{Goal:} $A_n \in \mathcal{F}_{n-1} \Longleftrightarrow A_n = \mathbb{E}(A_n \mid \mathcal{F}_{n-1})$ a.s..
+    $$
+    \begin{aligned}
+        &\mathbb{E}\left[ 
+            M_n\left( A_n - \mathbb{E}(A_n \mid \mathcal{F}_n) \right)
+         \right]\\
+         =& \mathbb{E}\left( A_n M_{n-1} \right) - \mathbb{E} \left[ 
+            M_n \mathbb{E}(A_n \mid \mathcal{F}_{n-1})
+          \right]\\
+         =& \mathbb{E}\left( M_{n-1} \left( A_n - \mathbb{E}(A_n \mid \mathcal{F}_{n-1}) \right) \right) + \mathbb{E}\left[ 
+            \mathbb{E}(A_n \mid \mathcal{F}_{n-1}) (M_n - M_{n-1})
+          \right]\\
+         =&\mathbb{E}(M_{n-1}A_n) - \mathbb{E}\left[ \mathbb{E}(A_nM_{n-1}\mid \mathcal{F}_{n-1}) \right] + \mathbb{E}\left[ 
+            \mathbb{E}(A_n \mid \mathcal{F}_{n-1}) \mathbb{E}(M_n - M_{n-1} \mid \mathcal{F}_{n-1})
+          \right]= 0.
+    \end{aligned}
+    $$
+
+    Fix $n \geq 1$. Let 
+    $$
+        X = \mathrm{sgn} \left( A_n - \mathbb{E}(A_n \mid \mathcal{F}_{n-1}) \right)
+    $$
+    Then $X\left( A_n - \mathbb{E}(A_n\mid \mathcal{F}_{n-1}) \right) = \abs{A_n - \mathbb{E}(A_n \mid \mathcal{F}_{n-1})}$.
+
+    Define 
+    $$ M_k = \begin{cases}
+       \mathbb{E}(X \mid \mathcal{F}_{k}),& 0 \leq k \leq n-1\\
+       X, &k=n
+    \end{cases}$$
+
+    Check: $\mathbb{E}(M_{k+1} \mid \mathcal{F}_{k}) = M_k$, $k \geq n$, $\mathbb{E}(X \mid \mathcal{F}_{k}) = X$.
+
+    $$
+    \begin{aligned}
+        0 &= \mathbb{E}\left[ M_n (A_n - \mathbb{E}(A_n \mid \mathcal{F}_{n-1})) \right]\\
+        &= \mathbb{E} \abs{A_n - \mathbb{E}(A_n \mid \mathcal{F}_{n-1})}
+    \end{aligned}
+    $$
+    $\implies A_n = \mathbb{E}(A_n \mid \mathcal{F}_{n-1})$ a.s.
+    
+    $\implies A_n \in \mathcal{F}_{n-1}.$
+}
+
+$$
+    \begin{aligned}
+        &\mathbb{E}(M_n A_n) = \sum_{k=1}^n \mathbb{E}\left( M_{k-1} (A_k - A_{k-1}) \right) \\
+        \Longleftrightarrow &
+        \mathbb{E}(M_tA_t) = \mathbb{E}\left( \int_{0}^{t}M_{s-}~dA_s \right) = \mathbb{E}\left( \int_{0}^{t} M_s ~dA_s \right).
+    \end{aligned}
+$$
+
+$$
+    \int_{0}^{t} M_s ~d A_s = \lim_{\norm{\Pi}\to 0} \int_{0}^{t} M_s^\Pi ~d A_s.
+$$
+where $\Pi = \{t_0, t_1,\cdots,t_n\}\subseteq[0,t]$ with $0 = t_0 < t_1 < \cdots < t_n = t$ and $\norm{\Pi} = \max_{1 \leq k \leq n}(t_k - t_{k-1}).$ $M_s \xlongleftarrow{a.s.} M_s^\Pi = \sum_{k=1}^{n} M_{t_k}\mathsf{1}_{(t_{k-1},t_k]}(s)$ by right-continuity. For each $\Pi$, 
+$$
+\begin{aligned}
+&\mathbb{E}\int_{0}^{t}M_s ^\Pi ~d A_s \\
+=& \mathbb{E} \sum_{k=1}^n M_{t_k}(A_{t_k} - A_{t_{k-1}}) \\
+=& \sum_{k=1}^n \mathbb{E}(M_{t_k A_{t_k}}) - \mathbb{E}(M_{t_k}A_{t_{k-1}})\\
+=&\mathbb{E}(M_{t_n}A_{t_n}) + \sum_{k=1}^{n-1}\mathbb{E}(M_{t_{k}} A_{t_{k}}) - \sum_{k=2}^{n}\mathbb{E}(M_{t_k} A_{t_{k-1}})\\
+=& \mathbb{E}(M_t A_t) + \sum_{k=1}^{n-1}\mathbb{E}(M_{t_k} A_{t_k}) - \sum_{k=1}^{n-1}\mathbb{E}(M_{t_{k+1}}A_{t_k}) \\
+=& \mathbb{E}(M_t A_t) - \underbrace{\sum_{k=1}^{n}\mathbb{E}\left( A_{t_k} (M_{t_{k+1}} - M_{t_k}) \right)}_{=0}
+\end{aligned}
+$$
+
+\defnn{
+    Let $S = \{\text{stopping time }T \text{ with }T < \infty \text{ a.s.}\}$. We say a right-continuous $\{X_t\}_{t \geq 0}$ is of class $D$ if $\{X_T\}_{T \in S}$ is U.I. $\implies$ implies $\{X_t\}_{t \geq 0}$ is U.I..
+
+    Fix $a > 0$. Let $S_a = \{\text{stopping time } T \text{ with }T \leq a \text{ a.s.}\}.$ $\{X_t\}_{t \geq 0}$ is of class $DL$ if $\{X_T\}_{T \in S_a}$ is U.I. for every $a > 0$.
+}
+
+
+\thm{Doob-Meyer Decomposition}{
+    If $\{X_t\}$ is of class $DL$, then $X_t = M_t + A_t$ with $\{M_t\}$ is martingale, $\{A_t\}$ is increasing.
+
+    If $(A_t)$ is natural, then $(M_t, A_t)$ is unique.
+}
+
+\pf{
+    Assume $X_t = \begin{cases}
+        M_t + A_t \\M_t' + A_t'
+    \end{cases}$ with $M_t,M_t'$ martingale, $A_t, A_t'$ natural.
+
+    Let $B_t = M_t - M_t' = A_t' - A_t$ is a martingale and of bounded variation \underline{natural}.
+    
+    $\forall~$bounded continuous martingale $\{\xi_t\}_{t \geq 0}$, 
+    $$
+    \begin{aligned}
+        \mathbb{E} \xi_t (A_t - A_t')& = \mathbb{E}\int_{0}^{t}\xi_{s-} (d A_s - d A_s') \\
+        &= \mathbb{E}\left[ \int_{0}^{t}\xi_{s-}  dB_s \right]\\
+        &=\lim_{n \to \infty} \mathbb{E}\sum_{j=1}^{m_n}\xi_{t_{j-1}^{(n)}} \left[ B_{t_j^{(n)}} - B_{t_{j-1}^{(n)}} \right]
+    \end{aligned}
+    $$ 
+    where $\Pi_n = \{t_0^{(n)}, \cdots, t_{m_n}^{(n)}\}$ is a partition of $[0,t]$.
+
+    $$
+    \mathbb{E}\left[ 
+        \xi_{t_{j-1}^{(n)}} (B_{t_j^{(n)}} - B_{t_{j-1}^{(n)}})
+     \right] = \mathbb{E} \left[ 
+        \xi_{t_{j-1}^{(n)}} \underbrace{\mathbb{E}(B_{t_j^{(n)}} - B_{t_{j-1}^{(n)}} \mid \mathcal{F}_{t_{j-1}^{(n)}})}_{=0}
+      \right]
+    $$
+    Hence $\mathbb{E}\left[ \xi_t (A_t - A_t')  \right] = 0.$
+
+    $\forall~$bounded variable $\xi$, we let $\xi_t = \mathbb{E}(\xi \mid \mathcal{F}_t)$. Then $\mathbb{E}\left[ \mathbb{E}(\xi \mid \mathcal{F}_t)(A_t - A_t') \right] = 0 \Rightarrow~ \mathbb{E}\left[ \xi (A_t - A_t') \right] = 0$.
+    
+    $\xi = \mathrm{sgn}(A_t - A_t') \Rightarrow~ \mathbb{E}\abs{A_t - A_t'} = 0 \Rightarrow~A_t = A_t'$, a.s. $\forall~ t > 0 \Rightarrow~ A_t = A_t'$, $\forall~ q \in \mathbb{Q}_+$ a.s. $\Rightarrow~$Right-continuity, $A_t = A_t'$, $\forall~ t \geq 0$ a.s..
+
+    \textbf{Existence: }Fix $a > 0$.
+    
+    We only need to prove $X_t = M_t + A_t$, $\forall~ 0 \leq t \leq a$.
+
+    Consider $Y_t \triangleq X_t - \mathbb{E}(X_a \mid \mathcal{F}_t)$. $(Y_t)_{t \geq 0}$ is a submartingale because 
+    $$
+    \begin{aligned}
+    \mathbb{E}(Y_t \mid \mathcal{F}_s)&= \mathbb{E}(X_t \mid \mathcal{F}_s) - \mathbb{E}(X_a \mid \mathcal{F}_s) \\
+    &\geq X_s - \mathbb{E}(X_a \mid \mathcal{F}_s) = Y_s, \quad \forall~t \geq s.
+    \end{aligned}
+    $$
+
+    $\Pi_n = \{t_0^{(n)},\cdots, t_{2^n}^{(n)}\}$ with $t_j^{(n)} = \frac{j}{2^n}a$, $0 \leq j \leq 2^n$. Then $\forall~ 0 \leq j \leq 2^n$, 
+    $$
+        Y_{t_{j}^{(n)}} = M_{t_{j}^{(n)}}^{(n)} + A_{t_j^{(n)}}^{(n)}
+    $$
+    with $A_{t_j^{(n)}}^{(n)} = \sum_{k=0}^{j-1}\mathbb{E}\left( Y_{t_{k+1}^{(n)}} - Y_{t_{k}^{(n)}} \middle| \mathcal{F}_{t_{k}^{(n)}}\right)$
+    $$
+    \begin{cases}
+        Y_0 = X_0 - \mathbb{E}(X_a \mid \mathcal{F_0}) \leq 0\\
+        Y_a = X_a - \mathbb{E}(X_a \mid \mathcal{F}_a) = 0.
+    \end{cases}
+    $$
+    $0 = M_a ^{(n)} - A_a^{(n)}$. Hence $M_{t_{j}^{(n)}}^{(n)} = \mathbb{E}(M_a^{(n)} \mid \mathcal{F}_{t_{j}^{(n)}}) = - \mathbb{E}(A_a^{(n)} \mid \mathcal{F}_{t_{j}^{(n)}}).$
+
+    $\implies Y_{t_{j}^{(n)}} = A_{t_{j}^{(n)}}^{(n)} - \mathbb{E}(A_a^{(n)} \mid \mathcal{F}_{t_{j}^{(n)}})$.
+
+    We will show $\{A_a^{(n)}\}_{n \geq 1}$ is U.I.. Then by Dunford-Pettis compactness criterion, $\exists~$integrable $A_a$ s.t. 
+    $$
+        A_a^{(n_k)} \xlongrightarrow{L^1} A_a
+    $$ 
+    i.e. $\forall~$bounded r.v. $\xi$, 
+    $$
+    \lim_{k \to \infty} \mathbb{E}(\xi A_a^{(n_k)}) = \mathbb{E}(\xi A_a).
+    $$
+
+    Define $A_t = Y_t + \mathbb{E}(A_a \mid \mathcal{F}_t)$.
+
+    4.11 Problem $\Rightarrow~$If $\mathbb{E}(\xi A_a^{(n_k)}) \to \mathbb{E}(\xi A_a)$ then 
+    $$
+    \mathbb{E}(\xi \mathbb{E}(A_a^{(n_k)} \mid \mathcal{F}_t)) \to \mathbb{E}(\xi \mathbb{E}(A_a \mid \mathcal{F}_t))
+    $$
+
+    $A_a^{(n_k)} \xlongrightarrow{L^1} A_a \Rightarrow~ \mathbb{E}(A_a^{(n_k)} \mid \mathcal{F}_t) \xlongrightarrow{L^1} \mathbb{E}(A_a \mid \mathcal{F}_t)$.
+
+    $$\begin{cases}
+        A_t = Y_t + \mathbb{E}(A_a \mid \mathcal{F}_t) \\
+        A_t^{(n)} = Y_t + \mathbb{E}(A_a^{(n)} \mid \mathcal{F}_t)
+    \end{cases}$$ 
+    for any $t = t_{j}^{(n)}$.
+
+    Hence $\mathbb{E}(\xi A_t^{(n)}) \to \mathbb{E}(\xi A_t)$. 
+
+    For any $0 \leq s < t \leq a$ with $s,t \in \{\frac{j}{2^n}, n \geq 1, 0 \leq j \leq 2^n\}$,
+    $$
+        \mathbb{E}(\xi (A_t - A_s)) = \lim_{k \to \infty}\mathbb{E}(\xi (A_t^{(n_k)} - A_s^{(n_k)}) ) \geq 0 \quad \text{if } \xi \geq 0.
+    $$
+
+    By letting $\xi = \mathsf{1}_{A_s > A_t}$, $\mathbb{E}\left[ (A_t - A_s) \mathsf{1}_{A_s - A_t} \right] \geq 0.$
+
+    $\Rightarrow~ A_t - A_s \geq 0$ a.s.
+
+    $A_0^{(n)} = 0 = Y_0 + \mathbb{E}(A_a^{(n)} \mid \mathcal{F}_0) \to Y_0 + \mathbb{E}(A_a \mid \mathcal{F}_0) = A_0$.
+
+    $\Rightarrow~ A_0 = 0$.
+
+    $X_t - \mathbb{E}(X_a \mid \mathcal{F}_t) =Y_t = A_t^{(n)}- \mathbb{E}(A_a^{(n)} \mid \mathcal{F}_t).$
+
+    $\Rightarrow~ Y_t = A_t - \mathbb{E}(A_a \mid \mathcal{F}_t) = X_t-\mathbb{E}(X_a \mid \mathcal{F}_t).$
+
+    $\Rightarrow~ X_t = A_t + \mathbb{E}(X_a - A_a \mid \mathcal{F}_t) = A_t + M_t$.
+
+    To prove $\{A_t\}$ is natural,
+    $$\mathbb{E}\int_{0}^{a} \xi_s ~dA_s = \mathbb{E}\int_{0}^{a}\xi_{s-}~dA_s.$$
+    $$LHS = \mathbb{E}(\xi_a A_a) = \lim_{n \to \infty}\mathbb{E}(\xi_a A_a^{(n)})$$
+
+    $$
+    RHS = \lim_{n \to \infty} \mathbb{E} \sum_{j=1}^{2^n}\xi_{t_{j-1}^{(n)}}(A_{t_{j}^{(n)}} - A_{t_{j-1}^{(n)}}).
+    $$
+
+    Because $\{A_{t_{j}^{(n)}}^{(n)}\}_{0 \leq j \leq 2^n}$ is predictable,
+    $$
+    \begin{aligned}
+    \mathbb{E}(\xi_a A_a^{(n)}) &= \mathbb{E}\left( \sum_{j=1}^{2^n}\xi_{t_{j-1}^{(n)}} (A_{t_{j}^{(n)}}^{(n)} - A_{t_{j-1}^{(n)}}^{(n)}) \right)\\
+    &=\mathbb{E}\left( \sum_{j=1}^{2^n}\xi_{t_{j-1}^{(n)}}(Y_{t_{j}^{(n)}}-Y_{t_{j-1}^{(n)}}) \right)\\
+    &=\mathbb{E}\left( \sum_{j=1}^{2^n}\xi_{t_{j-1}^{(n)}}(A_{t_{j}^{(n)}}-A_{t_{j-1}^{(n)}}) \right)
+    \end{aligned}
+    $$
+}
