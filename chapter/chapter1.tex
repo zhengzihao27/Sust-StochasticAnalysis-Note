@@ -914,3 +914,399 @@ $$
     \end{aligned}
     $$
 }
+
+\section{Square Integrable}
+\defnn{
+    Let $(X_t)_{t \geq 0}$ be a right-continuous martingale. We say $X$ is square-integrable if
+    $$
+    \mathbb{E}X_t^2 < \infty, \quad \forall~t \geq 0.
+    $$
+    Assume $X_0 = 0$, $X \in M_2.$
+}
+
+$Y_t = X_t^2$ is a submartingale.
+
+Recall \underline{DL}: $\forall~$stopping time $T \leq a$, $\{Y_T\}_{T}$ is U.I..
+
+By Doob-meyer decomposition, $Y_t = X_t^2 = M_t + A_t$, $\forall~ t \geq 0.$
+
+If $X \in M_2^c$ (continuous), we may let $M_t$ and $A_t$ be continuous.
+
+\defnn{
+    $\forall~ X \in M_2$, the quadratic variation of $X$ is defined by $\langle X \rangle_t \triangleq A_t$ i.e. $\langle X \rangle_{t}$ is the unique adapted, natural increasing process such that $\langle X \rangle_0 = 0$ and $X_t^2 - \langle X \rangle_{t}$ is a martingale.
+}
+
+If we take $X,Y \in M_2$, then 
+$$
+\begin{cases}
+    (X_t + Y_t)^2 - \langle X+Y \rangle_t \text{ is mart,}\\
+    (X_t - Y_t)^2 - \langle X-Y \rangle_{t} \text{ is mart.} 
+\end{cases}
+$$
+$\implies 4X_tY_t - \left( \langle X+Y \rangle_t - \langle X-Y \rangle_t   \right)$ is a mart.
+\defnn{
+    For $X,Y \in M_2$, we define the cross variation $$\langle X,Y \rangle_t \triangleq \frac{1}{4}\left( \langle X+Y \rangle_t - \langle X-Y \rangle_t   \right) $$
+    such that $X_tY_t - \langle X,Y \rangle_t $ is a martingale.
+}
+\rmkb{
+    $\langle X,X \rangle_t = \langle X \rangle_t.$
+}
+\defnn{
+    The p-th variation of $X$ over the partition $\Pi = \{t_0,\cdots,t_m\}$ of $[0,t]$ is
+    $$
+    V_t^{(p)}(\Pi) = \sum_{k=1}^{m}\abs{ X_{t_k} - X_{t_{k-1}} }^p.
+    $$
+    when $p = 2$, we call $V_t^{(2)}(\Pi)$ the quadratic variation.
+}
+\thmnn{
+    Let $X \in \mathcal{M}_2^c$. For partition $\Pi$ of $[0,t]$, we have $V_t^{(2)}(\Pi) \xlongrightarrow{P} \langle X \rangle_t.$
+}
+\pf{
+    $$
+    \begin{aligned}
+    &\mathbb{E}\left( V_t^{(2)}(\Pi) - \langle X \rangle_t  \right)^2 \\
+    =& \mathbb{E}\left[ 
+        \sum_{k=1}^{m}\abs{ X_{t_{k}} -X_{t_{k-1}}}^2 - \langle X \rangle _t
+     \right]^2\\
+     =& \mathbb{E}\left[ 
+        \sum_{k=1}^{m}\left( 
+            \abs{ X_{t_{k}} -X_{t_{k-1}}  }^2 - \left( \langle X \rangle_{t_k} - \langle X \rangle_{t_{k-1}}   \right)
+         \right)
+      \right]^2 \\
+      =& \sum_{k=1}^{m} \mathbb{E} \left[ 
+        \left( X_{t_{k}} -X_{t_{k-1}}  \right)^2 - \left( \langle X \rangle_{t_k} - \langle X \rangle_{t_{k-1}}   \right)
+       \right]^2 \\
+       &+ 2 \sum_{1 \leq j < \leq m}\mathbb{E}\left[ 
+        \left( X_{t_{k}} -X_{t_{k-1}}  \right)^2 - \left( \langle X \rangle_{t_k} - \langle X \rangle_{t_{k-1}}   \right)
+        \right]\left[ \left( 
+            X_{t_{j}} - X_{t_{j-1}}
+         \right)^2 - \left( \langle X \rangle_{t_j} - \langle X \rangle_{t_{j-1}}   \right) \right]. (\textbf{H})
+    \end{aligned}$$
+    Notice that
+    $$
+    \mathbb{E}\left[ 
+        \left( X_{t_{k}} - X_{t_{k-1}} \right)^2 \middle| \mathcal{F}_{t_j} 
+     \right] = \mathbb{E}\left[ 
+        X_{t_{k}}^2 \middle| \mathcal{F}_{t_{j}}
+      \right] - 2 \mathbb{E}\left( X_{t_{k}}X_{t_{k-1}} 
+        \middle| \mathcal{F}_{t_j} \right) + \mathbb{E}\left( X_{t_{k-1}}^2 \middle| \mathcal{F}_{t_j} \right).
+    $$
+    For the cross-term,
+    $$
+    \begin{aligned}
+        \mathbb{E}\left( X_{t_{k}}X_{t_{k-1}}\middle| \mathcal{F}_{t_{j}} \right) = \mathbb{E}\left[ 
+            \mathbb{E}\left( X_{t_{k}}X_{t_{k-1}}\middle| \mathcal{F}_{t_{k-1}} \right)\middle| \mathcal{F}_{t_j}
+         \right]= \mathbb{E}\left[ X_{t_{k-1}}\mathbb{E}\left( X_{t_{k}} \middle| \mathcal{F}_{t_{k-1}} \right) \middle| \mathcal{F}_{t_j} \right].
+    \end{aligned}
+    $$
+    Hence 
+    $$
+    \mathbb{E}\left[ \left( X_{t_{k}} -X_{t_{k-1}} \right)^2 \middle| \mathcal{F}_{t_j} \right] = \mathbb{E} \left[ 
+        X_{t_{k}}^2 - X_{t_{k-1}}^2 \middle| \mathcal{F}_{t_j}
+     \right] = \mathbb{E}\left[ \langle X \rangle_{t_k} - \langle X \rangle_{t_{k-1}} \middle| \mathcal{F}_{t_j}   \right]
+    $$
+    Then
+    $$
+    \begin{aligned}
+        (\textbf{H}) &\leq \sum_{k=1}^{m}\left[ 
+            2 \mathbb{E} \left( X_{t_{k}} - X_{t_{k-1}} \right)^4 + 2 \mathbb{E} \left( \langle X \rangle_{t_k} - \langle X \rangle_{t_{k-1}}   \right)^2
+         \right] + 2 \mathbb{E}\left[ \sup_{1 \leq k \leq m} \abs{ \langle X \rangle_{t_{k}} - \langle X \rangle_{t_{k-1}}   } \langle X \rangle_{t}  \right]\\
+         & = I + II.
+    \end{aligned}
+    $$
+    Note $I = 2 \mathbb{E} V_t^{(4)}(\Pi)$.
+    \lemnn{
+        Let $X \in \mathcal{M}_2$ satisfy $\abs{ X_s } \leq K< \infty,$ $\forall~ s \leq t$. Then $\mathbb{E}\left[ V_t^{(2)}(\Pi)^2 \right]\leq 6K^4$
+    }
+    Assuming this, then
+    $$
+    \mathbb{E}V_t^{(4)}(\Pi) \leq \mathbb{E}\left( 
+        \sum_{k=1}^{m}\abs{ X_{t_{k}}-X_{t_{k-1}} }^2 \cdot m_t^2\left( X;\norm{ \Pi } \right)
+     \right)
+    $$
+    where $m_t(X,\delta) = \sup\{\abs{ X_r - X_s }
+    \colon \abs{ s-r }\leq \delta,\, 0 \leq r < s \leq t\}.$
+    By Cauchy-Schwartz, 
+    $$
+    \begin{aligned}
+    &\mathbb{E}\left[ V_t^{(4)}(\Pi) \right]\\
+    \leq& \mathbb{E} \left[ V_t^{(2)}(\Pi)\cdot m_t^2(X, \norm{ \Pi }) \right]\\
+    \leq&\left( \mathbb{E}\left[ V_t^{(2)}(\Pi)^2 \right] \right)^{\frac{1}{2}}\left( \mathbb{E}m_t^4(X;\norm{ \Pi }) \right)^{\frac{1}{2}}\\
+    \leq&(6K^4)^\frac{1}{2}\cdot \left( \mathbb{E}\left[ m_t^4 \left( X,\norm{ \Pi } \right) \right] \right)^{\frac{1}{2}}.
+    \end{aligned}
+    $$  
+
+    If $\abs{ X_s } \leq K < \infty$, $\forall~ 0 \leq s \leq t$, by bounded convergence $\mathbb{E}\left[ m_t^4(X,\norm{ \Pi }) \right] \to 0$ as $\norm{ \Pi } \to 0.$
+
+    \lemnn{
+        Let $X \in \mathcal{M}_2$ satisfy $\abs{ X_s } \leq K < \infty$, $\forall~ 0 \leq s \leq t$. Then
+        $$
+            \mathbb{E}\left[ V_t^{(4)}(\Pi) \right] \to 0 \quad \text{a.s. }\norm{ \Pi } \to 0.
+        $$
+    }
+    For II. Let $X \in \mathcal{M}_2^c$ satisfy $\langle X \rangle_{s}  \leq K < \infty$, $\forall~ 0 \leq s \leq t$. Then 
+    $$
+    \mathbb{E}\left[ 
+        \langle X \rangle_{t} \cdot \sup_{1 \leq k \leq m} \abs{  \langle X \rangle_{t_{k}} - \langle X \rangle_{t_{k-1}}   } 
+     \right] \to 0.
+    $$
+    [proof: By uniformly Continuity]
+
+    \textbf{Summary:} If $\abs{ X_s } \leq K < \infty$ and $\langle X \rangle_{s} \leq K $, $\forall~ 0 \leq s \leq t$, then 
+    $$
+    \mathbb{E}\left[ 
+        \left( V_{t}^{(2)}(\Pi) - \langle X \rangle_{t}  \right)^2
+        \right] \to 0 \quad \text{a.s. } \norm{ \Pi } \to 0.
+    $$
+
+    Next, for general $X \in \mathcal{M}_2^c$, we use ``Localization'' to define $\forall~n \geq 1$,
+    $$
+    T_n = \inf \{ t \geq 0 \colon \abs{ X_t }\geq n \text{ or } \langle X \rangle_{t} \geq n \}.
+    $$
+
+    Then $X_t^{(n)} = X_{t \wedge T_n}$ is a bounded martingale. Also $\left\{ X_{t \wedge T_n}^2 - \langle X \rangle_{t \wedge T_n}  \right\}_{t \geq 0}$ is a bounded mart.
+
+    By uniqueness of $\langle X^{(n)} \rangle_{t} $, we get $\langle X^{(n)} \rangle_{t} = \langle X \rangle_{t \wedge T_n}  $ and $(X_t^{(n)})^2 - \langle X^{(n)} \rangle_{t} $ is mart.
+
+    Hence $\forall~ 0 \leq s \leq t$
+    $$
+    \begin{cases}
+        \abs{ X_s^{(n)} } \leq n < \infty, \\
+        \langle X^{(n)} \rangle_{s} \leq n < \infty. 
+    \end{cases}
+    $$
+    $$
+    \implies \mathbb{E}\left[ 
+        \sum_{k=1}^{m}\left( X_{t_{k} \wedge T_n} -X_{t_{k-1} \wedge T_n}  \right)^2 - \langle X \rangle_{t \wedge T_n}
+        \right]^2 \to 0 \quad \text{a.s. } \norm{ \Pi } \to 0.
+    $$
+
+    $T_n \uparrow \infty$ a.s.
+    $\forall~$fixed $t >0$, $\mathsf{P}(T_n < t)\to 0$. We need to prove $\forall~\varepsilon > 0$, $\forall~\eta>0$, $\exists~\delta > 0$, if $\norm{ \Pi } \leq \delta,$ then 
+    $$
+    \mathsf{P}\left( \abs{V_t^{(2)}(x) - \langle X \rangle_{t} }  > \varepsilon \right) < \eta.
+    $$
+
+    Let $n \geq 1$ be large such that $\mathsf{P}(T_n < t) \leq \frac{\eta}{2}$. Then 
+    $$  
+    \begin{aligned}
+    \mathsf{P}\left( \abs{V_t^{(2)}(X) - \langle X \rangle_{t} }  > \varepsilon \right) &= \mathsf{P}(T_n < t) + \mathsf{P}\left(  T_n \geq t, \abs{ V_{t \wedge T_n}^{(2)}(X)-\langle X \rangle_{t \wedge T_n}  } > \varepsilon\right)\\
+    &\leq \frac{\eta}{2} + \frac{1}{\varepsilon^2}\mathbb{E}\left[ 
+        \left( 
+            V_{t \wedge T_n}^{(2)}(X) - \langle X \rangle_{t \wedge T_n} 
+            \right)^2
+        \right]\quad (\textbf{Q}).
+    \end{aligned}
+    $$
+    Let $\norm{  \Pi }$ be small such that 
+    $$
+    (\textbf{Q}) \leq \frac{\eta}{2} + \frac{1}{\varepsilon^2} \varepsilon^2 \frac{\eta}{2}.
+    $$
+    Hence $\mathsf{P}\left( \abs{V_t^{(2)}(x) - \langle X \rangle_{t} }  > \varepsilon \right) \leq \eta.$
+}
+
+\cor{
+    $V_t^{(2)}(\Pi) \xlongrightarrow{P} \langle X \rangle_{t} \implies 
+    \begin{cases}
+    \forall~q > 2,\quad V_{t}^{(q)}(\Pi) \xlongrightarrow{P} 0,\\
+    \forall~q < 2,\quad V_{t}^{(q)}(\Pi) \xlongrightarrow{P} \infty
+    \end{cases} $
+    on $\{\langle X \rangle_{t} > 0 \}$.
+}
+
+$\mathcal{M}_2 = \{X\colon\mathbb{E} X_t^2 <\infty,\, \forall~ t\}$.
+
+$\mathcal{M}^2 = \{X\colon \sup_{t \geq 0} \mathbb{E}X_t^2 < \infty\}$.
+
+$\mathcal{M}^2_0 = \{X \in M^2 \colon X_0 = 0\}$.
+
+
+\section{\texorpdfstring{$L^2$}-Theory}
+The space $\mathcal{M}^2 \longleftrightarrow L^2(\mathcal{F}_{\infty})$, $X \mapsto X_{\infty}$. $\forall~ X \in \mathcal{M}^2$, we have 
+$$
+\begin{cases}
+    X_{\infty} = \lim_{t \to \infty} X_t \text{ a.s.,}\\
+    X_t \xlongrightarrow{L^2} X_{\infty},
+\end{cases}
+$$
+$\forall~ X_\infty \in L^2(\mathcal{F}_{\infty})$, we have $X_{t} = \triangleq \mathbb{E}\left( X_\infty \middle| \mathcal{F}_{t} \right) \in \mathcal{M}^2.$
+
+$$
+\mathbb{E}\left( X_t^2 \right) = \mathbb{E}\left[ \mathbb{E}\left( X_\infty \middle| \mathcal{F}_t \right)^2 \right] \leq \mathbb{E}\left[ \mathbb{E}\left( X_\infty^2 \middle| \mathcal{F}_t \right) \right] = \mathbb{E}[X_\infty^2].
+$$
+$\forall~ X,Y \in \mathcal{M}^2$, we define $\langle X,Y \rangle \triangleq \mathbb{E}\left[ X_{\infty}Y_{\infty} \right]. $
+
+\thm{Doob's $L^2$ inequality}{
+    $$
+    \mathbb{E}\left[ \sup_{0 \leq s \leq t}\abs{ X_s }^2 \right] \leq 4 \mathbb{E}\left[ X_t^2 \right].
+    $$
+    Let $t \to \infty$ to see 
+    $$
+    \mathbb{E}\left[ \sup_{t \geq 0}\abs{ X_s }^2 \right] \leq 4 \mathbb{E}[X_\infty^2].
+    $$
+}
+
+$\mathcal{M}^2$ is complete: For any Cauchy sequence $\{M^{(n)}\}$ in $\mathcal{M}^2$, we have $\{M_{\infty}^{(n)}\}$ is Cauchy in $L^2(\mathcal{F}_{\infty})$. $\implies\exists~M_{\infty} \in L^2(\mathcal{F}_{\infty})$ s.t. $M_{\infty}^{(n)} \to M_{\infty}$ in $L^2$.
+
+Then if $M_t = \mathbb{E}(M_\infty \mid\mathcal{F}_t)$ then
+$$
+    \sup_{t \geq 0}\abs{ M_t^{(n)} - M_t } \to 0 \text{ in } L^2.
+$$
+
+\pf{
+    $$\mathbb{E}\left[ 
+        \sup_{t \geq 0}\abs{ M_t^{(n)} - M_t }^2
+     \right] = \mathbb{E}\left[ 
+        \sup_{t \geq 0} \mathbb{E}\left( 
+            M_\infty^{(n)} - M_\infty \middle| \mathcal{F}_t
+         \right)^2
+      \right] \leq 4 \mathbb{E}\left[ \left( M_\infty^{(n)} - M_{\infty} \right)^2 \right] \to 0.$$
+}
+
+\cor{
+    The space $c \mathcal{M}^2$ of continuous mart in $\mathcal{M}^2$ is closed in the topology of $\mathcal{M}^2$.
+}
+
+\pf{
+    If $M^{(n)} \to M$ for $M^{(n)} \in c \mathcal{M}^2$, then
+    $$
+    \sup_{t \geq 0} \abs{ M_t^{(n)} - M_t } \to 0 \text{ in }L^2
+    $$
+    $\exists~(n_k)$ s.t. $\sup_{t \geq 0}\abs{ M_t^{(n_k)} - M_k }\to 0$ a.s.
+    
+    $\implies (M_t)$ is continous. 
+}
+
+\defn{Weakly orthogonal}{
+    $\forall~M,N \in \mathcal{M}_0^2$, if $\mathbb{E}[M_\infty N_\infty] = 0$.
+}
+
+\defn{Strongly Orthogonal}{
+    $\forall~$stopping time $T$, $\mathbb{E}[M_T N_T] = 0$.
+}
+
+\lemnn{Strongly orthogonal if and only if $MN$ is U.I.}
+\lemnn{For any progressively measurable process such that $\forall~$stopping time $T$, $$\begin{cases}
+\mathbb{E}\abs{ M_T } < \infty,\\
+\mathbb{E}M_T = 0,
+\end{cases}$$
+then $M$ is U.I.
+}
+\defn{stable subspaces of $\mathcal{M}_0^2$}{
+    We say $\mathcal{N}_{0} \subseteq \mathcal{M}_{0}^2 $ is a stable subspace if 
+    \begin{itemize}
+        \item[\textcircled{1}] $N_0$ is closed subspace,
+        \item[\textcircled{2}] $\forall~N \in \mathcal{N}_0$, $\forall~$stopping time $T$, we have $N^T \in \mathcal{N}_0$ ($N_t^T = N_{t \wedge T}$). 
+    \end{itemize}
+}
+\ex{}{$c \mathcal{M}_0^2$ is stable.}
+
+\thmnn{
+    Let $\mathcal{N}_0$ be a stable subspace of $\mathcal{M}_0^2$. Let $\mathcal{N}_0^\perp$ be the set of $Z \in \mathcal{M}_0^2$ which are weakly orthogonal to every element of $\mathcal{N}_0$, i.e.
+    $$
+    \mathcal{N}_0^\perp = \{Z \in \mathcal{M}_0^2 \colon \langle Z,N \rangle=0,\,\forall~ N \in \mathcal{N}_0 \}.
+    $$
+    
+    Then $\mathcal{N}_0^\perp$ is a stable subspace of $\mathcal{M}_0^2$, and $\forall~ Z \in \mathcal{N}_0^\perp$, we have $Z,N$ are strongly orthogonal for all $N \in \mathcal{N}_0,$
+
+    Finally, $\forall~ M \in \mathcal{M}_0^2$, $M = N + Z.$
+}
+\pf{
+    $0 = \mathbb{E}(Z_n N) \xlongrightarrow{L^1} \mathbb{E}(ZN).$
+
+    Next, $\forall~ Z \in \mathcal{N}_0^\perp$, then we have $\forall~ N \in \mathcal{N}_{0}$, $\mathbb{E}[Z_\infty N_\infty] = 0$.
+
+    For any stopping time $T$, we have $Z^T \in \mathcal{N}_0^\perp$ because 
+    $$
+    \begin{aligned}
+    \mathbb{E}[Z_\infty^T N_\infty] &= \mathbb{E}[Z_T N_\infty] \\
+    &= \mathbb{E}\left[ Z_T \mathbb{E}\left( N_\infty \middle| \mathcal{F}_T \right) \right] &= \mathbb{E}[Z_T N_T]\\
+    &= \mathbb{E} \left[ 
+        \mathbb{E}\left( Z_\infty \middle| \mathcal{F}_T \right) N_T
+     \right]  \\
+     &= \mathbb{E}[Z_\infty N_T]\\
+     &= \mathbb{E}[Z_\infty N_\infty^T].
+    \end{aligned}
+    $$
+    By $N^T \in  \mathcal{N}_0$, we get $\mathbb{E}[Z_\infty N_\infty ^T] = 0$ by $Z \in \mathcal{N}_0^\perp$. We prove $Z^T \in \mathcal{N}_0^{\perp}\Rightarrow~\mathcal{N}_0^\perp$ is stable.
+}
+
+\defnn{
+    Define $d \mathcal{M}_0^2 \triangleq (c \mathcal{M}_0^2)^\perp$. $\forall~ M \in \mathcal{M}_0^2$, we write $M = M^c + M^d$ with $M^c \in c \mathcal{M}_0^2$, $M^d \in d \mathcal{M}_0^2$ and $M^c M^d$ is U.I. [by $\mathbb{E}\left[ M_T^c M_T^d \right]=0$.]
+}
+
+Define $(\Delta f)(t) = f(t) - f(t-)$.
+
+\thm{Meyer}{
+    Let $M \in \mathcal{M}_0^2$. Then $\exists~$unique increasing process $[M]$ null at 0 s.t. 
+    \begin{itemize}
+        \item[\textcircled{1}] $M^2 - [M]$ is U.I.
+        \item[\textcircled{2}] $\Delta[M] = \left( \Delta M  \right)^2.$ 
+    \end{itemize}
+}
+\pf{
+    $M_t^2 = (M_t^c + M_t^d)^2 = (M_t^c)^2 + 2M_t^c M_t^d + (M_t^d)^2$.
+}
+
+For $M,N \in \mathcal{M}_0^2$, let $[M,N] \equiv \frac{1}{4}\left( [M+N] - [M-N] \right).$
+
+\thm{Kunita \& Watanabe}{
+    The process $[M,N]$ is the unique FV. process null at 0 s.t. 
+    \begin{itemize}
+        \item[\textcircled{1}] $MN - [M,N]$ is U.I.,
+        \item[\textcircled{2}] $\Delta[M,N] = \Delta M \cdot \Delta N$. 
+    \end{itemize}
+}
+
+\section{It\'o Integral}
+Let $M \in \mathcal{M}_0^2.$ 
+
+If $H_t = Z \cdot \mathsf{1}_{(S,T]}(t)$ for some $Z \in \mathcal{F}_S$ and $S \leq T$ (stopping times).
+
+Define $\int_{0}^{t} H_s \diff M_s \equiv(H\cdot M)(t) \equiv Z\cdot(M_{T \wedge t} -M_{S \wedge t}).$
+
+We will prove $(H \cdot M) \in \mathcal{M}_0^2.$
+
+\begin{itemize}
+    \item[\textcircled{1}] We will prove $\forall~$stopping time $R$ satisfies
+    $$
+    \begin{cases}
+        \mathbb{E} \abs{ (H \cdot M)_{R} } < \infty \\
+        \mathbb{E} (H \cdot M)_R = 0.
+    \end{cases}
+    $$
+\end{itemize}
+\pf{
+    Let $K > 0$ s.t. $\abs{ Z } \leq K < \infty.$ Then $\mathbb{E}\abs{ (H\cdot M)_{R} } \leq K \mathbb{E}\abs{M_{T \wedge R}} + K \mathbb{E}\abs{ M_{S \wedge R} }. (\xredstar{1})$
+
+    By optional stopping 
+    $$
+    \begin{aligned}
+        \mathbb{E}\abs{ M_{T \wedge R} } &= 
+        \mathbb{E}\left[ 
+            \abs{ \mathbb{E}\left( M_\infty \middle| \mathcal{F}_{T \wedge R} \right) }
+         \right]\\
+         &\leq \mathbb{E}\left[ 
+            \mathbb{E}\left( \abs{ M_\infty } \middle| \mathcal{F}_{T \wedge R} \right)
+          \right] = \mathbb{E}\abs{ M_\infty }.
+    \end{aligned}
+    $$
+    So $(\xredstar{1}) \leq 2K \mathbb{E}\abs{ M_\infty } < \infty.$
+
+    To prove $\mathbb{E}(H\cdot M)_{R} = 0 \Leftrightarrow \mathbb{E}\left[ 
+        Z(M_{T \wedge R} - M_{S \wedge R})
+     \right] = 0. (\xredstar{2})$
+
+    We may replace $Z$ by $\mathsf{1}_A$ for $A \in \mathcal{F}_S.$ Then 
+    $$  
+    \xredstar{2} \Leftrightarrow \mathbb{E}\left[ \mathsf{1}_A(M_{T \wedge R} - M_{S \wedge R}) \right] = 0.
+    $$
+
+    Define $$S_A \equiv \begin{cases}
+        S, &\text{on }A,\\
+        \infty,&\text{on }A^C.
+    \end{cases}$$Then 
+    $$
+    \mathbb{E}\left[ \mathsf{1}_A(M_{T \wedge R} - M_{S \wedge R}) \right]\Leftrightarrow \mathbb{E}\left[ M_{T_A \wedge R} - M_{S_A \wedge R} \right] = 0.
+    $$
+}

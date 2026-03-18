@@ -1,5 +1,10 @@
 \newcommand{\N}{\mathbb{N}}
 \newcommand{\Z}{\mathbb{Z}}
+
+\newcommand{\wto}{\rightharpoonup}
+
+\newcommand{\diff}{\mathop{}\!\mathrm{d}}
+
 \newcommand{\duedate}[1]{\date{\textbf{\textcolor{red}{Deadline: #1}}}}
 \newcommand{\email}[1]{\faEnvelope\ \href{mailto:#1}{#1}}
 
@@ -8,8 +13,6 @@
 \newcommand{\redbox}[1]{%
     \fcolorbox{red}{white}{#1}%
 }
-
-
 
 \newcommand{\contrad}{%
   \mathrel{
@@ -36,11 +39,15 @@
 \newcommand{\vertiii}[1]{{\left\vert\kern-0.25ex\left\vert\kern-0.25ex\left\vert #1 
    \right\vert\kern-0.25ex\right\vert\kern-0.25ex\right\vert}}
 
-\newcommand{\vertii}[1]{\left\|#1\right\|}
+\newcommand{\vertii}[1]{\left\| #1 \right\|}
 
-\newcommand{\norm}[1]{\left\|#1\right\|}
+\newcommand{\norm}[1]{\left\| #1 \right\|}
 
-\newcommand{\abs}[1]{\left|#1\right|}
+\newcommand{\abs}[1]{\left| #1 \right|}
+
+\newcommand{\redstar}{\textcolor{red}{\star}}
+\newcommand{\xredstar}[1]{\textcolor{red}{\star {#1}}}
+\newcommand{\bluestar}{\textcolor{blue}{\star}}
 
 \newcommand{\embed}{\hookrightarrow}
 \newcommand{\xembed}[1]{\stackrel{\mathrm{#1}}{\hookrightarrow}}
