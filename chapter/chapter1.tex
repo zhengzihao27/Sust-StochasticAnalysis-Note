@@ -1310,3 +1310,360 @@ We will prove $(H \cdot M) \in \mathcal{M}_0^2.$
     \mathbb{E}\left[ \mathsf{1}_A(M_{T \wedge R} - M_{S \wedge R}) \right]\Leftrightarrow \mathbb{E}\left[ M_{T_A \wedge R} - M_{S_A \wedge R} \right] = 0.
     $$
 }
+
+\lemnn{
+    If $Z \in b \mathcal{F}_S$ and $M$ is U.I. martingale. Then $H\cdot M$ is U.I. martingale.
+}
+
+Next, consider $H_t = \sum_{i=1}^n Z_i \mathsf{1}_{(S_i, T_i]} (t)$.
+
+$(H\cdot M)_{t} = \sum_{i=1}^{n} Z_i (M_{T_i \wedge t} - M_{S_i \wedge t})$.
+
+\cor{
+    If $Z_i \in b \mathcal{F}_{S_i}$ and $M$ is U.I. martingale, then $(H\cdot M)_{t}$ is U.I. martingale.
+}
+
+\defn{previsible process}{
+    Previsible $\sigma-$algebra $\mathsf{P}$ on $(0,\infty) \times \Omega$ is defined to be the smallest $\sigma$-algebra s.t. every adapted $L$-process is $\mathsf{P}$-measurable.
+
+    $L$-process: $(X_t)_{t > 0}$ s.t. $X_t = X_{t-}$ \& $X_{t+}$ exists. 
+    
+    We say $(X_t)_{t > 0}$ is previsible if it is $\mathsf{P}$-measurable.
+}
+\lemnn{
+    Suppose $S$ and $T$ are stopping times with $S \leq T \leq \infty$. Let $Z \in b \mathcal{F}_{S}$ and $H = Z \cdot\mathsf{1}_{(S,T]}$. Then $H$ is previsible.
+}
+\pf{
+    $\forall~ t > 0$ and $B$ Borel set, $\{H_t \in B\} \in \mathcal{F}_t$. We may assume $0 \not\in B.$
+    
+    Then $\{H_t \in B\}= \{Z \in B\} \cap \{S < t \leq T\} = \{Z \in B\} \cap \{S < t\} \cap \{t \leq T\}$.
+
+    Note that
+    $$\{S < t\} = \bigcup_{n=1}^\infty \{S \leq t - \frac{1}{n}\}$$.
+
+    Hence 
+    $$
+    \{H_t \in B\} = \bigcup_{n=1}^\infty\left( \{Z \in B\} \cap \{S \leq t - \frac{1}{n}\}  \right) \cap \{T \geq t\} \subseteq \mathcal{F}_{t - \frac{1}{n}} \subseteq \mathcal{F}_t.
+    $$
+}
+
+\defnn{
+    $\displaystyle b \varepsilon = \left\{\sum_{i=1}^n Z_i \mathsf{1}_{(S_i,T_i]} \colon n \geq 1, Z_i \in b \mathcal{F}_{S_i}, S_1 \leq T_1 \leq S_2 \leq \cdots.\right\}$
+}
+
+\noindent\textbf{claim:} $\sigma(b \varepsilon) = \mathsf{P}.$
+
+\pf{
+    ``$\subseteq$'' done.
+
+    ``$\supseteq$'' For any bounded left-continuous process,
+    $$
+    H_t = \lim_{k \uparrow \infty} \lim_{n \uparrow \infty} \sum_{i=2}^{n_k} H_{\frac{i-1}{n}} \mathsf{1}_{\left(\frac{i-1}{n},\frac{i}{n}\right]}(t).
+    $$
+
+    Since $H$ is adapted, we get $H_{\frac{i-1}{n}} \in b\mathcal{F}_{\frac{i-1}{n}}$.
+
+    Hence
+    $$
+    \sum_{i=2}^{n_k} H_{\frac{i-1}{n}} \mathsf{1}_{\left( \frac{i-1}{n}, \frac{i}{n} \right]}(t) \in b \varepsilon.
+    $$  
+
+    $\implies H_t \in \sigma(b \varepsilon).$
+}
+
+\lemnn{
+    Let $H \in b \varepsilon$, $M \in \mathcal{M}_{0}^2$. Then $H \cdot M \in \mathcal{M}_0^2$, and 
+    $$
+        \mathbb{E}(H \cdot M)_\infty^2 = \sum_{i=1}^{n}\mathbb{E}\left[ Z_{i-1}^2(M_{T_i} - M_{T_{i-1}})^2 \right]
+    $$
+    if $H = \sum_{i=1}^n Z_{i-1} \mathsf{1}_{(T_{i-1},T_i]}$.
+}
+
+\pf{
+    $(H \cdot M)_t = \equiv \sum_{i=1}^n Z_{i-1}\left( M_{T_i \wedge t} - M_{T_{i-1} \wedge t} \right)$. We have $(H \cdot M)$ is U.I. martingale.
+
+    Then $(H\cdot M)_{t} \to (H\cdot M)_{\infty}$ a.s. and in $L^1$, where $(H \cdot M)_{\infty} = \sum_{i=1}^n Z_{i-1}\Delta i$, $\Delta_i = M_{T_i} - M_{T_{i-1}}.$
+
+    Notice that 
+    $$
+    \mathbb{E}\left[ (H \cdot M)_{\infty}^2 \right] = \mathbb{E} \sum_{i=1}^n Z_{i-1}^2 \Delta_i^2 + 2 \mathbb{E}\left( \sum_{i < j} Z_{i-1}\Delta_i Z_{j-1}\Delta_j \right).
+    $$
+
+    For $i \leq j-1 < j$, we get
+    $$
+    \mathbb{E}\left[ Z_{i-1} \Delta_i Z_{j-1}\Delta_j\right] = \mathbb{E}\left[ Z_{i-1}\Delta_i \cdot Z_{j-1} \mathbb{E}\left[ \Delta_j \middle| \mathcal{F}_{T_{j-1}} \right] \right] =0.
+    $$
+
+    By Doob's $L^2$ ineq.
+
+    $$
+    \mathbb{E}\left[ 
+        \sup_{t \geq 0}\left( H \cdot M \right)_{t}^2
+     \right] \leq 4 \mathbb{E}\left[ (H \cdot M)_{\infty}^2  \right] < \infty.
+    $$
+    $\implies H \cdot M \in \mathcal{M}_0^2.$
+}
+
+Next, Recall that 
+$M \in \mathcal{M}_0^2 \implies \exists~$quadratic variation $[M]$ s.t. $M^2 - [M]$ is U.I..
+$$
+    \mathbb{E}\left[ (H\cdot M)_{\infty}^2 \right] = \sum_{i=1}^n \mathbb{E} \left[ 
+        Z_{i-1}^2 \left( M_{T_i} - M_{T_{i-1}} \right)^2
+     \right]. \xredstar{1}
+$$
+
+Note
+$$
+    \begin{aligned}
+    \mathbb{E}\left[ 
+        \left( M_{T_i} - M_{T_{i-1}} \right)^2 \middle| \mathcal{F}_{T_{i-1}}\right] &= \mathbb{E}\left[ 
+            M_{T_{i}}^2 - M_{T_{i-1}}^2 \middle| \mathcal{F}_{T_{i-1}}
+         \right]\\
+         &= \mathbb{E}\left[ 
+            [M]_{T_i} - [M]_{T_{i-1}} \middle| \mathcal{F}_{T_{i-1}}
+          \right].
+    \end{aligned}
+$$
+So
+$$
+    \xredstar{1} \implies \sum_{i=1}^{n} \mathbb{E}\left[ 
+        Z_{i-1}^2 \left( [M]_{T_i}-[M]_{T_{i-1}} \right)
+     \right] = \mathbb{E}\left[ 
+        \int_{0}^{\infty}H_s^2 \diff [M]_s 
+      \right].
+$$
+$$
+    \int_{0}^\infty \left( \sum_{i=1}^\infty Z_{i-1} \mathsf{1}_{(T_{i-1} - T_i]} \right)^2 \diff [M]_s = \int_{0}^\infty \sum_{i=1}^n Z_{i-1}^2 \mathsf{1}_{(T_{i-1},T_i]} \diff [M]_s.
+$$
+
+$\mathbb{E}(H \cdot M)_{\infty}^2 = \mathbb{E} \left[ \int_{0}^\infty  H_s ^2 \diff  [M]_s\right] < \infty.$
+
+For any fixed $M \in \mathcal{M}_0^2$, define 
+$$
+    \norm{ H }_{M} = \left( \mathbb{E}\int_{0}^{\infty} H_s ^2 \diff [M]_s  \right)^{\frac{1}{2}}.
+$$
+
+Then $L^2(M) \equiv \left\{ \text{previsible }H \text{ with } \norm{ H }_{M} < \infty \right\}$.
+
+We have
+$$
+\begin{aligned}
+    I: L^2(M) \cap b \varepsilon &\to L^2(\mathcal{F}_{\infty})\\
+    H & \mapsto (H\cdot M)_{\infty}.
+\end{aligned}
+$$
+
+$\norm{ H }_{M} = \left( \mathbb{E}\left[ \int_{0}^\infty H_s ^2 \diff [M]_s \right] \right)^{\frac{1}{2}}$.
+
+$\norm{ I(H) } = \left( \mathbb{E}(H \cdot M)_{\infty}^2 \right)^{\frac{1}{2}}.$
+
+And $\norm{ H }_{M} = \norm{ I(H) }$, we get isometry:
+$$
+\mathbb{E}\left[ \int_{0}^\infty H_s ^2 \diff [M]_s \right]=\mathbb{E}(H \cdot M)_{\infty}^2.
+$$
+$\implies$exstends uniquely to $L^2(M) \cap b \varepsilon = L^2(M)$.
+
+\defn{It\'o Integral}{
+    Let $M \in \mathcal{M}_{0}^2$ and $H \in L^2(M)$. Then It\'o Integral $(H\cdot M)_{t}$ is the image of $H$ under extension of $I : L^2(M)\to L^2(\mathcal{F}_{\infty})$.
+}
+
+\noindent\textbf{Localization}
+\defnn{
+    Let $T$ be a stopping time and $H$ is any process. Define 
+    $$
+        H(0,T](t) = \begin{cases}
+            H_t, & 0 <t \leq T ,\\
+            0, & t >T.
+        \end{cases}
+    $$
+}
+
+\rmkb{
+    If $H$ is previsible, so is $H(0,T].$
+}
+
+\defnn{
+    Let $T$ be a stopping time and $X$ is any process. Define
+    $$
+    X^T(t) = \begin{cases}
+        X(t),& 0 \leq t \leq T,\\
+        X(T), &t > T.
+    \end{cases}
+    $$
+}
+
+Then $(H \cdot M)^T = (H(0,T]\cdot M^T)_t,$ and 
+$$
+    \left[ Z_i \left( M_{T_i \wedge t} - M_{T_{i-1} \wedge t} \right) \right]^T = \left( Z_i \left( T_{i-1}\wedge T , T_i \wedge T \right]\cdot M^T \right)_t = Z_i\left( M_{T_i \wedge T \wedge t} - M_{T_{i-1}\wedge T \wedge t} \right).
+$$
+
+\thmnn{
+    Fix $M \in \mathcal{M}_0^2$. For any $H \in L^2(M)$ and any stopping time $T$.
+    \begin{itemize}
+        \item[(i)] $\displaystyle (H \cdot M)^T = H(0,T] \cdot M = H \cdot M^T.$
+        \item[(ii)] $(H\cdot M)_t ^2 - \int_{0}^\infty H_s^2 \diff [M]_s$ is U.I. martingale. $\implies [H\cdot M]_t = \int_{0}^t H_s^2 \diff [M]_s$.
+        \item[(iii)] If $H, K \in b \mathsf{P}$, then $(HK)\cdot M = H\cdot (K\cdot M)=K \cdot (H \cdot M).$ 
+        \item[(iv)] $\Delta(H \cdot M) = H \cdot \Delta M$.
+        \item[(v)] If $M$ is cts, then $H \cdot M$ is cts.  
+    \end{itemize}
+    
+}
+\pf{
+    (i) $(H \cdot M)_t^T = (H \cdot M)_{t \wedge T}.$
+}
+
+\ex{}{
+    $H = Z \mathsf{1}_{(U,V]}$.
+
+    $(H\cdot M)_t = Z (M_{V \wedge t} - M_{U \wedge t}) \implies (H \cdot M)_{t \wedge T} = Z\left( M_{V \wedge T \wedge t} - M_{U \wedge T \wedge t} \right).$
+
+    $H(0,T](t) = Z \mathsf{1}_{(U \wedge T , V \wedge T]}(t).$
+
+    So $(H(0,T] \cdot M)_{t} = Z(M_{V \wedge T \wedge t} - M _{U \wedge T \wedge t}).$
+
+    $(H \cdot M^T)_t = Z (M_{V \wedge t}^T - M_{U \wedge t}^T) = Z (M_{T \wedge V \wedge T} - M_{T \wedge U \wedge t}).$
+}
+
+Hence it holds for $H \in b \varepsilon. \implies$ holds for all $H \in L^2(M).$
+
+$(H \cdot M)_{\infty}^T = Z(M_V - M_U).$
+
+\pf{
+    (ii) $N_t = (H\cdot M)_{t}^2 - \int_{0}^t H_s ^2 \diff [M]_s.$
+    $$
+    \mathbb{E}\left[ \sup_{t \geq 0} (H \cdot M)_t ^2 \right] \leq 4 \mathbb{E}\left[ 
+        \int_{0}^{\infty}H_s^2 \diff [M]_s
+     \right]< \infty.
+    $$
+    Hence $\mathbb{E}\left[ \sup_{t \geq 0} \abs{N_t} \right] < \infty \implies \{N_t, t \geq 0\}$ is U.I..
+
+    It suffices to prove $\forall~$stopping time $T$, 
+    $$
+    \begin{cases}
+        \mathbb{E}[N_T] = 0 \\
+        \mathbb{E}\abs{N_T} < \infty
+    \end{cases} \implies \text{ U.I. martingale.}
+    $$
+    The second condition is proved, Now we need to check the first condition.
+    $$
+    \mathbb{E}[N_T] = \mathbb{E}\left[ (H \cdot M)_{T}^2 \right] - \mathbb{E} \int_0^T H_s^2 \diff [M]_s.
+    $$
+
+    Notice that $(H \cdot M)_{T} =Z(M_{V \wedge T} - Z_{U \wedge T})= (H \cdot M)_\infty^T$.
+
+    Then 
+    $$
+    (H \cdot M)_{T} = (H \cdot M)_{\infty}^T = \left( H(0,T] \cdot M \right)_{\infty}
+    $$  
+    $$
+    \implies \mathbb{E}\left[ (H\cdot M)_{T}^2 \right] = \mathbb{E} \left[ (H(0,T] \cdot M)_{\infty}^2 \right] = \mathbb{E}\left[ 
+        \int_{0}^\infty \left( H(0,T]_{s} \right)^2 \diff [M]_s
+     \right] = \mathbb{E}\left[ 
+        \int_0^T H_s^2 \diff [M]_s.
+      \right]
+    $$
+}
+
+\pf{
+    (iii) $H = Z_1 (S_1,T_1]$, $K = Z_2 (S_2,T_2].$
+
+    $HK = Z_1 Z_2 (S_1 \vee S_2,(T_1 \wedge T_2) \vee (S_1 \vee S_2)].$
+    $$
+    \left( \left( HK \right)\cdot M \right)_{\infty} = Z_1 Z_2 \left( M_T - M_S \right).
+    $$
+    $$
+    \begin{aligned}
+        \left( H \cdot \left( K \cdot M \right) \right)_{\infty} &= Z_1 \left( \left( K \cdot M \right)_{T_1} - \left( K \cdot M \right)_{S_1} \right) \\
+        &= Z_1 \left[ 
+        (K\cdot M)_{\infty}^{T_1} - \left( K \cdot M \right)_{\infty}^{S_1}
+     \right] \\
+     &= Z_1 \left[ (K \cdot M^{T_1})_{\infty} - (K \cdot M^{S_1})_{\infty} \right]\\
+     &=Z_1\left[ 
+        Z_2 \left( M_{T_2}^{T_1} - M_{S_2}^{T_1} \right) - Z_2 \left(M_{T_2}^{S_1} - M_{S_2}^{S_1}\right)
+      \right]\\
+      &= Z_1 Z_2 \left[ M_{T_2 \wedge T_1} -M_{S_2 \wedge T_1} - \left( M_{T_2 \wedge S_1} - M_{S_2 \wedge S_1} \right) \right]\\
+      &= Z_1 Z_2 \left( M_T -M_S \right).
+    \end{aligned}
+    $$
+    So $H\cdot(K\cdot M) = (H\cdot K)\cdot M$, $\forall~ H,K \in b \varepsilon.$
+
+    Next, for any $k \in b \mathsf{P}$ s.t. $\exists~ k^n \in b \varepsilon,$ $k^n \xlongrightarrow{L^2(M)}k$.
+
+    Then $\forall~ H \in b \varepsilon$,
+    $$
+    \mathbb{E}\left( 
+        \left( H \cdot(K \cdot M) - H\cdot (k^n \cdot M) \right)_{\infty}^2
+     \right) = \mathbb{E}\left( 
+        \left( H \cdot (k-k^n)\cdot M \right)_{\infty}^2
+      \right)=\mathbb{E}\left[ 
+        \int_{0}^\infty H_s^2 \diff [(k-k^n)\cdot M]_s
+       \right].
+    $$
+
+    \textbf{Recall:} $$[H \cdot M]_t = \int_{0}^t H_s^2 \diff [M]_s = \mathbb{E}\left[ \int_{0}^\infty H_s^2 (k_s - k_s^n)^2 \diff [M]_s \right] \to 0,$$
+    by $\abs{ H_s } \leq C$ and $k^n \xlongrightarrow{L^2(M)} k$.
+    $$
+    \norm{ k^n - k }_{M}^2 \triangleq \mathbb{E}\left[ \int_{0}^\infty(k_s - k_s^n)^2 \diff [M]_s \right] \to 0.
+    $$
+
+    Hence $\mathbb{E}\left[ \left( (H \cdot (k^n \cdot M)) - H \cdot(K \cdot M) \right)_{\infty}^2 \right] \to 0.$
+
+    Next 
+    $$
+        \mathbb{E}\left[ H\cdot (k^n \cdot M)_{\infty}^2 \right] = \mathbb{E}\left[ 
+            \left( \left( H\cdot k^n \right)\cdot M \right)_\infty^2
+         \right] \to \mathbb{E}\left[ 
+            \left( \left( HK \right)\cdot M \right)_{\infty}^2
+          \right].
+    $$
+
+    We conclude 
+    $$
+    \mathbb{E} \left[ 
+        (H \cdot (k \cdot M))_{\infty}^2
+     \right] = \mathbb{E}
+     \left[ 
+        ((Hk) \cdot M)_{\infty}^2
+      \right].
+    $$
+}
+
+\pf{
+    (iv) If $H = Z(S,T]$, then $(H \cdot M)_{t} = Z\left( M_{t \wedge T} - M_{t \wedge S} \right)$.
+    $$
+    \Delta (H \cdot M)_t = \Delta(Z (M_t - M_S)) = Z \times \Delta M_t = H \times \Delta M_t.
+    $$
+
+    $\implies$holds for all $H \in b \varepsilon.$
+
+    Next, $\forall~ H \in L^2(M)$, we let $H^n \in b \varepsilon$ and $H^n \xlongrightarrow{L^2(M)} H.$ Then 
+    $$
+        H^n \cdot M \xlongrightarrow{L^2(\mathcal{F}_{\infty})} H \cdot M \Longleftrightarrow H^n \cdot M \xlongrightarrow{\mathcal{M}_0^2} H \cdot M.
+    $$
+    
+    $\mathbb{E}\left[ \int_{0}^{\infty}(H_S^n - H_S)^2 \diff  [M]_s \right] \to 0 \implies \exists~$subseq $n_k \to \infty$ s.t. W.P.1.
+    $$
+    \int_0^\infty(H_S^n - H_S)^2 \diff [M]_s \to 0.
+    $$
+    $$
+    \sup_{t \geq 0}\abs{ (H^n \cdot M - H \cdot M)_t }\xlongrightarrow{L^2} 0 \implies \sup_{t \geq 0} \abs{ (H^{n_k} \cdot M)_t - (H\cdot M)_t }\xlongrightarrow{\text{a.s.}}0.
+    $$
+
+    By $\Delta(H^{n_k} \cdot M)_t = H^{n_k} \cdot \Delta M_t$.
+
+    \textbf{case 1.} If $\Delta M_S = 0$, then $\Delta(H^{n_k} \cdot M)_S = 0.$
+
+    By uniform convergence $\Delta (H \cdot M)_S =0.$
+
+    \textbf{case 2.} If $\Delta M_S \neq 0$, then $\Delta [M]_S = (\Delta M_S)^2 > 0$.
+
+    Then $H_S^{n_k} - H_s \to 0$ by 
+    $$
+    0\leftarrow\int_{0}^{\infty}\left( H_t^{n_k} - H_t \right)^2 \diff  [M]_t \geq \left( H_S^{n_k} - H_S \right)^2 \cdot \Delta[M]_S.
+    $$
+
+    $\Delta(H^{n_k} \cdot M)_S = H_S^{n_k} \cdot \Delta M_S$, let $k \to \infty $ we have
+    $$
+    \Delta(H \cdot M)_S = H_S \cdot \Delta M_S.
+    $$
+}

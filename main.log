@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.11.27)  18 MAR 2026 21:53
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.11.27)  25 MAR 2026 21:48
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
@@ -1155,20 +1155,80 @@ pdfTeX warning (ext4): destination with the same identifier (name{mytheorem.4}) 
 l.1259 }
         
 
-[24])
+[24]
+pdfTeX warning (ext4): destination with the same identifier (name{mylemma.1}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.1316 }
+        
+pdfTeX warning (ext4): destination with the same identifier (name{mycorollary.1}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.1324 }
+        
+pdfTeX warning (ext4): destination with the same identifier (name{mydefinition.1}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.1332 }
+        
+pdfTeX warning (ext4): destination with the same identifier (name{mylemma.2}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.1335 }
+        
 
 [25]
-pdfTeX warning (ext4): destination with the same identifier (name{mydefinition.1}) has been already used, duplicate ignored
+pdfTeX warning (ext4): destination with the same identifier (name{mydefinition.2}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.1352 }
+        
+pdfTeX warning (ext4): destination with the same identifier (name{mylemma.3}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.1380 }
+        
+
+[26]
+pdfTeX warning (ext4): destination with the same identifier (name{mydefinition.3}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.1468 }
+        
+pdfTeX warning (ext4): destination with the same identifier (name{mydefinition.4}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.1479 }
+        
+
+[27]
+pdfTeX warning (ext4): destination with the same identifier (name{mydefinition.5}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.1493 }
+        
+pdfTeX warning (ext4): destination with the same identifier (name{mytheorem.1}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.1510 }
+        
+
+[28]
+
+[29])
+
+[30]
+pdfTeX warning (ext4): destination with the same identifier (name{mydefinition.6}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
 l.112 \defn{defn example}{Example}
                                   
-pdfTeX warning (ext4): destination with the same identifier (name{mytheorem.1}) has been already used, duplicate ignored
+pdfTeX warning (ext4): destination with the same identifier (name{mytheorem.2}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
 l.113 \thm{thm example}{Example}
                                 
-pdfTeX warning (ext4): destination with the same identifier (name{mylemma.1}) has been already used, duplicate ignored
+pdfTeX warning (ext4): destination with the same identifier (name{mylemma.4}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
 l.115 ...xample}{Example}{proof for lemma example}
@@ -1179,17 +1239,11 @@ pdfTeX warning (ext4): destination with the same identifier (name{myproposition.
 l.116 \propp{pro example}{Example}
                                   
 Package hyperref Info: bookmark level for unknown myclaim defaults to 0 on input line 117.
-
-pdfTeX warning (ext4): destination with the same identifier (name{mycorollary.1}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.118 ...le}{example}{proof for corollary example}
-                                                  
 Package hyperref Info: bookmark level for unknown myfact defaults to 0 on input line 119.
 LaTeX Font Info:    Trying to load font information for U+fontawesomefree1 on input line 126.
  (/usr/local/texlive/2025/texmf-dist/tex/latex/fontawesome5/ufontawesomefree1.fd)
 
-[26
+[31
 
 
 
@@ -1210,18 +1264,18 @@ Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: 33613E477F99132F8DE15A813399BD98;1093.
  ) 
 Here is how much of TeX's memory you used:
- 61442 strings out of 473190
- 1546136 string characters out of 5715799
+ 61466 strings out of 473190
+ 1546512 string characters out of 5715799
  2332798 words of memory out of 5000000
- 83627 multiletter control sequences out of 15000+600000
- 580585 words of font info for 181 fonts, out of 8000000 for 9000
+ 83629 multiletter control sequences out of 15000+600000
+ 580761 words of font info for 184 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  98i,18n,101p,1045b,631s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2025/texmf-dist/fonts/type1/public/fontawesome5/FontAwesome5Free-Solid.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmbxti10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsl10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm7.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfrm1095.pfb>
-Output written on main.pdf (27 pages, 347445 bytes).
+Output written on main.pdf (32 pages, 367259 bytes).
 PDF statistics:
- 431 PDF objects out of 1000 (max. 8388607)
- 350 compressed objects within 4 object streams
- 143 named destinations out of 1000 (max. 500000)
+ 467 PDF objects out of 1000 (max. 8388607)
+ 381 compressed objects within 4 object streams
+ 159 named destinations out of 1000 (max. 500000)
  57429 words of extra memory for PDF output out of 61914 (max. 10000000)
 
