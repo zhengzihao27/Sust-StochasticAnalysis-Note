@@ -1,0 +1,534 @@
+\section{It\^o Integral}
+
+Let $M \in \mathcal{M}_0^2$. We begin with the simplest class of integrands.
+
+If $H_t = Z \mathsf{1}_{(S,T]}(t),$ where $Z \in \mathcal{F}_S$ is bounded and $S \leq T$ are stopping times, define
+$$
+    \int_0^t H_s \diff M_s \equiv (H \cdot M)_t \equiv Z\bigl(M_{T \wedge t} - M_{S \wedge t}\bigr).
+$$
+
+We now show that $(H \cdot M)$ belongs to $\mathcal{M}_0^2$. As a first step, we prove that $(H \cdot M)$ is a martingale. By Lemma 1.6.2, it suffices to verify that for every stopping time $R$,
+$$
+\begin{cases}
+    \mathbb{E}\abs{(H \cdot M)_R} < \infty,\\
+    \mathbb{E}(H \cdot M)_R = 0.
+\end{cases}
+$$
+
+\pf{
+    Let $R$ be any stopping time. Since $Z$ is bounded, say $\abs{Z} \leq K$, we have
+    $$
+        \mathbb{E}\abs{(H \cdot M)_R}
+        \leq K\mathbb{E}\abs{M_{T \wedge R}} + K\mathbb{E}\abs{M_{S \wedge R}}.
+    $$
+    Because $M \in \mathcal{M}_0^2$, the martingale $M$ is uniformly integrable, and
+    $$
+        M_{T \wedge R} = \mathbb{E}(M_\infty \mid \mathcal{F}_{T \wedge R}).
+    $$
+    Hence
+    $$
+        \mathbb{E}\abs{M_{T \wedge R}}
+        \leq \mathbb{E}\left[\mathbb{E}(\abs{M_\infty} \mid \mathcal{F}_{T \wedge R})\right]
+        = \mathbb{E}\abs{M_\infty},
+    $$
+    and similarly for $M_{S \wedge R}$. Therefore
+    $$
+        \mathbb{E}\abs{(H \cdot M)_R} < \infty.
+    $$
+
+    It remains to show that $\mathbb{E}(H \cdot M)_R = 0$. By linearity, it is enough to treat the case $Z = \mathsf{1}_A$ with $A \in \mathcal{F}_S$. Then
+    $$
+        \mathbb{E}(H \cdot M)_R
+        = \mathbb{E}\left[\mathsf{1}_A(M_{T \wedge R} - M_{S \wedge R})\right].
+    $$
+    Define the stopping times
+    $$
+        S_A \equiv
+        \begin{cases}
+            S, & \text{on } A,\\
+            \infty, & \text{on } A^c.
+        \end{cases}
+        \qquad
+        T_A \equiv
+        \begin{cases}
+            T, & \text{on } A,\\
+            \infty, & \text{on } A^c.
+        \end{cases}
+    $$
+    Then
+    $$
+        \mathsf{1}_A M_{S \wedge R} = M_{S_A \wedge R},
+        \qquad
+        \mathsf{1}_A M_{T \wedge R} = M_{T_A \wedge R}.
+    $$
+    Hence the expectation above is the difference of expectations of stopped values of the martingale $M$, and therefore equals $0$ by optional sampling. Thus $(H \cdot M)$ is a martingale.
+}
+
+\lemnn{
+    If $Z \in b\mathcal{F}_S$ and $M$ is a uniformly integrable martingale, then $H \cdot M$ is a uniformly integrable martingale.
+}
+
+More generally, consider a finite linear combination of such elementary processes:
+$$
+    H_t = \sum_{i=1}^n Z_i \mathsf{1}_{(S_i,T_i]}(t),
+$$
+where each $Z_i \in b\mathcal{F}_{S_i}$.
+
+We define
+$$
+    (H \cdot M)_t
+    \triangleq
+    \sum_{i=1}^{n} Z_i \bigl(M_{T_i \wedge t} - M_{S_i \wedge t}\bigr).
+$$
+
+\cor{
+    If $Z_i \in b \mathcal{F}_{S_i}$ and $M$ is U.I. martingale, then $(H\cdot M)_{t}$ is U.I. martingale.
+}
+
+
+We next introduce the predictable $\sigma$-algebra, which is the natural measurability class for It\^o integrands.
+
+\defn{Previsible process}{
+    The previsible $\sigma$-algebra $\mathcal{P}$ on $(0,\infty) \times \Omega$ is defined to be the smallest $\sigma$-algebra for which every adapted $L$-process is $\mathcal{P}$-measurable.
+
+    An $L$-process is a process $(X_t)_{t>0}$ such that $X_t = X_{t-}$ and $X_{t+}$ exists.
+
+    We say that a process $(X_t)_{t>0}$ is previsible if it is $\mathcal{P}$-measurable.
+}
+
+\lemnn{
+    Suppose $S$ and $T$ are stopping times with $S \leq T \leq \infty$. Let $Z \in b\mathcal{F}_S$ and $H = Z\mathsf{1}_{(S,T]}$. Then $H$ is previsible.
+}
+
+\pf{
+    Fix $t > 0$ and let $B$ be a Borel set. We may assume that $0 \notin B$. Then
+    $$
+        \{H_t \in B\}
+        = \{Z \in B\} \cap \{S < t\} \cap \{t \leq T\}.
+    $$
+    Moreover,
+    $$
+        \{S < t\} = \bigcup_{n=1}^{\infty}\left\{S \leq t - \frac{1}{n}\right\}.
+    $$
+    Since $\{Z \in B\} \in \mathcal{F}_S$, we have
+    $$
+        \{Z \in B\} \cap \left\{S \leq t - \frac{1}{n}\right\} \in \mathcal{F}_{t - \frac{1}{n}} \subseteq \mathcal{F}_t.
+    $$
+    Also, $\{t \leq T\} \in \mathcal{F}_t$. Therefore $\{H_t \in B\} \in \mathcal{F}_t$, so $H$ is adapted. Since $H$ is clearly an $L$-process, it follows from the definition of $\mathcal{P}$ that $H$ is previsible.
+}
+
+\defnn{
+    Let
+    $$
+        b\varepsilon
+        = \left\{
+            \sum_{i=1}^n Z_i \mathsf{1}_{(S_i,T_i]}
+            :
+            n \geq 1,\,
+            Z_i \in b\mathcal{F}_{S_i},\,
+            S_1 \leq T_1 \leq S_2 \leq \cdots
+        \right\}.
+    $$
+}
+
+\noindent\textbf{Claim.} $\sigma(b\varepsilon) = \mathcal{P}$.
+
+\pf{
+    ``$\subseteq$'' The inclusion $\sigma(b\varepsilon) \subseteq \mathcal{P}$ follows from the previous lemma.
+
+    ``$\supseteq$'' For any bounded left-continuous process,
+    $$
+    H_t = \lim_{k \uparrow \infty} \lim_{n \uparrow \infty} \sum_{i=2}^{n_k} H_{\frac{i-1}{n}} \mathsf{1}_{\left(\frac{i-1}{n},\frac{i}{n}\right]}(t).
+    $$
+
+    Since $H$ is adapted, we get $H_{\frac{i-1}{n}} \in b\mathcal{F}_{\frac{i-1}{n}}$.
+
+    Hence
+    $$
+    \sum_{i=2}^{n_k} H_{\frac{i-1}{n}} \mathsf{1}_{\left( \frac{i-1}{n}, \frac{i}{n} \right]}(t) \in b \varepsilon.
+    $$  
+
+    $\implies H_t \in \sigma(b \varepsilon).$
+
+}
+\pf{
+
+    
+}
+\lemnn{
+    Let $H \in b\varepsilon$ and $M \in \mathcal{M}_0^2$. Then $H \cdot M \in \mathcal{M}_0^2$, and if
+    $$
+        H = \sum_{i=1}^n Z_{i-1}\mathsf{1}_{(T_{i-1},T_i]},
+    $$
+    then
+    $$
+        \mathbb{E}(H \cdot M)_\infty^2
+        =
+        \sum_{i=1}^{n}\mathbb{E}\left[ Z_{i-1}^2(M_{T_i} - M_{T_{i-1}})^2 \right].
+    $$
+}
+
+
+\pf{
+    $$
+        (H \cdot M)_t = \sum_{i=1}^n Z_{i-1}\left( M_{T_i \wedge t} - M_{T_{i-1} \wedge t} \right).
+    $$
+    By the previous corollary 1.7.1, $(H \cdot M)$ is a U.I. martingale.
+
+    Hence $(H \cdot M)_t \to (H \cdot M)_\infty$ a.s. and in $L^1$, where
+    $$
+        (H \cdot M)_\infty = \sum_{i=1}^n Z_{i-1}\Delta_i,
+        \qquad
+        \Delta_i = M_{T_i} - M_{T_{i-1}}.
+    $$
+
+    Therefore
+    $$
+        \mathbb{E}\left[ (H \cdot M)_\infty^2 \right]
+        = \mathbb{E} \sum_{i=1}^n Z_{i-1}^2 \Delta_i^2
+        + 2 \mathbb{E}\left( \sum_{i < j} Z_{i-1}\Delta_i Z_{j-1}\Delta_j \right).
+    $$
+
+    For $i<j$, the random variable $Z_{i-1}\Delta_i Z_{j-1}$ is $\mathcal{F}_{T_{j-1}}$-measurable, so
+    $$
+        \mathbb{E}\left[ Z_{i-1}\Delta_i Z_{j-1}\Delta_j \right]
+        =
+        \mathbb{E}\left[
+            Z_{i-1}\Delta_i Z_{j-1}
+            \mathbb{E}\left( \Delta_j \middle| \mathcal{F}_{T_{j-1}} \right)
+        \right]
+        = 0.
+    $$
+    Thus all cross terms vanish.
+
+    By Doob's $L^2$ inequality,
+    $$
+        \mathbb{E}\left[
+            \sup_{t \geq 0}(H \cdot M)_t^2
+        \right]
+        \leq 4 \mathbb{E}\left[ (H \cdot M)_\infty^2 \right]
+        < \infty.
+    $$
+    Therefore $H \cdot M \in \mathcal{M}_0^2$.
+}
+
+Recall from Meyer's theorem that for $M \in \mathcal{M}_0^2$ there exists a quadratic variation $[M]$ such that $M^2 - [M]$ is a uniformly integrable martingale. Applying this to the previous lemma 1.7.3, we get
+$$
+    \mathbb{E}(H \cdot M)_\infty^2
+    =
+    \sum_{i=1}^n \mathbb{E}\left[
+        Z_{i-1}^2\bigl(M_{T_i} - M_{T_{i-1}}\bigr)^2
+    \right].
+$$
+Moreover,
+$$
+    \begin{aligned}
+        \mathbb{E}\left[
+            \bigl(M_{T_i} - M_{T_{i-1}}\bigr)^2 \middle| \mathcal{F}_{T_{i-1}}
+        \right]
+        &=
+        \mathbb{E}\left[
+            M_{T_i}^2 - M_{T_{i-1}}^2 \middle| \mathcal{F}_{T_{i-1}}
+        \right] \\
+        &=
+        \mathbb{E}\left[
+            [M]_{T_i} - [M]_{T_{i-1}} \middle| \mathcal{F}_{T_{i-1}}
+        \right],
+    \end{aligned}
+$$
+because $M^2 - [M]$ is a martingale and $\mathbb{E}(M_{T_i}\mid \mathcal{F}_{T_{i-1}})=M_{T_{i-1}}$.
+Therefore
+$$
+    \mathbb{E}(H \cdot M)_\infty^2
+    =
+    \sum_{i=1}^{n}\mathbb{E}\left[
+        Z_{i-1}^2\bigl([M]_{T_i} - [M]_{T_{i-1}}\bigr)
+    \right]
+    =
+    \mathbb{E}\left[
+        \int_0^\infty H_s^2 \diff [M]_s
+    \right].
+$$
+
+This shows that, for simple predictable integrands, the map
+$$
+    H \mapsto (H \cdot M)_\infty
+$$
+is an isometry from $(L^2(M)\cap b\varepsilon,\norm{\cdot}_M)$ into $L^2(\mathcal{F}_\infty)$ equipped with the usual $L^2$ norm.
+
+For fixed $M \in \mathcal{M}_0^2$, define
+$$
+    \norm{H}_M
+    =
+    \left(
+        \mathbb{E}\int_0^\infty H_s^2 \diff [M]_s
+    \right)^{1/2}.
+$$
+Let
+$$
+    L^2(M)
+    =
+    \left\{
+        \text{previsible } H : \norm{H}_M < \infty
+    \right\}.
+$$
+
+Then the map
+$$
+\begin{aligned}
+    I : L^2(M) \cap b\varepsilon &\to L^2(\mathcal{F}_\infty),\\
+    H &\mapsto (H \cdot M)_\infty
+\end{aligned}
+$$
+is an isometry, since
+$$
+    \mathbb{E}\left[
+        \int_0^\infty H_s^2 \diff [M]_s
+    \right]
+    =
+    \mathbb{E}(H \cdot M)_\infty^2.
+$$
+Hence $I$ extends uniquely from simple predictable processes to all of $L^2(M)$.
+
+\defn{It\'o Integral}{
+    Let $M \in \mathcal{M}_{0}^2$ and $H \in L^2(M)$. Then It\'o Integral $(H\cdot M)_{t}$ is the image of $H$ under extension of $I : L^2(M)\to L^2(\mathcal{F}_{\infty})$.
+}
+
+\noindent\textbf{Localization.}
+
+\defnn{
+    Let $T$ be a stopping time and let $H$ be any process. Define
+    $$
+        H(0,T](t)
+        =
+        \begin{cases}
+            H_t, & 0 < t \leq T,\\
+            0, & t > T.
+        \end{cases}
+    $$
+}
+
+\rmkb{
+    If $H$ is previsible, then so is $H(0,T]$.
+}
+
+\defnn{
+    Let $T$ be a stopping time and let $X$ be any process. Define
+    $$
+        X^T(t)
+        =
+        \begin{cases}
+            X(t), & 0 \leq t \leq T,\\
+            X(T), & t > T.
+        \end{cases}
+    $$
+}
+For an elementary integrand, the localization identity can be checked directly. Indeed,
+$$
+    (H \cdot M)^T_t = (H(0,T]\cdot M^T)_t,
+$$
+and
+$$
+    \left[ Z_i \left( M_{T_i \wedge t} - M_{T_{i-1} \wedge t} \right) \right]^T
+    =
+    \left( Z_i \mathsf{1}_{(T_{i-1}\wedge T,\; T_i \wedge T]} \cdot M^T \right)_t
+    =
+    Z_i\left( M_{T_i \wedge T \wedge t} - M_{T_{i-1}\wedge T \wedge t} \right).
+$$
+\thmnn{
+    Fix $M \in \mathcal{M}_0^2$. For any $H \in L^2(M)$ and any stopping time $T$:
+    \begin{itemize}
+        \item[(i)] $(H \cdot M)^T = H(0,T] \cdot M = H \cdot M^T$.
+        \item[(ii)] $(H \cdot M)_t^2 - \int_0^t H_s^2 \diff [M]_s$ is a uniformly integrable martingale. In particular,
+        $$
+            [H \cdot M]_t = \int_0^t H_s^2 \diff [M]_s.
+        $$
+        \item[(iii)] If $H, K \in b\mathcal{P}$, then
+        $$
+            (HK)\cdot M = H \cdot (K \cdot M) = K \cdot (H \cdot M).
+        $$
+        \item[(iv)] $\Delta(H \cdot M) = H \Delta M$.
+        \item[(v)] If $M$ is continuous, then $H \cdot M$ is continuous.
+    \end{itemize}
+}
+
+\pf{
+    We first prove the identities for elementary processes and then extend them by density.
+
+    For (i), let $H = Z\mathsf{1}_{(U,V]}$. Then
+    $$
+        (H \cdot M)_t = Z(M_{V \wedge t} - M_{U \wedge t}),
+    $$
+    so
+    $$
+        (H \cdot M)^T_t = (H \cdot M)_{t \wedge T}
+        = Z(M_{V \wedge T \wedge t} - M_{U \wedge T \wedge t}).
+    $$
+    On the other hand,
+    $$
+        H(0,T] = Z\mathsf{1}_{(U \wedge T, V \wedge T]},
+    $$
+    and therefore
+    $$
+        (H(0,T]\cdot M)_t
+        = Z(M_{V \wedge T \wedge t} - M_{U \wedge T \wedge t}).
+    $$
+    Similarly,
+    $$
+        (H \cdot M^T)_t = Z(M^T_{V \wedge t} - M^T_{U \wedge t})
+        = Z(M_{V \wedge T \wedge t} - M_{U \wedge T \wedge t}).
+    $$
+    Hence (i) holds for elementary processes, and then for all $H \in L^2(M)$ by continuity of the integral map.
+
+    For (ii), set
+    $$
+        N_t = (H \cdot M)_t^2 - \int_0^t H_s^2 \diff [M]_s.
+    $$
+    Since
+    $$
+        \mathbb{E}\left[\sup_{t \geq 0}(H \cdot M)_t^2\right]
+        \leq 4\mathbb{E}\left[\int_0^\infty H_s^2 \diff [M]_s\right] < \infty,
+    $$
+    the family $\{N_t : t \geq 0\}$ is uniformly integrable. It therefore suffices to show that $\mathbb{E}N_T = 0$ for every stopping time $T$.
+
+    By part (i),
+    $$
+        (H \cdot M)_T = (H(0,T]\cdot M)_\infty.
+    $$
+    Applying the isometry to the integrand $H(0,T]$, we obtain
+    $$
+    \begin{aligned}
+        \mathbb{E}(H \cdot M)_T^2
+        &= \mathbb{E}(H(0,T]\cdot M)_\infty^2 \\
+        &= \mathbb{E}\int_0^\infty H(0,T]_s^2 \diff [M]_s \\
+        &= \mathbb{E}\int_0^T H_s^2 \diff [M]_s.
+    \end{aligned}
+    $$
+    Hence $\mathbb{E}N_T = 0$, and (ii) follows.
+
+    For (iii) First take $H = Z_1 \mathsf{1}_{(S_1,T_1]}$ and $K = Z_2 \mathsf{1}_{(S_2,T_2]}$. Then
+    $$
+        HK = Z_1Z_2\,\mathsf{1}_{(S,T]},
+    $$
+    where
+    $$
+        S = S_1 \vee S_2,
+        \qquad
+        T = (T_1 \wedge T_2) \vee (S_1 \vee S_2).
+    $$
+    Hence
+    $$
+        ((HK)\cdot M)_\infty = Z_1Z_2(M_T - M_S).
+    $$
+    On the other hand,
+    $$
+    \begin{aligned}
+        (H \cdot (K \cdot M))_\infty
+        &= Z_1\Bigl((K \cdot M)_{T_1} - (K \cdot M)_{S_1}\Bigr) \\
+        &= Z_1\Bigl((K \cdot M^{T_1})_\infty - (K \cdot M^{S_1})_\infty\Bigr) \\
+        &= Z_1Z_2\Bigl[(M_{T_2 \wedge T_1} - M_{S_2 \wedge T_1}) - (M_{T_2 \wedge S_1} - M_{S_2 \wedge S_1})\Bigr] \\
+        &= Z_1Z_2(M_T - M_S).
+    \end{aligned}
+    $$
+    Therefore, for every $H,K \in b\varepsilon$,
+    $$
+        H \cdot (K \cdot M) = (HK)\cdot M.
+    $$
+    The identity
+    $$
+        K \cdot (H \cdot M) = (HK)\cdot M
+    $$
+    is proved in the same way.
+
+    Now let $K \in b\mathcal{P}$. Choose $(K^n)_{n\geq 1} \subset b\varepsilon$ such that
+    $$
+        K^n \xlongrightarrow{L^2(M)} K.
+    $$
+    Fix $H \in b\varepsilon$. By the isometry,
+    $$
+    \begin{aligned}
+        \mathbb{E}\left[\left(H \cdot (K\cdot M)-H\cdot(K^n\cdot M)\right)_\infty^2\right]
+        &= \mathbb{E}\left[\left(H\cdot\bigl((K-K^n)\cdot M\bigr)\right)_\infty^2\right] \\
+        &= \mathbb{E}\left[\int_0^\infty H_s^2 \diff [ (K-K^n)\cdot M ]_s\right] \\
+        &= \mathbb{E}\left[\int_0^\infty H_s^2 (K_s-K_s^n)^2 \diff [M]_s\right] \\
+        &\leq \norm{H}_\infty^2\,\mathbb{E}\left[\int_0^\infty (K_s-K_s^n)^2 \diff [M]_s\right]
+        \to 0.
+    \end{aligned}
+    $$
+    Hence
+    $$
+        H \cdot (K^n\cdot M) \xlongrightarrow{L^2(\mathcal{F}_\infty)} H \cdot (K\cdot M).
+    $$
+
+    On the other hand, for each $n$ we already know that
+    $$
+        H \cdot (K^n\cdot M) = (HK^n)\cdot M.
+    $$
+    Since $H \in b\varepsilon$, we also have
+    $$
+        \mathbb{E}\left[\int_0^\infty (H_sK_s^n-H_sK_s)^2 \diff [M]_s\right]
+        \leq \norm{H}_\infty^2\,\mathbb{E}\left[\int_0^\infty (K_s^n-K_s)^2 \diff [M]_s\right]
+        \to 0,
+    $$
+    so $HK^n \xlongrightarrow{L^2(M)} HK$. Applying the isometry once again,
+    $$
+        (HK^n)\cdot M \xlongrightarrow{L^2(\mathcal{F}_\infty)} (HK)\cdot M.
+    $$
+    By uniqueness of the $L^2(\mathcal{F}_\infty)$ limit,
+    $$
+        H \cdot (K\cdot M) = (HK)\cdot M.
+    $$
+    (iv) First let $H = Z\mathsf{1}_{(S,T]}$. Then
+    $$
+        (H \cdot M)_t = Z(M_{t \wedge T} - M_{t \wedge S}),
+    $$
+    so
+    $$
+        \Delta(H \cdot M)_t = Z\,\mathsf{1}_{(S,T]}(t)\,\Delta M_t = H_t \Delta M_t.
+    $$
+    Hence the identity holds for all $H \in b\varepsilon$.
+
+    Now let $H \in L^2(M)$, and choose $H^n \in b\varepsilon$ such that
+    $$
+        H^n \xlongrightarrow{L^2(M)} H.
+    $$
+    By the isometry,
+    $$
+        H^n \cdot M \xlongrightarrow{L^2(\mathcal{F}_\infty)} H \cdot M,
+    $$
+    and hence, after passing to a subsequence,
+    $$
+        \sup_{t \geq 0}\abs{(H^{n_k}\cdot M)_t - (H\cdot M)_t} \xlongrightarrow{a.s.} 0.
+    $$
+    Also,
+    $$
+        \int_0^\infty (H^{n_k}_s - H_s)^2 \diff [M]_s \xlongrightarrow{a.s.} 0
+    $$
+    along a further subsequence.
+
+    Fix $t \geq 0$. Since
+    $$
+        \Delta(H^{n_k}\cdot M)_t = H^{n_k}_t \Delta M_t,
+    $$
+    we distinguish two cases.
+
+    \textbf{Case 1.} If $\Delta M_t = 0$, then $\Delta(H^{n_k}\cdot M)_t = 0$ for every $k$, and therefore
+    $$
+        \Delta(H \cdot M)_t = 0 = H_t \Delta M_t.
+    $$
+
+    \textbf{Case 2.} If $\Delta M_t \neq 0$, then $\Delta[M]_t = (\Delta M_t)^2 > 0$. Hence
+    $$
+        \int_0^\infty (H^{n_k}_s - H_s)^2 \diff [M]_s
+        \geq
+        (H^{n_k}_t - H_t)^2 \Delta[M]_t,
+    $$
+    and so $H^{n_k}_t \to H_t$. Letting $k \to \infty$ in
+    $$
+        \Delta(H^{n_k}\cdot M)_t = H^{n_k}_t \Delta M_t,
+    $$
+    we obtain
+    $$
+        \Delta(H \cdot M)_t = H_t \Delta M_t.
+    $$
+}

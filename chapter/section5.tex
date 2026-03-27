@@ -1,0 +1,285 @@
+\section{Square Integrable}
+
+\defnn{
+    Let $(X_t)_{t \geq 0}$ be a right-continuous martingale. We say that $X$ is square-integrable if
+    $$
+        \mathbb{E}X_t^2 < \infty, \qquad \forall~ t \geq 0.
+    $$
+    Throughout this section, we assume $X_0 = 0$ and write $X \in \mathcal{M}_2$.
+}
+
+Then $Y_t = X_t^2$ is a submartingale. Recall that a process is of class $DL$ if, for every $a > 0$, the family $\{Y_T : T \leq a \text{ is a stopping time}\}$ is uniformly integrable. By the Doob--Meyer decomposition,
+$$
+    Y_t = X_t^2 = M_t + A_t, \qquad t \geq 0.
+$$
+
+If $X \in \mathcal{M}_2^c$ is continuous, then we may choose $M_t$ and $A_t$ to be continuous as well.
+
+\defnn{
+    For $X \in \mathcal{M}_2$, the quadratic variation of $X$ is defined by $\langle X \rangle_t \triangleq A_t$, that is, $\langle X \rangle_t$ is the unique adapted natural increasing process such that $\langle X \rangle_0 = 0$ and
+    $$
+        X_t^2 - \langle X \rangle_t
+    $$
+    is a martingale.
+}
+
+\rmkb{
+    The notation $\langle X \rangle_t$ is introduced here through the Doob--Meyer decomposition of the submartingale $X_t^2$.
+}
+
+If $X, Y \in \mathcal{M}_2$, then
+$$
+\begin{cases}
+    (X_t + Y_t)^2 - \langle X+Y \rangle_t \text{ is a martingale},\\
+    (X_t - Y_t)^2 - \langle X-Y \rangle_t \text{ is a martingale}.
+\end{cases}
+$$
+Subtracting the second relation from the first, we see that
+$$
+    4X_tY_t - \bigl(\langle X+Y \rangle_t - \langle X-Y \rangle_t\bigr)
+$$
+is a martingale.
+
+\defnn{
+    For $X, Y \in \mathcal{M}_2$, we define the cross variation by
+    $$
+        \langle X,Y \rangle_t \triangleq \frac{1}{4}\left( \langle X+Y \rangle_t - \langle X-Y \rangle_t \right),
+    $$
+    so that
+    $$
+        X_tY_t - \langle X,Y \rangle_t
+    $$
+    is a martingale.
+}
+
+\rmkb{
+    $\langle X,X \rangle_t = \langle X \rangle_t$.
+}
+
+\defnn{
+    Let $\Pi = \{t_0,\cdots,t_m\}$ be a partition of $[0,t]$. The $p$-th variation of $X$ over $\Pi$ is defined by
+    $$
+        V_t^{(p)}(\Pi) = \sum_{k=1}^{m}\abs{ X_{t_k} - X_{t_{k-1}} }^p.
+    $$
+    When $p = 2$, we call $V_t^{(2)}(\Pi)$ the quadratic variation along the partition $\Pi$.
+}
+
+\thmnn{
+    Let $X \in \mathcal{M}_2^c$. For any partition $\Pi$ of $[0,t]$, we have
+    $$
+        V_t^{(2)}(\Pi) \xlongrightarrow{P} \langle X \rangle_t
+    $$
+    as $\norm{\Pi} \to 0$.
+}
+
+\pf{
+    Let $\Pi = \{t_0,\dots,t_m\}$ and write
+    $$
+        \Delta_k X = X_{t_k} - X_{t_{k-1}}, \qquad \Delta_k \langle X \rangle = \langle X \rangle_{t_k} - \langle X \rangle_{t_{k-1}}.
+    $$
+    Then
+    $$
+        V_t^{(2)}(\Pi) - \langle X \rangle_t
+        = \sum_{k=1}^{m}\left( (\Delta_k X)^2 - \Delta_k \langle X \rangle \right).
+    $$
+    Hence
+    $$
+    \begin{aligned}
+        &\mathbb{E}\left( V_t^{(2)}(\Pi) - \langle X \rangle_t \right)^2\\
+        =&
+        \mathbb{E}\left[
+            \sum_{k=1}^{m}\left( (\Delta_k X)^2 - \Delta_k \langle X \rangle \right)
+        \right]^2 \\
+        =&
+        \sum_{k=1}^{m}\mathbb{E}\left[ \left( (\Delta_k X)^2 - \Delta_k \langle X \rangle \right)^2 \right]
+        \\
+        &+ 2\sum_{1 \leq j < k \leq m}\mathbb{E}\left[
+            \bigl((\Delta_k X)^2 - \Delta_k \langle X \rangle\bigr)
+            \bigl((\Delta_j X)^2 - \Delta_j \langle X \rangle\bigr)
+        \right].
+    \end{aligned}
+    $$
+
+    The cross terms vanish. Indeed, for $j < k$, the random variable
+    $$
+        (\Delta_j X)^2 - \Delta_j \langle X \rangle
+    $$
+    is $\mathcal{F}_{t_{k-1}}$-measurable, while
+    $$
+        \mathbb{E}\left( (\Delta_k X)^2 - \Delta_k \langle X \rangle \middle| \mathcal{F}_{t_{k-1}} \right) = 0
+    $$
+    because $X_s^2 - \langle X \rangle_s$ is a martingale. Therefore
+    $$
+        \mathbb{E}\left[
+            \bigl((\Delta_k X)^2 - \Delta_k \langle X \rangle\bigr)
+            \bigl((\Delta_j X)^2 - \Delta_j \langle X \rangle\bigr)
+        \right] = 0.
+    $$
+
+    Consequently,
+    $$
+    \begin{aligned}
+        \mathbb{E}\left( V_t^{(2)}(\Pi) - \langle X \rangle_t \right)^2
+        &=
+        \sum_{k=1}^{m}\mathbb{E}\left[ \left( (\Delta_k X)^2 - \Delta_k \langle X \rangle \right)^2 \right] \\
+        &\leq
+        2\sum_{k=1}^{m}\mathbb{E}(\Delta_k X)^4
+        + 2\sum_{k=1}^{m}\mathbb{E}(\Delta_k \langle X \rangle)^2 \\
+        &= I + II\\
+        &=2\mathbb{E}V_t^{(4)}(\Pi)+ II
+    \end{aligned}
+    $$
+
+    We first consider the bounded case. Assume that
+    $$
+        \abs{X_s} \leq K, \qquad \langle X \rangle_s \leq K, \qquad 0 \leq s \leq t.
+    $$
+
+    \lemnn{
+        Let $X \in \mathcal{M}_2$ satisfy $\abs{X_s} \leq K < \infty$ for all $0 \leq s \leq t$. Then
+        $$
+            \mathbb{E}\left[ V_t^{(2)}(\Pi)^2 \right] \leq 6K^4.
+        $$
+    }
+
+    Assuming this lemma, we obtain
+    $$
+        V_t^{(4)}(\Pi)
+        \leq
+        V_t^{(2)}(\Pi)\, m_t^2(X;\norm{\Pi}),
+    $$
+    where
+    $$
+        m_t(X,\delta) = \sup\{\abs{X_r - X_s} : \abs{s-r} \leq \delta,\ 0 \leq r < s \leq t\}.
+    $$
+    Hence, by Cauchy--Schwarz,
+    $$
+    \begin{aligned}
+        \mathbb{E}\left[ V_t^{(4)}(\Pi) \right]
+        &\leq \mathbb{E}\left[ V_t^{(2)}(\Pi)\,m_t^2(X,\norm{\Pi}) \right] \\
+        &\leq \left(\mathbb{E}\left[ V_t^{(2)}(\Pi)^2 \right]\right)^{1/2}
+        \left(\mathbb{E}m_t^4(X,\norm{\Pi})\right)^{1/2} \\
+        &\leq (6K^4)^{1/2}\left(\mathbb{E}m_t^4(X,\norm{\Pi})\right)^{1/2}.
+    \end{aligned}
+    $$
+    Since $X$ is continuous and bounded on $[0,t]$, bounded convergence yields
+    $$
+        \mathbb{E}m_t^4(X,\norm{\Pi}) \to 0
+    $$
+    as $\norm{\Pi} \to 0$. Thus $I \to 0$.
+
+    For $II$, note that $\langle X \rangle$ is continuous and increasing, so
+    $$
+        \sum_{k=1}^{m}(\Delta_k \langle X \rangle)^2
+        \leq
+        \sup_{1 \leq k \leq m}\abs{\Delta_k \langle X \rangle}\,\langle X \rangle_t.
+    $$
+    Since $\langle X \rangle$ is uniformly continuous on $[0,t]$ and bounded by $K$, it follows that
+    $$
+        \mathbb{E}\left[
+            \sup_{1 \leq k \leq m}\abs{\Delta_k \langle X \rangle}\,\langle X \rangle_t
+        \right] \to 0
+    $$
+    as $\norm{\Pi} \to 0$. Hence $II \to 0$ as well.
+
+    Therefore, in the bounded case,
+    $$
+        \mathbb{E}\left[
+            \left( V_t^{(2)}(\Pi) - \langle X \rangle_t \right)^2
+        \right] \to 0
+    $$
+    as $\norm{\Pi} \to 0$, and hence
+    $$
+        V_t^{(2)}(\Pi) \xlongrightarrow{P} \langle X \rangle_t.
+    $$
+
+    For a general $X \in \mathcal{M}_2^c$, we use localization. For $n \geq 1$, define
+    $$
+        T_n = \inf \{ t \geq 0 : \abs{X_t} \geq n \text{ or } \langle X \rangle_t \geq n \}.
+    $$
+    Then $T_n \uparrow \infty$ a.s., and
+    $$
+        X_t^{(n)} = X_{t \wedge T_n}
+    $$
+    is a bounded martingale. Moreover,
+    $$
+        X_{t \wedge T_n}^2 - \langle X \rangle_{t \wedge T_n}
+    $$
+    is a martingale, so by uniqueness of the quadratic variation,
+    $$
+        \langle X^{(n)} \rangle_t = \langle X \rangle_{t \wedge T_n}.
+    $$
+    Hence
+    $$
+    \begin{cases}
+        \abs{X_s^{(n)}} \leq n, \\
+        \langle X^{(n)} \rangle_s \leq n,
+    \end{cases}
+    \qquad 0 \leq s \leq t,
+    $$
+    and the bounded case gives
+    $$
+        \mathbb{E}\left[
+            \left(
+                V_{t \wedge T_n}^{(2)}(X) - \langle X \rangle_{t \wedge T_n}
+            \right)^2
+        \right] \to 0
+    $$
+    as $\norm{\Pi} \to 0$.
+
+    Now fix $\varepsilon > 0$ and $\eta > 0$. Choose $n$ so large that
+    $$
+        \mathsf{P}(T_n < t) \leq \frac{\eta}{2}.
+    $$
+    Then
+    $$
+    \begin{aligned}
+        \mathsf{P}\left( \abs{V_t^{(2)}(X) - \langle X \rangle_t} > \varepsilon \right)
+        &\leq
+        \mathsf{P}(T_n < t)
+        + \mathsf{P}\left(
+            T_n \geq t,\,
+            \abs{V_{t \wedge T_n}^{(2)}(X) - \langle X \rangle_{t \wedge T_n}} > \varepsilon
+        \right) \\
+        &\leq
+        \frac{\eta}{2}
+        + \frac{1}{\varepsilon^2}
+        \mathbb{E}\left[
+            \left(
+                V_{t \wedge T_n}^{(2)}(X) - \langle X \rangle_{t \wedge T_n}
+            \right)^2
+        \right].
+    \end{aligned}
+    $$
+    Taking $\norm{\Pi}$ small enough, the second term is at most $\eta/2$. Therefore
+    $$
+        \mathsf{P}\left( \abs{V_t^{(2)}(X) - \langle X \rangle_t} > \varepsilon \right) \leq \eta.
+    $$
+    This proves that
+    $$
+        V_t^{(2)}(\Pi) \xlongrightarrow{P} \langle X \rangle_t.
+    $$
+}
+
+\cor{
+    If $V_t^{(2)}(\Pi) \xlongrightarrow{P} \langle X \rangle_t$, then
+    $$
+    \begin{cases}
+        \forall~ q > 2,\quad V_t^{(q)}(\Pi) \xlongrightarrow{P} 0,\\
+        \forall~ q < 2,\quad V_t^{(q)}(\Pi) \xlongrightarrow{P} \infty
+    \end{cases}
+    $$
+    on $\{\langle X \rangle_t > 0\}$.
+}
+
+We use the following notation:
+$$
+    \mathcal{M}_2 = \{X : \mathbb{E}X_t^2 < \infty,\ \forall~ t \geq 0\},
+$$
+$$
+    \mathcal{M}^2 = \left\{X : \sup_{t \geq 0} \mathbb{E}X_t^2 < \infty\right\},
+$$
+and
+$$
+    \mathcal{M}_0^2 = \{X \in \mathcal{M}^2 : X_0 = 0\}.
+$$

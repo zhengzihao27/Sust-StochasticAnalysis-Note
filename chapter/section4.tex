@@ -1,0 +1,767 @@
+\section{Cts-time martingale}
+We now turn to continuous-time martingales and some of their basic properties.
+
+\defnn{On $(\Omega,\mathcal{F},(\mathcal{F}_{t})_{t \geq 0},\mathbb{P})$, a martingale is an adapted stochastic process $(X_t)_{t \geq 0}$ such that
+    $$
+    \begin{cases}
+        (i)~ \forall~ t \geq 0,~\mathbb{E}|X_t| < \infty \\
+        (ii)~ \forall~ t \geq s \geq 0,~\mathbb{E}(X_t \mid \mathcal{F}_s) = X _s.
+    \end{cases}
+    $$
+
+    If $\mathbb{E}(X_t \mid \mathcal{F}_s) \geq X _s$, we call $(X_t)$ a submartingale.
+
+    If $\mathbb{E}(X_t \mid \mathcal{F}_s) \leq X _s$, we call $(X_t)$ a supermartingale.
+}
+
+\prop{Let $\varphi: \mathbb{R} \to \mathbb{R}$ be a convex (concave up) function. If $(X_t)_{t \geq 0}$ is a martingale, then $(\varphi(X _t))_{t \geq 0}$ is a submartingale.}
+
+\textbf{Examples.} $\abs{X_t}$, $X _{t}^2$, $\abs{X _t}^p$ for all $p \geq 1$, and $(X _t)^+$ are all submartingales.
+
+\rmk{We assume $\mathbb{E}\abs{\varphi(X_t)}<\infty$, $\forall~ t \geq 0$.}
+
+\pf{
+    Jensen's inequality.
+}
+
+Define
+    $$
+    \begin{aligned}
+    &T_{b}^{(0)} = -\infty,\\
+    & T_a^{(1)} = \inf \{t \geq (T _b^{(0)})^+\colon X _t \leq a\},\\
+    &T_b^{(1)} = \inf \{t \geq T _a^{(1)}\colon X _t \geq b\}.
+    \end{aligned}
+    $$
+
+    $\forall~ l \geq 2$,
+    $$
+    \begin{aligned}
+        &T_a^{(l)} = \inf \{t \geq T _b^{(l-1)} \colon X _t \leq a\},\\
+        &T_b^{l} = \inf \{ t \geq T _a^{l}\colon X _t \geq b\}
+    \end{aligned}
+    $$
+    Define $$U_{ab}^X [0,n] = \max \{k \geq 0\colon T_{b}^{(k)} \leq n\}$$ to be the number of upcrossings of the interval $[a,b]$ on $[0,n]$.
+\thm{Continuous-time Doob's upcrossing inequality}{
+     Let $(X_{t})_{t \geq 0}$ be a right-continuous submartingale. For all $T > 0$,
+        $$
+        \mathbb{E}\left(U_{ab}^X [0,T]\right) \leq \frac{\mathbb{E}(X_{T} -a )^+}{b-a}
+        $$
+}
+
+\pf{
+    For each $n \geq 1$, let $D_n = \mathbb{Z}/ 2^n = \{0, \frac{\pm 1}{2^n}, \frac{\pm 2}{2^n},\cdots\}$.
+
+    Consider the upcrossings of $X$ on $[0,T]\cap D_{n}$. The sampled process $\left\{\frac{X_{j}}{2^n}\right\}_{j=0}^\infty$ is a discrete-time submartingale, so
+    $$
+        U_{ab}^X\left([0,T]\cap D_{n}\right) \leq U_{ab}^X [0,T],
+        \qquad
+        U_{ab}^X\left([0,T]\cap D_{n}\right) \uparrow U_{ab}^X([0,T]).
+    $$
+
+    Applying the discrete-time upcrossing inequality, we obtain
+    $$
+        \mathbb{E}\left(U_{ab}^X\left([0,T]\cap D_{n}\right)\right) \leq \frac{1}{b-a}\mathbb{E}(X_{T_n} - a)^+,
+    $$
+    where $T_n = \frac{[T \cdot 2^n]}{2^n}$. Letting $n\to \infty$, we get
+    $$
+        \mathbb{E}\left(U_{ab}^X([0,T])\right) \leq \frac{1}{b-a}\mathbb{E}(X_{T} - a)^+.
+    $$  
+}
+
+\prop{
+    If $(X_{t})_{t \geq 0}$ is a right-continuous submartingale and $\sup_{t \geq 0} \mathbb{E} X_{t}^+ < \infty$, then there exists $X \in L^1$ such that $X_t \xlongrightarrow{a.s.}X$ as $t \to \infty.$ 
+}
+
+\pf{
+    $$
+    \begin{aligned}
+        \mathbb{E}\left(U_{ab}^X([0,\infty))\right) &= \lim_{n \to \infty} \mathbb{E}\left(U_{ab}^X([0,n])\right)\\
+        &\leq \limsup_{n\to \infty}\frac{1}{b-a}\mathbb{E}(X_{n} - a)^+ \\
+        &\leq \limsup_{n\to \infty}\frac{1}{b-a}\left(\mathbb{E}(X_n^+)+ \abs{a}\right) < \infty.
+    \end{aligned}
+    $$
+    Hence for every $a < b$, we have $U_{ab}^X[0,\infty)< \infty$ a.s. 
+    
+    Therefore, with probability one, $U_{ab}^X[0,\infty) < \infty$ for all rational $a < b$.
+
+    Hence the event
+    $$
+        \left\{\liminf_{t\to \infty}X_{t} \leq a \leq b < \limsup_{t \to \infty} X_t\right\}
+    $$
+    cannot occur.
+
+    Therefore,
+    $$
+        \liminf_{t\to \infty} X_{t} = \limsup_{t \to \infty}X_t
+    $$
+    almost surely.
+}
+
+\defnn{
+    A family of random variables $(X_t)_{t \geq 0}$ is uniformly integrable (U.I.) if 
+    $$
+        \lim_{M \to \infty}\sup_{t \geq 0} \mathbb{E}\left(\abs{X_t} \mathsf{1}_{\abs{X _t} > M}\right) = 0.
+    $$
+}
+
+\rmkb{If $\sup_{t \geq 0} \mathbb{E} \abs{X_t}^p < \infty$ for some $p > 1$, then U.I.}
+
+\thmnn{
+    If $X_n \xlongrightarrow{P} X$, then the following are equivalent:
+    $$
+    \begin{cases}
+        X_n \xlongrightarrow{L^1} X, \\
+        \mathbb{E}\abs{X_n} \to \mathbb{E}\abs{X},\\
+        \{X_n\} \text{ is U.I.}.
+    \end{cases}
+    $$
+}
+
+\prop{Let $Z \in L^1$. Then
+$$
+    \{\mathbb{E}(Z\mid \mathcal{G}) \colon \mathcal{G}\text{ is a sub-}\sigma \text{-field of }\mathcal{F}\}
+$$
+is uniformly integrable.
+
+In particular, $\{\mathbb{E}(Z \mid \mathcal{F}_t)\}_{t \geq 0}$ is uniformly integrable, and it is a martingale by the tower property.
+}
+
+\prop{
+    A right-continuous martingale $(X_t)_{t \geq 0}$ is uniformly integrable if and only if there exists $X _{\infty} \in L^1$ such that
+    $$
+        X _t = \mathbb{E}(X _\infty \mid \mathcal{F}_t).
+    $$
+}
+
+\pf{
+    ``$\Rightarrow$'' Uniform integrability implies $\sup_{t \geq 0}\mathbb{E}\abs{X_t} < \infty$.
+
+    Hence the martingale convergence theorem yields some $X_{\infty}$ such that $X_t \xlongrightarrow{a.s.} X_\infty$ and
+    $$
+        \mathbb{E}\abs{X _{\infty}} = \mathbb{E}\left(\lim _{t \to \infty} \abs{X _t}\right) \leq \liminf _{t \to \infty} \mathbb{E}\abs{X _t} < \infty.
+    $$
+
+    To prove that $X_t = \mathbb{E}(X _{\infty} \mid \mathcal{F}_t)$ for every $t \geq 0$, it is enough to show that
+    $$
+        \mathbb{E}(X _t \mathsf{1}_A)=\mathbb{E}(X _{\infty}\mathsf{1}_A),
+        \qquad \forall~A \in \mathcal{F}_t.
+    $$
+
+    For any $s \geq 0$, the martingale property gives
+    $$
+        \mathbb{E}(X_{t+s} \mid \mathcal{F}_{t}) = X_{t},
+    $$
+    and hence
+    $$
+        \mathbb{E}(X_{t+s}\mathsf{1}_{A}) = \mathbb{E}(X_{t}\mathsf{1}_{A}).
+    $$
+    On the other hand,
+    $$
+        \abs{\mathbb{E}(X_{t+s}\mathsf{1}_A) - \mathbb{E}(X_{\infty} \mathsf{1}_A)}
+        \leq \mathbb{E}\abs{X_{t+s}-X_{\infty}} \to 0.
+    $$
+
+    Letting $s\to \infty$, we obtain
+    $$
+        \mathbb{E}(X_{t} \mathsf{1}_{A}) = \mathbb{E}(X_{\infty} \mathsf{1}_{A}).
+    $$
+
+    ``$\Leftarrow$'' If there exists $X_\infty \in L^1$ such that $X_t = \mathbb{E}(X_\infty \mid \mathcal{F}_t)$, then $\{X_t\}_{t \geq 0}$ is uniformly integrable by the previous proposition.
+}
+
+\thm{Optional sampling Theorem}{
+    Let $(X_t)_{t \geq 0}$ be a right-continuous martingale. Let $S \leq T$ be two stopping times. Suppose that either
+    \begin{enumerate}[label=\textcircled{\arabic*}]
+        \item $\{X_t\}$ is uniformly integrable;
+        \item there exists a constant $K >0$ such that $S,T \leq K$.
+    \end{enumerate}
+    Then
+    $$
+        \mathbb{E}(X_T \mid \mathcal{F}_S) = X _S.
+    $$
+    In particular,
+    $$
+        \mathbb{E}(X _T) = \mathbb{E}(X _S) = \mathbb{E}(X _0).
+    $$
+}
+
+\pf{
+    In case \textcircled{1}, let $Z = X_\infty$. In case \textcircled{2}, let $Z=X_{K}$.
+
+    In either case, we have $X_t = \mathbb{E}(Z\mid \mathcal{F}_t)$: for all $t \geq 0$ in case \textcircled{1}, and for all $t \leq K$ in case \textcircled{2}.
+
+    It therefore suffices to prove that $X_T = \mathbb{E}(Z \mid \mathcal{F}_T)$. Then similarly $X _S = \mathbb{E}(Z \mid \mathcal{F}_S)$.
+
+    Hence 
+    $$
+    \begin{aligned}
+    \mathbb{E}(X_T \mid \mathcal{F}_S) &= \mathbb{E}\left(\mathbb{E}(Z \mid \mathcal{F}_T) \mid \mathcal{F}_S\right)\\
+    &= \mathbb{E}(Z \mid \mathcal{F}_S)\\
+    &= X_S.
+    \end{aligned}    
+    $$
+
+    First suppose that $T$ takes values in some countable set $\{t_1,t_2,\dots\}$. Then for every $A \in \mathcal{F}_T$, 
+    $$
+    \begin{aligned}
+    \mathbb{E}(X_T \mathsf{1}_A)&= \sum_{n=1}^{\infty}\mathbb{E}(X_{t_n}\mathsf{1}_{\{T=t_n\}} \mathsf{1}_A)\\
+    &= \sum_{n=1}^{\infty}\mathbb{E}\left(X_{t_n}\mathsf{1}_{A \cap \{T=t_n\}}\right)\\
+    &= \sum_{n=1}^{\infty}\mathbb{E}\left(\mathbb{E}(Z\mid \mathcal{F}_{t_n})\mathsf{1}_{A \cap \{T=t_n\}}\right)\\
+    &= \sum_{n=1}^{\infty}\mathbb{E}\left(Z\mathsf{1}_{A \cap \{T = t_n\}}\right)\\
+    &= \mathbb{E}(Z \mathsf{1}_A).
+    \end{aligned}
+    $$
+    because $A \cap \{T = t_n\}\in \mathcal{F}_{t_n}$ and $\mathbb{E}(Z \mid \mathcal{F}_{t_n}) = X_{t_n}$.
+
+    Now consider a general stopping time $T$. Define $T_k = \frac{[2^k T] + 1}{2^k}$.
+
+    For every $A \in \mathcal{F}_T \subseteq \mathcal{F}_{T _k}$, the first step gives
+    $$
+        \mathbb{E}(Z \mathsf{1}_A) = \mathbb{E}(X_{T_k} \mathsf{1}_A).
+    $$
+
+    Letting $k \to \infty$, we conclude that
+    $$
+        \mathbb{E}(Z \mathsf{1}_A) = \mathbb{E}(X_T \mathsf{1}_A).
+    $$
+
+    Indeed, $X_{T_k} \xlongrightarrow{a.s.} X_T$ by right-continuity, and $\{X_{T_k}\}$ is uniformly integrable because $X_{T_k} = \mathbb{E}(Z \mid \mathcal{F}_{T_k})$. Hence $X_{T_k} \xlongrightarrow{L^1}X_T$.
+}
+
+\thm{Doob's Maximal Inequality}{
+    Let $(X_t)_{t \geq 0}$ be a right-continuous submartingale. Then for every $\lambda > 0$,
+    $$
+        \begin{aligned}
+            &\mathsf{P}(\sup_{0 \leq s \leq t} X_s > \lambda) \leq \frac{1}{\lambda}\mathbb{E}X_t^+,\\
+            &\mathsf{P}(\inf_{0 \leq s \leq t} X_s < -\lambda) \leq \frac{1}{\lambda}(\mathbb{E}X_t^+ - \mathbb{E}X_0).
+        \end{aligned}
+    $$
+}
+
+\pf{
+    For $\lambda > 0$, let
+    $$
+        T = \inf \{t \geq 0: X_t > \lambda\}.
+    $$
+    Then
+    $$
+        \mathsf{P}(\sup_{0 \leq s \leq t}X_s > \lambda) = \mathsf{P}(T \leq t).
+    $$
+    
+    Consider the stopped process $\{X_{t \wedge T}, t \geq 0\}$. Then
+    $$
+        \begin{aligned}
+        \lambda \mathsf{P}(T \leq t) = \lambda \mathbb{E}(\mathsf{1}_{T \leq t}) &\leq \mathbb{E}(X_T \mathsf{1}_{T \leq t})\\
+        & = \mathbb{E}(X_{T \wedge t} \mathsf{1}_{T \leq t}) \\
+        &= \mathbb{E}(X_{T \wedge t}^+ \mathsf{1}_{T \leq t})\\
+        &= \mathbb{E}(X_{T \wedge t}^+) \leq \mathbb{E}(X_t^+).
+        \end{aligned}
+    $$
+
+    Next let
+    $$
+        S = \inf\{t \geq 0 : X_t < -\lambda\}.
+    $$
+    Then
+    $$
+        \mathsf{P}(\inf_{0 \leq s \leq t}X_s < -\lambda) = \mathsf{P}(S \leq t).
+    $$
+    Therefore
+    $$
+        \lambda \mathsf{P}(S \leq t) = \lambda \mathbb{E}(\mathsf{1}_{S \leq t}).
+    $$
+    
+    Because $X_S \leq - \lambda$, $\lambda \leq - X_S$, so
+    $$
+        \lambda \mathsf{P}(S \leq t) \leq \mathbb{E}(-X_S \mathsf{1}_{S \leq t}) = - \mathbb{E}(X_{S \wedge t} \mathsf{1}_{S \leq t}).
+    $$
+
+    Applying optional stopping to the submartingale, we obtain
+    $$
+    \begin{aligned}
+    \mathbb{E}X_0 \leq \mathbb{E}X_{t \wedge S}&= \mathbb{E}(X_{t \wedge S}\mathsf{1}_{S \leq t}) + \mathbb{E}(X_{t \wedge S}\mathsf{1}_{S > t})\\
+    &\leq - \lambda \mathsf{P}(S \leq t) + \mathbb{E}(X_{t \wedge S}^+) \\
+    & \leq -\lambda \mathsf{P}(S \leq t)+ \mathbb{E}(X_t^+).
+    \end{aligned}
+    $$
+}
+
+\thmnn{$\forall~p > 1$, $\displaystyle\mathbb{E}\left(\sup_{s \leq t}\abs{X_s} \right)^p \leq \left(\frac{p}{p-1}\right)^p \mathbb{E}\abs{X_t}^p.$}
+
+\pf{
+    Let $Y= \sup_{0 \leq s \leq t}\abs{X_s}.$
+    $$
+    \begin{aligned}
+    \lambda \mathsf{P}(Y \geq \lambda) &\leq \mathbb{E}(\abs{X_{T \wedge t}}\mathsf{1}_{T \leq t}) \\
+    & = \mathbb{E}\left( \abs{X_{T \wedge t}} \right) - \mathbb{E}\left( \abs{X_{T \wedge t}} \mathsf{1}_{T > t} \right)\\
+    & \leq \mathbb{E}\left( \abs{X_t} \right) - \mathbb{E}\left( \abs{X_t}\mathsf{1}_{T >t} \right)\\
+    &= \mathbb{E} \abs{X_t} - \mathbb{E}\left( \abs{X_t} \mathsf{1}_{Y < \lambda} \right)\\
+    &= \mathbb{E}\left( \abs{X_t}\mathsf{1}_{Y \geq \lambda} \right).
+    \end{aligned}
+    $$
+    Hence $\mathsf{P}(Y \geq \lambda) \leq \frac{1}{\lambda}\mathbb{E}\left( \abs{X_t}\mathsf{1}_{Y \geq \lambda} \right).$
+    $$
+    \begin{aligned}
+        \mathbb{E}Y^p &= \int_{0}^{\infty} p \lambda^{p-1}\mathsf{P}(Y \geq \lambda) ~d \lambda \\
+        &\leq \int_{0}^{\infty} p \lambda^{p-2}\mathbb{E}\left( \abs{X_t}\mathsf{1}_{Y \geq \lambda} \right)~d \lambda\\
+        &=\mathbb{E}\left( \abs{X_t} \int_{0}^{\infty} p \lambda^{p-2}\mathsf{1}_{Y \geq \lambda} ~d\lambda \right)\\
+        &=\mathbb{E}\left( \abs{X_t}\int_{0}^{Y}p \lambda^{p-2}~d\lambda \right)\\
+        &= \mathbb{E}\left(\abs{X_t}\frac{p}{p-1}Y^{p-1}\right)\\
+        &\leq \frac{p}{p-1}\left( \mathbb{E}\abs{X_t}^p \right)^{\frac{1}{p}}\left( \mathbb{E}(Y^{p-1})^q \right)^{\frac{1}{q}}\\
+        &=\frac{p}{p-1}\left( \mathbb{E}\abs{X_t}^p \right)^{\frac{1}{p}}\left( \mathbb{E}Y^p \right)^{\frac{1}{q}}.
+    \end{aligned}
+    $$
+    Therefore
+    $$
+        \left( \mathbb{E}Y^p \right)^{\frac{1}{p}} \leq \frac{p}{p-1}\left( \mathbb{E}\abs{X_t}^p \right)^{\frac{1}{p}}.
+    $$
+
+    To justify the argument rigorously, consider $Y \wedge k$ for $k > 0$. Then
+    $$
+    \begin{aligned}
+        \mathbb{E}\left( Y \wedge k \right)^p &= \int_{0}^{\infty} p \lambda^{p-1}\mathsf{P}(Y\wedge k \geq \lambda)~d \lambda \\
+        &= \int_{0}^{k}p \lambda^{p-1}\mathsf{P}(Y \wedge k \geq \lambda)~d \lambda + \underbrace{\int_{k}^{\infty} p \lambda^{p-1}\mathsf{P}(Y\wedge k \geq \lambda)~d \lambda}_{=0} \\
+        &= \int_{0}^{k}p \lambda^{p-1}\mathsf{P}(Y \wedge k \geq \lambda)~d\lambda\\
+        &= \int_{0}^{k}p \lambda^{p-1}\mathsf{P}(Y \geq \lambda) ~d \lambda\\
+        &\leq \mathbb{E}\left( \abs{X_t}
+        \int_{0}^{k} p \lambda^{p-1} \mathsf{1}_{Y \geq \lambda}~d \lambda \right)\\
+        &= \mathbb{E}\left( \abs{X_t}\int_{0}^{k \wedge Y} p \lambda^{p-2}~d \lambda \right)\\
+        &= \mathbb{E}\left[ 
+            \abs{X_t} \frac{p}{p-1}(Y \wedge k )^{p-1}
+         \right].
+    \end{aligned}
+    $$
+
+    $\implies \mathbb{E}(Y \wedge k)^p \leq \frac{p}{p-1}\left( \mathbb{E}\abs{X_t}^p \right)^{\frac{1}{p}}\left( 
+        \mathbb{E}(Y \wedge k)^p
+     \right)^{\frac{1}{q}}.$
+
+    $\implies \left( \mathbb{E}(Y \wedge k)^p \right)^{\frac{1}{p}} \leq \frac{p}{p-1}\left( \mathbb{E}\abs{X_t}^p \right)^{\frac{1}{p}}$.
+
+    Letting $k\to \infty$, we obtain
+    $$
+        \left( \mathbb{E} Y^p \right)^{\frac{1}{p}} \leq \frac{p}{p-1}\left( \mathbb{E}\abs{X_t}^p \right)^{\frac{1}{p}}.
+    $$
+}
+
+\subsection{The Doob-Meyer Decomposition}
+We now turn to the continuous-time analogue of the discrete Doob decomposition.
+
+Recall the discrete-time Doob decomposition
+$$
+    X_n = M_n + A_n,
+$$
+where $X_n$ is a submartingale, $M_n$ is a martingale, and $A_n$ is a predictable increasing process.
+
+$$
+    \begin{aligned}
+        &\mathbb{E}\left( M_{n+1} \mid \mathcal{F}_n \right) = M_n \\
+        \implies& \mathbb{E}(X_{n+1}- A_{n+1}\mid \mathcal{F}_n) = X_n - A_n \\
+        \implies& \mathbb{E}(X_{n+1}\mid \mathcal{F}_n) - A_{n+1} = X_n - A_n \\
+        \implies& A_{n+1} - A_n = \mathbb{E}(X_{n+1}\mid \mathcal{F}_n) - X_ n \geq 0.
+    \end{aligned}
+$$
+
+$$
+\begin{cases}
+A_n = \sum_{k=0}^{n-1}\left( \mathbb{E}(X_{k+1} \mid \mathcal{F}_k) - X_k \right)\\
+A_0 = 0.
+\end{cases}
+$$
+
+For a right-continuous submartingale $(X_t)_{t \geq 0}$, we seek a decomposition of the form
+$$
+    X_t = M_t + A_t,
+$$
+where $M_t$ is a martingale and $A_t$ is an increasing and ``predictable'' process.
+
+So we first clarify what properties the increasing part should satisfy.
+
+\defnn{
+        An adapted process $A$ is called increasing if, almost surely,
+    \begin{enumerate}[label=(\alph*)]
+        \item $A_0 = 0$;
+        \item $t \mapsto A_t$ is nondecreasing and right-continuous;
+        \item $\mathbb{E}(A_t) < \infty$, $\forall~ t \geq 0 $. 
+    \end{enumerate}
+    We say that $A$ is integrable if
+    $$
+        \mathbb{E}(A_\infty) = \mathbb{E}(\lim_{t \to \infty}A_t) < \infty.
+    $$
+}
+
+\defnn{
+    An increasing process $A$ is called natural if for every bounded, right-continuous martingale $(M_t)_{t \geq 0}$ and every $t > 0$,
+    $$
+    \mathbb{E}\int_{0}^{t} M_s ~d A_s = \mathbb{E} \int_{0}^{t} M_{s-} ~d A_s.
+    $$
+}
+\rmkb{If $s \mapsto A_s$ is a.s. continuous, then $A$ is natural.}
+
+\defnn{
+    An increasing sequence $(A_n,\mathcal{F}_n)$ is called natural if for every bounded martingale $\{M_n,\mathcal{F}_n\}$,
+    $$
+    \mathbb{E}(M_n A_n) = \mathbb{E}\left( \sum_{k=1}^n M_{k-1}(A_k - A_{k-1}) \right).
+    $$
+}
+
+\prop{
+    In discrete time, predictability is equivalent to naturality.
+}
+
+\pf{
+    ``$\Rightarrow$'' Assume that $A$ is predictable, i.e. $A_n \in \mathcal{F}_{n-1}$. We show that $A$ is natural.
+
+    Indeed,
+    $$
+    \begin{aligned}
+        \mathbb{E}(M_n A_n)
+        &= \mathbb{E}\left(\sum_{k=1}^n M_kA_k - \sum_{k=1}^n M_{k-1}A_{k-1}\right)\\
+        &= \sum_{k=1}^n \mathbb{E}(M_kA_k) - \sum_{k=1}^n \mathbb{E}(M_{k-1}A_{k-1})\\
+        \Longleftrightarrow& \sum_{k=2}^n \mathbb{E}(M_{k-1}A_{k-1}) + \mathbb{E}(M_n A_n) = \sum_{k=1}^n \mathbb{E}(M_{k-1}A_k)\\
+        \Longleftrightarrow &
+        \sum_{k=1}^n \mathbb{E}(M_k A_k) = \sum_{k=1}^n \mathbb{E}(M_{k-1}A_k)\\
+        \Longleftrightarrow &
+        \sum_{k=1}^n \mathbb{E}\left[ 
+            (M_k - M_{k-1})A_{k}
+         \right]
+         = 0.
+    \end{aligned}
+    $$
+
+    Since $A_n \in \mathcal{F}_{n-1}$,
+    $$
+    \mathbb{E}\left( 
+        A_n (M_n - M_{n-1})
+     \right) = \mathbb{E} \left[ 
+        A_n \underbrace{\mathbb{E}(M_n - M_{n-1} \mid \mathcal{F}_{n-1} )}_{=0}
+      \right] = 0.
+    $$
+    Therefore $A$ is natural.
+
+    ``$\Leftarrow$'' Now assume that $A$ is natural. Then for every bounded martingale $(M_n)$,
+    $$
+    \mathbb{E}\left[ 
+        A_n (M_n - M_{n-1})
+     \right] = 0,\quad \forall~ n \geq 1.
+    $$
+
+    Our goal is to prove that
+    $$
+        A_n = \mathbb{E}(A_n \mid \mathcal{F}_{n-1}) \quad \text{a.s.},
+    $$
+    which is equivalent to $A_n \in \mathcal{F}_{n-1}$.
+    $$
+    \begin{aligned}
+        \mathbb{E}\left[ 
+            M_n\left( A_n - \mathbb{E}(A_n \mid \mathcal{F}_{n-1}) \right)
+         \right]
+         &= \mathbb{E}(M_nA_n) - \mathbb{E} \left[ 
+            M_n \, \mathbb{E}(A_n \mid \mathcal{F}_{n-1})
+          \right]\\
+         &= \mathbb{E}(M_nA_n) - \mathbb{E}\left[
+            \mathbb{E}(A_n \mid \mathcal{F}_{n-1}) \, \mathbb{E}(M_n \mid \mathcal{F}_{n-1})
+          \right]\\
+         &= \mathbb{E}(M_nA_n) - \mathbb{E}\left[
+            \mathbb{E}(A_n \mid \mathcal{F}_{n-1}) M_{n-1}
+          \right]\\
+         &= \mathbb{E}(M_nA_n) - \mathbb{E}(A_nM_{n-1})\\
+         &= \mathbb{E}\left[ A_n(M_n - M_{n-1}) \right] = 0.
+    \end{aligned}
+    $$
+
+    Fix $n \geq 1$, and let
+    $$
+        X = \mathrm{sgn} \left( A_n - \mathbb{E}(A_n \mid \mathcal{F}_{n-1}) \right)
+    $$
+    Then $X\left( A_n - \mathbb{E}(A_n\mid \mathcal{F}_{n-1}) \right) = \abs{A_n - \mathbb{E}(A_n \mid \mathcal{F}_{n-1})}$.
+
+    Define
+    $$
+    M_k = \begin{cases}
+       \mathbb{E}(X \mid \mathcal{F}_{k}),& 0 \leq k \leq n-1\\
+       X, &k=n
+    \end{cases}
+    $$
+
+    Then $(M_k)$ is a bounded martingale.
+
+    $$
+    \begin{aligned}
+        0 &= \mathbb{E}\left[ M_n (A_n - \mathbb{E}(A_n \mid \mathcal{F}_{n-1})) \right]\\
+        &= \mathbb{E} \abs{A_n - \mathbb{E}(A_n \mid \mathcal{F}_{n-1})}
+    \end{aligned}
+    $$
+    Therefore $A_n = \mathbb{E}(A_n \mid \mathcal{F}_{n-1})$ a.s.
+    
+    Hence $A_n \in \mathcal{F}_{n-1}$, so $A$ is predictable.
+}
+
+The previous proposition gives the discrete-time characterization of natural increasing processes.
+We now explain why the continuous-time definition is the correct analogue.
+
+$$
+    \begin{aligned}
+        &\mathbb{E}(M_n A_n) = \sum_{k=1}^n \mathbb{E}\left( M_{k-1} (A_k - A_{k-1}) \right) \\
+        \Longleftrightarrow &
+        \mathbb{E}(M_tA_t) = \mathbb{E}\left( \int_{0}^{t}M_{s-}~dA_s \right) = \mathbb{E}\left( \int_{0}^{t} M_s ~dA_s \right).
+    \end{aligned}
+$$
+
+Indeed, the discrete sum should be viewed as a Riemann--Stieltjes approximation of the corresponding continuous-time integral.
+
+$$
+    \int_{0}^{t} M_s ~d A_s = \lim_{\norm{\Pi}\to 0} \int_{0}^{t} M_s^\Pi ~d A_s.
+$$
+where $\Pi = \{t_0, t_1,\cdots,t_n\}\subseteq[0,t]$ with $0 = t_0 < t_1 < \cdots < t_n = t$ and $\norm{\Pi} = \max_{1 \leq k \leq n}(t_k - t_{k-1})$. By right-continuity,
+$$
+    M_s^\Pi = \sum_{k=1}^{n} M_{t_k}\mathsf{1}_{(t_{k-1},t_k]}(s) \xlongrightarrow{a.s.} M_s.
+$$
+For each $\Pi$,
+$$
+\begin{aligned}
+\mathbb{E}\int_{0}^{t}M_s ^\Pi ~d A_s
+&= \mathbb{E} \sum_{k=1}^n M_{t_k}(A_{t_k} - A_{t_{k-1}}) \\
+&= \sum_{k=1}^n \mathbb{E}(M_{t_k}A_{t_k}) - \sum_{k=1}^n \mathbb{E}(M_{t_k}A_{t_{k-1}})\\
+&= \mathbb{E}(M_{t_n}A_{t_n}) + \sum_{k=1}^{n-1}\mathbb{E}(M_{t_{k}} A_{t_{k}}) - \sum_{k=2}^{n}\mathbb{E}(M_{t_k} A_{t_{k-1}})\\
+&= \mathbb{E}(M_t A_t) + \sum_{k=1}^{n-1}\mathbb{E}(M_{t_k} A_{t_k}) - \sum_{k=1}^{n-1}\mathbb{E}(M_{t_{k+1}}A_{t_k}) \\
+&= \mathbb{E}(M_t A_t) - \underbrace{\sum_{k=1}^{n-1}\mathbb{E}\left( A_{t_k} (M_{t_{k+1}} - M_{t_k}) \right)}_{=0}.
+\end{aligned}
+$$
+
+Thus the continuous-time identity is exactly the limit of the discrete-time naturality relation.
+
+\defnn{
+    Let
+    $$
+        S = \{\text{stopping time }T \text{ with }T < \infty \text{ a.s.}\}.
+    $$
+    We say that a right-continuous process $\{X_t\}_{t \geq 0}$ is of class $D$ if $\{X_T\}_{T \in S}$ is uniformly integrable. In particular, this implies that $\{X_t\}_{t \geq 0}$ itself is uniformly integrable.
+
+    Fix $a > 0$, and let
+    $$
+        S_a = \{\text{stopping time } T \text{ with }T \leq a \text{ a.s.}\}.
+    $$
+    We say that $\{X_t\}_{t \geq 0}$ is of class $DL$ if $\{X_T\}_{T \in S_a}$ is uniformly integrable for every $a > 0$.
+}
+
+
+\thm{Doob-Meyer Decomposition}{
+    If $\{X_t\}$ is of class $DL$, then $X_t = M_t + A_t$, where $\{M_t\}$ is a martingale and $\{A_t\}$ is increasing.
+
+    If $(A_t)$ is natural, then $(M_t, A_t)$ is unique.
+}
+
+\pf{
+    Assume that
+    $$
+        X_t = M_t + A_t = M_t' + A_t',
+    $$
+    where $(M_t)$ and $(M_t')$ are martingales, and $(A_t)$ and $(A_t')$ are natural increasing processes.
+
+    Let
+    $$
+        B_t = M_t - M_t' = A_t' - A_t.
+    $$
+    Then $(B_t)$ is a martingale, and also a process of bounded variation. Moreover, it is natural.
+    
+    To prove uniqueness, let $(\xi_t)_{t \geq 0}$ be any bounded right-continuous martingale. Then
+    $$
+    \begin{aligned}
+        \mathbb{E}\bigl[\xi_t (A_t - A_t')\bigr]
+        &= \mathbb{E}\int_{0}^{t}\xi_{s-} (d A_s - d A_s') \\
+        &= \mathbb{E}\left[ \int_{0}^{t}\xi_{s-}  dB_s \right]\\
+        &= \lim_{n \to \infty} \mathbb{E}\sum_{j=1}^{m_n}\xi_{t_{j-1}^{(n)}} \left[ B_{t_j^{(n)}} - B_{t_{j-1}^{(n)}} \right],
+    \end{aligned}
+    $$
+    where $\Pi_n = \{t_0^{(n)}, \cdots, t_{m_n}^{(n)}\}$ is a partition of $[0,t]$.
+
+    For each $j$,
+    $$
+    \mathbb{E}\left[ 
+        \xi_{t_{j-1}^{(n)}} (B_{t_j^{(n)}} - B_{t_{j-1}^{(n)}})
+     \right] = \mathbb{E} \left[ 
+        \xi_{t_{j-1}^{(n)}} \underbrace{\mathbb{E}(B_{t_j^{(n)}} - B_{t_{j-1}^{(n)}} \mid \mathcal{F}_{t_{j-1}^{(n)}})}_{=0}
+      \right].
+    $$
+    Hence $\mathbb{E}\bigl[\xi_t (A_t - A_t')\bigr] = 0.$
+
+    Now let $\xi$ be any bounded $\mathcal{F}_t$-measurable random variable. Applying the preceding identity with the martingale
+    $$
+        \xi_s = \mathbb{E}(\xi \mid \mathcal{F}_s), \qquad 0 \leq s \leq t,
+    $$
+    we get
+    $$
+        \mathbb{E}\left[ \xi (A_t - A_t') \right] = 0.
+    $$
+    
+    Taking $\xi = \mathrm{sgn}(A_t - A_t')$, we obtain
+    $$
+        \mathbb{E}\abs{A_t - A_t'} = 0.
+    $$
+    Hence $A_t = A_t'$ a.s. for every $t > 0$. In particular, this holds for all $q \in \mathbb{Q}_+$. By right-continuity, we conclude that $A_t = A_t'$ for all $t \geq 0$ a.s.
+
+    \textbf{Existence: } Fix $a > 0$.
+    
+    It suffices to construct the decomposition on $[0,a]$.
+
+    Consider
+    $$
+        Y_t \triangleq X_t - \mathbb{E}(X_a \mid \mathcal{F}_t), \qquad 0 \leq t \leq a.
+    $$
+    Then $(Y_t)_{0 \leq t \leq a}$ is a submartingale, because
+    $$
+    \begin{aligned}
+        \mathbb{E}(Y_t \mid \mathcal{F}_s)
+        &= \mathbb{E}(X_t \mid \mathcal{F}_s) - \mathbb{E}(X_a \mid \mathcal{F}_s) \\
+        &\geq X_s - \mathbb{E}(X_a \mid \mathcal{F}_s)
+        = Y_s, \qquad 0 \leq s \leq t \leq a.
+    \end{aligned}
+    $$
+
+    Let $\Pi_n = \{t_0^{(n)},\cdots, t_{2^n}^{(n)}\}$ with $t_j^{(n)} = \frac{j}{2^n}a$, $0 \leq j \leq 2^n$. For each $n$, the discrete-time Doob decomposition gives
+    $$
+        Y_{t_{j}^{(n)}} = M_{t_{j}^{(n)}}^{(n)} + A_{t_j^{(n)}}^{(n)}, \qquad 0 \leq j \leq 2^n,
+    $$
+    where
+    $$
+        A_{t_j^{(n)}}^{(n)} = \sum_{k=0}^{j-1}\mathbb{E}\left( Y_{t_{k+1}^{(n)}} - Y_{t_{k}^{(n)}} \middle| \mathcal{F}_{t_{k}^{(n)}}\right).
+    $$
+    Since
+    $$
+    \begin{cases}
+        Y_0 = X_0 - \mathbb{E}(X_a \mid \mathcal{F}_0) \leq 0,\\
+        Y_a = X_a - \mathbb{E}(X_a \mid \mathcal{F}_a) = 0,
+    \end{cases}
+    $$
+    we have
+    $$
+        0 = Y_a = M_a^{(n)} + A_a^{(n)}.
+    $$
+    Hence
+    $$
+        M_{t_{j}^{(n)}}^{(n)} = \mathbb{E}(M_a^{(n)} \mid \mathcal{F}_{t_{j}^{(n)}}) = - \mathbb{E}(A_a^{(n)} \mid \mathcal{F}_{t_{j}^{(n)}}),
+    $$
+    and therefore
+    $$
+        Y_{t_{j}^{(n)}} = A_{t_{j}^{(n)}}^{(n)} - \mathbb{E}(A_a^{(n)} \mid \mathcal{F}_{t_{j}^{(n)}}).
+    $$
+
+    We will show that $\{A_a^{(n)}\}_{n \geq 1}$ is uniformly integrable. Then, by the Dunford-Pettis compactness criterion, there exists an integrable random variable $A_a$ such that
+    $$
+        A_a^{(n_k)} \rightharpoonup A_a
+        \qquad \text{weakly in } L^1
+    $$
+    along some subsequence. Equivalently, for every bounded random variable $\xi$,
+    $$
+        \lim_{k \to \infty} \mathbb{E}(\xi A_a^{(n_k)}) = \mathbb{E}(\xi A_a).
+    $$
+
+    Define
+    $$
+        A_t = Y_t + \mathbb{E}(A_a \mid \mathcal{F}_t), \qquad 0 \leq t \leq a.
+    $$
+
+    By Problem 4.11, the convergence $\mathbb{E}(\xi A_a^{(n_k)}) \to \mathbb{E}(\xi A_a)$ for every bounded random variable $\xi$ implies
+    $$
+        \mathbb{E}(\xi \mathbb{E}(A_a^{(n_k)} \mid \mathcal{F}_t)) \to \mathbb{E}(\xi \mathbb{E}(A_a \mid \mathcal{F}_t)),
+    $$
+    that is, $\mathbb{E}(A_a^{(n_k)} \mid \mathcal{F}_t)$ converges weakly in $L^1$ to $\mathbb{E}(A_a \mid \mathcal{F}_t)$.
+
+    Fix a dyadic time $t$. Then, for all sufficiently large $k$, we have
+    $$
+    \begin{cases}
+        A_t = Y_t + \mathbb{E}(A_a \mid \mathcal{F}_t), \\
+        A_t^{(n_k)} = Y_t + \mathbb{E}(A_a^{(n_k)} \mid \mathcal{F}_t)
+    \end{cases}
+    $$
+    because $t$ belongs to the dyadic partition $\Pi_{n_k}$ once $k$ is large enough.
+    Therefore
+    $$
+        A_t^{(n_k)} - A_t = \mathbb{E}(A_a^{(n_k)} \mid \mathcal{F}_t) - \mathbb{E}(A_a \mid \mathcal{F}_t).
+    $$
+    Since $\mathbb{E}(A_a^{(n_k)} \mid \mathcal{F}_t)$ converges weakly in $L^1$ to $\mathbb{E}(A_a \mid \mathcal{F}_t)$, it follows that
+    $$
+        \mathbb{E}(\xi A_t^{(n_k)}) \to \mathbb{E}(\xi A_t)
+    $$
+    for every bounded random variable $\xi$. 
+
+    For any dyadic times $0 \leq s < t \leq a$,
+    $$
+        \mathbb{E}(\xi (A_t - A_s)) = \lim_{k \to \infty}\mathbb{E}(\xi (A_t^{(n_k)} - A_s^{(n_k)})) \geq 0
+    $$
+    whenever $\xi \geq 0$.
+
+    Taking $\xi = \mathsf{1}_{A_s > A_t}$, we get
+    $$
+        \mathbb{E}\left[ (A_t - A_s) \mathsf{1}_{A_s > A_t} \right] \geq 0.
+    $$
+    Therefore $A_t - A_s \geq 0$ a.s.
+
+    Since
+    $$
+        A_0^{(n)} = 0 = Y_0 + \mathbb{E}(A_a^{(n)} \mid \mathcal{F}_0),
+    $$
+    passing to the limit gives
+    $$
+        A_0 = Y_0 + \mathbb{E}(A_a \mid \mathcal{F}_0) = 0.
+    $$
+
+    Moreover, for any dyadic time $t$,
+    $$
+        X_t - \mathbb{E}(X_a \mid \mathcal{F}_t) = Y_t = A_t^{(n_k)} - \mathbb{E}(A_a^{(n_k)} \mid \mathcal{F}_t)
+    $$
+    for all sufficiently large $k$.
+
+    Passing to the limit along the subsequence gives
+    $$
+        Y_t = A_t - \mathbb{E}(A_a \mid \mathcal{F}_t) = X_t - \mathbb{E}(X_a \mid \mathcal{F}_t).
+    $$
+    Therefore
+    $$
+        X_t = A_t + \mathbb{E}(X_a - A_a \mid \mathcal{F}_t)
+    $$
+    for every dyadic time $t \in [0,a]$. By right-continuity, the same identity then holds for all $t \in [0,a]$.
+
+    Define
+    $$
+        M_t = \mathbb{E}(X_a - A_a \mid \mathcal{F}_t), \qquad 0 \leq t \leq a.
+    $$
+    Then $(M_t)_{0 \leq t \leq a}$ is a martingale and
+    $$
+        X_t = A_t + M_t.
+    $$
+
+    Finally, we prove that $(A_t)$ is natural. It is enough to show that for every bounded right-continuous martingale $(\xi_t)$,
+    $$
+        \mathbb{E}\int_{0}^{a} \xi_s ~dA_s = \mathbb{E}\int_{0}^{a}\xi_{s-}~dA_s.
+    $$
+    We first note that
+    $$
+        \mathbb{E}\int_{0}^{a} \xi_s ~dA_s = \mathbb{E}(\xi_a A_a) = \lim_{n \to \infty}\mathbb{E}(\xi_a A_a^{(n)}).
+    $$
+
+    On the other hand,
+    $$
+        \mathbb{E}\int_{0}^{a}\xi_{s-}~dA_s
+        = \lim_{n \to \infty} \mathbb{E} \sum_{j=1}^{2^n}\xi_{t_{j-1}^{(n)}}(A_{t_{j}^{(n)}} - A_{t_{j-1}^{(n)}}).
+    $$
+
+    Since $\{A_{t_{j}^{(n)}}^{(n)}\}_{0 \leq j \leq 2^n}$ is predictable, and $t \mapsto \mathbb{E}(A_a \mid \mathcal{F}_t)$ is a martingale,
+    $$
+    \begin{aligned}
+        \mathbb{E}(\xi_a A_a^{(n)})
+        &= \mathbb{E}\left( \sum_{j=1}^{2^n}\xi_{t_{j-1}^{(n)}} (A_{t_{j}^{(n)}}^{(n)} - A_{t_{j-1}^{(n)}}^{(n)}) \right)\\
+        &= \mathbb{E}\left( \sum_{j=1}^{2^n}\xi_{t_{j-1}^{(n)}}(Y_{t_{j}^{(n)}}-Y_{t_{j-1}^{(n)}}) \right)\\
+        &= \mathbb{E}\left( \sum_{j=1}^{2^n}\xi_{t_{j-1}^{(n)}}\Bigl[(A_{t_{j}^{(n)}}-A_{t_{j-1}^{(n)}}) - \bigl(\mathbb{E}(A_a \mid \mathcal{F}_{t_j^{(n)}})-\mathbb{E}(A_a \mid \mathcal{F}_{t_{j-1}^{(n)}})\bigr)\Bigr] \right)\\
+        &= \mathbb{E}\left( \sum_{j=1}^{2^n}\xi_{t_{j-1}^{(n)}}(A_{t_{j}^{(n)}}-A_{t_{j-1}^{(n)}}) \right).
+    \end{aligned}
+    $$
+    Here the last equality follows because $t \mapsto \mathbb{E}(A_a \mid \mathcal{F}_t)$ is a martingale.
+    Letting $n \to \infty$, we obtain
+    $$
+        \mathbb{E}\int_{0}^{a} \xi_s ~dA_s = \mathbb{E}\int_{0}^{a}\xi_{s-}~dA_s.
+    $$
+    Therefore $(A_t)$ is natural.
+}
+

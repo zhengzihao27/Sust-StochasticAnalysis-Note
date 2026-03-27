@@ -1,0 +1,234 @@
+
+\section{\texorpdfstring{$L^2$}--Theory}
+
+The space $\mathcal{M}^2$ is naturally identified with $L^2(\mathcal{F}_\infty)$ through the correspondence
+$$
+    X \longmapsto X_\infty.
+$$
+Indeed, for every $X \in \mathcal{M}^2$, we have
+$$
+\begin{cases}
+    X_\infty = \lim_{t \to \infty} X_t \quad \text{a.s.},\\
+    X_t \xlongrightarrow{L^2} X_\infty.
+\end{cases}
+$$
+Conversely, if $X_\infty \in L^2(\mathcal{F}_\infty)$, then
+$$
+    X_t \triangleq \mathbb{E}\left( X_\infty \middle| \mathcal{F}_t \right)
+$$
+defines a martingale in $\mathcal{M}^2$. Moreover,
+$$
+    \mathbb{E}\left( X_t^2 \right)
+    = \mathbb{E}\left[ \mathbb{E}\left( X_\infty \middle| \mathcal{F}_t \right)^2 \right]
+    \leq \mathbb{E}\left[ \mathbb{E}\left( X_\infty^2 \middle| \mathcal{F}_t \right) \right]
+    = \mathbb{E}[X_\infty^2].
+$$
+
+Thus, for $X,Y \in \mathcal{M}^2$, it is natural to define
+$$
+    \langle X,Y \rangle \triangleq \mathbb{E}\left[ X_{\infty}Y_{\infty} \right].
+$$
+
+\rmkb{
+    Here $\langle X,Y \rangle$ denotes the inner product on the Hilbert space $\mathcal{M}^2$. It is different from the time-dependent bracket process $\langle X \rangle_t$ or $\langle X,Y \rangle_t$ introduced in the previous section.
+}
+
+\thm{Doob's $L^2$ inequality}{
+    $$
+        \mathbb{E}\left[ \sup_{0 \leq s \leq t}\abs{ X_s }^2 \right] \leq 4 \mathbb{E}\left[ X_t^2 \right].
+    $$
+    Letting $t \to \infty$, we obtain
+    $$
+        \mathbb{E}\left[ \sup_{s \geq 0}\abs{ X_s }^2 \right] \leq 4 \mathbb{E}[X_\infty^2].
+    $$
+}
+
+The space $\mathcal{M}^2$ is complete. Indeed, if $\{M^{(n)}\}$ is a Cauchy sequence in $\mathcal{M}^2$, then $\{M_\infty^{(n)}\}$ is Cauchy in $L^2(\mathcal{F}_\infty)$. Hence there exists $M_\infty \in L^2(\mathcal{F}_\infty)$ such that
+$$
+    M_\infty^{(n)} \xlongrightarrow{L^2} M_\infty.
+$$
+Let
+$$
+    M_t = \mathbb{E}(M_\infty \mid \mathcal{F}_t).
+$$
+Then
+$$
+    \sup_{t \geq 0}\abs{ M_t^{(n)} - M_t } \xlongrightarrow{L^2} 0.
+$$
+
+\pf{
+    By Doob's $L^2$ inequality,
+    $$
+    \begin{aligned}
+        \mathbb{E}\left[ 
+            \sup_{t \geq 0}\abs{ M_t^{(n)} - M_t }^2
+        \right]
+        &=
+        \mathbb{E}\left[
+            \sup_{t \geq 0}\abs{
+                \mathbb{E}\left(
+                    M_\infty^{(n)} - M_\infty \middle| \mathcal{F}_t
+                \right)
+            }^2
+        \right] \\
+        &\leq 4 \mathbb{E}\left[ \left( M_\infty^{(n)} - M_\infty \right)^2 \right] \to 0.
+    \end{aligned}
+    $$
+}
+
+\cor{
+    The space $c\mathcal{M}^2$ of continuous martingales in $\mathcal{M}^2$ is closed in the topology of $\mathcal{M}^2$.
+}
+
+\pf{
+    Let $M^{(n)} \to M$ in $\mathcal{M}^2$, with each $M^{(n)} \in c\mathcal{M}^2$. Then
+    $$
+        \sup_{t \geq 0} \abs{ M_t^{(n)} - M_t } \xlongrightarrow{L^2} 0.
+    $$
+    Hence, after passing to a subsequence if necessary,
+    $$
+        \sup_{t \geq 0}\abs{ M_t^{(n_k)} - M_t } \xlongrightarrow{a.s.} 0.
+    $$
+    Therefore $M^{(n_k)}$ converges uniformly almost surely to $M$, and since each $M^{(n_k)}$ has continuous sample paths, the limit process $M$ is also continuous.
+}
+
+\defn{Weakly orthogonal}{
+    Two martingales $M,N \in \mathcal{M}_0^2$ are said to be weakly orthogonal if
+    $$
+        \mathbb{E}[M_\infty N_\infty] = 0.
+    $$
+}
+
+\defn{Strongly orthogonal}{
+    Two martingales $M,N \in \mathcal{M}_0^2$ are said to be strongly orthogonal if, for every stopping time $T$,
+    $$
+        \mathbb{E}[M_T N_T] = 0.
+    $$
+}
+
+\lemnn{
+    Two martingales are strongly orthogonal if and only if $MN$ is uniformly integrable.
+}
+
+\lemnn{
+    Let $M$ be a progressively measurable process such that for every stopping time $T$,
+    $$
+    \begin{cases}
+        \mathbb{E}\abs{M_T} < \infty,\\
+        \mathbb{E}M_T = 0.
+    \end{cases}
+    $$
+    Then $M$ is uniformly integrable.
+}
+
+\defn{Stable subspaces of $\mathcal{M}_0^2$}{
+    A subspace $\mathcal{N}_0 \subseteq \mathcal{M}_0^2$ is called stable if
+    \begin{itemize}
+        \item[\textcircled{1}] $\mathcal{N}_0$ is a closed subspace;
+        \item[\textcircled{2}] for every $N \in \mathcal{N}_0$ and every stopping time $T$, the stopped process $N^T$, defined by $N_t^T = N_{t \wedge T}$, also belongs to $\mathcal{N}_0$.
+    \end{itemize}
+}
+
+\ex{}{$c\mathcal{M}_0^2$ is a stable subspace.}
+
+\thmnn{
+    Let $\mathcal{N}_0$ be a stable subspace of $\mathcal{M}_0^2$. Let $\mathcal{N}_0^\perp$ be the set of $Z \in \mathcal{M}_0^2$ which are weakly orthogonal to every element of $\mathcal{N}_0$, i.e.
+    $$
+        \mathcal{N}_0^\perp = \{Z \in \mathcal{M}_0^2 \colon \langle Z,N \rangle = 0,\ \forall~ N \in \mathcal{N}_0 \}.
+    $$
+    Then $\mathcal{N}_0^\perp$ is a stable subspace of $\mathcal{M}_0^2$. Moreover, if $Z \in \mathcal{N}_0^\perp$ and $N \in \mathcal{N}_0$, then $Z$ and $N$ are strongly orthogonal.
+
+    Finally, every $M \in \mathcal{M}_0^2$ admits a decomposition
+    $$
+        M = N + Z
+    $$
+    with $N \in \mathcal{N}_0$ and $Z \in \mathcal{N}_0^\perp$.
+}
+
+\pf{
+    Since $\mathcal{N}_0$ is a closed subspace of the Hilbert space $\mathcal{M}_0^2$, its orthogonal complement $\mathcal{N}_0^\perp$ is also a closed subspace, and every $M \in \mathcal{M}_0^2$ admits an orthogonal decomposition
+    $$
+        M = N + Z
+    $$
+    with $N \in \mathcal{N}_0$ and $Z \in \mathcal{N}_0^\perp$.
+
+    It remains to prove that $\mathcal{N}_0^\perp$ is stable and that orthogonality is in fact strong. Let $Z \in \mathcal{N}_0^\perp$, $N \in \mathcal{N}_0$, and let $T$ be a stopping time. Then
+    $$
+    \begin{aligned}
+        \mathbb{E}[Z_\infty^T N_\infty]
+        &= \mathbb{E}[Z_T N_\infty] \\
+        &= \mathbb{E}\left[ Z_T \mathbb{E}\left( N_\infty \middle| \mathcal{F}_T \right) \right] \\
+        &= \mathbb{E}[Z_T N_T] \\
+        &= \mathbb{E}\left[ \mathbb{E}\left( Z_\infty \middle| \mathcal{F}_T \right) N_T \right] \\
+        &= \mathbb{E}[Z_\infty N_T] \\
+        &= \mathbb{E}[Z_\infty N_\infty^T].
+    \end{aligned}
+    $$
+    Since $\mathcal{N}_0$ is stable, we have $N^T \in \mathcal{N}_0$, and hence
+    $$
+        \mathbb{E}[Z_\infty N_\infty^T] = 0.
+    $$
+    Therefore
+    $$
+        \mathbb{E}[Z_\infty^T N_\infty] = 0
+    $$
+    for every $N \in \mathcal{N}_0$, so $Z^T \in \mathcal{N}_0^\perp$. This proves that $\mathcal{N}_0^\perp$ is stable.
+
+    In particular, since $Z^T \in \mathcal{N}_0^\perp$, taking the same $N \in \mathcal{N}_0$ in the preceding identity yields
+    $$
+        \mathbb{E}[Z_T N_T] = \mathbb{E}[Z_\infty^T N_\infty] = 0.
+    $$
+    Thus $Z$ and $N$ are strongly orthogonal.
+}
+
+\defnn{
+    Define
+    $$
+        d\mathcal{M}_0^2 \triangleq (c\mathcal{M}_0^2)^\perp.
+    $$
+    Then every $M \in \mathcal{M}_0^2$ can be written as
+    $$
+        M = M^c + M^d,
+    $$
+    where $M^c \in c\mathcal{M}_0^2$, $M^d \in d\mathcal{M}_0^2$, and $M^c$ and $M^d$ are strongly orthogonal. In particular, $M^cM^d$ is uniformly integrable.
+}
+
+For a c\`adl\`ag function $f$, define
+$$
+    \Delta f(t) = f(t) - f(t-).
+$$
+
+We now extend the quadratic variation from the continuous case to a general martingale in $\mathcal{M}_0^2$. In the continuous case, the bracket $\langle M \rangle$ is characterized by the fact that $M^2 - \langle M \rangle$ is a martingale. When jumps are present, however, the increasing process must also record the jump contribution. The next theorem shows that there is a unique increasing process $[M]$ which plays this role and satisfies $\Delta[M] = (\Delta M)^2$.
+
+\thm{Meyer}{
+    Let $M \in \mathcal{M}_0^2$. Then there exists a unique increasing process $[M]$, null at $0$, such that
+    \begin{itemize}
+        \item[\textcircled{1}] $M^2 - [M]$ is uniformly integrable;
+        \item[\textcircled{2}] $\Delta [M] = (\Delta M)^2$.
+    \end{itemize}
+}
+
+\pf{
+    Write
+    $$
+        M = M^c + M^d,
+    $$
+    where $M^c \in c\mathcal{M}_0^2$ and $M^d \in d\mathcal{M}_0^2$. Then
+    $$
+        M_t^2 = (M_t^c + M_t^d)^2 = (M_t^c)^2 + 2M_t^cM_t^d + (M_t^d)^2.
+    $$
+    The theorem is obtained by combining the continuous quadratic variation of $M^c$, the purely discontinuous part $M^d$, and the strong orthogonality between $M^c$ and $M^d$.
+}
+
+For $M,N \in \mathcal{M}_0^2$, define
+$$
+    [M,N] \triangleq \frac{1}{4}\left( [M+N] - [M-N] \right).
+$$
+
+\thm{Kunita \& Watanabe}{
+    The process $[M,N]$ is the unique finite-variation process, null at $0$, such that
+    \begin{itemize}
+        \item[\textcircled{1}] $MN - [M,N]$ is uniformly integrable;
+        \item[\textcircled{2}] $\Delta [M,N] = \Delta M \cdot \Delta N$.
+    \end{itemize}
+}

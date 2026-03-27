@@ -1,0 +1,111 @@
+\underline{Riemann-Stieltjes Integral}: If $f$ is continuous and $g$ is of \underline{finite variation}, then $\int_{a}^{b} f(x) ~ \mathrm{d}g(x)$ is well-defined, and is given by
+$$
+    \int_{a}^{b} f(x) ~ \mathrm{d}g(x):=\lim_{n\to \infty} \sum_{i=0}^{n-1}f(\xi_{i})\left(g(x_{i+1}) - g(x_{i})\right)
+$$
+where $a \leq x_{0} < x_{1} < \cdots < x_{n} \leq b$ and $\xi_{i} \in [x_{i}, x_{i+1}]$.
+
+\underline{Main Task}: define the It\^o integral
+$$
+    (H\cdot X)_{t} = \int_{0}^{t} H_{s} ~\mathrm{d}X_{s}.
+$$
+
+The most important case is when $X$ is Brownian motion.
+
+\thmnn{$\displaystyle\sum_{k=1}^{2^{n}}\left(B_{\frac{k}{2^{n}}} - B_{\frac{k-1}{2^{n}}}\right)^{2} \xlongrightarrow{a.s.} 1 .$}
+
+Recall that the finite variation of a function $g:[a,b] \to \mathbb{R}$ is
+$$
+    V_{g}([a,b]) = \int_{a}^{b} \abs{ \mathrm{d}g(x)} = \sup_{n}\sum_{i=1}^{n}\abs{g(x_{i+1}) - g(x_{i})}
+$$
+
+\cornnp{$V_{B}([0,1]) = \infty$ a.s.}{
+    \begin{equation*}
+        \begin{aligned}
+                    \textcolor{red}{(\star)}\sum_{k=1}^{2^{n}}\left( B_{\frac{k}{2^{n}}} - B_{\frac{k-1}{2^{n}}}\right)^{2} &\leq \sup_{1 \leq k \leq 2^{n}} \abs{B_{\frac{k}{2^{n}}} - B_{\frac{k-1}{2^{n}}}}\cdot \sum_{k=1}^{2^{n}}\abs{B_{\frac{k}{2^{n}}} - B_{\frac{k-1}{2^{n}}}}\\
+        & \leq V_{B}([0,1]) \cdot \sup_{1 \leq k \leq 2^{n}}\abs{B_{\frac{k}{2^{n}}} - B_{\frac{k-1}{2^{n}}}}
+        \end{aligned}
+    \end{equation*}
+    If $V_{B}([0,1]) < \infty$, then by the continuity of Brownian paths,
+    $$
+        \sup_{1 \leq k \leq 2^{n}}\abs{B_{\frac{k}{2^{n}}} - B_{\frac{k-1}{2^{n}}}} \to 0,
+    $$
+    and hence $\textcolor{red}{(\star)} \to 0$.
+    
+    This contradicts $\textcolor{red}{(\star)} \to 1$. Therefore, with probability one,
+    $$
+        V_{B}([0,1]) = \infty.
+    $$
+}
+
+This shows that Brownian motion is too irregular to be treated by the classical Riemann--Stieltjes theory. Therefore, to define
+$$
+    (H\cdot X)_{t} = \int_{0}^{t} H_{s}~\mathrm{d}X_{s},
+$$
+we need a new framework, where typically $H$ is previsible (predictable) and $X$ is a semimartingale.
+
+\ex{}{Let $H_{n} \in \mathcal{F}_{n-1}$ and let $(M_{n})$ be a martingale.
+
+Then $(H\cdot M)_{n} = \sum_{k=1}^{n}H_{k}(M_{k} - M_{k-1})$ is a martingale.}
+
+\section{Set-up}
+
+Throughout, let $(\Omega, \mathcal{F}, \mathsf{P})$ be a probability space. A stochastic process $X=(X_{t})_{t \geq 0}$ is a family of random variables taking values in $(\mathbb{R}^{d},\mathcal{B}(\mathbb{R}^{d}))$:
+$$
+\begin{aligned}
+    X\colon [0,\infty) \times \Omega &\to \mathbb{R}^{d}\\
+   (t,\omega) &\mapsto X_{t}(\omega).
+\end{aligned}
+$$
+
+For each fixed $\omega$, the map $t \mapsto X_{t}(\omega)$ is called the sample path of $X$ corresponding to $\omega$.
+
+\defnn{For two stochastic processes $X$ and $Y$, we say that $Y$ is a modification of $X$ if
+$$
+    \forall~ t \geq 0,\quad \mathsf{P}(X_{t}= Y_{t}) = 1.
+$$}
+
+\defnn{We say that $X$ and $Y$ are indistinguishable if
+$$
+    \mathsf{P}(X_{t} = Y_{t},~ \forall~ t \geq 0) = 1.
+$$
+In this case, $Y$ is also called a version of $X$.}
+
+\ex{}{Let $Y$ be a modification of $X$, and suppose that both $X$ and $Y$ have a.s. right-continuous sample paths. Then $X$ and $Y$ are indistinguishable.}
+
+\defnn{A function $f$ is right-continuous if
+$$
+    f(x)= f(x+) = \lim_{t\downarrow x} f(t).
+$$}
+
+\pf{Since $\forall~  t \geq 0$, $\mathsf{P}(X_{t} \neq Y_{t}) = 0$, the two processes agree almost surely at every fixed rational time. More precisely,
+    $$
+        \mathsf{P}\left(\bigcup_{q\in \mathbb{Q}^{+}} X_{q} \neq Y_{q}\right) \leq \sum_{q\in \mathbb{Q}^{+}} \mathsf{P} (X_{q} \neq Y_{q}) = 0.
+    $$
+    Therefore,
+    $$
+        \mathsf{P}\left(\bigcap_{q\in \mathbb{Q}^{+}} X_{q} = Y_{q}\right) = 1.
+    $$
+    On the other hand, if two right-continuous functions $f$ and $g$ agree on $\mathbb{Q}^{+}$, then they must agree on all of $[0,\infty)$, since the rationals are dense.
+
+    Applying this observation pathwise to the sample paths of $X$ and $Y$, we conclude that
+    $$
+        \mathsf{P}\left(X_{t} = Y_{t},~ \forall~ t \geq 0\right) = 1.
+    $$
+}
+
+\ex{}{Let $T \sim \mathrm{Exp}(1)$. Define 
+    $$
+    \begin{aligned}
+        &X_{t} \equiv 0,\quad\forall~ t \geq 0 \\
+        &Y_{t} = \begin{cases}
+            0,& t \neq T\\
+            1,&t = T.
+        \end{cases}
+    \end{aligned}
+    $$
+    Then for every fixed $t \geq 0$,
+    $$
+        \mathsf{P}(X_{t} \neq Y_{t}) = \mathsf{P}(Y_{t} = 1) = \mathsf{P}(t = T) = 0.
+    $$
+    Hence $Y$ is a modification of $X$. However, $X$ and $Y$ are not indistinguishable, because on the event $\{T<\infty\}$ they differ at time $T$.
+}

@@ -1,0 +1,128 @@
+\section{Filtration}
+
+We now introduce filtrations, which describe the information available up to each time $t$.
+
+Let $(\mathcal{F}_{t})_{t \geq 0}$ be a filtration of $(\Omega, \mathcal{F})$, that is,
+$$
+    \forall~ 0 \leq s < t < \infty,\quad \mathcal{F}_{s} \subseteq \mathcal{F}_{t} \subseteq \mathcal{F}.
+$$
+
+\ex{}{(Natural filtration) Let $(X_{t})_{t \geq 0}$ be a stochastic process. Define
+    $$
+        \mathcal{F}_{t}^{X} = \sigma(X_{s},0 \leq s \leq t).
+    $$
+    Then $(\mathcal{F}_{t}^{X})$ is a filtration.
+}
+By construction, $X_{t} \in \mathcal{F}_{t}^{X}$ for every $t \geq 0$.
+
+\exe{1.7}{Let $X$ be a process whose sample paths are all \underline{RCLL}. Let
+    $$
+        A = \{\omega\colon X(\omega)\text{ is continuous on }[0,t_{0})\}
+    $$    
+    for some fixed $t_{0} > 0$. Show that $A \in \mathcal{F}_{t_{0}}^{X}.$
+}
+
+\underline{RCLL}: $f(x) = f(x+)$ and $f(x-)$ exists.
+
+\pf{
+    Since every sample path is RCLL, continuity on $[0,t_0)$ is equivalent to continuity at every point in $(0,t_0)$. Hence
+    $$
+    \begin{aligned}
+        A &= \{\omega\colon \forall~ s\in (0,t_{0}) ,~ X(s-,\omega)= X(s,\omega) \}\\
+        &=\{\omega\colon \forall~q \in (0,t_{0})\cap \mathbb{Q},~X(q-,\omega) = X(q,\omega) \}
+    \end{aligned}
+    $$
+    because for an RCLL function, possible discontinuities are jumps, and it is enough to check them on rational times.
+
+    Let $(0, t_{0})\cap \mathbb{Q} = (q_{m})_{m \geq 1}$. Then
+    $$
+    \begin{aligned}
+        A &= \left\{
+            \omega \colon \forall~ q_{m}\text{ with } m \geq 1,~\forall~k \geq 1,~\exists~ N \geq 1,~\forall~ n \geq N, \abs{X(q_{m}-\frac{1}{n},\omega) - X(q_{m},\omega)} < \frac{1}{k}
+        \right\}\\
+        &= \bigcap_{m=1}^{\infty}\bigcap_{k=1}^{\infty}\bigcup_{N=1}^{\infty}\bigcap_{n=N}^{\infty}\left\{\omega\colon \abs{X(q_{m} - \frac{1}{n},\omega) - X(q_{m},\omega)} < \frac{1}{k}\right\}\in \mathcal{F}_{t_{0}}^{X}.
+    \end{aligned}
+    $$
+    Therefore $A \in \mathcal{F}_{t_0}^X$.
+}
+
+\exe{1.8}{Let $X$ be a process whose sample paths are RCLL a.s. Then $A \notin \mathcal{F}_{t_{0}}^{X}$ is possible.}
+
+\pf{
+    [TODO]
+}
+
+\defnn{A filtration $\{\mathcal{F}_{t}\}_{t \geq 0}$ is said to satisfy the \underline{usual conditions} if
+    \begin{enumerate}[label=(\alph*)]
+        \item $\displaystyle \mathcal{F}_{t} = \mathcal{F}_{t+} = \bigcap_{s>t} \mathcal{F}_{s}$;
+        \item $\mathcal{F}_{0}$ contains all the \underline{$\mathsf{P}-$negligible} sets in $\mathcal{F}$.
+    \end{enumerate}
+}
+
+\defnn{An event $A$ is called $\mathsf{P}$-negligible if there exists $N \in \mathcal{F}$ such that $A \subseteq N$ and $\mathsf{P}(N) = 0$.}
+
+\defnn{
+    We define
+    $$
+        \mathcal{F}_{t+} = \bigcap_{s >t}\mathcal{F}_{s},
+        \qquad
+        \mathcal{F}_{t-}= \sigma\left(\bigcup_{s<t}\mathcal{F}_{s}\right).
+    $$
+    We say that the filtration is right-continuous if $\mathcal{F}_{t} = \mathcal{F}_{t+}$.
+}
+
+\defnn{
+    The stochastic process $X$ is \underline{adapted} to the filtration $\{\mathcal{F}_{t}\}_{t \geq 0}$ if $\forall~t \geq 0$, $X_{t}$ is $\mathcal{F}_{t}$-measurable.
+}
+
+In particular, every process is adapted to its natural filtration.
+
+\defnn{The stochastic process $X$ is called progressively measurable with respect to $(\mathcal{F}_{t})$ if $\forall~t \geq 0$, the map
+    $$
+        \begin{aligned}
+            (s,\omega) &\mapsto X_{s}(\omega)\\
+            ([0,t]\times \Omega,\mathcal{B}([0,t])\otimes \mathcal{F}_{t}) & \to (\mathbb{R}^{d}, \mathcal{B}(\mathbb{R}^{d}))
+        \end{aligned}
+    $$
+    is measurable.
+}
+
+\rmk{An adapted process need not be progressively measurable in general. The useful point here is that, under additional path regularity, adaptedness implies progressive measurability. In the usual hierarchy one has
+$$
+    \text{previsible} \Longrightarrow \text{progressively measurable} \Longrightarrow \text{adapted}.
+$$
+}
+
+
+
+\propp{If $X$ is adapted to the filtration ($\mathcal{F}_t$) and every sample path is right-continuous or left-continuous, then $X$ is also progressively measurable.}{
+    It is enough to treat the right-continuous case. Fix $t>0$. For every $n \geq 1$ and $0 \leq k \leq 2^n -1$, define
+    $$
+    X_s^{(n)}(\omega) = X_{\frac{k+1}{2^n}t}(\omega),\quad \forall~  \frac{kt}{2^n} < s \leq \frac{k+1}{2^n}t
+    $$
+    Then, by right-continuity of the sample paths,
+    $$
+        \lim_{n \to \infty}X_{s}^{(n)}(\omega) = X_{s}(\omega)
+    $$
+    for all $(s,\omega) \in [0,t]\times \Omega$.
+
+    Therefore, it suffices to show that
+    $$
+    \begin{aligned}
+        (s,\omega) &\mapsto X_{s}^{(n)}(\omega)\\
+        ([0,t]\times \Omega,\mathcal{B}([0,t])\otimes \mathcal{F}_{t}) & \to (\mathbb{R}^{d}, \mathcal{B}(\mathbb{R}^{d}))
+    \end{aligned}
+    $$
+    is measurable.
+
+    Indeed, for every $A \in \mathcal{B}(\mathbb{R}^{d})$,
+    $$
+    \begin{aligned}
+        &\left\{(s,\omega)\colon X_{s}^{(n)}(\omega) \in A\right\}\\
+        =&\bigcup_{k=0}^{2^{n} -1}\left(\frac{k}{2^{n}}t , \frac{k+1}{2^{n}}t \right]\times \left\{X_{\frac{k+1}{2^{n}}t} \in A\right\}\in \mathcal{B}([0,t])\otimes \mathcal{F}_{t}
+    \end{aligned}
+    $$
+    because $X$ is adapted and therefore $X_{\frac{k+1}{2^n}t}$ is $\mathcal{F}_t$-measurable.
+
+    Thus $X_{s}^{(n)}(\omega)$ is measurable for every $n$. Passing to the pointwise limit, we conclude that $X$ is progressively measurable.
+}

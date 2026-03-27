@@ -1,0 +1,4 @@
+version: 1
+display_name: LaTeX Section Polish
+short_description: Polish theorem-heavy LaTeX lecture-note sections without changing the mathematics.
+default_prompt: Polish this LaTeX section for readability, transitions, and proof narration while preserving theorem environments, formulas, and proof strategy.

@@ -1,0 +1,200 @@
+\section{Stopping Times}
+We now study random times that are compatible with the filtration $(\mathcal{F}_{t})_{t \geq 0}$ on $(\Omega, \mathcal{F},\mathsf{P})$.
+
+\defnn{A random time $T$ is called a \underline{stopping time} with respect to $(\mathcal{F}_{t})$ if
+$$
+    \forall~ t \geq 0,\quad \{T \leq t\} \in \mathcal{F}_{t}.
+$$
+}
+
+\defnn{A random time $T$ is called an \underline{optional time} with respect to $(\mathcal{F}_{t})$ if
+$$
+    \forall~ t \geq 0,\quad \{T < t\} \in \mathcal{F}_{t}.
+$$
+}
+
+\propp{Every stopping time is an optional time. Moreover, if the filtration is right-continuous, then the two notions are equivalent.}{
+    ``$\Rightarrow$'' If $T$ is a stopping time, then
+    $$
+        \{T<t\} = \bigcup_{n=1}^{\infty}\left\{T \leq t - \frac{1}{n}\right\} \in \mathcal{F}_t.
+    $$
+    
+    ``$\Leftarrow$'' Now assume that $T$ is an optional time and that the filtration is right-continuous. Then for every $m \geq 1$,
+    $$
+        \{T \leq t\} = \bigcap_{n=m}^{\infty}\left\{T < t+\frac{1}{n}\right\}.
+    $$
+    Since $\{T < t + \frac{1}{n}\} \in \mathcal{F}_{t+\frac{1}{n}} \subseteq \mathcal{F}_{t+\frac{1}{m}}$, we obtain
+    $$
+        \{T \leq t\} \in \mathcal{F}_{t+\frac{1}{m}}.
+    $$
+    
+    Therefore
+    $$
+        \{T \leq t\} \in \bigcap_{m=1}^{\infty}\mathcal{F}_{t+\frac{1}{m}}= \mathcal{F}_{t^+} = \mathcal{F}_t,
+    $$
+    so $T$ is a stopping time.
+}
+
+\lemnn{If $T$ and $S$ are stopping times, then $T \wedge S$, $T \vee S $, $T+S$ are stopping times.}
+
+\pf{$\forall~ t \geq 0$, 
+    \begin{enumerate}
+        \item $\{T \wedge S \leq t\} = \{T \leq t\} \cup \{S \leq t\} \in \mathcal{F}_{t}.$
+        \item $\{ T \vee S \leq t\} = \{T \leq t\}\cap \{S \leq t\} \in \mathcal{F}_{t}.$
+        \item To prove $\{T+S \leq t\} \in \mathcal{F}_{t}$, it is enough to show that $\{T+S > t\} \in \mathcal{F}_{t}$.
+        $$
+        \begin{aligned}
+            &\{T + S > t\} \\
+            = &\{T = 0,~S >t\}\cup \{S=0,~ T> t\}\cup\{0<T<t,~T+S > t\}\cup \{S>0,~ T \geq t\}\\
+             \in &\mathcal{F}_{t} \cup \mathcal{F}_{t} \cup \{0<T<t,~T+S > t\} \cup  \mathcal{F}_{t}.
+        \end{aligned}
+        $$
+        Thus it remains to show that
+        $$\{0< T < t ,~ T+S > t\} = \bigcup_{\stackrel{r\in \mathbb{Q}^{+}}{0 < r <t}}\{r < T < t,~ S> t-r\}.
+        $$
+        The right-hand side belongs to $\mathcal{F}_{t}$.
+        
+        ``$\Leftarrow~$'' $S > t-r > t - T$, so $S+T > t$.
+
+        ``$\Rightarrow~$'' Since $S+T > t$, we can choose $r\in \mathbb{Q}^{+}$ with $0<r<T$ and $S+r>t$.
+    \end{enumerate}
+}
+
+\lemnn{If $\{T_n\}_{n \geq 1}$ are stopping times, then $\sup_{n \geq 1} T_n$ is a stopping time.}
+
+\pf{
+    $\forall~ t \geq 0,$ 
+    $
+        \{\sup_{n \geq 1} T_n \leq t\} = \bigcap_{n=1}^{\infty}\{T_n \leq t\} \in \mathcal{F}_t.
+    $
+}
+
+\defnn{The stopping $\sigma$-algebra associated with a stopping time $T$ is
+$$
+    \mathcal{F}_T = \{A \in \mathcal{F} \mid \forall~ t \geq 0,\; A \cap \{T \leq t\} \in \mathcal{F}_t\}.
+$$}
+
+\prop{If $T(\omega) = t_0$ for some fixed $t_0 \geq 0$, $\forall~ \omega \in \Omega$, then $\mathcal{F}_T = \mathcal{F}_{t_0}$.}
+
+\pf{Note that $\forall~  t \geq 0$,
+    $$
+        \{T \leq t\} = \begin{cases}
+            \varnothing,& t_0 > t\\
+            \Omega, &t_0 \leq t
+        \end{cases}
+    $$
+
+    \noindent``$\mathcal{F}_{t_{0}} \subseteq \mathcal{F}_{T}$''
+
+    $\forall~  A \in \mathcal{F}_{t_{0}}$, $\forall~  t \geq 0$,
+    \begin{enumerate}[label=\textcircled{\arabic*}]
+        \item $t \geq t_{0}$, $A \cap \{T \leq t\} = A \in \mathcal{F}_{t_{0}} \subseteq \mathcal{F}_{t};$
+        \item $t < t_{0}$, $A \cap \{T \leq t\} = \varnothing \in \mathcal{F}_{t}$.
+    \end{enumerate}
+    Hence $\mathcal{F}_{t_{0}}\subseteq \mathcal{F}_{T}$.
+
+     \noindent``$\mathcal{F}_{T} \subseteq \mathcal{F}_{t_{0}}$''
+
+    $\forall~  A \in \mathcal{F}_{T}$, we have $A \cap \{T \leq t\} \in \mathcal{F}_{t}$ by definition. Let $t = t_{0}$, then $\{T \leq t_{0}\}= \Omega$, so
+
+    $$
+        A \cap \{T \leq t_{0}\} \in \mathcal{F}_{t_{0}} \Rightarrow~ A \cap \Omega \in \mathcal{F}_{t_{0}} \Rightarrow~ A \in \mathcal{F}_{t_{0}}.
+    $$
+    Hence $\mathcal{F}_{T}\subseteq \mathcal{F}_{t_{0}}$.
+}
+    
+\lemnn{$\forall~$ stopping time $T$ and $S$, $\forall~A \in \mathcal{F}_S$, we have $A\cap \{S \leq T\} \in \mathcal{F}_T.$ In particular, if $S \leq T$ for all $\omega \in \Omega$, then $\mathcal{F}_S \subseteq \mathcal{F}_T.$}
+
+\pf{
+    First note that $T \wedge t$ is also a stopping time. Hence $T \wedge t$ is $\mathcal{F}_t$-measurable.
+
+    To prove $A\cap \{S \leq T \} \in \mathcal{F}_T$, it is enough to show that for every $t \geq 0$,
+    $$
+        A \cap \{S \leq T\} \cap \{T \leq t\}\in \mathcal{F}_t.
+    $$
+
+    We have 
+    $$
+    A \cap \{S \leq T\} \cap \{T \leq t\} = \underbrace{A \cap \{S \leq t\}}_{\in \mathcal{F}_t} \cap \underbrace{\{T \leq t\}}_{\in \mathcal{F}_t} \cap \underbrace{\{S \wedge t \leq T \wedge t\}}_{\mathcal{F}_t}.
+    $$
+    Indeed, on $\{S \leq t\}\cap \{T \leq t\}$, the event $\{S \leq T\}$ is exactly the same as $\{S \wedge t \leq T \wedge t\}$. Therefore the whole intersection belongs to $\mathcal{F}_t$, and hence $A\cap \{S \leq T \} \in \mathcal{F}_T$.
+}
+
+\lemnn{
+    Let $S,T$ be two stopping times. Then $\mathcal{F}_{T \wedge S} = \mathcal{F}_T \cap \mathcal{F}_S$ and $\{T < S\}$, $\{S < T\}$, $\{T \leq S\}$, $\{S \leq T\}$, $\{T = S\}$ belong to $\mathcal{F}_S \cap \mathcal{F}_T = \mathcal{F}_{S \wedge T}.$
+}
+
+\pf{
+    $\mathcal{F}_{T \wedge S} \subseteq \mathcal{F}_S$ and $\mathcal{F}_{T \wedge S} \subseteq \mathcal{F}_T \Rightarrow~\mathcal{F}_{T \wedge S} \subseteq \mathcal{F}_T \cap \mathcal{F}_S$.
+    
+    To prove $\mathcal{F}_T \cap \mathcal{F}_S \subseteq \mathcal{F}_{T \wedge S}$, $\forall~ A \in \mathcal{F}_T \cap \mathcal{F}_S$, we will prove $\forall~ t \geq 0$, $A \cap \{T \wedge S \leq t\} \in \mathcal{F}_t.$
+
+    $$
+    \begin{aligned}
+        A \cap \{T \wedge S \leq t\} &= A \cap \left(\{T \leq t\} \cup \{S \leq t\}\right)\\
+        &= \left(A \cap \{T \leq t\}\right)\cup \left(A \cap \{S \leq t\}\right)\in \mathcal{F}_t.
+    \end{aligned}
+    $$
+
+    Next, $\{S \leq T\}\in \mathcal{F}_T$. It remains to prove $\{S <T\} \in \mathcal{F}_T.$
+
+    Assuming this, by interchanging $T$ and $S$, we get $\{T \leq S\}$, $\{T > S\}$, $\{T <S\}\in \mathcal{F}_S$.
+
+    Therefore $\{S \leq T\} \in \mathcal{F}_S \cap \mathcal{F}_T$.
+
+    $\{T= S\} = \{ S \leq T\}\cap \{T \leq S\}\in \mathcal{F}_S \cap \mathcal{F}_T$.
+
+    To prove $\{S < T\}\in \mathcal{F}_T$, let $R = S \wedge T$. Then $\{S < T\}= \{R < T\}$. Since $R$ is a stopping time, we have $R \in \mathcal{F}_R \subseteq \mathcal{F}_T$, and therefore $\{R < T\} \in \mathcal{F}_T$.
+}
+
+\textbf{Summary:}
+\begin{enumerate}[label=(\roman*)]
+    \item $T \in \mathcal{F}_T$;
+    \item If $S \leq T$, $\mathcal{F}_S \subseteq \mathcal{ F}_T$;
+    \item $T \wedge t \in \mathcal{F}_{T \wedge t} \subseteq \mathcal{F}_t$;
+    \item $\mathcal{F}_{T \wedge S} = \mathcal{F}_T \cap \mathcal{F}_S.$
+\end{enumerate}
+
+For each $\omega \in \Omega$, if $T(\omega) \in [0,\infty)$ and $X_t(\omega) \in \mathbb{R}^d$ for all $t \geq 0$, we define
+$$
+    X _T(\omega) = X _{T(\omega)}(\omega).
+$$
+
+\prop{
+    Let $\{X_t\}_{t \geq 0}$ 
+    be a progressively measurable process, and let $T$ be a stopping time. Then $X_T$, defined on $\{T < \infty\}$, is $\mathcal{F}_T$-measurable, and the stopped process $\{X _{T \wedge t}\}_{t \geq 0}$ is progressively measurable.
+}
+
+\pf{
+    Let $B \in \mathcal{B}(\mathbb{R}^d)$. By definition of $\mathcal{F}_T$,
+    $$
+        \{X_T \in B\} \in \mathcal{F}_T
+        \quad \Longleftrightarrow \quad
+        \forall~ t \geq 0,\;
+        \{ X _T \in B\}\cap \{T \leq t\}\in \mathcal{F}_t.
+    $$
+    On the event $\{T \leq t\}$ we have $X_T = X_{T\wedge t}$, so
+    $$
+        \{ X _T \in B\}\cap \{T \leq t\}
+        =
+        \{X _{T \wedge t} \in B\} \cap \{T \leq t\}.
+    $$
+
+    Therefore, it is enough to prove that $X_{T \wedge t}$ is $\mathcal{F}_t$-measurable for every $t \geq 0$.
+
+    Observe that the map
+    $$
+        (s,\omega)\mapsto (T(\omega) \wedge s, \omega)
+    $$
+    is $\mathcal{B}([0,t])\otimes \mathcal{F}_t$-measurable.
+
+    By assumption, $(s,\omega)\mapsto X_s(\omega)$ is $\mathcal{B}([0,t])\otimes \mathcal{F}_t$-measurable.
+
+    Hence the composition
+    $$
+        (s,\omega)\mapsto X_{T(\omega) \wedge s}(\omega)
+    $$
+    is also $\mathcal{B}([0,t])\otimes \mathcal{F}_t$-measurable. In particular, evaluating at $s=t$ shows that $X_{T \wedge t}$ is $\mathcal{F}_t$-measurable.
+
+    This also proves that the stopped process $(X_{T\wedge t})_{t \geq 0}$ is progressively measurable.
+}
