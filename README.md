@@ -1,6 +1,6 @@
 # Sust-StochasticAnalysis-Note
 
-This repository contains lecture notes for SUST MAT7093 Stochastic Analysis, taught by Assistant Professor Hong Jieliang.
+This repository contains lecture notes for SUST MAT7093 Stochastic Analysis (Spring 2026), taught by Assistant Professor Jieliang Hong.
 
 The notes are written in English and maintained in LaTeX. The drafting, editing, and polishing process was carried out with support from Codex.
 
