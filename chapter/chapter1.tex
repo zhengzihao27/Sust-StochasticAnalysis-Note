@@ -8,3 +8,380 @@
 \input{chapter/section6.tex}
 \input{chapter/section7.tex}
 \par\noindent\hrulefill\par
+
+\thm{Kunita-Watanabe}{
+    Let $M \in \mathcal{M}_0^2$ and $H \in L^2(M)$. Then $\forall~N \in \mathcal{M}_0^2$,
+    $$
+    \mathbb{E}\left[ 
+        (H \cdot M)_{\infty} \cdot N_\infty
+     \right] = \mathbb{E}\left[ 
+        (H \cdot [M,N])_{\infty}
+      \right].
+    $$
+    Moreover, 
+    $$
+        [H\cdot M , N] = H \cdot [M,N] \xlongequal{def}\int H_s \diff [M,N]_s.
+    $$
+}
+
+\thmnn{
+    Let $M,N \in \mathcal{M}_0^2$. Then 
+    $$
+    \left( \int_0^\infty \abs{ H_s K_s } \diff [M,N]_s \right)^2 \leq \int_0^\infty H_s^2 \diff [M]_s \cdot \int_0^\infty K_s ^2 \diff [N]_s. \quad \text{a.s.}
+    $$
+}
+
+\pf{
+    $\abs{ H_s K_s } = H_s K_s \cdot \mathrm{sgn}(H_s K_s)$.
+
+    $\abs{ \diff [M,N]_s } = \diff [M,N]_s \cdot \mathrm{sgn}([M,N]_s)$.
+    $$
+    \begin{aligned}
+        LHS &= \int_0^\infty H_s K_s \cdot \mathrm{sgn}(H_s K_s) \cdot \mathrm{sgn} ([M,N]_s) \diff [M,N]_s\\
+        &=\int_{0}^{\infty} \tilde{H_s}K_s \diff [M,N]_s
+    \end{aligned}
+    $$
+    $$
+    \begin{aligned}
+        RHS &= \int_0^\infty \tilde{H_s} \diff [M]_s \cdot \int_0^\infty K_s^2 \diff [N]_s
+    \end{aligned}
+    $$
+    $$
+    \Leftrightarrow \left( \int_0^\infty \tilde{H_s} K_s \diff [M,N]_s  \right)^2 \leq \int_0^\infty \tilde{H_s} \diff [M]_s \int_0^\infty K_s ^2 \diff [N]_s.
+    $$
+    $$
+    \Leftrightarrow \begin{aligned}
+        & H_n = \sum_{i=1}^n U_i (t_i,t_{i+1}]\\
+        & K_n \equiv \sum_{i=1}^n V_i(t_i,t_{i+1}].
+    \end{aligned}
+    $$
+    $$
+    \Leftrightarrow \left( \sum_{i=1}^{n} U_i V_i \left( [M,N]_{t_{i+1}} - [M,N]_{t_i} \right) \right)^2 \leq \sum_{i=1}^2 U_i^2([M]_{t_{i+1}} - [M]_{t_i} ) \cdot \sum_{i=1}^n V_i^2 ([N]_{t_{i+1}}-[N]_{t_i}).
+    $$
+
+    It suffices to prove
+    $$
+    \abs{ [M,N]_{t_{i+1}} - [M,N]_{t_i} } \leq \left( [M]_{t_{i+1}} - [M]_{t_i} \right)^{\frac{1}{2}} \left( 
+        [N]_{t_{i+1}} - [N]_{t_i}
+     \right)^{\frac{1}{2}}.
+    $$
+    like $(\sum_i a_i b_i)^2 \leq \sum_i a_i^2 \sum_i b_i^2.$
+
+    To prove this, note that $\forall~ \lambda \in \mathbb{Q}$, $[M+ \lambda N]$ is increasing and so 
+    $$
+        [M+ \lambda N]_{t_{i+1}} - [M+\lambda N]_{t_i} \geq 0 \quad \text{a.s..}
+    $$
+    
+    Also 
+    $$
+        [M + \lambda N]_t = [M]_t + 2\lambda[M,N]_t + \lambda^2 [N]_t.
+    $$
+    because
+    $
+    (M+ \lambda N)_{t}^2 - [M+ \lambda N]_t
+    $ is U.I. and by the uniqueness (?)
+    $$
+    M_t^2  + 2 \lambda M_t N_t + \lambda^2 N_t^2 -([M]_t + 2 \lambda [M,N]_t + \lambda^2 [N]_t).
+    $$
+    Hence 
+    $$
+    \left( [M]_{t_{i+1}} - [M]_{t_i} \right) + 2 \lambda \left( [M,N]_{t_{i+1}} - [M,N]_{t_i} \right) + \lambda^2 \left( [N]_{t_{i+1}} -[N]_{t_i} \right) \geq 0
+    $$
+    $$ 
+    \Leftrightarrow b^2 - 4ac \leq 0.
+    $$
+    So
+    $$
+        \left( [M,N]_{t_{i+1}} - [M,N]_{t_i} \right)^2 \leq \left( [M]_{t_{i+1}} - [M]_{t_i} \right)\left( [N]_{t_{i+1}} - [N]_{t_i} \right).
+    $$
+    $$
+        \mathbb{E}\left[ 
+            (H\cdot M)_{\infty} N_{\infty}
+         \right] = \mathbb{E}\left[ 
+            (H \cdot [M,N])_{\infty}
+          \right].
+    $$
+
+    If $H = Z(S,T]$, 
+    $$\begin{cases}
+     LHS = \mathbb{E}\left[ Z(M_T - M_S) \cdot N_\infty \right]\\
+     RHS = \mathbb{E}\left[ Z([M,N]_{T} - [M,N]_S) \right]   
+    \end{cases}$$
+
+    $$
+    \begin{aligned}
+        LHS &= \mathbb{E}\left[ \mathbb{E}(N_\infty \mid \mathcal{F}_T) \cdot Z(M_T - M_S) \right] \\
+        &= \mathbb{E}\left[ Z(M_T N_T - M_S N_T) \right]\\
+        &= \mathbb{E}[ZM_TN_T] - \mathbb{E}\left[ \mathbb{E}(N_T \mid \mathcal{F}_S)\cdot ZM_S \right]\\
+        &=\mathbb{E}\left[ Z M_T N_T \right] - \mathbb{E}[ZM_S N_S].
+    \end{aligned}
+    $$
+    
+    Because $M_t N_t - [M,N]_t$ is U.I.
+    $$
+    \mathbb{E}[M_T N_T] = \mathbb{E}[[M,N]_T] \implies \mathbb{E}[Z(M_T N_T - [M,N]_T)] = 0.
+    $$
+    And
+    $$
+    \begin{aligned}
+        LHS &= \mathbb{E}\left[ Z(M_T N_T - M_S N_S) \right] \\
+        &= \mathbb{E}\left[ Z \mathbb{E}\left[ M_TN_T -M_S N_S \mid \mathcal{F}_S \right] \right]\\
+        &= \mathbb{E}\left[ Z \mathbb{E}[[M,N]_T - [M,N]_S \mid \mathcal{F}_S] \right]\\
+        &=\mathbb{E}[Z([M,N]_T - [M,N]_S)].
+    \end{aligned}
+    $$
+    Hence $\forall~ H \in b \varepsilon$
+    $$
+    \mathbb{E}[(H\cdot M)_{\infty} \cdot N_{\infty}] = \mathbb{E}\left[ (H \cdot [M,N])_{\infty} \right].
+    $$
+    
+    If $H_n \xlongrightarrow{L^2(M)}H$, i.e.
+    $$
+    \mathbb{E}\left( \int_0^\infty (H_n(s) - H_s)^2 \diff [M]_s \right) \to 0
+    $$
+    $\implies (H_n \cdot M)_{\infty} \xlongrightarrow{L^2} (H\cdot M)_{\infty}$ by 
+    $$
+    \mathbb{E}[(H_n \cdot M - H\cdot M)_{\infty}^2] = \mathbb{E}\left[ \int_{0}^{\infty}(H_n - H) \diff [M]_s \right] \to 0.
+    $$
+    
+    Hence $\mathbb{E}[(H_n \cdot M)_{\infty} \cdot N_{\infty}] \to \mathbb{E}[(H\cdot M)_{\infty} N_\infty]$.
+
+    Next,
+    $$
+    \begin{aligned}
+    \mathbb{E}\left[ \abs{ (H_n \cdot [M,N])_{\infty} - (H \cdot [M,N])_{\infty} } \right] &= \mathbb{E}\abs{ ((H_n - H) \cdot [M,N])_{\infty} } \\
+    &\leq \left( \mathbb{E}\left( \int_0^\infty(H_n -H) \diff [M]_s \right) \right)^{\frac{1}{2}}\left( \mathbb{E}[N]_{\infty} \right)^{\frac{1}{2}} \to 0
+    \end{aligned}
+    $$
+    by using 
+    $$
+    \left( \int_0^\infty \abs{ H_s } \diff [M,N]_s \right) \leq \left( \int_0^\infty H_s^2 \diff [M]_s \right)^{\frac{1}{2}} \left( \int_0^\infty 1 \diff [N]_s \right)^{\frac{1}{2}}.
+    $$
+
+    Hence $\mathbb{E}[(H_n \cdot [M,N])_{\infty}] \to \mathbb{E}[(H\cdot [M,N])_{\infty}]$.
+}
+
+\rmkb{
+    proof of $[H\cdot M,N] = H \cdot [M,N]$
+    $\Leftrightarrow$ It suffices to. prove $(H\cdot M)_{t} N_t - \int_{0}^\infty H_s \diff [M,N]_s$ is a U.I. martingale.
+    
+    $\Leftrightarrow \forall~$stopping time $R$
+    $$
+    \mathbb{E}[(H\cdot M)_{R} \cdot N_R] = \mathbb{E}\left[ \int_0^R H_s \diff [M,N]_s \right].
+    $$
+    $$
+    \begin{aligned}
+        LHS &= \mathbb{E}\left[ (H\cdot M)_{\infty}^R \cdot N_\infty^R \right] \\
+        &= \mathbb{E}\left[ 
+        (H^R \cdot M)_{\infty} \cdot N_\infty^R
+        \right] \\
+        &= \mathbb{E}[(H^R \cdot [M,N^R])_{\infty}]\\
+        &= \mathbb{E}\left[ \int_0^\infty H^R(s) \diff [M,N^R]_s \right]\\
+        &= \mathbb{E}\left[ \int_0^R H(s) \diff [M,N]_s \right] = RHS.
+    \end{aligned}
+    $$
+}
+
+\defn{local martingale}{
+    $\mathcal{M}_{loc}=\{\text{local martingale}\}$. 
+    
+    $\exists~$stopping times $T_n \uparrow \infty$ s.t. $M^{T_n}$ is a martingale.
+}
+\defn{continuous local martingale}{
+    $c\mathcal{M}_{loc}=\{\text{continuous local martingale}\}$.
+
+    Quadratic variation of $c \mathcal{M}_{loc}$. 
+    
+    If $M \in c\mathcal{M}_{loc}$, then $\exists~[M]$ increasing process such that $M^2 - [M] \in c \mathcal{M}_{loc}$.
+}
+
+\lemnn{
+    If $M \in c \mathcal{M}_{loc}$. Fix $n \geq 1$, define
+    $$
+    T_n = \inf \{t \geq 0\colon \abs{ M_t }\geq n\}.
+    $$
+    Then $M^{T_n}$ is a bounded martingale.
+}
+
+\pf{
+    By definition, $\exists~$stopping $(S_k)\uparrow \infty$ s.t. $M^{S_k}$ is a martingale.
+
+    $\implies M^{S_k \wedge T_n}$ is also a martingale.
+
+    So $\forall~ s < t$, $$\mathbb{E}(M^{S_k \wedge T_n}_t \mid \mathcal{F}_s) = M_s^{S_k \wedge T_n}.$$
+
+    Let $k \to \infty$ to get $\mathbb{E}(M_t^{T_n} \mid \mathcal{F}_s) = M_s^{T_n}.$ 
+
+    pf of Quadratic variation:
+
+    \textbf{(Existence.)} $\forall~ n \geq 1$, we let
+    $$
+    T_n = \inf \{t \geq 0 \colon \abs{ M_t } \geq n\}.
+    $$
+    Then define $\forall~ t < T_n$,
+    $$
+    [M]_t = [M^{T_n}]_t .
+    $$
+
+    We need to check that $[M^{T_n}]_t$ is well-defined.
+    $$
+    \begin{aligned}
+        [M^{T_2}]^{T_1} = [M^{T_2}]_{t\wedge T_1}
+    \end{aligned}
+    $$
+    Because $[M]^T = [M^T]$,
+    $$
+    [M^{T_2}]^{T_1} = [M^{T_2 \wedge T_1}] =[M^{T_1}].
+    $$
+    By $T_n \uparrow \infty$, we have $[M]_t$ is defined for all $t \geq 0$.(?)
+
+    \textbf{(uniqueness.)} If $\exists~A,A'$ increasing such that $N = M^2 - A$ and $N' =M^2 - A' \in c \mathcal{M}_{loc}$.
+    Then $N-N'= A' - A \in c \mathcal{M}_{loc}$ is of finite variation.
+    
+    \lemnn{
+        If $M \in c \mathcal{M}_{loc}$ and $M$ is of finite variation, then $M_t \equiv 0.$
+    }
+    \pf{
+        Let $V_M(t) =$ total variation of $M$ on $[0,t]$. Define $T_n = \inf \{t \geq 0 \colon V_M(t) > n\}.$ 
+
+        Then $M^{T_n}$ is a bounded martingale and is of finite variation. Next, define 
+        $$
+        A_t^n \equiv \sum_{k=1}^{2^n}\left( M(t_{k}^n) - M(t_{k-1}^n) \right)^2
+        $$
+        with $t_k^n = \frac{k}{2^n} t$.
+
+        So
+        $$
+        A_t^n \leq \sup_{1 \leq k \leq 2^n} \abs{ M(t_k^n) - M(t_{k-1}^n) }\cdot V_M(t) \xlongrightarrow{a.s.} 0
+        $$
+        by continuity of $M$.
+
+        Thus $A_t^n \to 0$, $\forall~ t \geq 0$.
+
+        We will prove $A_t^n \to A_t$ such that $M_t^2 - A_t$ is martingale.
+
+        $\implies A_t = 0$ and $\mathbb{E}M_t^2 = \mathbb{E}M_0^2 = 0.$
+
+        $\implies M_t = 0$ a.s. $\forall~ t \geq 0$.
+
+        By a.s. continuity, $M_t \equiv 0$, a.s.
+    }
+}
+
+\subsection{It\'o Integral of local martingale}
+
+\thmnn{
+    Let $M \in c \mathcal{M}_{loc}$ with $M_0 = 0$. Let $H \in \mathcal{P}$ such that W.P.1
+    $$
+    \int_0^t H_s ^2 \diff [M]_s < \infty
+    $$
+    for all $t > 0$. Then $H \cdot M$ is well-defined such that $H\cdot M \in c \mathcal{M}_{0,loc}$.
+}
+\pf{
+    Let $U_n = \inf \{t \colon \abs{ M_t } > n\}$, $V_n = \inf\{t \colon \int_0^t H_s^2 \diff [M]_s > n\}.$
+
+    (Recall $L^2(M) \implies \mathbb{E}\int_0^\infty H_s^2 \diff [M]_s < \infty$).
+
+    $\implies T_n = U_n \wedge V_n$. In this way, $M^{T_n} \in c \mathcal{M}_0^2$ and $H^{T_n} \in L^2(M^{T_n}).$
+
+    So $H^{T_n} \cdot M^{T_n}$ is defined by previous $L^2$ theory.
+
+    $\implies (H\cdot M)^{T_n} = H^{T_n} \cdot M^{T_n}$ ($t < T_n$) is a $L^2$-bounded martingale.
+
+    $\implies H \cdot M \in c \mathcal{M}_{0,loc}$.
+}
+
+\defn{semimartingale}{
+    We say $X$ is a semimartingale if 
+    $$
+    X_t = X_0 + M_t + A_t.
+    $$
+    $M_t$ is local mart, $A_t$ is finite variation.
+}
+
+\defnn{
+    Let $X$ be a continuous semimartingale. Then $\exists~$unique 
+    $$
+    \begin{cases}
+        M \in c \mathcal{M}_{0,loc}\\
+        A \in c F V_0
+    \end{cases}
+    $$
+    such that $X_t = X_0 + M_t + A_t$, $\forall~ t \geq 0$.
+}
+
+\pf{
+    If $\exists~M'$ and $A'$ such that 
+    $$
+        X= X_0 + M' + A' = X_0 + M + A.
+    $$
+    Then $M - M' = A' - A \in c \mathcal{M}_{0,loc} \cap c F V = \{0\}$.
+}
+
+We write $M= X^{cm}$ and 
+$$
+    [X,X] = [M,M] = [X^{cm},X^{cm}].
+$$
+
+Similarly, $[X,Y] = [X^{cm},Y^{cm}]$.
+
+For any $H \in lb \mathcal{P}$ define
+$$
+    H \cdot X =H \cdot M + H \cdot A.
+$$
+Obviously $H\cdot M \in c \mathcal{M}_{0,loc}$ and $H \cdot A \in FV$.
+
+And 
+$$
+\begin{aligned}
+[H\cdot X, K \cdot Y] &= [H \cdot X^{cm},K\cdot Y^{cm}] \\
+&= H \cdot [X^{cm},K\cdot Y^{cm}] \\
+&= H\cdot K [X^{cm},Y^{cm}]\\
+&= (HK)\cdot [X^{cm},Y^{cm}]=(HK)\cdot [X,Y].
+\end{aligned}$$
+
+\subsection{It\'o's Formula} 
+\thm{It\'o's Formula}{
+    Let $f \colon \mathbb{R}^n \to \mathbb{R}$ be $C^2$. Let 
+    $$
+    X_t \equiv(X_t^1,\cdots,X_t^n)
+    $$
+    be a continuous semimartingale.
+
+    Then 
+    $$
+    f(x_t) - f(x_0) = \int_0^t \nabla f(X_s) \diff X_s + \frac{1}{2}\int_0^t \sum_{i,j} D_{ij}f(X_s)\diff [X^i,X^j]_{s}
+    $$
+    where $\nabla f(X_s) = (D_1f(X_s),\cdots,D_n f(X_s))$. $D_i f(x) = \frac{\partial}{\partial x_i}f(x)$, $D_{ij} = D_i D_j = D_j D_i.$
+}
+
+\thm{Integration by Parts}{
+    Let $X,Y$ be continuous semimartingales. Then 
+    $$
+    X_tY_t - X_0Y_0 = \int_0^t X_s \diff Y_s + \int_0^t Y_s \diff X_s + [X,Y]_t.
+    $$
+}
+\pf{
+    Assume IBP holds.
+    
+    Let $$\mathcal{A} = \left\{f \in C^2 (\mathbb{R}^n) \colon \diff f(X_t) = \sum_i D_i f(X_t) \diff X_t + \frac{1}{2} \sum_{i,j}D_{ij}f(X_t) \diff [X^i,X^j]_t\right\}.$$
+
+    (i). $f,g \in \mathcal{A} \implies f+ g \in \mathcal{A}$.
+    (ii). $f,g \in \mathcal{A} \implies fg \in \mathcal{ A}$.
+
+    $$
+    \begin{aligned}
+    \diff (fg(X_t)) =& \diff (f(X_t)\cdot g(X_t)) \\
+    =& f(X_t) \cdot \diff g(X_t) + g(X_t) \diff f(X_t) + \diff [f(X_t),g(X_t)]_t\\
+    =& f(X_t)\left( \sum_i D_i g(X_t) \diff X_t + \frac{1}{2} \sum_{i,j} D_{ij}g(X_t) \diff [X^i,X^j]_t \right) \\
+    &+ g(X_t)\left( \sum_i D_i f(X_t)\diff X_t + \frac{1}{2}\sum_{i,j}D_{ij}f(X_t) \diff [X^i,X^j]_t \right) \\
+    &+ \diff \left[ \int_0^t \sum_{i} D_i f(X_t) \diff X_t, \int_0^t \sum_j D_j g(X_t) \diff X_t^j \right]\\
+    =&\diff X_t \left( \sum_i f D_i g(X_t) + \sum_i g D_i f(X_t) \right) \\
+    &+ \frac{1}{2} \sum_{i,j} \left( g D_{ij}f (X_t) + f D_{ij}g(X_t) + 2D_i fD_j g(X_t) \right)\diff [X^i,X^j]_t\\
+    =& \sum_i D_i(fg)(X_t) \diff X_t + \frac{1}{2}\sum_{i,j}D_{ij}(fg)(X_t)\diff [X^i,X^j]_t\\
+    \implies \quad& fg \in \mathcal{A}.
+    \end{aligned}
+    $$
+
+    (iii). $f(x) = x \in \mathcal{A} \implies \forall~$polynomial $\in \mathcal{A}$.
+}
