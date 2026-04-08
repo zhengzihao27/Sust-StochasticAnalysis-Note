@@ -385,3 +385,315 @@ $$
 
     (iii). $f(x) = x \in \mathcal{A} \implies \forall~$polynomial $\in \mathcal{A}$.
 }
+
+\lemnn{$\forall~ f \in C^2(\mathbb{R}^d)$, $\exists~$polynomials $\{P_n(x)\}_{n \geq 1}$ such that 
+    $$
+    \begin{cases}
+        P_n(x) \to f(x)\\
+        D_i P_n(x) \to D_i f(x)\\
+        D_{ij}P_n(x) \to D_{ij}f(x)
+    \end{cases}
+    $$
+    uniformly on compacts.
+}
+
+Define $U_N = \inf\{t \geq 0\colon \abs{ X_t }+ [M]_{t} > N\}$ for each $N >0$.
+
+Then $U_N \uparrow \infty$. So it suffices to prove It\'o formula holds for $\forall~ t \leq U_N$.
+
+Note that $$P_n(X_t) = P_n(X_0) + \int_{0}^{t}\sum_{i} D_i P_n(X_s) \diff  X_s + \frac{1}{2} \int_{0}^{t} \sum_{i,j} D_{ij}P_n(X_s) \diff [X^i,X^j]_s$$ for $0 \leq t \leq U_N$.
+
+By letting $n \to \infty$, we will prove the limits are 
+$$
+f(X_t) = f(X_0) + \int_{0}^{t}\sum_{i} D_i f(X_s) \diff X_s + \frac{1}{2} \int_{0}^{t} \sum_{ij}D_{ij}f(X_s) \diff [X^i,X^j]_s.
+$$
+
+$$
+\begin{aligned}
+    I_{1,n}=&\int_{0}^{t} \sum_i D_i P_n(X_s) \diff X_s \\
+    =& \int_0^t \sum_i D_i P_n(X_s) \diff M_s + \int_0^t \sum_i D_i P_n(X_s) \diff A_s.
+\end{aligned}
+$$
+
+Notice that 
+$$
+    \abs{ \int_0^t \sum_i D_i P_n (X_s) \diff A_s - \int_0^t \sum_i D_i f(X_s) \diff  A_s } \leq d\cdot \sup_{i} \underbrace{\norm{ D_iP_n - D_i f }}_{\text{max on compacts}}\cdot A_t \xlongrightarrow{n \to \infty} 0 \text{ a.s.}
+$$
+
+Next,
+$$
+    \begin{aligned}
+    &\mathbb{E} \sup_{s \leq t} \abs{ \int_0^t \sum_i \left( D_i P_n(X_s) - D_i f(X_s) \right) \diff  M_s }^2 \\
+    \leq & \mathbb{E}\int_0^t \left( \sum_i D_i P_n(X_s) - D_i f(X_s) \right)^2 \diff [M]_s \\
+    \leq & d \cdot \sup_{1 \leq i \leq d}\norm{ D_iP_n - D_i f }^2 \cdot \underbrace{\mathbb{E}[M]_{t \wedge U_N}}_{N} \xlongrightarrow{n \to \infty} 0.
+    \end{aligned}
+$$
+
+By taking subsequence, $\int_0^t \sum_i D_i P_{n_k}(X_s) \diff  M_s \xlongleftarrow{\text{a.s.}}\int_0^t \sum_i D_i f(X_s) \diff  M_s.$
+
+$$
+    \begin{aligned}
+        I_{2,n} = \frac{1}{2} \int_0^t \sum_{i,j} D_{ij}P_n(X_s) \diff [X^i,X^j]_s.
+    \end{aligned}
+$$
+
+Notice that 
+
+$$
+    \abs{ I_{2,n} - \frac{1}{2}\int_0^t \sum_{i,j}D_{ij}f(X_s) \diff [X^i,X^j]_s } \leq C \sum_{i,j} \norm{ D_{ij}P_n - D_{ij}f }\cdot \underbrace{\sum_{i,j}[X^i,X^j]_t}_{\leq C_N} \xlongrightarrow{n \to \infty} \to 0.
+$$
+
+\lemnn{
+    Let $M$ be a bounded continuous martingale with $M_0 = 0$. Let $V$ be continuous $FV_0$
+    $$
+    \begin{aligned}
+        &M_t^2 = \int_0^t 2M_s \diff M_s + [M]_t ,\\
+        &M_t V_t = \int_0^t M_s \diff V_s + \int_0^t V_s \diff  M_s.
+    \end{aligned}
+    $$
+}
+\pf{
+    $$
+    \begin{aligned}
+        M_t^2 &= \left[ \sum_{k=1}^{2^n}M(t_{k}^{n}) - M(t_{k-1}^{n}) \right]^2\\
+        &= \sum_{k=1}^{2^n}\left( M(t_{k}^{n}) - M(t_{k-1}^{n}) \right)^2 + 2\sum_{k=1}^{2^n}\left[ M(t_{k}^{n})M(t_{k-1}^{n}) - M(t_{k-1}^{n})^2 \right]\\
+        &=M(t_{2^n}^{n})^2 - M(t_{0}^{n})^2 = M(t)^2
+    \end{aligned}
+    $$
+    where $t_{k}^{n} = \frac{k}{2^n} t$.
+
+    Note that $\sum_{k=1}^{2^n}\left( M(t_{k}^{n}) - M(t_{k-1}^{n}) \right)^2 \to [M]_t$ and 
+    $$
+    2\sum_{k=1}^{2^n}\left[ M(t_{k}^{n})M(t_{k-1}^{n}) - M(t_{k-1}^{n})^2 \right] = 2 \sum_{k=1}^{2^n}M(t_{k-1}^{n})(M(t_{k}^{n}) - M(t_{k-1}^{n}))\to 2\int_0^t M_s \diff M_s.
+    $$
+
+    $$
+    \begin{aligned}
+        M_t V_t &= M_{t_{2^n}^n}V_{t_{2^n}^n} - M_{t_{0}^n}V_{t_0^n} \\
+        &= \sum_{k=1}^{2^n}\left[ M(t_{k}^{n})V(t_{k}^{n}) - M(t_{k-1}^{n})V(t_{k-1}^{n}) \right] \\
+        &= \sum_{k=1}^{2^n} M(t_{k}^{n})(V(t_{k}^{n}) - V(t_{k-1}^{n})) + \sum_{k=1}^n V(t_{k-1}^{n})\left( M(t_{k}^{n}) - M(t_{k-1}^{n}) \right) \\
+        &\to \int_{0}^{t}M_s \diff V_s + \int_0^t V_s \diff M_s.
+    \end{aligned}
+    $$
+}
+
+\thm{L\'evy Thm}{
+    Let $\{B_t^i\}_{t \geq 0} \in c \mathcal{M}_{0,loc}$ for $i=1,2,\cdots,n$. If $\forall~i,j$, we have 
+    $$ 
+    [B^i,B^j]_t = \begin{cases}
+        t, & i = j,\\
+        0, & i \neq j.
+    \end{cases}
+    $$
+    
+    Then $B_t = (B_t^1,\cdots,B_t^n)$ is a Brownian motion on $\mathbb{R}^n$ with $\mathcal{N}(0,I_n).$
+}
+
+\pf{
+    $\forall~ s < t,$ we will prove 
+    $$
+    \mathbb{E}\left[ e^{i \theta (B_t - B_s)} \middle| \mathcal{F}_s \right] = e^{-\frac{1}{2}(t-s) \abs{ \theta }^2}
+    $$
+    for all $\theta \in \mathbb{R}^n$.
+
+    Define $f(x,t) = e^{i\theta x + \frac{1}{2}\abs{ \theta }^2 t }$, $\mathbb{R}^{n+1} \to \mathbb{C}$.
+
+    Apply It\'o's formula to $f(B_t,t) \equiv f(X_t).$
+
+    $X_t = (B_t^1,B_t^2,\cdots,B_t^n,t).$
+
+    $$
+    \begin{aligned}
+    f(X_t) =& f(x_0) + \int_0^t \sum_{i=1}^n (D_i f(X_s \diff B_s^i)) + \int_0^1 D_{n+1}f(X_s)ds \\
+    &+ \frac{1}{2}\int_0^t \sum_{1 \leq i,j \leq n}D_{ij}f(X_s) \diff [B^i,B^j]_s \\
+    &+ \frac{1}{2}\int_0^t \sum_{1 \leq k \leq n}D_{k,n+1}f(X_s) \diff [B^k,s]_s
+    \end{aligned}
+    $$
+    $$
+    \begin{aligned}
+        \implies f(B_t,t)= &f(B_0,0) + \int_0^t \sum_i D_i f(B_s,s)\diff B_s^i \\
+        &+ \int_0^t \left( e^{i \theta B_s + \frac{1}{2}\abs{ \theta }^2 s} \cdot \frac{1}{2} \abs{ \theta }^2 \right) \diff s \\
+        &+ \int_0^t \frac{1}{2}\left( \sum_{j=1}^n e^{i \theta B_s + \frac{1}{2}\abs{ \theta }^2 s }(i \theta_j)^2 \right) \diff s.
+    \end{aligned}
+    $$
+
+    We conclude that $f(B_t,t) = f(B_0,0) + c \mathcal{M}_{0,loc}$
+    $$
+    \implies e\underbrace{^{i\theta B_t + \frac{1}{2} \abs{ \theta }^2 t}}_{M_t^\theta \in c \mathcal{M}_{0,loc}} = 1 + c \mathcal{M}_{0,loc}
+    $$
+    Since $\abs{ M_t^\theta } = e^{\frac{1}{2} \abs{ \theta }^2 t} < \infty$ and 
+    $$
+    \mathbb{E}(M_t^{T_n} \mid \mathcal{F}_s) = M_s^{T_n}
+    $$
+    where $T_n$ reduces $M$.
+
+    We may take $n \to \infty$ to get $\mathbb{E}(M_t \mid \mathcal{F}_s) = M_s$.
+
+    $$
+    \implies \mathbb{E}(e^{i \theta B_t + \frac{1}{2}\abs{ \theta }^2 t} \mid \mathcal{F}_s) = e^{i\theta B_s + \frac{1}{2} \abs{ \theta }^2 s}.
+    $$
+
+    $$
+    \implies \mathbb{E}\left( e^{i \theta(B_t - B_s)} \mid \mathcal{F}_s \right) = e^{\frac{1}{2}\abs{ \theta }^2 (t-s)}.
+    $$
+
+    $$
+    \implies B_t - B_s \sim \mathcal{N}(0,t-s)
+    $$
+
+    Q independent of $\mathcal{F}_s$.
+}
+
+\thm{Dubins and Schwarz}{
+    let $M \in c \mathcal{M}_{0,loc}$ such that $[M]_t \uparrow \infty$ as $t \to \infty$. Then $M_t = B([M]_t)$ where $B$ is some Brownian motion.
+
+    Let $T_t = \inf\{u \geq 0 \colon [M]_u > t\}$. Set $\mathcal{G}_t \equiv \mathcal{F}(\tau_t)$. Then $B_t \equiv M(\tau_t)$ is a B.M. with respect to $\mathcal{G}_t.$
+}
+
+\pf{
+    (i) $M(\tau_t) \in \mathcal{F}_{\tau_t} \implies B_t \in \mathcal{G}_t$.
+    
+    (ii) $t\mapsto B_t$ is continuous.
+
+    $$
+    \begin{cases}
+        \tau_{a-} = b, \\
+        \tau_{a+} = c.
+    \end{cases}
+    $$
+
+    We only need to prove $M(b) = M(c)$.
+
+    Assume $M$ is bounded $\forall~ q \in \mathbb{Q}_+$, define 
+    $$
+    S_q \equiv \inf\{t > q \colon [M]_t > [M]_q\}.
+    $$
+
+    We will show $M_t \equiv M_q$ for all $t \in [q,S_q)$
+    
+    Note $S_q \geq q$, by OST,
+    $$\mathbb{E}\left( M_{S_q}^2 - [M]_{S_q} \mid \mathcal{F}_q \right) = M_q^2 - [M]_q.
+    $$
+
+    Because $[M]_{S_q} = [M]_q$,
+    $$
+    \implies \mathbb{E}[M_{S_q}^2 - M_q^2 \mid \mathcal{F}_q] = 0.
+    $$
+    $$
+    \implies \mathbb{E}((M_{S_q} - M_q)^2 \mid \mathcal{F}_q) = 0.
+    $$
+    $$
+    \implies \mathbb{E}(M_{S_q} - M_q)^2 = 0.
+    $$
+    $$
+    \implies M_{S_q} = M_q.
+    $$
+
+    (iii) $B_t$ and $B_t^2 - t \in c \mathcal{M}_{0,loc} \implies [B]_t = t \implies$ B.M.
+
+    Recall $B_t = M(\tau_t)$. Define 
+    $$
+    \begin{aligned}
+    &T_n = \inf \{ t \geq 0 \colon \abs{ M_t } > n\},\\
+    &U_n = [M]_{T_n}.    
+    \end{aligned}
+    $$
+
+    We will check $\tau_{t \wedge U_n} = T_n \wedge \tau_t.$
+    $$
+    t \wedge U_n \leq t \implies \tau_{t \wedge U_n } \leq \tau_t.
+    $$
+    $$
+    \tau_{t\wedge U_n} =\inf \{
+        u\colon [M]_u > t \wedge U_n = t \wedge[M]_{T_n}
+    \}.
+    $$
+    When $u = T_n$, $\tau_t \wedge T_n = \tau_{t \wedge U_n}$
+    
+    ...
+
+    Then $B_{t \wedge U_n} = M(\tau_{t \wedge U_n}) = M(\tau_n \wedge \tau _t)$, $B_t^{U_n} = M_{\tau_t}^{T_n}.$
+
+    By OST 
+    $$
+    \mathbb{E}\left( B_t^{U_n} \middle| \mathcal{F}_{\tau_s} \right) = \mathbb{E}\left( M_{\tau_t}^{T_n} \middle| \mathcal{F}_{\tau_s} \right) = M_{\tau_s}^{T_n} = B_s^{U_n}.
+    $$
+
+    Then $B^{U_n}$ is a martingale w.r.t. $\mathcal{G}_t = \mathcal{F}_{\tau_t}$ + (2) $U_n$ is $\mathcal{G}_t$-stopping time $\implies B \in c \mathcal{M}_{0,loc}$
+
+    \textbf{pf of (2)}
+
+    $$
+    \{[M]_{T_n} \leq t\}=\{U_n \leq t\} \in \mathcal{F}_{\tau_t}.
+    $$
+
+    $$
+    \{T_n \leq \tau_t\} \in \mathcal{F}_{\tau_t}.
+    $$
+
+    $\left( M^2 - [M] \right)^{T_n}$ is martingale. Then 
+    $$
+    \mathbb{E}\left[ (M_{\tau_t}^{T_n})^2 - [M]_{\tau_t}^{T_n} \middle|  \mathcal{F}_{\tau_s}\right]= \left( M_{\tau_s}^{T_n} \right)^2 - [M]_{\tau_s}^{T_n}
+    $$  
+    $$
+    \implies \mathbb{E}\left[ 
+        (B_t^{U_n})^2 - t \wedge U_n \middle| \mathcal{F}_s 
+     \right] = (B_s^{U_n})^2 - s \wedge U_n.
+    $$  
+    $
+    \implies (B_t^2 - t)^{U_n}
+    $ is a martingale $\implies B_t^2 - t \in \mathcal{M}_{loc} \implies[B]_t = t.$
+}   
+
+If $[M]_{\infty} < \infty$, we get $\tau_t = \infty$, $\forall~ t \geq [M]_{\infty}$.
+$$
+B_t = M(\infty), \quad \forall~ t \geq [M]_{\infty}.
+$$
+
+So this def does not give a B.M.
+
+Define 
+$$B_t = 
+\begin{cases}
+    M(\tau_t), & t < [M]_{\infty},\\
+    M(\infty)+W(t) - W([M]_{\infty}), & t \geq [M]_{\infty},
+\end{cases}
+$$
+where $W$ is a standard B.M. independent of $M$.
+
+Or 
+$$B_t
+\begin{cases}
+    M(\tau_t),& t <[M]_{\infty}\\
+    M(\infty)+W(t-[M]_{\infty}), & t \geq[M]_{\infty}.
+\end{cases}
+$$
+Then $B([M]_{t})= M_t.$
+
+\lemnn{
+    On $\{[M]_{\infty
+} < \infty\}$, the limit $M_\infty \equiv \lim_{t \uparrow \infty} M_t$ exists a.s.
+}
+\pf{
+    Define $S_K = \inf \{t \geq 0 \colon [M]_t > K\}$. Then on $\{[M]_{\infty} < \infty\}$, $S_K = \infty$, $\forall~ K >[M]_\infty$
+
+    $M^{S_K}$ is a $L^2$-bounded martingale.
+
+    $\implies \lim_{t \uparrow \infty} M_t^{S_K}$ exists a.s.
+
+    Let $K \uparrow \infty$ to get $\lim_{t\uparrow \infty}M_t$ exists a.s.
+
+    By an enlargement of the prob. space $(\Omega. \mathcal{F},\mathsf{P})$
+    $$
+    \begin{aligned}
+    \implies &\tilde{\Omega} = \Omega \times \Omega^*\\
+        & \tilde{\mathcal{F}}_t = \mathcal{F}_t \times \mathcal{F}_{t}^* \\
+        & \tilde{\mathsf{P}} = \mathsf{P} \times \mathsf{P}^*
+    \end{aligned}
+    $$
+    where on $(\Omega^*, \mathcal{F}^*,\mathcal{F}_{t}^*, \mathsf{P}^*)$ we have $W^*$ is B.M. independent of $M$.
+}
+
+\thm{Dubins-Schwarz (general version)}{
+    Let $M \in c \mathcal{M}_{0,loc}$. Then $\exists~$B.M. B s.t. $M_t = B([M]_t)$ for all $t \geq 0$.
+}

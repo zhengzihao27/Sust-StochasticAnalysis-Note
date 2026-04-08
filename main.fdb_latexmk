@@ -1,5 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1775050613.01689 "/Users/zheng/Desktop/SustStochasticAnalysis/main.tex" "main.pdf" "main" 1775050616.84075 0
+["pdflatex"] 1775655057.64854 "/Users/zheng/Desktop/SustStochasticAnalysis/main.tex" "main.pdf" "main" 1775655063.23526 0
   "/Users/zheng/Desktop/SustStochasticAnalysis/main.tex" 1772627289.25161 3599 2103264f2dcd1c088da06208148aab70 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc" 1136849721 2900 1537cc8184ad1792082cd229ecc269f4 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/enc/dvips/fontawesome5/fa5free1.enc" 1622837620 3042 0e2b14b9be7d01075a4c4591d5d1781b ""
@@ -310,8 +310,8 @@
   "/usr/local/texlive/2025/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1764178997 5467155 19efa205003f9ecad95fbbaa6ff24da1 ""
   "/usr/local/texlive/2025/texmf-var/web2c/pdftex/pdflatex.fmt" 1764178933 3345728 dc00c2a410a30d0573a4366c75a713c7 ""
   "/usr/local/texlive/2025/texmf.cnf" 1741450484 577 418a7058ec8e006d8704f60ecd22c938 ""
-  "chapter/chapter1.aux" 1775050616.42944 15441 27740e9615e553ffeb8940afe8c67876 "pdflatex"
-  "chapter/chapter1.tex" 1775050612.51532 13020 2b1f9835868a7dff969a14313993a89a ""
+  "chapter/chapter1.aux" 1775655062.69193 16455 ae6d16fde425e6d0129be2b29ead294f "pdflatex"
+  "chapter/chapter1.tex" 1775655057.10587 23503 9189194aa8ef20baea24fdf61f04ddf1 ""
   "chapter/chapter2.aux" 0 -1 0 ""
   "chapter/chapter3.aux" 0 -1 0 ""
   "chapter/chapter4.aux" 0 -1 0 ""
@@ -324,10 +324,10 @@
   "chapter/section6.tex" 1775041214.95759 8513 33e61e94160dfd28bb3b233607c7a372 ""
   "chapter/section7.tex" 1775041214.95797 16244 50285c23e8aec2f30c8f33d91ac6291f ""
   "commands.tex" 1773840097.68965 1473 4e94dcdd1546e00b87338498d1d5b82a ""
-  "main.aux" 1775050616.46973 1640 8a23ba7a573ccefcdd678a26b5159a58 "pdflatex"
-  "main.out" 1775050616.47631 1466 c04bacc6750ad218056fb347a4c5fe30 "pdflatex"
+  "main.aux" 1775655062.73549 1643 d1a91517cfc8633a8ff316bf65e906ce "pdflatex"
+  "main.out" 1775655062.7489 1466 c04bacc6750ad218056fb347a4c5fe30 "pdflatex"
   "main.tex" 1772627289.25161 3599 2103264f2dcd1c088da06208148aab70 ""
-  "main.toc" 1775050616.47695 897 ff532ca67c1103d8cd668f268e0849f2 "pdflatex"
+  "main.toc" 1775655062.74971 897 ff532ca67c1103d8cd668f268e0849f2 "pdflatex"
   "theorems.tex" 1772245318.02929 8766 869bfaec0c8f1debeeda916ab7c2c792 ""
   (generated)
   "chapter/chapter1.aux"
