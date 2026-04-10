@@ -233,7 +233,7 @@
     $$
     [M^{T_2}]^{T_1} = [M^{T_2 \wedge T_1}] =[M^{T_1}].
     $$
-    By $T_n \uparrow \infty$, we have $[M]_t$ is defined for all $t \geq 0$.(?)
+    By $T_n \uparrow \infty$, we have $[M]_t$ is defined for all $t \geq 0$.
 
     \textbf{(uniqueness.)} If $\exists~A,A'$ increasing such that $N = M^2 - A$ and $N' =M^2 - A' \in c \mathcal{M}_{loc}$.
     Then $N-N'= A' - A \in c \mathcal{M}_{loc}$ is of finite variation.
@@ -547,7 +547,7 @@ $$
 \thm{Dubins and Schwarz}{
     let $M \in c \mathcal{M}_{0,loc}$ such that $[M]_t \uparrow \infty$ as $t \to \infty$. Then $M_t = B([M]_t)$ where $B$ is some Brownian motion.
 
-    Let $T_t = \inf\{u \geq 0 \colon [M]_u > t\}$. Set $\mathcal{G}_t \equiv \mathcal{F}(\tau_t)$. Then $B_t \equiv M(\tau_t)$ is a B.M. with respect to $\mathcal{G}_t.$
+    Let $\tau_t = \inf\{u \geq 0 \colon [M]_u > t\}$. Set $\mathcal{G}_t \equiv \mathcal{F}(\tau_t)$. Then $B_t \equiv M(\tau_t)$ is a B.M. with respect to $\mathcal{G}_t.$
 }
 
 \pf{
@@ -608,11 +608,35 @@ $$
         u\colon [M]_u > t \wedge U_n = t \wedge[M]_{T_n}
     \}.
     $$
-    When $u = T_n$, $\tau_t \wedge T_n = \tau_{t \wedge U_n}$
-    
-    ...
 
-    Then $B_{t \wedge U_n} = M(\tau_{t \wedge U_n}) = M(\tau_n \wedge \tau _t)$, $B_t^{U_n} = M_{\tau_t}^{T_n}.$
+    \textbf{Claim:} $\tau_t \wedge T_n = \tau_{t \wedge U_n}$
+    
+    \textbf{case 1.} $t \leq U_{n}$ we have
+    $$
+        \tau_{t \wedge U_{n}} = \inf \{u\colon [M]_{u}> t\} = \tau_{t},
+    $$
+    and
+    $$
+    t \leq U_{n} = [M]_{T_{n}} \implies T_{n} \geq \tau_{t} \implies \tau_{t} \wedge T_{n} = \tau_{t} = \tau_{t \wedge U_{n}}.
+    $$
+
+    \textbf{case 2.} $t > U_{n}$ we have
+    $$
+    \tau_{t \wedge U_{n}} = \tau_{U_{n}} = \inf \{u\colon [M]_{u} > U_{n}\}
+    $$
+    and
+    $$
+    t > U_{n} > [M]_{T_{n}} \implies T_{n} < \tau_{t} \implies \tau_{t} \wedge T_{n} = T_{n}.
+    $$
+    It suffices to prove $T_{n} = \tau_{[M]_{T_{n}}}= \tau_{U_{n}}$.
+
+    One hand, $\tau_{U_{n}} \geq T_{n}$ can be proved by def of $\tau_{U_{n}}$.
+
+    On the other hand, $T_{n} = \inf \{t \colon \abs{ M_{t} } > n\}$. Take $\forall~\varepsilon>0$, $u_{\varepsilon} \in (T_{n} , T_{n} + \varepsilon)$ s.t. $\abs{ M_{u_{\varepsilon}} }>n .$
+
+    Hence $M_{u_{\varepsilon}} \neq M_{T_{n}}$. Suppose $[M]_{u_{\varepsilon}} = [M]_{T_{n}}$, then $M$ is constant by the property of continuous local martingale. Contradiction. So $[M]_{u_{\varepsilon}} > [M]_{T_{n}} = U_{n} \implies \tau_{U_{n}} \leq u_{\varepsilon}$. Let $\varepsilon \downarrow 0$ to get $\tau_{U_{n}} \leq T_{n}$.
+
+    Then $B_{t \wedge U_n} = M(\tau_{t \wedge U_n}) = M(T_n \wedge \tau _t)$, $B_t^{U_n} = M_{\tau_t}^{T_n}.$
 
     By OST 
     $$
