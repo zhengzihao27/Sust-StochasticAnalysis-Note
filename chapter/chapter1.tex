@@ -268,7 +268,7 @@
     }
 }
 
-\subsection{It\'o Integral of local martingale}
+\subsection{It\^o Integral of local martingale}
 
 \thmnn{
     Let $M \in c \mathcal{M}_{loc}$ with $M_0 = 0$. Let $H \in \mathcal{P}$ such that W.P.1
@@ -340,8 +340,8 @@ $$
 &= (HK)\cdot [X^{cm},Y^{cm}]=(HK)\cdot [X,Y].
 \end{aligned}$$
 
-\subsection{It\'o's Formula} 
-\thm{It\'o's Formula}{
+\subsection{It\^o's Formula} 
+\thm{It\^o's Formula}{
     Let $f \colon \mathbb{R}^n \to \mathbb{R}$ be $C^2$. Let 
     $$
     X_t \equiv(X_t^1,\cdots,X_t^n)
@@ -399,7 +399,7 @@ $$
 
 Define $U_N = \inf\{t \geq 0\colon \abs{ X_t }+ [M]_{t} > N\}$ for each $N >0$.
 
-Then $U_N \uparrow \infty$. So it suffices to prove It\'o formula holds for $\forall~ t \leq U_N$.
+Then $U_N \uparrow \infty$. So it suffices to prove It\^o formula holds for $\forall~ t \leq U_N$.
 
 Note that $$P_n(X_t) = P_n(X_0) + \int_{0}^{t}\sum_{i} D_i P_n(X_s) \diff  X_s + \frac{1}{2} \int_{0}^{t} \sum_{i,j} D_{ij}P_n(X_s) \diff [X^i,X^j]_s$$ for $0 \leq t \leq U_N$.
 
@@ -498,7 +498,7 @@ $$
 
     Define $f(x,t) = e^{i\theta x + \frac{1}{2}\abs{ \theta }^2 t }$, $\mathbb{R}^{n+1} \to \mathbb{C}$.
 
-    Apply It\'o's formula to $f(B_t,t) \equiv f(X_t).$
+    Apply It\^o's formula to $f(B_t,t) \equiv f(X_t).$
 
     $X_t = (B_t^1,B_t^2,\cdots,B_t^n,t).$
 
@@ -720,4 +720,342 @@ Then $B([M]_{t})= M_t.$
 
 \thm{Dubins-Schwarz (general version)}{
     Let $M \in c \mathcal{M}_{0,loc}$. Then $\exists~$B.M. B s.t. $M_t = B([M]_t)$ for all $t \geq 0$.
+}
+
+\thm{Dol\'eans' Thm}{
+    Let $X$ be a semimartingale with $X_0 = 0$. Suppose $Z_0 \in \mathcal{F}_0$. Then $\exists~$a unique continuous semimartingale $Z$ s.t. 
+    $$
+    Z_t = Z_0 + \int_{0}^{t}Z_s \diff X_s.
+    $$
+    The solution $Z_t = Z_0 e^{X_t - \frac{1}{2}[X]_t}$. 
+
+    \textbf{Notation:} $\mathcal{E}(X_t) = e^{X_t - \frac{1}{2}[X]_t}$ is called the exponential semimartingale of $X$.
+}
+
+\pf{
+    $\mathcal{E}(X_t) = e^{X_t - \frac{1}{2}[X]_t} = f(X_t, [X]_t)$ with $f(x,y) = e^{x - \frac{1}{2}y}.$
+
+    By apply It\^o's formula, 
+    $$
+    \diff f(X_t,[X]_t) = \partial_x f(X_t,[X]_t) \diff X_t + \partial_y f(X_t, [X]_t) \diff [X]_t + \frac{1}{2}\left( \partial_{xx}f(X_t,[X]_t) \diff [X]_t \right).
+    $$
+    Because 
+    $$
+    \begin{cases}
+        \diff X_t \diff X_t = \diff [X]_t\\
+        \diff X_t \diff [X]_t = 0\\
+        \diff [X]_t \diff [X]_t = 0.
+    \end{cases}
+    $$
+    Hence 
+    $$
+    \diff \mathcal{E}(X_t) = \mathcal{E}(X_t) \diff X_t.
+    $$
+    So $\mathcal{E}(X)$ is a solution to 
+    $$
+    \diff Z_t = Z_t \diff X_t.
+    $$
+
+    \textbf{(Uniqueness)} Assume $Z$ is another solution. We will prove 
+    $$
+        Z_t = Z_0 \mathcal{E}(X_t).
+    $$
+
+    We now have $\diff Z_t = Z_t \diff X_t$. 
+    
+    Define 
+    $$
+    Y_t = e^{- X_t + \frac{1}{2}[X]_t} = (\mathcal{E}(X)_t)^{-1}.
+    $$
+
+    It suffices to prove $\diff (Z_t Y_t) = 0$ which implies 
+    $$
+    Z_t Y_t = Z_0 Y_0 = Z_0, \quad \forall~t.
+    $$
+    
+    We have
+    $$
+    \diff (Z_t Y_t) = Z_t \diff Y_t + Y_t \diff Z_t + \diff [Y,Z]_t.
+    $$
+
+    Notice that by It\^o's formula,
+    $$
+    \diff Y_t = (-1)Y_t \diff X_t + \frac{1}{2} Y_t \diff [X]_t + \frac{1}{2}(-1)^2 Y_t \diff [X]_t = -Y_t \diff X_t + Y_t \diff [X]_t.
+    $$
+
+    $$
+    \implies \diff (Z_t Y_t) = Z_t(-Y_t \diff X_t + Y_t \diff [X]_t) + Y_t(Z_t \diff X_t) + Y_t(Z_t \diff X_t) + (-Y_t Z_t) \diff [X]_t = 0.
+    $$
+}
+
+Let $M \in c \mathcal{M}_{0,loc}$. Then $\mathcal{E}(\theta M)_t = e^{\theta M_t - \frac{1}{2}\theta^2[M]_t}$ is in $c \mathcal{M}_{loc}$.
+
+By Fatou's lemma, we get 
+$$
+\begin{aligned}
+    \mathbb{E}(\mathcal{E}(\theta M)_t \mid \mathcal{F}_s) &= \mathbb{E}(\lim_{n\to \infty} \mathcal{E}(\theta M)_{t \wedge T_n} \mid \mathcal{F}_s) \\
+    &\leq \liminf_{n \to \infty} \mathbb{E}(\mathcal{E}(\theta M)_{t}^{T_n} \mid \mathcal{F}_s)\\
+    & = \liminf_{n \to \infty} \mathcal{E}(\theta M)_{s}^{T_n} \\
+    &= \mathcal{E}(\theta M)_s.
+\end{aligned}
+$$
+
+Hence $\mathcal{E}(X_t)$ is a supermartingale and $\mathbb{E}(\mathcal{E}(M)_t) \leq 1$.
+
+\thmnn{
+    Suppose $\forall~ t > 0$, $\exists~ K_t > 0$ s.t.
+    $$
+    [M]_t < K_t \quad \text{a.s.}
+    $$
+
+    If for some $t > 0$, $\exists~K_t >0$ s.t.
+    $$
+    [M]_t < K_t \quad \text{a.s.}
+    $$
+    
+    Then for this $t > 0$,
+    $$
+    \mathsf{P}\left( \max_{s \leq t}M_s > y \right) \leq e^{-\frac{y^2}{2K_t}}, \quad \forall~ y > 0.
+    $$
+    and $\mathcal{E}(\theta M)$ is a true martingale.
+}
+
+\pf{
+    By using $\mathcal{E}(\theta M)$ is a supermartingale, by Doob's inequality,
+    $$
+    \begin{aligned}
+    \mathsf{P}\left( \max_{s \leq t} M_s > y \right) &= \mathsf{P}\left( \max_{s \leq t} \mathcal{E}(\theta M)_s > e^{\theta y - \frac{1}{2} \theta^2 K_t} \right)\\
+    & \leq \frac{\mathbb{E}(\mathcal{E}(\theta M)_t)}{e^{\theta y -\frac{1}{2} \theta^2 K_t}}\\
+    & \leq e^{-\theta y + \frac{1}{2} \theta^2 K_t}.
+    \end{aligned}
+    $$
+    Pick $\theta = \frac{y}{K_t}$ to get $e^{-\frac{y^2}{2K_t}}$.
+
+    Next, define $Z_t = \max_{s \leq t} M_s$. Then $\forall~ \theta > 0$, 
+    $$
+        \mathbb{E}e^{\theta Z_t} = \int_{\mathbb{R}}e^{\theta y} \mathsf{P}(Z_t \in \diff y).
+    $$
+
+    Notice that $\forall~ z \in \mathbb{R}$, 
+    $$
+        e^{\theta Z} = 1 + \int_{0}^{Z} \theta e^{\theta y} \diff y.
+    $$
+    $$
+    \begin{aligned}
+    \implies 
+        \mathbb{E}(e^{\theta Z_t}) &= 1 + \mathbb{E}\left( \int_0^{Z_t} \theta e^{\theta y} \diff y \right) \\
+        &= 1 + \mathbb{E}\left( \int_0^\infty \mathsf{1}_{y < Z_t} \theta e^{\theta y} \diff  y \right)\\
+        & = 1+ \int_0^\infty \theta e^{\theta y} \diff  y  \mathsf{P}(Z_t > y)\\
+        & \leq 1 + \int_0^\infty \theta e^{\theta y} e^{-\frac{y^2}{2K_t}} \diff y \\
+        &< \infty.
+    \end{aligned}
+    $$
+
+    By $\mathcal{E}(\theta M)_t$ is a $\mathcal{M}_{loc}$, we get $\exists~T_n \uparrow \infty$ s.t. $\mathcal{E}(\theta M)_{t}^{T_n}$ is a martingale.
+
+    $$
+        \implies \forall~ s < t,\quad \mathbb{E}[\mathcal{E}(\theta M)_{t}^{T_n} \mid \mathcal{F}_s] = \mathcal{E}(\theta M)_{s}^{T_n}.
+    $$
+
+    By DCT for $\mathcal{E}(\theta M)_{t}^{T_n} \leq Z_t$ and $\mathbb{E} Z_t < \infty$, we get 
+    $$
+    \lim_{n \to \infty} \mathbb{E}(\mathcal{E}(\theta M)_{t}^{T_n} \mid \mathcal{F}_s) = \mathbb{E}(\mathcal{E}(\theta M)_t \mid \mathcal{F}_s).
+    $$
+}
+
+\cor{
+    Let $B$ be a B.M. in $\mathbb{R}^n$ and let $H$ be a bounded previsible process. Then 
+    $$
+    e^{\int H \diff B - \frac{1}{2}\int \abs{ H_s }^2 \diff s}
+    $$
+    is a true martingale.
+}
+
+\rmkb{$[M]_t = \int_0^t \abs{ H_s }^2 \diff  s < K_t$.}
+
+\cor{
+    Let $M \in c \mathcal{M}_{0,loc}$. Then $\forall~ t > 0$, $y> 0$, $K >0$,
+    $$
+    \mathsf{P}\left( \max_{s \leq t} M_s \geq y, [M]_{t} \leq K \right) \leq e^{-\frac{y^2}{2K}}.
+    $$
+    $$
+    \implies \mathsf{P}\left( \max_{s \leq t}\abs{ M_s } \geq y, [M]_t \leq K \right) \leq 2 e^{-\frac{y^2}{2K}}.
+    $$
+}
+
+\pf{
+    Let $T =\inf \{u \geq 0 \colon [M]_{u} \geq K\}$. Then 
+    $$
+    \mathsf{P}\left( \max_{s \leq t}M_s \geq y, [M]_{t} \leq K \right) \leq \mathsf{P}\left( \max_{s \leq t} M_{s \wedge T} \geq y \right) \leq e^{- \frac{y^2}{2K}}
+    $$  
+    since $[M^T]_t \leq K$.
+}
+
+\thm{Novikov's Thm}{
+    If $\forall~t > 0$, $\mathbb{E}(e^{\frac{1}{2} [M]_t} ) < \infty$ then $\mathcal{E}(X)_t$ is a true martingale.
+}
+
+\pf{
+    See P198 of [KS].
+}
+
+\subsection{Burkholder-Davis-Gundy inequalities}
+
+\defnn{
+    We say a function $F: \mathbb{R}^+ \to \mathbb{R}^+$ is \underline{moderate} if continuous and increasing, $F(x) = 0 \Leftrightarrow x=0$, and $\forall~\alpha > 1$,
+    $$
+        \sup_{x > 0} \frac{F(\alpha x)}{F(x)} < \infty.
+    $$
+}
+\ex{}{
+    $F(x) = x^{p}$, $\forall~ p > 0$.
+    $F(x) = x^p \left( \log x \vee 1 \right)$, $\forall~ p \geq 0$.
+}
+
+\thm{BDG inequality}{
+    Let $F$ be moderate. Then $\exists~$universal constants $c_F \leq C_F < \infty$ s.t. $\forall~ M \in c \mathcal{M}_{0,loc}$,
+    $$
+    c_{F} \mathbb{E}\left( F([M]_{\infty}^{\frac{1}{2}}) \right) \leq \mathbb{E} F(M_\infty^*) \leq C_F \mathbb{E}\left( F([M]_{\infty}^{\frac{1}{2}}) \right).
+    $$
+
+    $M_t^* = \sup_{s \leq t}\abs{ M_s }.$ Fix $t > 0$. Let $\tilde{M}_{s}^{t} = M_{s \wedge t}$. Then 
+    $$
+    c_{F} \mathbb{E}\left( F([M]_{t}^{\frac{1}{2}}) \right) \leq \mathbb{E}\left( F(M_t^*) \right) \leq C_F \mathbb{E} F([M]_{t}^{\frac{1}{2}}).
+    $$
+}
+
+\ex{}{
+    If $F(x) = x^p$, then 
+    $$
+    c_p \mathbb{E}[M]_{t}^{\frac{p}{2}} \leq \mathbb{E} \abs{ M_t^* }^p \leq C_p \mathbb{E}[M]_t^{\frac{p}{2}}.
+    $$
+}
+
+\lemp{``good'' $\lambda$ inequality}{
+    Let $X$ and $Y$ be nonegative R.V.s. Suppose $\exists~\beta > 1$ s.t. $\forall~ \lambda > 0$, $\delta >0$,
+    $$
+    \mathsf{P}(X > \beta \lambda, Y \leq \delta \lambda) \leq \psi(\delta) \mathsf{P}(X > \lambda)
+    $$
+    where $\psi(\delta) \downarrow 0$ as $\delta \downarrow 0$.
+
+    Then for each moderate $F$, $\exists~C=C(\beta,\psi, F) > 0$ s.t. 
+    $$
+    \mathbb{E}[F(X)] \leq c \mathbb{E}[F(Y)].
+    $$
+}{
+    Assume good $\lambda$ inequality. Then it holds by replacing $X$ by $X \wedge a$ for any $a>0$.
+
+    If $a > \beta \lambda > \lambda$, then
+    $$
+    \begin{aligned}
+    &X \wedge a > \beta \lambda \Leftrightarrow X > \beta \lambda\\
+    & X \wedge a > \lambda \Leftrightarrow X > \lambda.
+    \end{aligned}
+    $$
+
+    Hence we may assume $\mathbb{E}F(X) < \infty$.
+
+    [ $\mathbb{E}F(X\wedge a) \leq \mathbb{E} F(Y)$ for all $a >0$. Then let $a \uparrow \infty$.]
+
+    Notice that $\sup_{x>0} \frac{F(x)}{F(\frac{x}{\beta})}$.
+
+    Let $\gamma > 0$ s.t. $F(x) \leq \frac{1}{\gamma} F(\frac{x}{\beta})$ for all $x > 0$.
+
+    Now 
+    $$
+    \int F(\diff \lambda) \psi(\delta) \mathsf{P}(X > \lambda) \geq \int F(\diff \lambda) \mathsf{P}(X > \beta \lambda, Y \leq \delta \lambda).
+    $$
+    $$
+    LHS = \psi(\delta) \mathbb{E}\left( \int_0^X F(\diff \lambda) \right) = \psi(\delta)\mathbb{E}(F(X)).
+    $$
+    $$
+    \begin{aligned}
+    RHS &= \int F(\diff \lambda) \mathbb{E}(\mathsf{1}_{\frac{Y}{\delta} \leq \lambda < \frac{X}{\beta}}) \\
+    &= \mathbb{E}\left( \int_{\frac{Y}{\delta}}^{\frac{X}{\beta}} F(\diff \lambda) \right) \\
+    &= \mathbb{E}\left( F\left(\frac{X}{\beta}\right) - F\left(\frac{Y}{\delta}\right) \right)\\
+    & \geq \mathbb{E}\left( \gamma F(X) \right) - \mathbb{E}\left( F\left( \frac{Y}{\delta} \right) \right).
+    \end{aligned}
+    $$
+
+    Let $\delta > 0$ be small sucht that 
+    $$
+    \psi(\delta) < \frac{\gamma}{2} \implies \gamma -\psi(\delta) \geq \frac{\gamma}{2}.
+    $$
+
+    Hence 
+    $$
+    \mathbb{E}\left( F(X) \right)\left( \psi(\delta) - \gamma \right) \geq - \mathbb{E}\left( F\left( \frac{Y}{\delta} \right) \right).
+    $$
+
+    $$ \implies
+    \mathbb{E}\left( F\left( \frac{Y}{\delta} \right) \right) \geq \left( \gamma - \psi(\delta) \right) \mathbb{E}F(X) \geq \frac{\lambda}{2} \mathbb{E}F(X).
+    $$
+
+    Using $\displaystyle\sup_{y > 0}\frac{F(y/\delta)}{F(y)} < \infty$, $\implies \exists~\mu > 0$ s.t. $F(y/\delta) \leq \mu F(y)$ for all $y > 0$ 
+    $$\implies \mathbb{E}(F(Y/\delta)) \leq \mu \mathbb{E} F(Y)$$
+    $$
+    \implies \frac{\gamma}{2}\mathbb{E}F(X) \leq \mu \mathbb{E}F(Y).
+    $$
+}
+
+\pf{
+    of BDF inequality.
+
+    $$\mathsf{P}\left(M_\infty^* > \beta \lambda , [M]_{\infty}^{\frac{1}{2}} \leq \delta \lambda\right) \leq e^{-\frac{(\beta \lambda)^2}{2 (\delta \lambda)^2}} = e^{-\frac{\beta^2}{2 \delta^2}}.$$
+
+    Define $\tau = \inf \{u \geq 0 \colon \abs{ M_u }> \lambda\}$. 
+
+    Then 
+    $$\begin{aligned}
+        \mathsf{P}\left( M_\infty^* > \beta \lambda, [M]_{\infty}^{\frac{1}{2}} \leq \delta \lambda \right) &= \mathsf{P}\left( M_\infty^* > \beta \lambda, [M]_{\infty}^{\frac{1}{2}} \leq \delta \lambda , \tau < \infty\right)\\
+        &= \mathbb{E}\left[ \mathsf{1}_{\tau < \infty} \mathsf{P}\left( M_\infty^* > \beta \lambda, [M]_{\infty}^{\frac{1}{2}} \leq \delta \lambda \,\middle|\, \mathcal{F}_{\tau} \right) \right]
+    \end{aligned}
+    $$
+
+    Define $N_t \equiv (M_{t + \tau} - M_{\tau})^2 - ([M]_{t + \tau} - [M]_{\tau})$.
+
+    Then $N_t \in \mathcal{F}_{t + \tau}$ is a continuous local martingale
+    $$
+    \mathbb{E}\left[ M_{t+\tau}^2 - [M]_{t + \tau} \mid \mathcal{F}_{s + \tau} \right] = M_{s+\tau}^2 - [M]_{s+\tau}.
+    $$
+
+    $ \implies N_0 = 0$ and on $\{M_{\infty}^* > \beta \lambda, [M]_{\infty}^{\frac{1}{2}} \leq \delta \lambda\}$ we have $\exists~\tilde{t} > 0$ s.t.
+    $$
+    M_{\tilde{t} + \tau} \geq \beta \lambda \implies N_{\tilde{t}} = \left( M_{\tilde{t}+\tau} \pm \lambda \right)^2 - \left( [M]_{\tilde{t} + \tau} - [M]_{\tau} \right) \geq \left[ (\beta - 1) \lambda \right]^2 - (\delta \lambda)^2.
+    $$
+
+    Moreover $N_t \geq - \delta^2 \lambda^2$, $\forall~ t \geq 0$. 
+
+    Hence $N_t$ reaches $[(\beta-1)\lambda]^2 - (\delta \lambda)^2$ before $(-\delta^2 \lambda^2)$.
+
+    By (Gambler's Ruin $\mathsf{P}_{k}(\tau_0 < \tau_N) = \frac{N-k}{N}$)
+    $$ 
+    \mathsf{P}(\tau_b < \tau_a) \leq \frac{-a}{b-a}
+    $$
+    $$
+    \implies \mathsf{P}\left( M_\infty^* > \beta \lambda, [M]_{\infty}^{\frac{1}{2}} \leq \delta \lambda \mid \mathcal{F}_\tau \right) \leq \mathsf{P}\left( \tau_{[(\beta - 1)\lambda]^2 - (\delta \lambda)^2} < \tau_{-(\delta \lambda)^2} \right) \leq \frac{(\delta \lambda)^2}{[(\beta -1)\lambda]^2} = \frac{\delta^2}{(\beta -1)^2}.
+    $$
+
+    Here we take $0 < \delta < \beta -1$. Therefore
+    $$
+    \mathsf{P}\left( M_\infty^* > \beta \lambda, [M]_{\infty}^{\frac{1}{2}} \leq \delta \lambda  \right) \leq \delta^2 \frac{1}{(\beta - 1)^2} \mathsf{P}(\tau < \infty) = \delta^2 \frac{1}{(\beta-1)^2} \mathsf{P}\left( M_\infty^* > \lambda \right).
+    $$
+
+    Similarly, 
+    $$
+    \mathsf{P}\left( [M]_{\infty}^{\frac{1}{2}} > \beta \lambda, M_{\infty}^*  \leq \delta \lambda\right).
+    $$
+
+    $$
+    \tilde{N}_t = [M]_{t+\tilde{\tau}} - [M]_{\tilde{\tau}} - (M_{\tilde{\tau} + t}-M_{\tilde{\tau}})^2
+    $$
+    with $\tilde{\tau} = \inf\{u \geq 0 \colon [M]_{u}^{\frac{1}{2}} > \lambda\}$.
+
+    $$
+    \implies \mathsf{P}\left( [M]_{\infty}^{\frac{1}{2}} > \beta \lambda, M_{\infty}^*  \leq \delta \lambda, \tilde{\tau} < \infty \right) = \mathbb{E}\left[ \mathsf{P}(\dots \mid \mathcal{F}_{\tilde{\tau}})\mathsf{1}_{\tilde{\tau} < \infty} \right].
+    $$
+
+    Then $\tilde{N}_t$ reaches $(\beta \lambda)^2 - \lambda^2 - (\delta \lambda)^2$ before $-(\delta \lambda)^2$.
+
+
 }
