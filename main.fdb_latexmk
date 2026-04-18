@@ -1,5 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1776521121.93144 "/Users/zheng/Desktop/SustStochasticAnalysis/main.tex" "main.pdf" "main" 1776521125.39464 0
+["pdflatex"] 1776521185.65921 "/Users/zheng/Desktop/SustStochasticAnalysis/main.tex" "main.pdf" "main" 1776521189.08003 0
   "/Users/zheng/Desktop/SustStochasticAnalysis/main.tex" 1772627289.25161 3599 2103264f2dcd1c088da06208148aab70 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc" 1136849721 2900 1537cc8184ad1792082cd229ecc269f4 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/enc/dvips/fontawesome5/fa5free1.enc" 1622837620 3042 0e2b14b9be7d01075a4c4591d5d1781b ""
@@ -311,7 +311,7 @@
   "/usr/local/texlive/2025/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1764178997 5467155 19efa205003f9ecad95fbbaa6ff24da1 ""
   "/usr/local/texlive/2025/texmf-var/web2c/pdftex/pdflatex.fmt" 1764178933 3345728 dc00c2a410a30d0573a4366c75a713c7 ""
   "/usr/local/texlive/2025/texmf.cnf" 1741450484 577 418a7058ec8e006d8704f60ecd22c938 ""
-  "chapter/chapter1.aux" 1776521125.06598 18014 54373b962ffa0295037c48911038ac44 "pdflatex"
+  "chapter/chapter1.aux" 1776521188.70039 18014 54373b962ffa0295037c48911038ac44 "pdflatex"
   "chapter/chapter1.tex" 1776521117.42149 37530 7489ec0edea5635ea2720f561ddccb48 ""
   "chapter/chapter2.aux" 0 -1 0 ""
   "chapter/chapter3.aux" 0 -1 0 ""
@@ -325,10 +325,10 @@
   "chapter/section6.tex" 1775041214.95759 8513 33e61e94160dfd28bb3b233607c7a372 ""
   "chapter/section7.tex" 1775041214.95797 16244 50285c23e8aec2f30c8f33d91ac6291f ""
   "commands.tex" 1773840097.68965 1473 4e94dcdd1546e00b87338498d1d5b82a ""
-  "main.aux" 1776521125.09388 1646 276b6d79073bc15395f8ba290f264c83 "pdflatex"
-  "main.out" 1776521125.09942 1706 694c7613d5861067f0be590d45b134a1 "pdflatex"
+  "main.aux" 1776521188.73102 1646 276b6d79073bc15395f8ba290f264c83 "pdflatex"
+  "main.out" 1776521188.73705 1706 694c7613d5861067f0be590d45b134a1 "pdflatex"
   "main.tex" 1772627289.25161 3599 2103264f2dcd1c088da06208148aab70 ""
-  "main.toc" 1776521125.10012 1003 41413a0dfa7fb4daad6c2d8e29f6acd9 "pdflatex"
+  "main.toc" 1776521188.73784 1003 41413a0dfa7fb4daad6c2d8e29f6acd9 "pdflatex"
   "theorems.tex" 1772245318.02929 8766 869bfaec0c8f1debeeda916ab7c2c792 ""
   (generated)
   "chapter/chapter1.aux"
