@@ -1,1061 +1,388 @@
 % !TeX root = ../main.tex
 \chapter{Intro}
-\input{chapter/section1.tex}
-\input{chapter/section2.tex}
-\input{chapter/section3.tex}
-\input{chapter/section4.tex}
-\input{chapter/section5.tex}
-\input{chapter/section6.tex}
-\input{chapter/section7.tex}
+% \input{chapter/section1.tex}
+% \input{chapter/section2.tex}
+% \input{chapter/section3.tex}
+% \input{chapter/section4.tex}
+% \input{chapter/section5.tex}
+% \input{chapter/section6.tex}
+% \input{chapter/section7.tex}
+\input{chapter/section8.tex}
 \par\noindent\hrulefill\par
 
-\thm{Kunita-Watanabe}{
-    Let $M \in \mathcal{M}_0^2$ and $H \in L^2(M)$. Then $\forall~N \in \mathcal{M}_0^2$,
+
+\subsection{Stratonovich Calculus}
+Let $X,Y$ be continuous semimartingale. Define
+$$\begin{aligned}
+&S^n(t) \equiv \sum_{i=1}^n \frac{1}{2} \left( Y(t_{i}^n) +Y(t_{i-1}^n) \right)\left( X(t_{i}^n) - X(t_{i-1}^n) \right)\\
+&S(t) = \int_0^t Y_s \partial X_s.
+\end{aligned}
+$$
+Then 
+$$
+\sup_{t \leq k}\abs{ S^n(t) - S(t) } \xlongrightarrow{P} 0.
+$$
+
+\pf{
     $$
-    \mathbb{E}\left[ 
-        (H \cdot M)_{\infty} \cdot N_\infty
-     \right] = \mathbb{E}\left[ 
-        (H \cdot [M,N])_{\infty}
-      \right].
+    \begin{aligned}
+    S^n(t) &= \sum_{i=1}^{\infty}\left[ Y(t_{i-1}^n) + \frac{1}{2}(Y(t_{i}^n) - Y(t_{i-1}^n) ) \right](X(t_{i}^n) - X(t_{i-1}^n)) \\
+    &= \sum_{i=1}^{\infty} Y(t_{i-1}^n)(X(t_{i}^n) - X(t_{i-1}^n)) + \frac{1}{2} \sum_{i=1}^{\infty} \Delta Y(t_i^n)\Delta X(t_i^n).
+    \end{aligned}
     $$
-    Moreover, 
+
+    It remains to prove 
     $$
-        [H\cdot M , N] = H \cdot [M,N] \xlongequal{def}\int H_s \diff [M,N]_s.
+    \begin{aligned}
+    &\sum_{i=1}^{\infty}\Delta Y(t_{i}^n)\Delta X(t_{i}^n) \to [X,Y]_t = \frac{1}{4}([X+Y]_t - [X-Y]_t) \\
+    &\Leftrightarrow \sum_{i=1}^{\infty}\Delta X(t_i^n)^2 \to [X]_t \\
+    & \Leftrightarrow \sum_{i=1}^{\infty}\left( \Delta M(t_i^n) + \Delta A(t_i^n) \right)^2 \to [X]_t = [M]_t.
+    \end{aligned}
+    $$
+
+    We have $\sum_{i=1}^\infty\left( \Delta M(t_i^n) \right)^2 \to [M]_t$,
+    $$
+    \abs{ \sum_{i=1}^{\infty}\Delta M(t_i^n) \Delta A(t_i^n) } \leq \sup_{i \geq 1}\abs{ \Delta M(t_i^n) } \sum_{i=1}^{\infty}\abs{ \Delta A(t_i^n) } \leq \sup_{\substack{t \leq k\\ i \geq 1}} \abs{ \Delta M(t_i^n) } \mathrm{Var}_A(t) \xlongrightarrow{a.s.} 0.
     $$
 }
 
-\thmnn{
-    Let $M,N \in \mathcal{M}_0^2$. Then 
+\section{Stochastic Differenctial Equation}
+$$
+\begin{aligned}
+    &\diff X_t = b(t,X_t) \diff t + \sigma(t,X_t) \diff W_t,\\
+    & X_t = X_0 + \int_0^t b(s,X_s) \diff s + \int_0^t \sigma(s,X_s) \diff W_s.
+\end{aligned}
+$$
+
+d-dimension SDE ...
+
+\defn{Strong solution}{
+    A strong solution of the SDE, on a given probability space ($\Omega,\mathcal{F},\mathsf{P}$) and a given B.M. $(W_t,\mathcal{F}_t^W)_{t \geq 0}$, with initial condition $\xi$ is a process $\{X_t, t \geq 0\}$ with continuous sample path and 
+    \begin{itemize}
+        \item[(i)] $X \in \mathcal{F}_t$ with $(\mathcal{F}_t)_{t \geq 0}$ being the augmented filtration of the B.M. $(\mathcal{F}_t^W)_{t \geq 0}$.
+        \item[(ii)] $\mathsf{P}(X_0 = \xi) = 1$.
+        \item[(iii)] $$
+        \mathsf{P}\left( \int_0^t \abs{ b_i(s,X_s) } + \sigma_{ij}^2(s,X_s) \diff s < \infty \right) = 1 
+        $$   
+        for all $i,j,t$.
+        \item[(iv)] $X_t = X_0 + \int_0^t b(s,X_s) \diff s + \int_0^t \sigma(s,X_s) \diff W_s$.
+    \end{itemize}
+}
+
+\defn{Strong Uniqueness}{
+    Given $b(t,x)$ and $\sigma(t,x)$. Suppose $\forall~$B.M. $\{W_t\}_{t \geq 0}$ on some $(\Omega,\mathcal{F},\mathsf{P})$ and $\xi$ is the initial condition, and $\{\mathcal{F}_t\}$ is the augmented filtration, if $X$ and $\tilde{X}$ are two strong solutions with respect to the sam $W$, then 
     $$
-    \left( \int_0^\infty \abs{ H_s K_s } \diff [M,N]_s \right)^2 \leq \int_0^\infty H_s^2 \diff [M]_s \cdot \int_0^\infty K_s ^2 \diff [N]_s. \quad \text{a.s.}
+    \mathsf{P}\left(X_t = \tilde{X}_t, \forall~ t \geq 0\right)  = 1.
+    $$
+}
+
+\ex{}{
+    \begin{itemize}
+        \item[(i)] $\diff X_t = \diff W_t \implies X_t = W_t + \xi_0.$
+        \item[(ii)] $\diff X_t = b(t,X_t)\diff t + \diff W_t$ where $b:[0,\infty) \times \mathbb{R} \to \mathbb{R}$ is bounded Borel-mble and $\forall~ x \leq y$, we have $b(t,x) \geq b(t,y)$, $\forall~ t \geq 0$. Fot this SDE, strong uniqueness holds.  
+    \end{itemize}
+}
+
+\pf{
+    Eg.(ii) $\forall~$B.M. on $(\Omega,\mathcal{F},\mathsf{P})$, $\forall~\xi$. If $X^{(1)}$ \& $X^{(2)}$ are strong solutions, then 
+    $$
+    X_t^{(j)} = \xi + \int_0^t b(s,X_s^{(j)}) \diff s + W_t, \quad \forall~ j=1,2.
+    $$  
+    $$
+    X_t^{(1)} - X_t^{(2)} = \int_0^t \left[ b(s,X_s^{(1)}) - b(s,X_s^{(2)}) \right] \diff s.
+    $$
+    $$
+    \implies \diff  \Delta_t = \left[ b(t,X_t^{(1)}) - b(t,X_t^{(2)}) \right] \diff t.
+    $$
+    By It\^o's formula,
+    $$
+    \Delta_t^2 = \int_0^t 2 \Delta_s \diff \Delta_s + \frac{1}{2}\int_0^t 2 \diff [\Delta]_t = 2\int_0^t \left( X_s^{(1)} - X_s^{(2)} \right)\left[ b(s,X_s^{(1)}) - b(s,X_s^{(2)}) \right] \diff s.
+    $$
+
+    If $x \leq y$, then $b(s,x) - b(s,y) \geq 0.$
+
+    If $x > y$, then $b(s,x) - b(s,y) \leq 0$.
+
+    $\implies (x-y)(b(s,x) - b(s,y)) \leq 0$. So 
+    $$
+    \Delta_t^2 = 2\int_0^t \left( X_s^{(1)} - X_s^{(2)} \right)\left[ b(s,X_s^{(1)}) - b(s,X_s^{(2)}) \right] \diff s \leq 0, \quad \text{a.s.}
+    $$
+
+    $\implies \mathsf{P}\left( \Delta_t = 0,\forall~ t \geq 0 \right) = 1$.
+
+    $\implies$ strong uniqueness.
+}
+
+\thm{It\^o Uniqueness Theorem}{
+    Suppose $b(t,x)$ and $\sigma(t,x)$ are locally Lipschitz in the space variable: $\forall~ n \geq 1$, $\exists~ K_n >0$ s.t. $\forall~ t \geq 0$, $\norm{ x },\norm{ y } \leq n$, we have
+    $$
+    \norm{ b(t,x)-b(t,y) } + \norm{ \sigma(t,x) - \sigma(t,y) } \leq K_n \norm{ x-y }.
+    $$
+    Then strong uniqueness holds.
+}
+
+\lem{Gronwall's Inequality}{
+    Suppose a continuous function $g(t)$ satisfies $0 \leq g(t) \leq \alpha(t) + \beta\int_{0}^{t} g(s) \diff s$ for all $t \in [0,T]$ with $\beta \geq 0$ and $\alpha:[0,T] \to \mathbb{R}$ integrable. Then 
+    $$
+    g(t) \leq \alpha(t) + \beta \int_0^t \alpha(s) e^{\beta(t-s)} \diff s, \quad \forall~ t \leq T.
     $$
 }
 
 \pf{
-    $\abs{ H_s K_s } = H_s K_s \cdot \mathrm{sgn}(H_s K_s)$.
+    $I(t):= \int_{0}^{t} g(s)\diff s$.
 
-    $\abs{ \diff [M,N]_s } = \diff [M,N]_s \cdot \mathrm{sgn}([M,N]_s)$.
+    $\implies I'(t) =  g(t) \leq  \alpha(t) + \beta I(t)$.
+
+    $\implies I'(t) - \beta I(t) -  \alpha(t) \leq 0$.
+
+    Notice that
     $$
-    \begin{aligned}
-        LHS &= \int_0^\infty H_s K_s \cdot \mathrm{sgn}(H_s K_s) \cdot \mathrm{sgn} ([M,N]_s) \diff [M,N]_s\\
-        &=\int_{0}^{\infty} \tilde{H_s}K_s \diff [M,N]_s
-    \end{aligned}
-    $$
-    $$
-    \begin{aligned}
-        RHS &= \int_0^\infty \tilde{H_s} \diff [M]_s \cdot \int_0^\infty K_s^2 \diff [N]_s
-    \end{aligned}
-    $$
-    $$
-    \Leftrightarrow \left( \int_0^\infty \tilde{H_s} K_s \diff [M,N]_s  \right)^2 \leq \int_0^\infty \tilde{H_s} \diff [M]_s \int_0^\infty K_s ^2 \diff [N]_s.
-    $$
-    $$
-    \Leftrightarrow \begin{aligned}
-        & H_n = \sum_{i=1}^n U_i (t_i,t_{i+1}]\\
-        & K_n \equiv \sum_{i=1}^n V_i(t_i,t_{i+1}].
-    \end{aligned}
-    $$
-    $$
-    \Leftrightarrow \left( \sum_{i=1}^{n} U_i V_i \left( [M,N]_{t_{i+1}} - [M,N]_{t_i} \right) \right)^2 \leq \sum_{i=1}^2 U_i^2([M]_{t_{i+1}} - [M]_{t_i} ) \cdot \sum_{i=1}^n V_i^2 ([N]_{t_{i+1}}-[N]_{t_i}).
+    \left[ e^{-\beta t} I(t) \right]' = \left( I'(t) - \beta I(t) \right) e^{-\beta t} \leq \alpha(t) e^{-\beta t}.
     $$
 
-    It suffices to prove
-    $$
-    \abs{ [M,N]_{t_{i+1}} - [M,N]_{t_i} } \leq \left( [M]_{t_{i+1}} - [M]_{t_i} \right)^{\frac{1}{2}} \left( 
-        [N]_{t_{i+1}} - [N]_{t_i}
-     \right)^{\frac{1}{2}}.
-    $$
-    like $(\sum_i a_i b_i)^2 \leq \sum_i a_i^2 \sum_i b_i^2.$
+    $e^{-\beta t}I(t) - 0 = \int_0^t \left[ e^{-\beta s}I(s) \right]' \diff s \leq \int_0^t \alpha(s) e^{-\beta s} \diff s$.
 
-    To prove this, note that $\forall~ \lambda \in \mathbb{Q}$, $[M+ \lambda N]$ is increasing and so 
-    $$
-        [M+ \lambda N]_{t_{i+1}} - [M+\lambda N]_{t_i} \geq 0 \quad \text{a.s..}
-    $$
+    $\implies I(t) \leq \int_0^t \alpha(s) e^{\beta(t-s)} \diff s$.
     
-    Also 
+    $\implies g(t) \leq \alpha(t) + \beta I(t) = \alpha(t) + \beta \int_0^t \alpha(s) e^{\beta(t-s)} \diff s$.
+}
+
+\pf{
+    of It\^o Uniqueness Theorem.
+
+    Given $W$ and $(\Omega,\mathcal{F} , \mathsf{P})$ and $\xi$. If $X$ and $\tilde{X}$ are two strong solutions with respect to the same $W$. Define
     $$
-        [M + \lambda N]_t = [M]_t + 2\lambda[M,N]_t + \lambda^2 [N]_t.
+    \begin{aligned}
+        &\tau_n = \inf \{t \geq 0\colon \norm{ X_t } \geq n\}\\
+        &\tilde{\tau}_n = \inf \{t \geq 0\colon \norm{ \tilde{X}_t } \geq n\}.
+    \end{aligned}
     $$
-    because
-    $
-    (M+ \lambda N)_{t}^2 - [M+ \lambda N]_t
-    $ is U.I. and by the uniqueness (?)
+
+    Set $\tau_n \wedge \tilde{\tau}_n$. Then $\lim_{n \to \infty} S_n = \infty$, $\mathsf{P}$-a.s.
+
+    Note that 
     $$
-    M_t^2  + 2 \lambda M_t N_t + \lambda^2 N_t^2 -([M]_t + 2 \lambda [M,N]_t + \lambda^2 [N]_t).
+        X_{t \wedge S_n} - \tilde{X}_{t \wedge S_n} = \int_0^{t \wedge S_n} \left[b(s,X_s) - b(s,\tilde{X}_s)\right] \diff s + \int_0^{t \wedge S_n}\left[ \sigma(s,X_s) - \sigma(s,\tilde{X}_s) \right]
     $$
+    $$\implies \mathbb{E} \norm{ X_{t \wedge S_n} - \tilde{X}_{t \wedge S_n} }^2 \leq 4 \mathbb{E}\left[ \int_0^{t \wedge S_n}(b-b)\diff s \right]^2 + 4 \mathbb{E}\left[ \int_0^{t \wedge S_n} (\sigma - \sigma)\diff W_s \right]^2$$.
+
+    $(X_t^1,X_t^2,\dots,X_t^d) = \left( \int_0^t b^1 \diff s + \int_0^t \sigma^1 \diff W_s,\dots,\int_0^t b^d \diff s + \int_0^t \sigma^d \diff W_s \right)$.
+
+    $$ \begin{aligned}
+    \implies \norm{ X }^2 &= \sum_{i=1}^d (X_t^j)^2 \\&= \sum_{i=1}^d \left( \int_0^t b^j \diff s + \int_0^t \sigma^j \diff W_s \right)^2 \\&\leq 2 \sum_{i=1}^d\left(\int_0^t b^j \diff s\right)^2 + \left(\int_0^t \sigma^j \diff W_s\right)^2
+    \end{aligned} $$
+
+    $$
+    \begin{aligned}
+        \mathbb{E} \norm{ X_{t \wedge S_n} - \tilde{X}_{t \wedge S_n} }^2  \leq &2 \sum_{i=1}^{d} \mathbb{E}\left( \int_0^{t \wedge S_n} \left( b_i(s,X_s) - b(s,\tilde{X}_s) \right) \diff s\right)^2 \\
+        &+ 2 \sum_{i=1}^{d} \mathbb{E}\left( \sum_{j=1}^{r}\int_0^{t \wedge S_n} \left( \sigma_{ij}(s,X_s) - \sigma_{ij}(s,\tilde{X}_s) \right) \diff W_s^{(j)}\right)^2 \\
+        \leq& 2 \sum_{i=1}^{d} \mathbb{E} \left[ t \cdot \int_0^{t \wedge S_n}\left( b_{i}(s,X_s) - b_i(s,\tilde{X}_s) \right)^2 \diff s \right]\\
+        &+ 2\sum_{i=1}^{d}\sum_{j=1}^{r} \mathbb{E} \left[ \int_0^{t \wedge S_n}(\sigma_{ij} - \sigma_{ij}) \diff W_s^{(j)} \right]^2
+        \end{aligned}
+    $$
+    And $\mathbb{E} \left[ \int_0^{t\wedge S_n} \left(\sigma_{ij} - \sigma_{ij}\right) \diff W_s^{(j)}\right]^2 = \mathbb{E}\left[ \int_0^{t \wedge S_n}\left( \sigma_{ij} - \sigma_{ij} \right)^2 \diff s \right]$.
+
+    We conclude that
+    $$
+    \begin{aligned}
+    \mathbb{E} \norm{ X_{t \wedge S_n} - \tilde{X}_{t\wedge S_n} }^2 \leq & 2 t \mathbb{E}\int_0^{t \wedge S_n}\norm{ b(s,X_s) - b(s,\tilde{X}_s) }^2 \diff s + 2 \mathbb{E}\int_0^{t \wedge S_n} \norm{ \sigma(s,X_s) - \sigma(s,\tilde{X}_s) }^2 \diff s \\
+    \leq & 2T \mathbb{E}\int_0^{t \wedge S_n} K_n^2 \norm{ X_s - \tilde{X}_s }^2 \diff s + 2 \mathbb{E}\int_0^{t \wedge S_n} K_n^2 \norm{ X_s - \tilde{X}_s }^2 \diff s \\
+    \leq& 2(T+1)K_n^2 \int_0^t \mathbb{E}\norm{ X_{s\wedge S_n} - \tilde{X}_{s \wedge S_n} }^2 \diff s,
+    \end{aligned}
+    $$
+    since
+    $$
+    \norm{ \sigma }^2 = \sum_{i=1}^{d}\sum_{j=1}^{r} \sigma_{ij}^2.
+    $$
+
+    If we let $g(t ) = \triangleq \mathbb{E} \norm{ X_{t \wedge S_n} - \tilde{X}_{t \wedge S_n} }^2$, then $g(t) \leq 2(T+1)K_n^2 \int_0^t g(s) \diff s.$
+
+    By Gronwall's inequality, we get $g(t) \leq 0$.
+    
+    $\implies X_{t \wedge S_n} = \tilde{X}_{t \wedge S_n}$ a,s, $\forall~ t \geq 0$.
+
+    $\implies X_{t \wedge S_n} = \tilde{X}_{t \wedge S_n}$, $\forall~t \geq 0$, a.s.
+
+    Let $S_n \uparrow \infty$ to conclude $X_t = \tilde{X}_t$, $\forall
+    ~ t \geq 0$, a.s.
+}
+
+\thm{Existence}{
+    Suppose $\exists~K > 0$ s.t. $\forall~ t \geq 0$, $\forall~ x,y \in \mathbb{R}^d$,
+    $$
+    \begin{cases}
+        \norm{ b(t,x) - b(t,y) } + \norm{ \sigma(t,x) - \sigma(t,y) } \leq K \norm{ x-y }\\
+        \norm{ b(t,x) } + \norm{ \sigma(t,x) } \leq K(1 + \norm{ x }).
+    \end{cases}
+    $$
+    On $(\Omega,\mathcal{F},\mathsf{P})$, let $\xi$ be R.V. and r-dimensional $B.M.$ $W=\{W_t\}_{t\geq 0}$ independent of $\xi$, and $\mathbb{E}\norm{ \xi }^2 < \infty.$ Let $(\mathcal{F}_t)_{t \geq 0}$ be the augmented filtration. Then $\exists~$continuous adapted process $X=\{X_t\}_{t \geq 0}$ which is a strong solution with respect to $W$ and $X_0 = \xi$ a.s.
+
+    Moreover, $\forall~ T > 0$, $\exists~ C= C(K,T) > 0$ s.t. $\forall~ 0 \leq t \leq T$,
+    $$
+    \mathbb{E} \norm{ X_t }^2 \leq C(1 + \mathbb{E}\norm{ \xi }^2) e^{Ct}.
+    $$
+}
+
+\pf{
+    Define $X_t^{(0)}= \xi$, $\forall~ t \geq 0$.
+
+    For any $k \geq 1$, define 
+    $$
+    X_t^{(k)} \triangleq \xi + \int_0^t b(s,X_s^{(k-1)}) \diff s + \int_0^t \sigma(s,X_s^{(k-1)})\diff  W_s.
+    $$
+
+    Then $\forall~ T > 0$, $\exists~C=C(K,T) > 0$ s.t.
+    $$
+    \mathbb{E}\norm{ X_t^{(k)} }^2 \leq C(1+ \mathbb{E}\norm{ \xi }^2) e^{Ct}, \quad\forall~ t \leq T, \forall~k \geq 0.
+    $$  
+
+    (Exercise)
+
+    For any $k \geq 0$,
+    $$
+    X_t^{(k+1)} - X_t^{(k)} = \int_0^t\left( b(s,X_s^{(k)}) - b(s,X_s^{(k-1)}) \right) \diff s + \int_0^t\left( \sigma(s,X_s^{(k)}) - \sigma(s,X_s^{(k-1)}) \right) \diff  W_s.
+    $$
+
+    $$
+    \begin{aligned}
+    \mathbb{E} \left[ \sup_{s \leq t} \norm{ B_s }^2 \right] &= \mathbb{E} \norm{ \sup_{s \leq t}\int_0^s \left( b(u,X_u^{(k)}) - b(u,X_u^{(k-1)}) \right) \diff  u}^2 \\
+    &\leq \mathbb{E}\left[ t \cdot \int_0^t \norm{ b(u,X_u^{(k)}) - b(u,X_u^{(k-1)}) } ^2 \diff u\right]\\
+    & \leq K^2 + \int_0^t \mathbb{E} \norm{ X_u^{(k)} - X_u^{(k-1)} }^2 \diff u.
+    \end{aligned}
+    $$
+
+    $M_t = \int_0^t \sigma(s,X_s^{(k)}) - \sigma(s,X_s^{(k-1)}) \diff W_s$.
+
+    $[M]_t = \int_0^t \norm{ \sigma(s,X_s^{(k)}) - \sigma(s,X_s^{(k-1)}) }^2 \diff s$.
+
+    $\implies \mathbb{E}[M]_t \leq \int_0^t K^2\left(1+\norm{ X_s^{(k)} } + \norm{ X_s^{(k-1)} }\right)^2 \diff s < \infty$ by $\mathbb{E}\norm{ X_t^{(k)} }^2 \leq Ce^{Ct}.$
+
+    $$
+    \begin{aligned}
+        \mathbb{E}\left[ \sup_{s \leq t} \norm{ M_s }^2 \right] &\leq C \mathbb{E}[M_t]\\
+        &= C \mathbb{E}\int_0^t \norm{ \sigma(s,X_s^{(k)}) - \sigma(s,X_s^{k-1}) }^2 \diff s\\
+        &\leq C \mathbb{E}\int_0^t K \norm{ X_s^{(k)} - X_s^{(k-1)} }^2 \diff s.
+    \end{aligned}
+    $$
+
+    Combine the two inequalities to get 
+    $$
+    \begin{aligned}
+        \mathbb{E}\left[ \max_{s \leq t} \norm{ X_s^{(k+1)} - X_s^{(k)} }^2 \right] &\leq 2 \mathbb{E}\left[ \max_{s \leq t} \norm{ B_s }^2 \right] + 2 \mathbb{E} \left[ \max_{s \leq t} \norm{ M_s }^2 \right] \\
+        & \leq C\cdot 4 K^2(1+T) \int_0^t \mathbb{E}\norm{ X_s^{(k)}- X_s^{(k-1)} }^2 \diff s \\
+        & \leq L \int_0^t \mathbb{E}\left( \norm{ X_u^{(k)} - X_u^{(k-1)}}^2  \right)\diff s.
+    \end{aligned}
+    $$
+
+    When $k=1$, we have 
+    $$
+        \mathbb{E}\left( \norm{ X_s^{(1)} - X_s^{(0)} }^2 \right) \leq 2 \mathbb{E}\norm{ X_t^{(1)} }^2 + 2 \mathbb{E}\norm{ X_t^{(0)} }^2 \leq C^*
+    $$
+    for all $0 \leq t \leq T.$
+
     Hence 
     $$
-    \left( [M]_{t_{i+1}} - [M]_{t_i} \right) + 2 \lambda \left( [M,N]_{t_{i+1}} - [M,N]_{t_i} \right) + \lambda^2 \left( [N]_{t_{i+1}} -[N]_{t_i} \right) \geq 0
-    $$
-    $$ 
-    \Leftrightarrow b^2 - 4ac \leq 0.
-    $$
-    So
-    $$
-        \left( [M,N]_{t_{i+1}} - [M,N]_{t_i} \right)^2 \leq \left( [M]_{t_{i+1}} - [M]_{t_i} \right)\left( [N]_{t_{i+1}} - [N]_{t_i} \right).
-    $$
-    $$
-        \mathbb{E}\left[ 
-            (H\cdot M)_{\infty} N_{\infty}
-         \right] = \mathbb{E}\left[ 
-            (H \cdot [M,N])_{\infty}
-          \right].
+    \mathbb{E}\left( \max_{0 \leq s \leq t} \norm{ X_s^{(2)} - X_s^{(1)} }^2 \right) \leq L\int_0^t C^* \diff s = C^*(Lt).
     $$
 
-    If $H = Z(S,T]$, 
-    $$\begin{cases}
-     LHS = \mathbb{E}\left[ Z(M_T - M_S) \cdot N_\infty \right]\\
-     RHS = \mathbb{E}\left[ Z([M,N]_{T} - [M,N]_S) \right]   
-    \end{cases}$$
+    $$\implies
+        \mathbb{E}\left( \max_{0 \leq s \leq t} \norm{ X_s^{(3)} - X_s^{(2)} }^2 \right) \leq L\int_0^t C^* (Ls) \diff s = C^* \frac{1}{2}(Lt)^2.
+    $$
+
+    By induction, we can prove $\forall~ k \geq 1$,
+    $$
+    \mathbb{E}\left( \max_{s \leq t} \norm{ X_s^{(k+1)} - X_s^{(k)} }^2 \right) \leq C^* \frac{1}{k!} (Lt)^k.
+    $$
+
+    By chebyshev's Inequality,
+    $$
+    \mathsf{P}\left(\max_{0 \leq t \leq T} \norm{ X_t^{(k+1)} - X_t^{(k)} } > \frac{1}{2^{k+1}}\right) \leq 4^{k+1} C^* \frac{1}{k!} (LT)^k.
+    $$
+
+    $\sum_{k=1}^\infty \mathsf{P}(\max \norm{ \dots } > \frac{1}{2^{k+1}}) < \infty$.
+
+    $\implies$ B.C. Lemma gives
+    $$
+    \mathsf{P}\left(\max_{t \leq T} \norm{ X_t^{(k+1)} - X_t^{(k)} } > \frac{1}{2^{k+1}}~\text{i.o.}\right) = 0.
+    $$  
+
+    $\implies \mathsf{P}$-a.s. $\exists~N(\omega)< \infty$ s.t. $\forall~ k \geq N$, 
+    $$
+        \max_{t \leq T} \norm{ X_t^{(k+1)} - X_t^{(k)} }\leq \frac{1}{2^{k+1}}.
+    $$
+
+    $\implies \forall~ k \geq N$, $\forall~ m \geq 1$, we have
+    $$
+    \max_{t \leq T} \norm{ X_t^{(k+m)} - X_t^{(k)} } \leq\sum_{j=k}^{k+m-1} \frac{1}{2^{j+1}} \leq \frac{1}{2^k}.
+    $$
+    
+    Hence $\left\{ X_t^{(k)}(\omega),0 \leq t \leq T \right\}$ is a Cauchy sequence in $\norm{ \dots }_{sup}$.
+
+    Hence $\exists~$limit $\left\{ X_t(\omega), 0 \leq t \leq T \right\}$ s.t. 
+    $$
+    \lim_{k\to \infty} \max_{t \leq T} \norm{ X_t^{(k)} - X_t } = 0.
+    $$
+
+    Since $T > 0$ is arbitrary, $\exists~X=\left\{ X_t,0 \leq t < \infty \right\}$ s.t. $\forall~ T > 0$, $\sup_{t \leq T}\norm{ X_t^{(k)} - X_t } \to 0 $ as $k \to \infty$. 
 
     $$
     \begin{aligned}
-        LHS &= \mathbb{E}\left[ \mathbb{E}(N_\infty \mid \mathcal{F}_T) \cdot Z(M_T - M_S) \right] \\
-        &= \mathbb{E}\left[ Z(M_T N_T - M_S N_T) \right]\\
-        &= \mathbb{E}[ZM_TN_T] - \mathbb{E}\left[ \mathbb{E}(N_T \mid \mathcal{F}_S)\cdot ZM_S \right]\\
-        &=\mathbb{E}\left[ Z M_T N_T \right] - \mathbb{E}[ZM_S N_S].
+        \mathbb{E}\norm{ X_t }^2 &= \mathbb{E}\lim_{k \to \infty} \norm{ X_t^{(k)} }^2 \\
+        &\leq \lim_{k \to \infty} \mathbb{E} \norm{ X_t^{(k)} }^2 \leq C(1+\mathbb{E}\norm{ \xi }^2) e^{Ct}.
     \end{aligned}
-    $$
-    
-    Because $M_t N_t - [M,N]_t$ is U.I.
-    $$
-    \mathbb{E}[M_T N_T] = \mathbb{E}[[M,N]_T] \implies \mathbb{E}[Z(M_T N_T - [M,N]_T)] = 0.
-    $$
-    And
-    $$
-    \begin{aligned}
-        LHS &= \mathbb{E}\left[ Z(M_T N_T - M_S N_S) \right] \\
-        &= \mathbb{E}\left[ Z \mathbb{E}\left[ M_TN_T -M_S N_S \mid \mathcal{F}_S \right] \right]\\
-        &= \mathbb{E}\left[ Z \mathbb{E}[[M,N]_T - [M,N]_S \mid \mathcal{F}_S] \right]\\
-        &=\mathbb{E}[Z([M,N]_T - [M,N]_S)].
-    \end{aligned}
-    $$
-    Hence $\forall~ H \in b \varepsilon$
-    $$
-    \mathbb{E}[(H\cdot M)_{\infty} \cdot N_{\infty}] = \mathbb{E}\left[ (H \cdot [M,N])_{\infty} \right].
-    $$
-    
-    If $H_n \xlongrightarrow{L^2(M)}H$, i.e.
-    $$
-    \mathbb{E}\left( \int_0^\infty (H_n(s) - H_s)^2 \diff [M]_s \right) \to 0
-    $$
-    $\implies (H_n \cdot M)_{\infty} \xlongrightarrow{L^2} (H\cdot M)_{\infty}$ by 
-    $$
-    \mathbb{E}[(H_n \cdot M - H\cdot M)_{\infty}^2] = \mathbb{E}\left[ \int_{0}^{\infty}(H_n - H) \diff [M]_s \right] \to 0.
-    $$
-    
-    Hence $\mathbb{E}[(H_n \cdot M)_{\infty} \cdot N_{\infty}] \to \mathbb{E}[(H\cdot M)_{\infty} N_\infty]$.
-
-    Next,
-    $$
-    \begin{aligned}
-    \mathbb{E}\left[ \abs{ (H_n \cdot [M,N])_{\infty} - (H \cdot [M,N])_{\infty} } \right] &= \mathbb{E}\abs{ ((H_n - H) \cdot [M,N])_{\infty} } \\
-    &\leq \left( \mathbb{E}\left( \int_0^\infty(H_n -H) \diff [M]_s \right) \right)^{\frac{1}{2}}\left( \mathbb{E}[N]_{\infty} \right)^{\frac{1}{2}} \to 0
-    \end{aligned}
-    $$
-    by using 
-    $$
-    \left( \int_0^\infty \abs{ H_s } \diff [M,N]_s \right) \leq \left( \int_0^\infty H_s^2 \diff [M]_s \right)^{\frac{1}{2}} \left( \int_0^\infty 1 \diff [N]_s \right)^{\frac{1}{2}}.
     $$
 
-    Hence $\mathbb{E}[(H_n \cdot [M,N])_{\infty}] \to \mathbb{E}[(H\cdot [M,N])_{\infty}]$.
+    $\implies \mathsf{P}\left( \int_{0}^{t}\abs{ b(s,X_s) }\diff s + \int_0^t \sigma_{ij}^2(s,X_s)  \diff  s < \infty\right) = 1.$
+
+    $$
+    X_t^{(k+1)} = \xi + \int_0^t b(s,X_s^{(k)}) \diff s + \int_0^t \sigma(s,X_s^{(k)})\diff W_s.
+    $$
+
+    $$
+    X_t = \xi + \int_0^t b(s,X_s) \diff s + \int_0^t \sigma(s,X_s) \diff W_s.
+    $$
+
+    Need to prove $X_t^{(k+1)} \xlongrightarrow{k \to \infty} X_t$ a.s. 
+}
+
+\thm{Yamada-Watanabe}{
+    Let $\diff  X_t = \sigma(X_t) \diff W_t + b(X_t) \diff t$,
+    where
+    $$
+    \sigma(x) =
+    \begin{pmatrix}
+    \sigma_{1}(x_1) & \cdots & 0 \\
+    \vdots & \ddots & \vdots \\
+    0 & \cdots & \sigma_{n}(x_ )
+    \end{pmatrix}
+    $$
+    $$
+    b(x) = (b^1(x),b^2(x),\dots,b^n(x))
+    $$
+
+    such that 
+    \begin{itemize}
+        \item[(i)] $\exists~$positive increasing function $\rho(u)$, $u\in (0,\infty)$ s.t. 
+        $$
+        \abs{ \sigma_i(\xi) - \sigma_i(\eta) } \leq \rho\left( \abs{ \xi - \eta } \right)
+        $$
+        for all $\xi,\eta \in \mathbb{R}^1$, $i=1,\dots,n$ and 
+        $$
+        \int_{0^+} \rho^{-2}(u) \diff u = \infty.
+        $$
+        i.e. $\forall~ \varepsilon >0$, $\int_0^\varepsilon \rho^{-2}(u) \diff u = \infty$.
+
+        \item[(ii)] $\exists~$positive increasing concave function $k(u)$, $u\in(0,\infty)$ s.t. 
+        $$
+        \abs{ b_i(x) - b_j(y) } \leq k \left( \abs{ x-y } \right)
+        $$
+        for all $x,y \in \mathbb{R}^n$, $i=1,\dots,n$ and $\int_{0^+} k^{-1}(u) \diff u = \infty.$
+    \end{itemize}
+    Then strong uniqueness holds.
 }
 
 \rmkb{
-    proof of $[H\cdot M,N] = H \cdot [M,N]$
-    $\Leftrightarrow$ It suffices to. prove $(H\cdot M)_{t} N_t - \int_{0}^\infty H_s \diff [M,N]_s$ is a U.I. martingale.
-    
-    $\Leftrightarrow \forall~$stopping time $R$
-    $$
-    \mathbb{E}[(H\cdot M)_{R} \cdot N_R] = \mathbb{E}\left[ \int_0^R H_s \diff [M,N]_s \right].
-    $$
-    $$
-    \begin{aligned}
-        LHS &= \mathbb{E}\left[ (H\cdot M)_{\infty}^R \cdot N_\infty^R \right] \\
-        &= \mathbb{E}\left[ 
-        (H^R \cdot M)_{\infty} \cdot N_\infty^R
-        \right] \\
-        &= \mathbb{E}[(H^R \cdot [M,N^R])_{\infty}]\\
-        &= \mathbb{E}\left[ \int_0^\infty H^R(s) \diff [M,N^R]_s \right]\\
-        &= \mathbb{E}\left[ \int_0^R H(s) \diff [M,N]_s \right] = RHS.
-    \end{aligned}
-    $$
+    If $\rho(u) = u^{\alpha}$, then strong uniqueness holds if $\alpha \geq \frac{1}{2}$; fails if $0 < \alpha < \frac{1}{2}$.
 }
 
-\defn{local martingale}{
-    $\mathcal{M}_{loc}=\{\text{local martingale}\}$. 
-    
-    $\exists~$stopping times $T_n \uparrow \infty$ s.t. $M^{T_n}$ is a martingale.
-}
-\defn{continuous local martingale}{
-    $c\mathcal{M}_{loc}=\{\text{continuous local martingale}\}$.
 
-    Quadratic variation of $c \mathcal{M}_{loc}$. 
-    
-    If $M \in c\mathcal{M}_{loc}$, then $\exists~[M]$ increasing process such that $M^2 - [M] \in c \mathcal{M}_{loc}$.
-}
-
-\lemnn{
-    If $M \in c \mathcal{M}_{loc}$. Fix $n \geq 1$, define
-    $$
-    T_n = \inf \{t \geq 0\colon \abs{ M_t }\geq n\}.
-    $$
-    Then $M^{T_n}$ is a bounded martingale.
-}
-
-\pf{
-    By definition, $\exists~$stopping $(S_k)\uparrow \infty$ s.t. $M^{S_k}$ is a martingale.
-
-    $\implies M^{S_k \wedge T_n}$ is also a martingale.
-
-    So $\forall~ s < t$, $$\mathbb{E}(M^{S_k \wedge T_n}_t \mid \mathcal{F}_s) = M_s^{S_k \wedge T_n}.$$
-
-    Let $k \to \infty$ to get $\mathbb{E}(M_t^{T_n} \mid \mathcal{F}_s) = M_s^{T_n}.$ 
-
-    pf of Quadratic variation:
-
-    \textbf{(Existence.)} $\forall~ n \geq 1$, we let
-    $$
-    T_n = \inf \{t \geq 0 \colon \abs{ M_t } \geq n\}.
-    $$
-    Then define $\forall~ t < T_n$,
-    $$
-    [M]_t = [M^{T_n}]_t .
-    $$
-
-    We need to check that $[M^{T_n}]_t$ is well-defined.
-    $$
-    \begin{aligned}
-        [M^{T_2}]^{T_1} = [M^{T_2}]_{t\wedge T_1}
-    \end{aligned}
-    $$
-    Because $[M]^T = [M^T]$,
-    $$
-    [M^{T_2}]^{T_1} = [M^{T_2 \wedge T_1}] =[M^{T_1}].
-    $$
-    By $T_n \uparrow \infty$, we have $[M]_t$ is defined for all $t \geq 0$.
-
-    \textbf{(uniqueness.)} If $\exists~A,A'$ increasing such that $N = M^2 - A$ and $N' =M^2 - A' \in c \mathcal{M}_{loc}$.
-    Then $N-N'= A' - A \in c \mathcal{M}_{loc}$ is of finite variation.
-    
-    \lemnn{
-        If $M \in c \mathcal{M}_{loc}$ and $M$ is of finite variation, then $M_t \equiv 0.$
-    }
-    \pf{
-        Let $V_M(t) =$ total variation of $M$ on $[0,t]$. Define $T_n = \inf \{t \geq 0 \colon V_M(t) > n\}.$ 
-
-        Then $M^{T_n}$ is a bounded martingale and is of finite variation. Next, define 
-        $$
-        A_t^n \equiv \sum_{k=1}^{2^n}\left( M(t_{k}^n) - M(t_{k-1}^n) \right)^2
-        $$
-        with $t_k^n = \frac{k}{2^n} t$.
-
-        So
-        $$
-        A_t^n \leq \sup_{1 \leq k \leq 2^n} \abs{ M(t_k^n) - M(t_{k-1}^n) }\cdot V_M(t) \xlongrightarrow{a.s.} 0
-        $$
-        by continuity of $M$.
-
-        Thus $A_t^n \to 0$, $\forall~ t \geq 0$.
-
-        We will prove $A_t^n \to A_t$ such that $M_t^2 - A_t$ is martingale.
-
-        $\implies A_t = 0$ and $\mathbb{E}M_t^2 = \mathbb{E}M_0^2 = 0.$
-
-        $\implies M_t = 0$ a.s. $\forall~ t \geq 0$.
-
-        By a.s. continuity, $M_t \equiv 0$, a.s.
-    }
-}
-
-\subsection{It\^o Integral of local martingale}
-
-\thmnn{
-    Let $M \in c \mathcal{M}_{loc}$ with $M_0 = 0$. Let $H \in \mathcal{P}$ such that W.P.1
-    $$
-    \int_0^t H_s ^2 \diff [M]_s < \infty
-    $$
-    for all $t > 0$. Then $H \cdot M$ is well-defined such that $H\cdot M \in c \mathcal{M}_{0,loc}$.
-}
-\pf{
-    Let $U_n = \inf \{t \colon \abs{ M_t } > n\}$, $V_n = \inf\{t \colon \int_0^t H_s^2 \diff [M]_s > n\}.$
-
-    (Recall $L^2(M) \implies \mathbb{E}\int_0^\infty H_s^2 \diff [M]_s < \infty$).
-
-    $\implies T_n = U_n \wedge V_n$. In this way, $M^{T_n} \in c \mathcal{M}_0^2$ and $H^{T_n} \in L^2(M^{T_n}).$
-
-    So $H^{T_n} \cdot M^{T_n}$ is defined by previous $L^2$ theory.
-
-    $\implies (H\cdot M)^{T_n} = H^{T_n} \cdot M^{T_n}$ ($t < T_n$) is a $L^2$-bounded martingale.
-
-    $\implies H \cdot M \in c \mathcal{M}_{0,loc}$.
-}
-
-\defn{semimartingale}{
-    We say $X$ is a semimartingale if 
-    $$
-    X_t = X_0 + M_t + A_t.
-    $$
-    $M_t$ is local mart, $A_t$ is finite variation.
-}
-
-\defnn{
-    Let $X$ be a continuous semimartingale. Then $\exists~$unique 
-    $$
-    \begin{cases}
-        M \in c \mathcal{M}_{0,loc}\\
-        A \in c F V_0
-    \end{cases}
-    $$
-    such that $X_t = X_0 + M_t + A_t$, $\forall~ t \geq 0$.
-}
-
-\pf{
-    If $\exists~M'$ and $A'$ such that 
-    $$
-        X= X_0 + M' + A' = X_0 + M + A.
-    $$
-    Then $M - M' = A' - A \in c \mathcal{M}_{0,loc} \cap c F V = \{0\}$.
-}
-
-We write $M= X^{cm}$ and 
-$$
-    [X,X] = [M,M] = [X^{cm},X^{cm}].
-$$
-
-Similarly, $[X,Y] = [X^{cm},Y^{cm}]$.
-
-For any $H \in lb \mathcal{P}$ define
-$$
-    H \cdot X =H \cdot M + H \cdot A.
-$$
-Obviously $H\cdot M \in c \mathcal{M}_{0,loc}$ and $H \cdot A \in FV$.
-
-And 
-$$
-\begin{aligned}
-[H\cdot X, K \cdot Y] &= [H \cdot X^{cm},K\cdot Y^{cm}] \\
-&= H \cdot [X^{cm},K\cdot Y^{cm}] \\
-&= H\cdot K [X^{cm},Y^{cm}]\\
-&= (HK)\cdot [X^{cm},Y^{cm}]=(HK)\cdot [X,Y].
-\end{aligned}$$
-
-\subsection{It\^o's Formula} 
-\thm{It\^o's Formula}{
-    Let $f \colon \mathbb{R}^n \to \mathbb{R}$ be $C^2$. Let 
-    $$
-    X_t \equiv(X_t^1,\cdots,X_t^n)
-    $$
-    be a continuous semimartingale.
-
-    Then 
-    $$
-    f(x_t) - f(x_0) = \int_0^t \nabla f(X_s) \diff X_s + \frac{1}{2}\int_0^t \sum_{i,j} D_{ij}f(X_s)\diff [X^i,X^j]_{s}
-    $$
-    where $\nabla f(X_s) = (D_1f(X_s),\cdots,D_n f(X_s))$. $D_i f(x) = \frac{\partial}{\partial x_i}f(x)$, $D_{ij} = D_i D_j = D_j D_i.$
-}
-
-\thm{Integration by Parts}{
-    Let $X,Y$ be continuous semimartingales. Then 
-    $$
-    X_tY_t - X_0Y_0 = \int_0^t X_s \diff Y_s + \int_0^t Y_s \diff X_s + [X,Y]_t.
-    $$
-}
-\pf{
-    Assume IBP holds.
-    
-    Let $$\mathcal{A} = \left\{f \in C^2 (\mathbb{R}^n) \colon \diff f(X_t) = \sum_i D_i f(X_t) \diff X_t + \frac{1}{2} \sum_{i,j}D_{ij}f(X_t) \diff [X^i,X^j]_t\right\}.$$
-
-    (i). $f,g \in \mathcal{A} \implies f+ g \in \mathcal{A}$.
-    (ii). $f,g \in \mathcal{A} \implies fg \in \mathcal{ A}$.
-
-    $$
-    \begin{aligned}
-    \diff (fg(X_t)) =& \diff (f(X_t)\cdot g(X_t)) \\
-    =& f(X_t) \cdot \diff g(X_t) + g(X_t) \diff f(X_t) + \diff [f(X_t),g(X_t)]_t\\
-    =& f(X_t)\left( \sum_i D_i g(X_t) \diff X_t + \frac{1}{2} \sum_{i,j} D_{ij}g(X_t) \diff [X^i,X^j]_t \right) \\
-    &+ g(X_t)\left( \sum_i D_i f(X_t)\diff X_t + \frac{1}{2}\sum_{i,j}D_{ij}f(X_t) \diff [X^i,X^j]_t \right) \\
-    &+ \diff \left[ \int_0^t \sum_{i} D_i f(X_t) \diff X_t, \int_0^t \sum_j D_j g(X_t) \diff X_t^j \right]\\
-    =&\diff X_t \left( \sum_i f D_i g(X_t) + \sum_i g D_i f(X_t) \right) \\
-    &+ \frac{1}{2} \sum_{i,j} \left( g D_{ij}f (X_t) + f D_{ij}g(X_t) + 2D_i fD_j g(X_t) \right)\diff [X^i,X^j]_t\\
-    =& \sum_i D_i(fg)(X_t) \diff X_t + \frac{1}{2}\sum_{i,j}D_{ij}(fg)(X_t)\diff [X^i,X^j]_t\\
-    \implies \quad& fg \in \mathcal{A}.
-    \end{aligned}
-    $$
-
-    (iii). $f(x) = x \in \mathcal{A} \implies \forall~$polynomial $\in \mathcal{A}$.
-}
-
-\lemnn{$\forall~ f \in C^2(\mathbb{R}^d)$, $\exists~$polynomials $\{P_n(x)\}_{n \geq 1}$ such that 
-    $$
-    \begin{cases}
-        P_n(x) \to f(x)\\
-        D_i P_n(x) \to D_i f(x)\\
-        D_{ij}P_n(x) \to D_{ij}f(x)
-    \end{cases}
-    $$
-    uniformly on compacts.
-}
-
-Define $U_N = \inf\{t \geq 0\colon \abs{ X_t }+ [M]_{t} > N\}$ for each $N >0$.
-
-Then $U_N \uparrow \infty$. So it suffices to prove It\^o formula holds for $\forall~ t \leq U_N$.
-
-Note that $$P_n(X_t) = P_n(X_0) + \int_{0}^{t}\sum_{i} D_i P_n(X_s) \diff  X_s + \frac{1}{2} \int_{0}^{t} \sum_{i,j} D_{ij}P_n(X_s) \diff [X^i,X^j]_s$$ for $0 \leq t \leq U_N$.
-
-By letting $n \to \infty$, we will prove the limits are 
-$$
-f(X_t) = f(X_0) + \int_{0}^{t}\sum_{i} D_i f(X_s) \diff X_s + \frac{1}{2} \int_{0}^{t} \sum_{ij}D_{ij}f(X_s) \diff [X^i,X^j]_s.
-$$
-
-$$
-\begin{aligned}
-    I_{1,n}=&\int_{0}^{t} \sum_i D_i P_n(X_s) \diff X_s \\
-    =& \int_0^t \sum_i D_i P_n(X_s) \diff M_s + \int_0^t \sum_i D_i P_n(X_s) \diff A_s.
-\end{aligned}
-$$
-
-Notice that 
-$$
-    \abs{ \int_0^t \sum_i D_i P_n (X_s) \diff A_s - \int_0^t \sum_i D_i f(X_s) \diff  A_s } \leq d\cdot \sup_{i} \underbrace{\norm{ D_iP_n - D_i f }}_{\text{max on compacts}}\cdot A_t \xlongrightarrow{n \to \infty} 0 \text{ a.s.}
-$$
-
-Next,
-$$
-    \begin{aligned}
-    &\mathbb{E} \sup_{s \leq t} \abs{ \int_0^t \sum_i \left( D_i P_n(X_s) - D_i f(X_s) \right) \diff  M_s }^2 \\
-    \leq & \mathbb{E}\int_0^t \left( \sum_i D_i P_n(X_s) - D_i f(X_s) \right)^2 \diff [M]_s \\
-    \leq & d \cdot \sup_{1 \leq i \leq d}\norm{ D_iP_n - D_i f }^2 \cdot \underbrace{\mathbb{E}[M]_{t \wedge U_N}}_{N} \xlongrightarrow{n \to \infty} 0.
-    \end{aligned}
-$$
-
-By taking subsequence, $\int_0^t \sum_i D_i P_{n_k}(X_s) \diff  M_s \xlongleftarrow{\text{a.s.}}\int_0^t \sum_i D_i f(X_s) \diff  M_s.$
-
-$$
-    \begin{aligned}
-        I_{2,n} = \frac{1}{2} \int_0^t \sum_{i,j} D_{ij}P_n(X_s) \diff [X^i,X^j]_s.
-    \end{aligned}
-$$
-
-Notice that 
-
-$$
-    \abs{ I_{2,n} - \frac{1}{2}\int_0^t \sum_{i,j}D_{ij}f(X_s) \diff [X^i,X^j]_s } \leq C \sum_{i,j} \norm{ D_{ij}P_n - D_{ij}f }\cdot \underbrace{\sum_{i,j}[X^i,X^j]_t}_{\leq C_N} \xlongrightarrow{n \to \infty} \to 0.
-$$
-
-\lemnn{
-    Let $M$ be a bounded continuous martingale with $M_0 = 0$. Let $V$ be continuous $FV_0$
-    $$
-    \begin{aligned}
-        &M_t^2 = \int_0^t 2M_s \diff M_s + [M]_t ,\\
-        &M_t V_t = \int_0^t M_s \diff V_s + \int_0^t V_s \diff  M_s.
-    \end{aligned}
-    $$
-}
-\pf{
-    $$
-    \begin{aligned}
-        M_t^2 &= \left[ \sum_{k=1}^{2^n}M(t_{k}^{n}) - M(t_{k-1}^{n}) \right]^2\\
-        &= \sum_{k=1}^{2^n}\left( M(t_{k}^{n}) - M(t_{k-1}^{n}) \right)^2 + 2\sum_{k=1}^{2^n}\left[ M(t_{k}^{n})M(t_{k-1}^{n}) - M(t_{k-1}^{n})^2 \right]\\
-        &=M(t_{2^n}^{n})^2 - M(t_{0}^{n})^2 = M(t)^2
-    \end{aligned}
-    $$
-    where $t_{k}^{n} = \frac{k}{2^n} t$.
-
-    Note that $\sum_{k=1}^{2^n}\left( M(t_{k}^{n}) - M(t_{k-1}^{n}) \right)^2 \to [M]_t$ and 
-    $$
-    2\sum_{k=1}^{2^n}\left[ M(t_{k}^{n})M(t_{k-1}^{n}) - M(t_{k-1}^{n})^2 \right] = 2 \sum_{k=1}^{2^n}M(t_{k-1}^{n})(M(t_{k}^{n}) - M(t_{k-1}^{n}))\to 2\int_0^t M_s \diff M_s.
-    $$
-
-    $$
-    \begin{aligned}
-        M_t V_t &= M_{t_{2^n}^n}V_{t_{2^n}^n} - M_{t_{0}^n}V_{t_0^n} \\
-        &= \sum_{k=1}^{2^n}\left[ M(t_{k}^{n})V(t_{k}^{n}) - M(t_{k-1}^{n})V(t_{k-1}^{n}) \right] \\
-        &= \sum_{k=1}^{2^n} M(t_{k}^{n})(V(t_{k}^{n}) - V(t_{k-1}^{n})) + \sum_{k=1}^n V(t_{k-1}^{n})\left( M(t_{k}^{n}) - M(t_{k-1}^{n}) \right) \\
-        &\to \int_{0}^{t}M_s \diff V_s + \int_0^t V_s \diff M_s.
-    \end{aligned}
-    $$
-}
-
-\thm{L\'evy Thm}{
-    Let $\{B_t^i\}_{t \geq 0} \in c \mathcal{M}_{0,loc}$ for $i=1,2,\cdots,n$. If $\forall~i,j$, we have 
-    $$ 
-    [B^i,B^j]_t = \begin{cases}
-        t, & i = j,\\
-        0, & i \neq j.
-    \end{cases}
-    $$
-    
-    Then $B_t = (B_t^1,\cdots,B_t^n)$ is a Brownian motion on $\mathbb{R}^n$ with $\mathcal{N}(0,I_n).$
-}
-
-\pf{
-    $\forall~ s < t,$ we will prove 
-    $$
-    \mathbb{E}\left[ e^{i \theta (B_t - B_s)} \middle| \mathcal{F}_s \right] = e^{-\frac{1}{2}(t-s) \abs{ \theta }^2}
-    $$
-    for all $\theta \in \mathbb{R}^n$.
-
-    Define $f(x,t) = e^{i\theta x + \frac{1}{2}\abs{ \theta }^2 t }$, $\mathbb{R}^{n+1} \to \mathbb{C}$.
-
-    Apply It\^o's formula to $f(B_t,t) \equiv f(X_t).$
-
-    $X_t = (B_t^1,B_t^2,\cdots,B_t^n,t).$
-
-    $$
-    \begin{aligned}
-    f(X_t) =& f(x_0) + \int_0^t \sum_{i=1}^n (D_i f(X_s \diff B_s^i)) + \int_0^1 D_{n+1}f(X_s)ds \\
-    &+ \frac{1}{2}\int_0^t \sum_{1 \leq i,j \leq n}D_{ij}f(X_s) \diff [B^i,B^j]_s \\
-    &+ \frac{1}{2}\int_0^t \sum_{1 \leq k \leq n}D_{k,n+1}f(X_s) \diff [B^k,s]_s
-    \end{aligned}
-    $$
-    $$
-    \begin{aligned}
-        \implies f(B_t,t)= &f(B_0,0) + \int_0^t \sum_i D_i f(B_s,s)\diff B_s^i \\
-        &+ \int_0^t \left( e^{i \theta B_s + \frac{1}{2}\abs{ \theta }^2 s} \cdot \frac{1}{2} \abs{ \theta }^2 \right) \diff s \\
-        &+ \int_0^t \frac{1}{2}\left( \sum_{j=1}^n e^{i \theta B_s + \frac{1}{2}\abs{ \theta }^2 s }(i \theta_j)^2 \right) \diff s.
-    \end{aligned}
-    $$
-
-    We conclude that $f(B_t,t) = f(B_0,0) + c \mathcal{M}_{0,loc}$
-    $$
-    \implies e\underbrace{^{i\theta B_t + \frac{1}{2} \abs{ \theta }^2 t}}_{M_t^\theta \in c \mathcal{M}_{0,loc}} = 1 + c \mathcal{M}_{0,loc}
-    $$
-    Since $\abs{ M_t^\theta } = e^{\frac{1}{2} \abs{ \theta }^2 t} < \infty$ and 
-    $$
-    \mathbb{E}(M_t^{T_n} \mid \mathcal{F}_s) = M_s^{T_n}
-    $$
-    where $T_n$ reduces $M$.
-
-    We may take $n \to \infty$ to get $\mathbb{E}(M_t \mid \mathcal{F}_s) = M_s$.
-
-    $$
-    \implies \mathbb{E}(e^{i \theta B_t + \frac{1}{2}\abs{ \theta }^2 t} \mid \mathcal{F}_s) = e^{i\theta B_s + \frac{1}{2} \abs{ \theta }^2 s}.
-    $$
-
-    $$
-    \implies \mathbb{E}\left( e^{i \theta(B_t - B_s)} \mid \mathcal{F}_s \right) = e^{\frac{1}{2}\abs{ \theta }^2 (t-s)}.
-    $$
-
-    $$
-    \implies B_t - B_s \sim \mathcal{N}(0,t-s)
-    $$
-
-    Q independent of $\mathcal{F}_s$.
-}
-
-\thm{Dubins and Schwarz}{
-    let $M \in c \mathcal{M}_{0,loc}$ such that $[M]_t \uparrow \infty$ as $t \to \infty$. Then $M_t = B([M]_t)$ where $B$ is some Brownian motion.
-
-    Let $\tau_t = \inf\{u \geq 0 \colon [M]_u > t\}$. Set $\mathcal{G}_t \equiv \mathcal{F}(\tau_t)$. Then $B_t \equiv M(\tau_t)$ is a B.M. with respect to $\mathcal{G}_t.$
-}
-
-\pf{
-    (i) $M(\tau_t) \in \mathcal{F}_{\tau_t} \implies B_t \in \mathcal{G}_t$.
-    
-    (ii) $t\mapsto B_t$ is continuous.
-
-    $$
-    \begin{cases}
-        \tau_{a-} = b, \\
-        \tau_{a+} = c.
-    \end{cases}
-    $$
-
-    We only need to prove $M(b) = M(c)$.
-
-    Assume $M$ is bounded $\forall~ q \in \mathbb{Q}_+$, define 
-    $$
-    S_q \equiv \inf\{t > q \colon [M]_t > [M]_q\}.
-    $$
-
-    We will show $M_t \equiv M_q$ for all $t \in [q,S_q)$
-    
-    Note $S_q \geq q$, by OST,
-    $$\mathbb{E}\left( M_{S_q}^2 - [M]_{S_q} \mid \mathcal{F}_q \right) = M_q^2 - [M]_q.
-    $$
-
-    Because $[M]_{S_q} = [M]_q$,
-    $$
-    \implies \mathbb{E}[M_{S_q}^2 - M_q^2 \mid \mathcal{F}_q] = 0.
-    $$
-    $$
-    \implies \mathbb{E}((M_{S_q} - M_q)^2 \mid \mathcal{F}_q) = 0.
-    $$
-    $$
-    \implies \mathbb{E}(M_{S_q} - M_q)^2 = 0.
-    $$
-    $$
-    \implies M_{S_q} = M_q.
-    $$
-
-    (iii) $B_t$ and $B_t^2 - t \in c \mathcal{M}_{0,loc} \implies [B]_t = t \implies$ B.M.
-
-    Recall $B_t = M(\tau_t)$. Define 
-    $$
-    \begin{aligned}
-    &T_n = \inf \{ t \geq 0 \colon \abs{ M_t } > n\},\\
-    &U_n = [M]_{T_n}.    
-    \end{aligned}
-    $$
-
-    We will check $\tau_{t \wedge U_n} = T_n \wedge \tau_t.$
-    $$
-    t \wedge U_n \leq t \implies \tau_{t \wedge U_n } \leq \tau_t.
-    $$
-    $$
-    \tau_{t\wedge U_n} =\inf \{
-        u\colon [M]_u > t \wedge U_n = t \wedge[M]_{T_n}
-    \}.
-    $$
-
-    \textbf{Claim:} $\tau_t \wedge T_n = \tau_{t \wedge U_n}$
-    
-    \textbf{case 1.} $t \leq U_{n}$ we have
-    $$
-        \tau_{t \wedge U_{n}} = \inf \{u\colon [M]_{u}> t\} = \tau_{t},
-    $$
-    and
-    $$
-    t \leq U_{n} = [M]_{T_{n}} \implies T_{n} \geq \tau_{t} \implies \tau_{t} \wedge T_{n} = \tau_{t} = \tau_{t \wedge U_{n}}.
-    $$
-
-    \textbf{case 2.} $t > U_{n}$ we have
-    $$
-    \tau_{t \wedge U_{n}} = \tau_{U_{n}} = \inf \{u\colon [M]_{u} > U_{n}\}
-    $$
-    and
-    $$
-    t > U_{n} > [M]_{T_{n}} \implies T_{n} < \tau_{t} \implies \tau_{t} \wedge T_{n} = T_{n}.
-    $$
-    It suffices to prove $T_{n} = \tau_{[M]_{T_{n}}}= \tau_{U_{n}}$.
-
-    One hand, $\tau_{U_{n}} \geq T_{n}$ can be proved by def of $\tau_{U_{n}}$.
-
-    On the other hand, $T_{n} = \inf \{t \colon \abs{ M_{t} } > n\}$. Take $\forall~\varepsilon>0$, $u_{\varepsilon} \in (T_{n} , T_{n} + \varepsilon)$ s.t. $\abs{ M_{u_{\varepsilon}} }>n .$
-
-    Hence $M_{u_{\varepsilon}} \neq M_{T_{n}}$. Suppose $[M]_{u_{\varepsilon}} = [M]_{T_{n}}$, then $M$ is constant by the property of continuous local martingale. Contradiction. So $[M]_{u_{\varepsilon}} > [M]_{T_{n}} = U_{n} \implies \tau_{U_{n}} \leq u_{\varepsilon}$. Let $\varepsilon \downarrow 0$ to get $\tau_{U_{n}} \leq T_{n}$.
-
-    Then $B_{t \wedge U_n} = M(\tau_{t \wedge U_n}) = M(T_n \wedge \tau _t)$, $B_t^{U_n} = M_{\tau_t}^{T_n}.$
-
-    By OST 
-    $$
-    \mathbb{E}\left( B_t^{U_n} \middle| \mathcal{F}_{\tau_s} \right) = \mathbb{E}\left( M_{\tau_t}^{T_n} \middle| \mathcal{F}_{\tau_s} \right) = M_{\tau_s}^{T_n} = B_s^{U_n}.
-    $$
-
-    Then $B^{U_n}$ is a martingale w.r.t. $\mathcal{G}_t = \mathcal{F}_{\tau_t}$ + (2) $U_n$ is $\mathcal{G}_t$-stopping time $\implies B \in c \mathcal{M}_{0,loc}$
-
-    \textbf{pf of (2)}
-
-    $$
-    \{[M]_{T_n} \leq t\}=\{U_n \leq t\} \in \mathcal{F}_{\tau_t}.
-    $$
-
-    $$
-    \{T_n \leq \tau_t\} \in \mathcal{F}_{\tau_t}.
-    $$
-
-    $\left( M^2 - [M] \right)^{T_n}$ is martingale. Then 
-    $$
-    \mathbb{E}\left[ (M_{\tau_t}^{T_n})^2 - [M]_{\tau_t}^{T_n} \middle|  \mathcal{F}_{\tau_s}\right]= \left( M_{\tau_s}^{T_n} \right)^2 - [M]_{\tau_s}^{T_n}
-    $$  
-    $$
-    \implies \mathbb{E}\left[ 
-        (B_t^{U_n})^2 - t \wedge U_n \middle| \mathcal{F}_s 
-     \right] = (B_s^{U_n})^2 - s \wedge U_n.
-    $$  
-    $
-    \implies (B_t^2 - t)^{U_n}
-    $ is a martingale $\implies B_t^2 - t \in \mathcal{M}_{loc} \implies[B]_t = t.$
-}   
-
-If $[M]_{\infty} < \infty$, we get $\tau_t = \infty$, $\forall~ t \geq [M]_{\infty}$.
-$$
-B_t = M(\infty), \quad \forall~ t \geq [M]_{\infty}.
-$$
-
-So this def does not give a B.M.
-
-Define 
-$$B_t = 
-\begin{cases}
-    M(\tau_t), & t < [M]_{\infty},\\
-    M(\infty)+W(t) - W([M]_{\infty}), & t \geq [M]_{\infty},
-\end{cases}
-$$
-where $W$ is a standard B.M. independent of $M$.
-
-Or 
-$$B_t
-\begin{cases}
-    M(\tau_t),& t <[M]_{\infty}\\
-    M(\infty)+W(t-[M]_{\infty}), & t \geq[M]_{\infty}.
-\end{cases}
-$$
-Then $B([M]_{t})= M_t.$
-
-\lemnn{
-    On $\{[M]_{\infty
-} < \infty\}$, the limit $M_\infty \equiv \lim_{t \uparrow \infty} M_t$ exists a.s.
-}
-\pf{
-    Define $S_K = \inf \{t \geq 0 \colon [M]_t > K\}$. Then on $\{[M]_{\infty} < \infty\}$, $S_K = \infty$, $\forall~ K >[M]_\infty$
-
-    $M^{S_K}$ is a $L^2$-bounded martingale.
-
-    $\implies \lim_{t \uparrow \infty} M_t^{S_K}$ exists a.s.
-
-    Let $K \uparrow \infty$ to get $\lim_{t\uparrow \infty}M_t$ exists a.s.
-
-    By an enlargement of the prob. space $(\Omega. \mathcal{F},\mathsf{P})$
-    $$
-    \begin{aligned}
-    \implies &\tilde{\Omega} = \Omega \times \Omega^*\\
-        & \tilde{\mathcal{F}}_t = \mathcal{F}_t \times \mathcal{F}_{t}^* \\
-        & \tilde{\mathsf{P}} = \mathsf{P} \times \mathsf{P}^*
-    \end{aligned}
-    $$
-    where on $(\Omega^*, \mathcal{F}^*,\mathcal{F}_{t}^*, \mathsf{P}^*)$ we have $W^*$ is B.M. independent of $M$.
-}
-
-\thm{Dubins-Schwarz (general version)}{
-    Let $M \in c \mathcal{M}_{0,loc}$. Then $\exists~$B.M. B s.t. $M_t = B([M]_t)$ for all $t \geq 0$.
-}
-
-\thm{Dol\'eans' Thm}{
-    Let $X$ be a semimartingale with $X_0 = 0$. Suppose $Z_0 \in \mathcal{F}_0$. Then $\exists~$a unique continuous semimartingale $Z$ s.t. 
-    $$
-    Z_t = Z_0 + \int_{0}^{t}Z_s \diff X_s.
-    $$
-    The solution $Z_t = Z_0 e^{X_t - \frac{1}{2}[X]_t}$. 
-
-    \textbf{Notation:} $\mathcal{E}(X_t) = e^{X_t - \frac{1}{2}[X]_t}$ is called the exponential semimartingale of $X$.
-}
-
-\pf{
-    $\mathcal{E}(X_t) = e^{X_t - \frac{1}{2}[X]_t} = f(X_t, [X]_t)$ with $f(x,y) = e^{x - \frac{1}{2}y}.$
-
-    By apply It\^o's formula, 
-    $$
-    \diff f(X_t,[X]_t) = \partial_x f(X_t,[X]_t) \diff X_t + \partial_y f(X_t, [X]_t) \diff [X]_t + \frac{1}{2}\left( \partial_{xx}f(X_t,[X]_t) \diff [X]_t \right).
-    $$
-    Because 
-    $$
-    \begin{cases}
-        \diff X_t \diff X_t = \diff [X]_t\\
-        \diff X_t \diff [X]_t = 0\\
-        \diff [X]_t \diff [X]_t = 0.
-    \end{cases}
-    $$
-    Hence 
-    $$
-    \diff \mathcal{E}(X_t) = \mathcal{E}(X_t) \diff X_t.
-    $$
-    So $\mathcal{E}(X)$ is a solution to 
-    $$
-    \diff Z_t = Z_t \diff X_t.
-    $$
-
-    \textbf{(Uniqueness)} Assume $Z$ is another solution. We will prove 
-    $$
-        Z_t = Z_0 \mathcal{E}(X_t).
-    $$
-
-    We now have $\diff Z_t = Z_t \diff X_t$. 
-    
-    Define 
-    $$
-    Y_t = e^{- X_t + \frac{1}{2}[X]_t} = (\mathcal{E}(X)_t)^{-1}.
-    $$
-
-    It suffices to prove $\diff (Z_t Y_t) = 0$ which implies 
-    $$
-    Z_t Y_t = Z_0 Y_0 = Z_0, \quad \forall~t.
-    $$
-    
-    We have
-    $$
-    \diff (Z_t Y_t) = Z_t \diff Y_t + Y_t \diff Z_t + \diff [Y,Z]_t.
-    $$
-
-    Notice that by It\^o's formula,
-    $$
-    \diff Y_t = (-1)Y_t \diff X_t + \frac{1}{2} Y_t \diff [X]_t + \frac{1}{2}(-1)^2 Y_t \diff [X]_t = -Y_t \diff X_t + Y_t \diff [X]_t.
-    $$
-
-    $$
-    \implies \diff (Z_t Y_t) = Z_t(-Y_t \diff X_t + Y_t \diff [X]_t) + Y_t(Z_t \diff X_t) + Y_t(Z_t \diff X_t) + (-Y_t Z_t) \diff [X]_t = 0.
-    $$
-}
-
-Let $M \in c \mathcal{M}_{0,loc}$. Then $\mathcal{E}(\theta M)_t = e^{\theta M_t - \frac{1}{2}\theta^2[M]_t}$ is in $c \mathcal{M}_{loc}$.
-
-By Fatou's lemma, we get 
-$$
-\begin{aligned}
-    \mathbb{E}(\mathcal{E}(\theta M)_t \mid \mathcal{F}_s) &= \mathbb{E}(\lim_{n\to \infty} \mathcal{E}(\theta M)_{t \wedge T_n} \mid \mathcal{F}_s) \\
-    &\leq \liminf_{n \to \infty} \mathbb{E}(\mathcal{E}(\theta M)_{t}^{T_n} \mid \mathcal{F}_s)\\
-    & = \liminf_{n \to \infty} \mathcal{E}(\theta M)_{s}^{T_n} \\
-    &= \mathcal{E}(\theta M)_s.
-\end{aligned}
-$$
-
-Hence $\mathcal{E}(X_t)$ is a supermartingale and $\mathbb{E}(\mathcal{E}(M)_t) \leq 1$.
-
-\thmnn{
-    Suppose $\forall~ t > 0$, $\exists~ K_t > 0$ s.t.
-    $$
-    [M]_t < K_t \quad \text{a.s.}
-    $$
-
-    If for some $t > 0$, $\exists~K_t >0$ s.t.
-    $$
-    [M]_t < K_t \quad \text{a.s.}
-    $$
-    
-    Then for this $t > 0$,
-    $$
-    \mathsf{P}\left( \max_{s \leq t}M_s > y \right) \leq e^{-\frac{y^2}{2K_t}}, \quad \forall~ y > 0.
-    $$
-    and $\mathcal{E}(\theta M)$ is a true martingale.
-}
-
-\pf{
-    By using $\mathcal{E}(\theta M)$ is a supermartingale, by Doob's inequality,
-    $$
-    \begin{aligned}
-    \mathsf{P}\left( \max_{s \leq t} M_s > y \right) &= \mathsf{P}\left( \max_{s \leq t} \mathcal{E}(\theta M)_s > e^{\theta y - \frac{1}{2} \theta^2 K_t} \right)\\
-    & \leq \frac{\mathbb{E}(\mathcal{E}(\theta M)_t)}{e^{\theta y -\frac{1}{2} \theta^2 K_t}}\\
-    & \leq e^{-\theta y + \frac{1}{2} \theta^2 K_t}.
-    \end{aligned}
-    $$
-    Pick $\theta = \frac{y}{K_t}$ to get $e^{-\frac{y^2}{2K_t}}$.
-
-    Next, define $Z_t = \max_{s \leq t} M_s$. Then $\forall~ \theta > 0$, 
-    $$
-        \mathbb{E}e^{\theta Z_t} = \int_{\mathbb{R}}e^{\theta y} \mathsf{P}(Z_t \in \diff y).
-    $$
-
-    Notice that $\forall~ z \in \mathbb{R}$, 
-    $$
-        e^{\theta Z} = 1 + \int_{0}^{Z} \theta e^{\theta y} \diff y.
-    $$
-    $$
-    \begin{aligned}
-    \implies 
-        \mathbb{E}(e^{\theta Z_t}) &= 1 + \mathbb{E}\left( \int_0^{Z_t} \theta e^{\theta y} \diff y \right) \\
-        &= 1 + \mathbb{E}\left( \int_0^\infty \mathsf{1}_{y < Z_t} \theta e^{\theta y} \diff  y \right)\\
-        & = 1+ \int_0^\infty \theta e^{\theta y} \diff  y  \mathsf{P}(Z_t > y)\\
-        & \leq 1 + \int_0^\infty \theta e^{\theta y} e^{-\frac{y^2}{2K_t}} \diff y \\
-        &< \infty.
-    \end{aligned}
-    $$
-
-    By $\mathcal{E}(\theta M)_t$ is a $\mathcal{M}_{loc}$, we get $\exists~T_n \uparrow \infty$ s.t. $\mathcal{E}(\theta M)_{t}^{T_n}$ is a martingale.
-
-    $$
-        \implies \forall~ s < t,\quad \mathbb{E}[\mathcal{E}(\theta M)_{t}^{T_n} \mid \mathcal{F}_s] = \mathcal{E}(\theta M)_{s}^{T_n}.
-    $$
-
-    By DCT for $\mathcal{E}(\theta M)_{t}^{T_n} \leq Z_t$ and $\mathbb{E} Z_t < \infty$, we get 
-    $$
-    \lim_{n \to \infty} \mathbb{E}(\mathcal{E}(\theta M)_{t}^{T_n} \mid \mathcal{F}_s) = \mathbb{E}(\mathcal{E}(\theta M)_t \mid \mathcal{F}_s).
-    $$
-}
-
-\cor{
-    Let $B$ be a B.M. in $\mathbb{R}^n$ and let $H$ be a bounded previsible process. Then 
-    $$
-    e^{\int H \diff B - \frac{1}{2}\int \abs{ H_s }^2 \diff s}
-    $$
-    is a true martingale.
-}
-
-\rmkb{$[M]_t = \int_0^t \abs{ H_s }^2 \diff  s < K_t$.}
-
-\cor{
-    Let $M \in c \mathcal{M}_{0,loc}$. Then $\forall~ t > 0$, $y> 0$, $K >0$,
-    $$
-    \mathsf{P}\left( \max_{s \leq t} M_s \geq y, [M]_{t} \leq K \right) \leq e^{-\frac{y^2}{2K}}.
-    $$
-    $$
-    \implies \mathsf{P}\left( \max_{s \leq t}\abs{ M_s } \geq y, [M]_t \leq K \right) \leq 2 e^{-\frac{y^2}{2K}}.
-    $$
-}
-
-\pf{
-    Let $T =\inf \{u \geq 0 \colon [M]_{u} \geq K\}$. Then 
-    $$
-    \mathsf{P}\left( \max_{s \leq t}M_s \geq y, [M]_{t} \leq K \right) \leq \mathsf{P}\left( \max_{s \leq t} M_{s \wedge T} \geq y \right) \leq e^{- \frac{y^2}{2K}}
-    $$  
-    since $[M^T]_t \leq K$.
-}
-
-\thm{Novikov's Thm}{
-    If $\forall~t > 0$, $\mathbb{E}(e^{\frac{1}{2} [M]_t} ) < \infty$ then $\mathcal{E}(X)_t$ is a true martingale.
-}
-
-\pf{
-    See P198 of [KS].
-}
-
-\subsection{Burkholder-Davis-Gundy inequalities}
-
-\defnn{
-    We say a function $F: \mathbb{R}^+ \to \mathbb{R}^+$ is \underline{moderate} if continuous and increasing, $F(x) = 0 \Leftrightarrow x=0$, and $\forall~\alpha > 1$,
-    $$
-        \sup_{x > 0} \frac{F(\alpha x)}{F(x)} < \infty.
-    $$
-}
-\ex{}{
-    $F(x) = x^{p}$, $\forall~ p > 0$.
-    $F(x) = x^p \left( \log x \vee 1 \right)$, $\forall~ p \geq 0$.
-}
-
-\thm{BDG inequality}{
-    Let $F$ be moderate. Then $\exists~$universal constants $c_F \leq C_F < \infty$ s.t. $\forall~ M \in c \mathcal{M}_{0,loc}$,
-    $$
-    c_{F} \mathbb{E}\left( F([M]_{\infty}^{\frac{1}{2}}) \right) \leq \mathbb{E} F(M_\infty^*) \leq C_F \mathbb{E}\left( F([M]_{\infty}^{\frac{1}{2}}) \right).
-    $$
-
-    $M_t^* = \sup_{s \leq t}\abs{ M_s }.$ Fix $t > 0$. Let $\tilde{M}_{s}^{t} = M_{s \wedge t}$. Then 
-    $$
-    c_{F} \mathbb{E}\left( F([M]_{t}^{\frac{1}{2}}) \right) \leq \mathbb{E}\left( F(M_t^*) \right) \leq C_F \mathbb{E} F([M]_{t}^{\frac{1}{2}}).
-    $$
-}
-
-\ex{}{
-    If $F(x) = x^p$, then 
-    $$
-    c_p \mathbb{E}[M]_{t}^{\frac{p}{2}} \leq \mathbb{E} \abs{ M_t^* }^p \leq C_p \mathbb{E}[M]_t^{\frac{p}{2}}.
-    $$
-}
-
-\lemp{``good'' $\lambda$ inequality}{
-    Let $X$ and $Y$ be nonegative R.V.s. Suppose $\exists~\beta > 1$ s.t. $\forall~ \lambda > 0$, $\delta >0$,
-    $$
-    \mathsf{P}(X > \beta \lambda, Y \leq \delta \lambda) \leq \psi(\delta) \mathsf{P}(X > \lambda)
-    $$
-    where $\psi(\delta) \downarrow 0$ as $\delta \downarrow 0$.
-
-    Then for each moderate $F$, $\exists~C=C(\beta,\psi, F) > 0$ s.t. 
-    $$
-    \mathbb{E}[F(X)] \leq c \mathbb{E}[F(Y)].
-    $$
-}{
-    Assume good $\lambda$ inequality. Then it holds by replacing $X$ by $X \wedge a$ for any $a>0$.
-
-    If $a > \beta \lambda > \lambda$, then
-    $$
-    \begin{aligned}
-    &X \wedge a > \beta \lambda \Leftrightarrow X > \beta \lambda\\
-    & X \wedge a > \lambda \Leftrightarrow X > \lambda.
-    \end{aligned}
-    $$
-
-    Hence we may assume $\mathbb{E}F(X) < \infty$.
-
-    [ $\mathbb{E}F(X\wedge a) \leq \mathbb{E} F(Y)$ for all $a >0$. Then let $a \uparrow \infty$.]
-
-    Notice that $\sup_{x>0} \frac{F(x)}{F(\frac{x}{\beta})}$.
-
-    Let $\gamma > 0$ s.t. $F(x) \leq \frac{1}{\gamma} F(\frac{x}{\beta})$ for all $x > 0$.
-
-    Now 
-    $$
-    \int F(\diff \lambda) \psi(\delta) \mathsf{P}(X > \lambda) \geq \int F(\diff \lambda) \mathsf{P}(X > \beta \lambda, Y \leq \delta \lambda).
-    $$
-    $$
-    LHS = \psi(\delta) \mathbb{E}\left( \int_0^X F(\diff \lambda) \right) = \psi(\delta)\mathbb{E}(F(X)).
-    $$
-    $$
-    \begin{aligned}
-    RHS &= \int F(\diff \lambda) \mathbb{E}(\mathsf{1}_{\frac{Y}{\delta} \leq \lambda < \frac{X}{\beta}}) \\
-    &= \mathbb{E}\left( \int_{\frac{Y}{\delta}}^{\frac{X}{\beta}} F(\diff \lambda) \right) \\
-    &= \mathbb{E}\left( F\left(\frac{X}{\beta}\right) - F\left(\frac{Y}{\delta}\right) \right)\\
-    & \geq \mathbb{E}\left( \gamma F(X) \right) - \mathbb{E}\left( F\left( \frac{Y}{\delta} \right) \right).
-    \end{aligned}
-    $$
-
-    Let $\delta > 0$ be small sucht that 
-    $$
-    \psi(\delta) < \frac{\gamma}{2} \implies \gamma -\psi(\delta) \geq \frac{\gamma}{2}.
-    $$
-
-    Hence 
-    $$
-    \mathbb{E}\left( F(X) \right)\left( \psi(\delta) - \gamma \right) \geq - \mathbb{E}\left( F\left( \frac{Y}{\delta} \right) \right).
-    $$
-
-    $$ \implies
-    \mathbb{E}\left( F\left( \frac{Y}{\delta} \right) \right) \geq \left( \gamma - \psi(\delta) \right) \mathbb{E}F(X) \geq \frac{\lambda}{2} \mathbb{E}F(X).
-    $$
-
-    Using $\displaystyle\sup_{y > 0}\frac{F(y/\delta)}{F(y)} < \infty$, $\implies \exists~\mu > 0$ s.t. $F(y/\delta) \leq \mu F(y)$ for all $y > 0$ 
-    $$\implies \mathbb{E}(F(Y/\delta)) \leq \mu \mathbb{E} F(Y)$$
-    $$
-    \implies \frac{\gamma}{2}\mathbb{E}F(X) \leq \mu \mathbb{E}F(Y).
-    $$
-}
-
-\pf{
-    of BDF inequality.
-
-    $$\mathsf{P}\left(M_\infty^* > \beta \lambda , [M]_{\infty}^{\frac{1}{2}} \leq \delta \lambda\right) \leq e^{-\frac{(\beta \lambda)^2}{2 (\delta \lambda)^2}} = e^{-\frac{\beta^2}{2 \delta^2}}.$$
-
-    Define $\tau = \inf \{u \geq 0 \colon \abs{ M_u }> \lambda\}$. 
-
-    Then 
-    $$\begin{aligned}
-        \mathsf{P}\left( M_\infty^* > \beta \lambda, [M]_{\infty}^{\frac{1}{2}} \leq \delta \lambda \right) &= \mathsf{P}\left( M_\infty^* > \beta \lambda, [M]_{\infty}^{\frac{1}{2}} \leq \delta \lambda , \tau < \infty\right)\\
-        &= \mathbb{E}\left[ \mathsf{1}_{\tau < \infty} \mathsf{P}\left( M_\infty^* > \beta \lambda, [M]_{\infty}^{\frac{1}{2}} \leq \delta \lambda \,\middle|\, \mathcal{F}_{\tau} \right) \right]
-    \end{aligned}
-    $$
-
-    Define $N_t \equiv (M_{t + \tau} - M_{\tau})^2 - ([M]_{t + \tau} - [M]_{\tau})$.
-
-    Then $N_t \in \mathcal{F}_{t + \tau}$ is a continuous local martingale
-    $$
-    \mathbb{E}\left[ M_{t+\tau}^2 - [M]_{t + \tau} \mid \mathcal{F}_{s + \tau} \right] = M_{s+\tau}^2 - [M]_{s+\tau}.
-    $$
-
-    $ \implies N_0 = 0$ and on $\{M_{\infty}^* > \beta \lambda, [M]_{\infty}^{\frac{1}{2}} \leq \delta \lambda\}$ we have $\exists~\tilde{t} > 0$ s.t.
-    $$
-    M_{\tilde{t} + \tau} \geq \beta \lambda \implies N_{\tilde{t}} = \left( M_{\tilde{t}+\tau} \pm \lambda \right)^2 - \left( [M]_{\tilde{t} + \tau} - [M]_{\tau} \right) \geq \left[ (\beta - 1) \lambda \right]^2 - (\delta \lambda)^2.
-    $$
-
-    Moreover $N_t \geq - \delta^2 \lambda^2$, $\forall~ t \geq 0$. 
-
-    Hence $N_t$ reaches $[(\beta-1)\lambda]^2 - (\delta \lambda)^2$ before $(-\delta^2 \lambda^2)$.
-
-    By (Gambler's Ruin $\mathsf{P}_{k}(\tau_0 < \tau_N) = \frac{N-k}{N}$)
-    $$ 
-    \mathsf{P}(\tau_b < \tau_a) \leq \frac{-a}{b-a}
-    $$
-    $$
-    \implies \mathsf{P}\left( M_\infty^* > \beta \lambda, [M]_{\infty}^{\frac{1}{2}} \leq \delta \lambda \mid \mathcal{F}_\tau \right) \leq \mathsf{P}\left( \tau_{[(\beta - 1)\lambda]^2 - (\delta \lambda)^2} < \tau_{-(\delta \lambda)^2} \right) \leq \frac{(\delta \lambda)^2}{[(\beta -1)\lambda]^2} = \frac{\delta^2}{(\beta -1)^2}.
-    $$
-
-    Here we take $0 < \delta < \beta -1$. Therefore
-    $$
-    \mathsf{P}\left( M_\infty^* > \beta \lambda, [M]_{\infty}^{\frac{1}{2}} \leq \delta \lambda  \right) \leq \delta^2 \frac{1}{(\beta - 1)^2} \mathsf{P}(\tau < \infty) = \delta^2 \frac{1}{(\beta-1)^2} \mathsf{P}\left( M_\infty^* > \lambda \right).
-    $$
-
-    Similarly, 
-    $$
-    \mathsf{P}\left( [M]_{\infty}^{\frac{1}{2}} > \beta \lambda, M_{\infty}^*  \leq \delta \lambda\right).
-    $$
-
-    $$
-    \tilde{N}_t = [M]_{t+\tilde{\tau}} - [M]_{\tilde{\tau}} - (M_{\tilde{\tau} + t}-M_{\tilde{\tau}})^2
-    $$
-    with $\tilde{\tau} = \inf\{u \geq 0 \colon [M]_{u}^{\frac{1}{2}} > \lambda\}$.
-
-    $$
-    \implies \mathsf{P}\left( [M]_{\infty}^{\frac{1}{2}} > \beta \lambda, M_{\infty}^*  \leq \delta \lambda, \tilde{\tau} < \infty \right) = \mathbb{E}\left[ \mathsf{P}(\dots \mid \mathcal{F}_{\tilde{\tau}})\mathsf{1}_{\tilde{\tau} < \infty} \right].
-    $$
-
-    Then $\tilde{N}_t$ reaches $(\beta \lambda)^2 - \lambda^2 - (\delta \lambda)^2$ before $-(\delta \lambda)^2$.
-
-
-}
