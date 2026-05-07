@@ -1,5 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1777731450.33887 "/Users/zheng/Desktop/SustStochasticAnalysis/main.tex" "main.pdf" "main" 1777731453.88831 0
+["pdflatex"] 1778074845.89959 "/Users/zheng/Desktop/SustStochasticAnalysis/main.tex" "main.pdf" "main" 1778074851.8496 0
   "/Users/zheng/Desktop/SustStochasticAnalysis/main.tex" 1772627289.25161 3599 2103264f2dcd1c088da06208148aab70 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc" 1136849721 2900 1537cc8184ad1792082cd229ecc269f4 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/enc/dvips/fontawesome5/fa5free1.enc" 1622837620 3042 0e2b14b9be7d01075a4c4591d5d1781b ""
@@ -54,6 +54,7 @@
   "/usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb" 1248133631 32726 0a1aea6fcd6468ee2cf64d891f5c43c8 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsl10.pfb" 1248133631 35022 e40946b20bfdcd1099eafb2bcd9f25dd ""
   "/usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb" 1248133631 24457 5cbb7bdf209d5d1ce9892a9b80a307cc ""
+  "/usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb" 1248133631 24420 52dbb8e8aa0069a1b987309557f8d303 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb" 1248133631 32569 5e5ddc8df908dea60932f3c484a54c0d ""
   "/usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb" 1248133631 32587 1788b0c1c5b39540c96f5e42ccd6dae8 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb" 1248133631 32626 4f5c1b83753b1dd3a97d1b399a005b4b ""
@@ -311,8 +312,8 @@
   "/usr/local/texlive/2025/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1764178997 5467155 19efa205003f9ecad95fbbaa6ff24da1 ""
   "/usr/local/texlive/2025/texmf-var/web2c/pdftex/pdflatex.fmt" 1764178933 3345728 dc00c2a410a30d0573a4366c75a713c7 ""
   "/usr/local/texlive/2025/texmf.cnf" 1741450484 577 418a7058ec8e006d8704f60ecd22c938 ""
-  "chapter/chapter1.aux" 1777731453.56502 20102 808c679d339f02e3ee5b872de04c8e2b "pdflatex"
-  "chapter/chapter1.tex" 1777731445.13984 16405 e37a04af4b3ded0fc323b0e53ace4d3b ""
+  "chapter/chapter1.aux" 1778074851.34147 21256 6944c10780a59983828e6312d6e1047f "pdflatex"
+  "chapter/chapter1.tex" 1778074845.46799 29939 f1ac19144ba8b0e3e9506590b5cd3fdd ""
   "chapter/chapter2.aux" 0 -1 0 ""
   "chapter/chapter3.aux" 0 -1 0 ""
   "chapter/chapter4.aux" 0 -1 0 ""
@@ -326,10 +327,10 @@
   "chapter/section7.tex" 1775041214.95797 16244 50285c23e8aec2f30c8f33d91ac6291f ""
   "chapter/section8.tex" 1777460732.31878 45614 8b40a3331fd17372929db3fe8175c1e1 ""
   "commands.tex" 1773840097.68965 1473 4e94dcdd1546e00b87338498d1d5b82a ""
-  "main.aux" 1777731453.59143 1637 1d2f9cd2c54865253c99def33fdcdff7 "pdflatex"
-  "main.out" 1777731453.59694 2288 60e738cfc72b5f59a9ab441574a4cac1 "pdflatex"
+  "main.aux" 1778074851.37794 1637 5cad354da2b9662e6d30c1baceca99cb "pdflatex"
+  "main.out" 1778074851.38609 2288 60e738cfc72b5f59a9ab441574a4cac1 "pdflatex"
   "main.tex" 1772627289.25161 3599 2103264f2dcd1c088da06208148aab70 ""
-  "main.toc" 1777731453.59765 1275 ae2603ac57dfefdcb570e863d0bc6f9d "pdflatex"
+  "main.toc" 1778074851.3869 1275 ae2603ac57dfefdcb570e863d0bc6f9d "pdflatex"
   "theorems.tex" 1772245318.02929 8766 869bfaec0c8f1debeeda916ab7c2c792 ""
   (generated)
   "chapter/chapter1.aux"

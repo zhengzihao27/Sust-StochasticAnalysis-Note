@@ -386,3 +386,352 @@ d-dimension SDE ...
 }
 
 
+\prop{(Yamada \& Watanabe 1971)
+
+    ``$d=1$'' Consider
+    $$
+    \diff X_t = b(t,X_t) \diff t + \sigma(t,X_t) \diff W_t.
+    $$
+
+    Assume that $\exists~$constant $K > 0$ and $h:[0,\infty) \to [0,\infty)$ is a strictly increasing function with $h(0) = 0$ such that
+    $$
+    \begin{cases}
+        \abs{ b(t,x) - b(t,y) } \leq K \abs{ x-y }\\
+        \abs{ \sigma(t,x) - \sigma(t,y) } \leq h(\abs{ x-y })
+    \end{cases}
+    $$
+    hold for all $t \geq 0$ and $x,y \in \mathbb{R}$ with 
+    $$
+    \int_0^\varepsilon h(u)^{-2}\diff u = \infty, \quad \forall~ \varepsilon >0.
+    $$ 
+    Then strong uniqueness holds. 
+}
+
+\pf{
+    Idea: Constant a $C^2$ function $\psi_n(x)$ s.t. $\psi_n(x) \uparrow \abs{ x }$. Let $a_0 = 1 > a_1 >\dots > a_n \downarrow 0$ such that
+    $$
+    \begin{aligned}
+        &\int_{a_1}^{a_0} h(u)^{-2}\diff  u = 1,\\
+        &\int_{a_2}^{a_1} h(u)^{-2} \diff u = 2,\\
+        &\dots \\
+        & \int_{a_n}^{a_{n-1}} h(u)^{-2} \diff  u = n,
+    \end{aligned}
+    $$
+    So 
+    $$
+    \int_{a_n}^{a_{n-1} } \frac{2}{n }h(x)^{-2}\diff  x = 2.
+    $$
+
+    Then $\exists~\rho_n(x)$ s.t.
+    $$
+    \int_{a_n}^{a_{n-1}} \rho_n(x)\diff x = 1
+    $$
+    and $\rho_n(x) = 0$, $\forall~x  \notin (a_n,a_{n-1})$, and $x \mapsto \rho_n(x)$ is continuous.
+
+    $$
+    \implies \int_0^\infty \rho_n(x) \diff x = 1.
+    $$
+
+    Let $\psi_n'(x) = \int_0^x \rho_n(y) \diff y$, $\forall~ x \geq 0$.
+
+    Let $\psi_n(x) = \int_0^x \psi_n'(y) \diff y$ for $x \geq 0$ and 
+    $$
+    \psi_n(x) = \psi_n(-x), \quad \forall~ x < 0.
+    $$
+
+    One can check that $\psi_n(x) \uparrow \abs{ x }$, $\forall~ x \in \mathbb{R}$.
+
+    \textbf{Summary:} \begin{itemize}
+        \item[(i)] $\psi_n(x) \to \abs{ x }$, $\forall~ x \in \mathbb{R}$,
+        \item[(ii)] $\abs{ \psi_n'(x) } \leq 1$, $\forall~ x \in \mathbb{R}$,
+        \item[(iii)] $\abs{ \psi_n''(x) } = \abs{ \rho_n(x) } \leq \frac{2}{n} h(x)^{-2}$.
+    \end{itemize}
+
+    Suppose $X^{(1)}$ \& $X^{(2)}$ are two strong solutions with $X_0^{(1)} = X_0^{(2)}$ a.s.
+
+    Define 
+    $$
+    \tau_N = \inf \left\{ t \geq 0 \colon \int_0^t \sigma(s,X_s^{(1)})^2 \diff s \geq N \text{ or } \int_{0}^{t}\sigma(s,X_s^{(2)})^2 \diff s \geq N\right\}.
+    $$
+    $$
+    \implies \mathbb{E}\int_0^{t \wedge \tau_N} \sigma(s,X_s^{(i)})^2 \diff s \leq N
+    $$
+    for $i=1,2$.
+
+    We may assume that 
+    $$
+    \mathbb{E}\int_0^t \sigma(s,X_s^{(i)})^2 \diff s < \infty,
+    $$
+    for $\forall~ t \geq 0$, $i=1,2$, due to $\tau_N \uparrow \infty$ a.s.
+
+    Otherwise we may prove
+    $$
+    X_s^{(1)} = X_s^{(2)}, \quad \forall~0 \leq s \leq \tau_N \text{ a.s. }\implies X_s^{(1)} = X_s^{(2)}, \quad \forall~ s \geq 0.
+    $$
+
+    Define $\Delta_t = X_t^{(1)} - X_t^{(2)}$.
+    
+    $$
+    \begin{aligned}
+    \implies \diff \Delta_t &= \diff X_t^{(1)} - \diff X_t^{(2)}\\
+    &= \left[ \sigma(t,X_t^{(1)}) - \sigma(t,X_t^{(2)}) \right] \diff W_t + \left[ b(t,X_t^{(1)}) - b(t,X_t^{(2)}) \right] \diff t.
+    \end{aligned}
+    $$
+
+    Apply It\^o's formula to get 
+    $$
+    \begin{aligned}
+    \psi_n(\Delta_t) &= \psi_n(\Delta_0) + \int_0^t \psi_n'(\Delta_s) \diff \Delta_s + \frac{1}{2} \int_0^t \psi_n''(\Delta_s) \diff [\Delta]_s \\
+    &=\psi_n(0) + \int_0^t\psi_n'(\Delta_s)[\sigma - \sigma]\diff W_s + \int_0^t \psi_n'(\Delta_s)[b-b]\diff s + \frac{1}{2}\int_0^t \psi_n''(\Delta_s)[\sigma - \sigma]^2 \diff s.
+    \end{aligned}
+    $$
+
+    Take expectation to see that
+    $$
+    \begin{aligned}
+        \mathbb{E}\psi_n(\Delta_t) &= \mathbb{E}\int_0^t \psi_n'(\Delta_s)\left[ b(t,X_t^{(1)}) - b(t,X_t^{(2)})  \right]\diff s + \mathbb{E}\int_0^t \frac{1}{2}\psi_n''(\Delta_s) [\sigma - \sigma]^2 \diff s \\
+    &\leq \mathbb{E}\int_0^t K \abs{ X_s^{(1)} - X_s^{(2)} } \diff s + \mathbb{E}\int_0^t \frac{1}{2} \frac{2}{n} h(\abs{ \Delta_s })^{-2}\cdot h(\abs{ X_s^{(1)} - X_s^{(2)} })^2 \diff s\\
+    &= K\int_0^t \mathbb{E}\abs{ X_s^{(1)} - X_s^{(2)} }\diff s + \frac{1}{n}t.
+    \end{aligned}
+    $$
+
+    Let $n\to \infty$ to get 
+    $$
+    \mathbb{E}\abs{ \Delta_t } \leq K \int_0^t \mathbb{E} \abs{ \Delta_s }\diff s.
+    $$
+
+    By Gronwall's Inequality,
+    $$
+    \mathbb{E}\abs{ \Delta_t } = 0 \implies X_t^{(1)} = X_t^{(2)} \text{ a.s.}.
+    $$
+
+    By continuity,
+    $$
+    X_t^{(1)} = X_t^{(2)}, \quad \forall~ t \geq 0 \text{ a.s.}.
+    $$
+}
+
+\prop{(R \& W)
+
+    If $Y = X- X'$, and $h \colon [0,\infty) \to [0,\infty)$ is increasing s.t.
+    $$
+    \int_0^\varepsilon h(x)^{-2} \diff x = \infty, \quad \forall~\varepsilon > 0,
+    $$
+    then $l_{\cdot}^0(Y) = 0$ if 
+    $$
+    \int_0^t h(Y_s)^{-2} \mathsf{1}_{\{Y_s > 0 \}}\diff [Y]_s < \infty
+    $$
+    a.s. $\forall~ t > 0$.
+
+    Here $l_t^{0} (Y)$ is the local time of $Y$ at 0 
+    
+    (Recall $\abs{ Y_t } = \abs{ Y_0 } + \int_0^t \mathrm{sgn}(Y_s) \diff Y_s + l_t^{0}(Y)$)
+}
+
+\pf{
+    $$
+    l_t^a ``=" \int_0^t \delta_a (Y_s) \diff [Y]_s.
+    $$  
+    Then $\forall~ $function $f \colon : \mathbb{R} \to \mathbb{R}$,
+    $$
+    \begin{aligned}
+    \int_0^t f(Y_s) \diff [Y]_s & = \int_0^t \diff [Y]_s \int_{-\infty}^{\infty}f(a)\delta_a (Y_s)\diff a \\
+    &= \int_{-\infty}^{\infty}f(a)\diff a \int_0^t \delta_a(Y_s)\diff [Y]_s \\
+    &= \int_{-\infty}^{\infty}f(a)l_t^a(Y)\diff a.
+    \end{aligned}
+    $$
+    
+    So 
+    $$
+    \int_0^t h(Y_s)^{-2}\mathsf{1}_{\{Y_s > 0\}} \diff [Y]_s = \int_{-\infty}^{\infty}h(a)^{-2}\mathsf{1}_{\{a > 0\}} l_t^a \diff a = \int_0^\infty h(a)^{-2}l_t^a \diff a.
+    $$
+
+    If $l_t^a(Y) > 0$, then by the right-continuity of $a \mapsto l_t^a(Y)$, we get $\int_t^a (Y) \geq \varepsilon_0$ for some $\varepsilon_0 > 0$ and $0 < a < \varepsilon_0$.
+    $$
+    \implies \int_0^\infty h(a)^{-2}l_t^a \diff a \geq \int_0^{\varepsilon_0} h(a)^{-2} \varepsilon_0 \diff a = \infty.
+    $$
+    Contradiction.
+
+    Hence we conclude that $l_t^0(Y) = 0$, $\forall~ t \geq 0$, a.s.
+}
+
+\textbf{Assumption:} $\begin{cases}
+    \abs{ b(t,x)-b(t,y) } \leq K \abs{ x-y }\\
+    \abs{ \sigma(t,x) - \sigma(t,y) } \leq h (\abs{ x-y })
+\end{cases}$ and $\int_0^{\varepsilon}h(x)^{-2} \diff x = \infty$, $\forall~\varepsilon > 0$.
+
+\pf{Second proof of (Y-W 1971) (Le Gall) 
+
+    Since (Recall $\diff Y_s = \diff X_s^{(1)} - \diff X_s^{(2)}$)
+    $$
+    \begin{aligned}
+    \int_0^t h(Y_s)^{-2}\mathsf{1}_{\{Y_s > 0\}} \diff [Y]_s &= \int_0^t h(Y_s)^{-2} \mathsf{1}_{\{Y_s > 0\}}(\sigma - \sigma)^2 \diff s\\
+    &\leq \int_0^t h(Y_s)^{-2}\mathsf{1}_{\{Y_s > 0\}}h(\abs{ X_s^{(1)} - X_s^{(2)} })^2 \diff s \leq t < \infty \text{ a.s..}
+    \end{aligned}
+    $$
+
+    $\implies l_t^0 (Y) = 0$ a.s.
+    
+    Thus 
+    $$
+        \abs{ Y_t } = \abs{ Y_0 } + \int_0^t \mathrm{sgn}(Y_s) \diff Y_s + l_t^0(Y).
+    $$
+    $$
+    \begin{aligned}
+        \implies \abs{ X_t^{(1)} - X_t^{(2)} } &= \int_0^t \mathrm{sgn}(X_s^{(1)} - X_s^{(2)})(b-b)\diff s + \int_0^t \mathrm{sgn}(X_s^{(1)} - X_s^{(2)}) (\sigma - \sigma)\diff W_s.
+    \end{aligned}
+    $$
+    $$
+    \implies \mathbb{E}\abs{ X_t^{(1)} - X_t^{(2)} } \leq \int_0^t \mathbb{E} K \abs{ X_s^{(1)} - X_s^{(2)} }\diff s.
+    $$
+
+    By Gronwall's, the proof is done.
+}
+
+
+\thm{Comparision Principle}{
+    Given $(\Omega,\mathcal{F},\mathsf{P})$ and a B.M. $\{W_t,\mathcal{F}_t,t \geq 0\}$. If two continuous adapted process $X^{(1)},X^{(2)}$ satisfy that 
+    $$
+    \begin{cases}
+        X_t^{(1)} = X_0^{(1)} + \int_0^t b_1(s,X_s^{(1)}) \diff s + \int_0^t \sigma(s,X_s^{(1)}) \diff  W_s,\\
+        X_t^{(2)} = X_0^{(2)} + \int_0^t b_2(s,X_s^{(2)}) \diff s + \int_0^t \sigma(s,X_s^{(2)}) \diff  W_s.
+    \end{cases}
+    $$
+
+    Assume \begin{itemize}
+        \item[(1)] $\sigma(t,x)$, $b_j(t,x)$ are continuous, real-values functions on $[0,\infty) \times \mathbb{R}$.
+        \item[(2)] $\abs{ \sigma(t,x) -\sigma(t,y) } \leq h(\abs{ x-y })$ with 
+        $$\int_0^{\varepsilon}h(x)^{-2} \diff x = \infty.$$
+        \item[(3)] $X_0^{(1)} \leq X_0^{(2)}$.
+        \item[(4)] $b_1(t,x) \leq b_2(t,x)$.
+        \item[(5)] either $b_1(t,x)$ or $b_2(t,x)$ satisfy $\abs{ b(t,x)-b(t,y) } \leq K \abs{ x-y }$.
+    \end{itemize}
+
+    Then $\mathsf{P}\left( X_t^{(1)} \leq X_t^{(2)}, \forall~ t \geq 0 \right) = 1$.
+}
+
+\pf{
+    Assume $\abs{ b_1(t,x) - b_1(t,y) } \leq K \abs{ x-y }$. Again we assume 
+    $$
+    \mathbb{E}\int_0^t \sigma(s ,X_s^{(j)})^2 \diff s < \infty, \quad \forall~t \geq 0.
+    $$
+
+    Let $\psi_n(x)$ be as before. Define
+    $$
+    \varphi_n(x) = \psi_n(x) \mathsf{1}_{(0,\infty)}(x).
+    $$
+    $$
+    \mathbb{E}[\varphi_n(\Delta_t)] \leq \mathbb{E}\int_0^t \varphi_n'(\Delta_s)\left[ b_1(s,X_s^{(1)}) - b_2(s,X_s^{(2)}) \right]\diff s + \frac{t}{n}
+    $$
+    where $\Delta_t = X_t^{(1)} - X_t^{(2)}$.
+
+    So 
+    $$
+    \begin{aligned}
+    \mathbb{E}\varphi_n(\Delta_t)- \frac{t}{n} &\leq \mathbb{E}\int_0^t \varphi_n'(\Delta_s)\left[ b_1(s,X_s^{(1)}) - b_2(s,X_s^{(2)}) \right]\diff s \\
+    &\leq \mathbb{E}\int_0^t K \abs{ X_s^{(1)} - X_s^{(2)} }\varphi_n'(\Delta_s)\diff s\\
+    & = \mathbb{E}\int_0^t K \Delta_s^+ \varphi_n'(\Delta_s^+) \diff s \\
+    &\leq \mathbb{E}\int_0^t K \Delta_s^+ \diff s,
+    \end{aligned}
+    $$
+    since $\varphi_n'(\Delta_s) = 0$ if $\Delta_s \leq 0$. $\varphi_n'(\Delta_s) > 0$ if $\Delta_s > 0$.
+
+    By $\psi_n(x) \to \abs{ x }$, $\varphi_n(x) = \psi_n(x) \mathsf{1}_{(0,\infty)}(x) \to x^+$.
+
+    Let $n \to \infty$ to get 
+    $$
+    \mathbb{E}\Delta_t^+ \leq K \int_0^t \mathbb{E} \Delta_s^+ \diff s.
+    $$
+
+    By Gronwall, $\mathbb{E} \Delta_t^+ = 0 \implies \mathsf{P}\left( X_t^{(1)} \leq X_t^{(2)} \right) = 1$, $\forall~ t > 0$.
+}
+
+\defn{Weak Solution}{
+    A weak solution of SDE is a triple $(X,W)$, $(\Omega, \mathcal{F}, \mathsf{P})$, $\{\mathcal{F}_t\}$ where
+    \begin{itemize}
+        \item[(1)] ($\Omega, \mathcal{F}, \mathsf{P}$) probability space, $\{\mathcal{F}_t\}$ is filtration.
+        \item[(2)] $(X_t, \mathcal{F}_t)$ is continuous and adapted $(W_t, \mathcal{F}_t)$ is an r-dim B.M.
+        \item[(3)] $\displaystyle \mathsf{P}\left( \int_0^t b_j(s,X_s) + \sigma_{ij}(s,X_s)^2 \diff s < \infty, \quad \forall~t \geq 0  \right) = 1$.
+        \item[(4)] $X_t = X_0 + \int_0^tb(s,X_s)\diff s + \int_0^t \sigma(s,X_s) \diff W_s$.
+    \end{itemize}
+}
+
+\defn{Pathwise Uniqueness}{
+    Suppose whenever $(X,W)$, $(\Omega, \mathcal{F}, \mathsf{P})$, $\{\mathcal{F}_t\}$ and $(\tilde{X},W)$, $(\Omega, \mathcal{F}, \mathsf{P})$, $\{\tilde{\mathcal{F}}_t\}$ are two weak solutions with $X_0 = \tilde{X}_0$ a.s., if $$
+    \mathsf{P}\left( X_t = \tilde{X}_t,\quad \forall~ t \geq 0 \right) = 1,
+    $$
+    then pathwise uniqueness holds.
+}
+
+\defn{Weak Uniqueness (Uniqueness in law)}{
+    If for any two weak solutions $(X,W)$, $(\Omega,\mathcal{F}, \mathsf{P})$, $\{\mathcal{F}_t\}$ and $(\tilde{X},\tilde{W})$, $(\tilde{\Omega}, \tilde{\mathcal{F}}_t, \tilde{\mathsf{P}})$, $\{\tilde{\mathcal{F}}_t\}$ with same initial distribution $\forall~ B \in B(\mathbb{R}^d)$, $$\mathsf{P(X_0 \in B)} = \tilde{\mathsf{P}}(\tilde{X}_0 \in B).$$ 
+
+    We get $X$ and $\tilde{X}$ have the same law, i.e. $\forall~ t_0 \leq t_1 \leq \dots \leq t_n$,
+    $$
+    \mathsf{P}\left( X_{t_0} \in B_0,\dots, X_{t_n}\in B_n \right) = \tilde{\mathsf{P}}\left( \tilde{X}_{t_0}\in B_0, \dots, X_{t_n} \in B_n \right)
+    $$
+    for all $B_i \in B(\mathbb{R}^d)$, then weak uniqueness holds.
+}
+
+\rmkb{
+    (Tanaka SDE)
+    $$
+    X_t = \int_0^t \mathrm{sgn}(X_s) \diff W_s 
+    $$
+    with $\mathrm{sgn}(x) = \begin{cases}
+        1,& x> 0\\
+        -1,& x \leq 0
+    \end{cases}$.
+
+    \textbf{Weak Uniqueness:} If $(X,W)$, $(\Omega, \mathcal{F}, \mathsf{P})$, $\{\mathcal{F}_t\}$ is a weak solution, then the process $(X_t)$ is a continuous, square-integrable martingale with
+    $$
+    [X]_t = \int_0^t \mathrm{sgn}(X_s)^2 \diff  s = t .
+    $$
+    
+    So $X$ is a B.M. $\implies$ Weak Uniqueness holds.
+
+    However, $(-X,W)$, $(\Omega, \mathcal{F}, \mathsf{P})$, $\{\mathcal{F}_t\}$ is also a weak solution.
+
+    Because $$X_t = \int_0^t \mathrm{sgn}(X_t) \diff W_s \implies -X_t = \int_0^t -\mathrm{sgn}(X_s) \diff W_s = \int_0^t \mathrm{sgn}(-X_s) \diff W_s.
+    $$ 
+    $$
+    \int_0^t\left( -\mathrm{sgn}(X_t) - \mathrm{sgn}(-X_s) \right)\diff  W_s \sim \int_0^t \left( -\mathrm{sgn}(X_s) - \mathrm{sgn}(-X_s) \right)^2 \diff s.
+    $$
+
+    Notice that $-\mathrm{sgn}(x) - \mathrm{sgn}(-x) = 0$ for all $x \neq 0$ and 
+    $$
+    \mathsf{P}\left( X_s \neq 0,\text{ for a.e. } s \geq 0 \right) = 1.
+    $$
+
+    W.P.1 
+    $$
+    \int_0^t (-\mathrm{sgn}(X_s) - \mathrm{sgn}(-X_s))^2 \diff s = 0 \implies \int_0^t -\mathrm{sgn}(X_s) \diff W_s = \int_0^t \mathrm{sgn}(-X_s) \diff W_s \text{ a.s. }
+    $$
+
+    $\implies - X_t = \int_0^t \mathrm{sgn}(-X_s)\diff W_s$.
+
+    $\implies(-X,W)$ is also a weak solution.
+    $$
+    \implies \mathsf{P}(X_t \neq - X_t, \text{ for a.e. } t \geq 0) = 1.
+    $$
+
+    Hence pathwise uniqueness fails.
+
+    \textbf{Weak Existence:} $(X,W)$, $(\Omega, \mathcal{F}, \mathsf{P})$, $\{\mathcal{F}_t\}$.
+
+    \textbf{Construction:} Given $(\Omega, \mathcal{F}, \mathsf{P})$ and a B.M. $X = \{X_t, \mathcal{F}_t^{X}, t \geq 0\}$. Let $\mathring{\mathcal{F}}_t^X = $augmention of $\mathcal{F}_t^X$.
+
+    Assume $\mathsf{P}(X_0 = 0 ) = 1$.
+
+    Define $W_t \triangleq \int_0^t \mathrm{sgn}(X_s) \diff X_s$.
+
+    Then $W_t$ is a B.M. with respect to $\mathring{\mathcal{F}}_t^X$. 
+
+    Also 
+    $$
+        \int_0^t \mathrm{sgn}(X_s) \diff W_s = \int_0^t \mathrm{sgn}(X_s) \mathrm{sgn}(X_s)\diff X_s = \int_0^t 1 \diff X_s = X_t.
+    $$
+
+    Hence $(X,W)$, $(\Omega,\mathcal{F},\mathsf{P})$, $\mathring{\mathcal{F}}_t^X$ is a weak solution.
+}
+
