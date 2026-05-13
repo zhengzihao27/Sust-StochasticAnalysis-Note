@@ -1004,4 +1004,125 @@ Weak solutions constructed by means of the Girsanov Theorem.
     Z_t \triangleq \exp\left( \sum_{i=1}^d \int_0^t b_j(s,X_s) \diff X_s^{(j)} - \frac{1}{2}\int_0^t \norm{ b(s,X_s) }^2 \diff s \right)
     $$
     is a martingale.
+
+    By Girsanov Theorem, if we define 
+    $$
+    Q^X(A) = \mathsf{P}^X(A \cdot Z_T)
+    $$
+    for all $A \in \mathcal{F}_T$, then
+    $$
+    W_t \triangleq X_t - X_0 - \int_0^t b(s,X_s) \diff s
+    $$
+    is a B.M. with $Q^X(W_0 = 0) = 1$.
+
+    Then $X_t = X_0 + W_t + \int_0^t b(s,X_s) \diff s$ for all $0 \leq s \leq T$.
+
+    Note that $\mathsf{P}^X(X_0 = x) = 1$.
+
+    Then $Q^X(X_0 = x) = 1$.
+
+    Define $Q^\mu (A) = \int_{\mathbb{R}^d} Q^X(A)\mu(\diff x)$.
+
+    Then $Q^{\mu}(W_0 = 0) = 1$ and 
+    $$
+    \begin{aligned}
+    Q^\mu(X_0 \in A) &= \int_{\mathbb{R}^d}Q^X(X_0\in A) \mu (\diff x)\\
+    &=\int_{\mathbb{R}^d} \mathsf{1_{x\in A}}\mu(\diff x) = \mu(A) .
+    \end{aligned}
+    $$
+
+    So under $Q^\mu$ we get $X_0 \sim \mu$ and $(X,W)$, $(\Omega,\mathcal{F},Q^\mu)$, $\{\mathcal{F}_t\}$.
+
+}
+
+(1) pathwise uniqueness $\implies$ weak uniqueness.
+
+\pf{
+    If $$
+    \begin{cases}
+        (X^{(1)},W^{(1)})\\
+        (\Omega_1,\mathcal{F}_1,v_1)\\
+        (\mathcal{F}_t^{(1)})_{t \geq 0},
+    \end{cases}
+    \begin{cases}
+        (X^{(2)},W^{(2)})\\
+        (\Omega_2,\mathcal{F}_2,v_2)\\
+        (\mathcal{F}_t^{(2)})_{t \geq 0},
+    \end{cases}
+    $$
+    are two weak solutions.
+
+    If $v_1(X_0^{(1)} \in \cdot) = v_2 (X_0^{(2)} \in \cdot)$, then we will show that
+    $$
+    v_1(X^{(1)} \in \cdot) = v_2 (X^{(2)} \in \cdot).
+    $$
+
+    In fact, we will prove that if 
+    $$
+    Y^{(j)} = X^{(j)}-X_0^{(j)},
+    $$  
+    then 
+    $$
+    v_1((X_0^{(1)},W^{(1)},Y^{(1)}) \in A) = v_2 ((X_0^{(2)},W^{(2)},Y^{(2)}) \in A)
+    $$
+    for all $A\in \mathcal{B}(\Theta)$ with $\Theta = \mathbb{R}^d \times C[0,\infty)^r \times C[0,\infty)^d$ and $\mathcal{B}(\Theta) = \mathcal{B}(\mathbb{R}^d)\otimes \mathcal{B}(C[0,\infty)^r) \otimes \mathcal{B}(C[0,\infty)^d)$.
+
+    Let $\mu(\cdot) = v_1(X_0^{(1)} \in \cdot) = v_2(X_0^{(2)} \in \cdot)$.
+
+    Let $P_*$ denote the wiener measure on $C[0,\infty)^r$ .
+
+    Define $(\Omega,\mathcal{F})$ by $\Omega=\Theta\times C[0,\infty)^d$, $\mathcal{F} = \mathcal{B}(\Theta)\otimes \mathcal{B}(C[0,\infty)^d)$.
+
+    For each $\omega \in \Omega$, we write $\omega = (x,w,y_1,y_2)$.
+
+    Define 
+    $$
+    \mathsf{P}(\diff \omega) = \mu(\diff x)P_*(\diff w)Q_1(x,w,\diff y_1)Q_2(x,w,\diff y_2),
+    $$
+    where $Q_j(x,w,y_i)$ is the regular conditional probability s.t. 
+    \begin{itemize}
+        \item[(1)] $\forall~ x \in \mathbb{R}^d$, $w \in C[0,\infty)^r$, $Q_j(x,w,\cdot)$ is a probability measure on $(C[0,\infty)^d,\mathcal{B}(C[0,\infty)^d)).$
+        \item[(2)] $\forall~ F \in  \mathcal{B}(C[0,\infty)^d)$, the map $(x,w)\to Q_j(x,w;F)$ is measurable w.r.t $\mathcal{B}(\mathbb{R}^d)\otimes \mathcal{B}(C[0,\infty)^r)$.
+        \item[(3)] $\forall~G \in \mathcal{B}(\mathbb{R}^d)\otimes \mathcal{B}(C[0,\infty)^r)$, $\forall~F\in \mathcal{B}(C[0,\infty)^d)$, 
+        $$
+        v_j(X_0^{(j)}, W^{(j)} \in G, Y^{(j)} \in F) = \int_G \mu(\diff x) P_*(\diff w) Q_j(x,w;F)
+        $$
+        i.e. $Q_j(x,w;F) = v_j(Y^{(j)}\in F \mid X_0^{(j)}= x , W^{(j)}= w )$.
+    \end{itemize}
+
+    Let $G_t \triangleq \sigma((x,w(s),y_1(s),y_2(s)) \colon x\in \mathbb{R}^d, 0 \leq s \leq t )$.
+
+    Let $F_t \triangleq $ augmention of $\sigma_t$.
+
+    Now we conclude that 
+    $$
+    \begin{aligned}
+        \mathsf{P}\left( \{\omega \in \Omega \colon (x,w,y_1)\in A\} \right) &= 
+        \int \mathsf{P}(\diff \omega) \mathsf{1}_{(x,w,y_1)\in A} \\
+        &= \int_{A} \mu(\diff x) P_*(\diff w)Q_1(x,w;\diff y_1)\\
+        &= v_1((X_0^{(1)} ,W^{(1)}, Y^{(1)})\in A).
+    \end{aligned}
+    $$
+
+    So 
+    $$
+    (x+y_1,w) \xlongequal{d} (X^{(1)},X^{(1)})
+    $$
+    and 
+    $$
+    (x+y_2,w) \xlongequal{d} (X^{(2)},W^{(2)}).
+    $$
+
+    pathwise uniqueness implies
+    $$
+    \mathsf{P}(x+y_1(t) = x+y_2(t),\forall~ t \geq 0) = 1.
+    $$
+    $$
+    \begin{aligned}
+        v_1((X_0^{(1)},W^{(1)},Y^{(1)})\in A) &=
+        \mathsf{P}(\{\omega \in \Omega\colon (x,w,y_1)\in A\}) \\
+        &= \mathsf{P}(\{\omega \in \Omega \colon (x,w,y_2)\in A\}) \\
+        &=v_2((X_0^{(2)},W^{(2)},Y^{(2)})\in A).
+    \end{aligned}
+    $$
 }
