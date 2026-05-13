@@ -664,7 +664,7 @@ d-dimension SDE ...
 }
 
 \defn{Weak Uniqueness (Uniqueness in law)}{
-    If for any two weak solutions $(X,W)$, $(\Omega,\mathcal{F}, \mathsf{P})$, $\{\mathcal{F}_t\}$ and $(\tilde{X},\tilde{W})$, $(\tilde{\Omega}, \tilde{\mathcal{F}}_t, \tilde{\mathsf{P}})$, $\{\tilde{\mathcal{F}}_t\}$ with same initial distribution $\forall~ B \in B(\mathbb{R}^d)$, $$\mathsf{P(X_0 \in B)} = \tilde{\mathsf{P}}(\tilde{X}_0 \in B).$$ 
+    If for any two weak solutions $(X,W)$, $(\Omega,\mathcal{F}, \mathsf{P})$, $\{\mathcal{F}_t\}$ and $(\tilde{X},\tilde{W})$, $(\tilde{\Omega}, \tilde{\mathcal{F}}_t, \tilde{\mathsf{P}})$, $\{\tilde{\mathcal{F}}_t\}$ with same initial distribution $\forall~ B \in B(\mathbb{R}^d)$, $$\mathsf{P}(X_0 \in B)= \tilde{\mathsf{P}}(\tilde{X}_0 \in B).$$ 
 
     We get $X$ and $\tilde{X}$ have the same law, i.e. $\forall~ t_0 \leq t_1 \leq \dots \leq t_n$,
     $$
@@ -733,5 +733,221 @@ d-dimension SDE ...
     $$
 
     Hence $(X,W)$, $(\Omega,\mathcal{F},\mathsf{P})$, $\mathring{\mathcal{F}}_t^X$ is a weak solution.
+
+    \textbf{No strong solution.}
+
+    Given $(\Omega, \mathcal{F}, \mathsf{P})$ and a B.M. $W$, if $X$ is a strong solution, then 
+    $$
+    X_t \in \mathcal{F}_t^{W} \subseteq \mathring{\mathcal{F}}_t^W \implies \mathcal{F}_t^X \subseteq \mathring{\mathcal{F}}_t^W.
+    $$
+
+    By $X$ is a B.M., by Tanaka's formula,
+    $$
+    \abs{ X_t }= \abs{ X_0 } + \int_0^t \mathrm{sgn}(X_s) \diff X_s + L_t^X(0).
+    $$
+
+    By SDE, we get
+    $$
+    \int_0^t \mathrm{sgn}(X_s) \diff X_s = \int_0^t \mathrm{sgn}(X_s)^2 \diff W_s = W_t.
+    $$  
+    $$
+    \implies W_t = \abs{ X_t }  - L_t^X(0).
+    $$
+    $$
+    L_t^X(0) = \int_0^t \delta_0 (X_s) \diff s = \lim_{\varepsilon \downarrow 0} \frac{1}{2\varepsilon} \int_0^t \mathsf{1}_{\abs{ X_s } \leq \varepsilon} \diff s = \lim_{\varepsilon \downarrow 0} \frac{1}{2\varepsilon} \abs{ \{0 \leq s \leq y \colon \abs{ X_s } \leq \varepsilon\} }.
+    $$
+
+    Hence $W_t = \abs{ X_t } - \lim_{\varepsilon \downarrow 0} \frac{1}{2 \varepsilon} \abs{ \{0 \leq s \leq t \colon \abs{ X_s } \leq \varepsilon\} } \in \mathcal{F}_t^{\abs{ X }}$.
+
+    $\implies \mathring{\mathcal{F}}_t^W \subseteq \mathring{\mathcal{F}}_t^{\abs{ X }}$.
+
+    $\implies \mathring{\mathcal{F}}_t^X \subseteq \mathring{\mathcal{F}}_t^{\abs{ X }}$. Contradiction.
 }
 
+$$
+\begin{cases}
+    \text{strong uniqueness} \implies \text{weak uniqueness}\\
+    \text{weak existence}+\text{pathwise uniqueness} \implies \text{strong existence}.
+\end{cases}
+$$
+
+\subsection{Girsanov Theorem}
+    Given $(\Omega, \mathcal{F},\mathsf{P})$ and a d-dim B.M. $W=\{W_t,\mathcal{F}_t, t \geq 0\}$ with $\mathsf{P}(W_0 = 0) = 1$. Let $X=\{X_t,\mathcal{F}_t,t \geq 0\}$ be a d-dim measurable, adapted process such that $\forall~ T \geq 0$, $\forall~ 1 \leq i \leq d$, $\mathsf{P}\left( \int_0^T (X_t^{(i)})^2 \diff t < \infty \right) = 1$. Then 
+    $$
+    \int_0^t X_s^{(i)} \diff W_s^{(i)}
+    $$
+    is well-defined. Set 
+    $$
+    Z_t(X) = \exp \left( \int_0^t X_s \diff W_s  - \frac{1}{2}\int_0^t \norm{ X_s }^2 \diff s \right).
+    $$
+
+    Assume $Z(X)$ is a martingale i.e. $\mathbb{E}Z_t(X) = 1$, $\forall~ t \geq 0$.
+
+    Define a probability measure $\tilde{\mathsf{P}}_T$ for any $T > 0$ by 
+    $$
+    \tilde{\mathsf{P}}_T (A) = \mathbb{E}\left( Z_T(X) \cdot \mathsf{1}_A \right)
+    $$
+    for all $A \in \mathcal{F}_T$, $\frac{\diff \tilde{\mathsf{P}}_T}{\diff \mathsf{P}} = Z_T(X)$.
+
+
+\rmkb{
+    If $A \in \mathcal{F}_t \subseteq \mathcal{F}_T$ for $0 \leq t \leq T$, we must
+    $$
+    \begin{aligned}
+        \tilde{\mathsf{P}}_T(A) = \mathbb{E}\left( \mathsf{1}_A Z_T(X) \right),\\
+        \tilde{\mathsf{P}}_t(A) = \mathbb{E}\left( \mathsf{1}_A Z_t(X) \right).
+    \end{aligned}
+    $$
+    Note that 
+    $$
+    \mathbb{E}(\mathsf{1}_A Z_T(X)) = \mathbb{E}\left[ \mathbb{E}\left(\mathsf{1}_A Z_T(X) \mid \mathcal{F}_t\right) \right] = \mathbb{E}\left[ \mathsf{1}_A \mathbb{E}\left( Z_T(X) \mid \mathcal{F}_t \right) \right] = \mathbb{E}\left[ \mathsf{1}_A Z_t(X) \right].
+    $$
+    Hence $\tilde{\mathsf{P}}_T|_{\mathcal{F}_t} = \tilde{\mathsf{P}}_t$.
+}
+
+\thm{Girsanov Theorem}{
+    Assume $Z(X)$ is a martingale. Define $\tilde{W} = \{\tilde{W}_t, t \geq 0\}$ by $\tilde{W}_t^{(i)} = W_t^{(i)} - \int_0^t X_s^{(i)} \diff s$ for $1 \leq i \leq d$, and $t \geq 0$. Then for each fixed $T > 0$, $\{\tilde{W}_t, \mathcal{F}_t, 0 \leq t \leq T\}$ is a d-dim B.M. on $(\Omega,\mathcal{F}_T,\tilde{\mathsf{P}}_T)$.
+}
+
+\lemnn{Fix $T > 0$. If $0 \leq s \leq t \leq T$ and $Y \in \mathcal{F}_t$ with $\tilde{E}_T \abs{ Y } < \infty$. Then
+    $$
+    \tilde{E}_T \left( Y \mid \mathcal{F}_s \right) = \frac{1}{Z_s}\mathbb{E}\left( YZ_t \mid \mathcal{F}_s \right)
+    $$
+    a.s. $\tilde{\mathsf{P}}_T$ and $\mathsf{P}$.
+
+    $\tilde{\mathsf{P}}_T << \mathsf{P}$ and $\mathsf{P} << \tilde{\mathsf{P}}_T$. $\tilde{\mathsf{P}}_T(A) = \mathbb{E}\left( \mathsf{1}_A Z_T(X) \right)$.
+
+    If $\mathsf{P}(A) = 0 \implies \tilde{\mathsf{P}}_T(A) = 0$.
+
+    If $\tilde{\mathsf{P}}_T(A) = 0 \implies \mathsf{P}(A) = 0$.$(Z_T(X)>0 \text{ a.s.})$.}
+
+    \pf{
+        It suffices to prove $\forall~ A \in \mathcal{F}_s$, 
+        $$
+        \tilde{E}_T(\mathsf{1}_A Y) = \tilde{E}_T(\mathsf{1}_A \frac{1}{Z_s} \mathbb{E}(YZ_t \mid \mathcal{F}_s)).
+        $$
+
+        $$
+        \begin{aligned}
+            RHS &= \tilde{E}_s (\mathsf{1}_A \frac{1}{Z_s} \mathbb{E}(Y Z_t \mid \mathcal{F}_s)) \\
+            &= \mathbb{E}(\mathsf{1}_A \mathbb{E}(YZ_t \mid \mathcal{F}_s))\\
+            &= \mathbb{E}(\mathsf{1}_A YZ_t)\\
+            &=\tilde{E}_t(\mathsf{1}_A Y)\\
+            &= \tilde{E}_T(\mathsf{1}_A Y).
+        \end{aligned}
+        $$
+}
+
+\prop{
+    Define $M_T^{c,loc}=\{M\colon M\text{ is a continuous local martingale on }(\Omega,\mathcal{F}_T, \mathsf{P})\}$.
+
+    $\tilde{M}_T^{c,loc}=\{\text{continuous local martingale on }(\Omega,\mathcal{F}_T,\tilde{\mathsf{P}}_T)\}$.
+
+    \begin{itemize}
+        \item[(1)] If $M \in M_T^{c,loc}$, then $$
+        \tilde{M}_t \triangleq M_t - \sum_{i=1}^d \int_0^t X_s^{(i)} \diff [M,W^{(i)}]_s
+        $$
+        for $0 \leq t \leq T$ is in $\tilde{M}_T^{c,loc}$.
+        \item[(2)] If $N \in M_T^{c,loc}$ and 
+        $$
+        \tilde{N}_t = N_t - \sum_{i=1}^{d}\int_0^t X_s^{(i)} \diff [N,W^{(i)}]_s,
+        $$
+        then 
+        $$
+        [\tilde{M},\tilde{N}]_t = [M,N]_t
+        $$
+        for all $0 \leq t \leq T$, a.s. $\mathsf{P}$ and $\tilde{\mathsf{P}}_T$.
+    \end{itemize}
+}
+
+
+\pf{
+    of Girsanov Theorem:
+
+    If $M = W^{(j)}$ with $1 \leq j \leq d$, then 
+    $$
+    \tilde{M}_t = W_t^{(j)} - \int_0^t X_s^{(j)}\diff W_s^{(j)} \in \tilde{M}_T^{c,loc}
+    $$
+    $$
+    \implies \tilde{W}_t^{(j)} \in \tilde{M}_T^{c,loc}.
+    $$
+
+    Set $N = W^{(k)} \implies \tilde{N}_t = \tilde{W}_t^{(k)} \in \tilde{M}_T^{c,loc}$ and $[\tilde{M},\tilde{N}]_t = [M,N]_t = \delta_{jk}t$.
+    
+    $\implies [\tilde{W}^{(j)},\tilde{W}^{(k)}]_t = \delta_{jk}t$ 
+
+    $\implies \tilde{W}$ is a d-dim B.M..
+}
+
+\pf{
+    of Prop. Assume $M,N$ are bounded martingale with bounded quadrastic variation.
+    $$
+    \left[ \tau_n^{M} =  \inf\left\{ t \geq 0 \colon \abs{ M_t } \geq n \text{ or } [M]_{t} \geq n \right\}\right]
+    $$
+
+    Consdier $t \leq \tau_n^M \wedge \tau_n^N$.
+
+    Assume also that $Z_t(X)$ and $\sum_{i=1}^d\int_0^t(X_s^{(j)})^2 \diff s$ are bounded for all $ t \geq 0$ a.s.
+
+    By Kunita \& Watanabe inequality
+    $$
+    \begin{aligned}
+    \abs{ \int_0^t X_s^{(j)}\diff [M,W^{(j)}]_s }^2
+        &\leq \int_0^t(X_s^{(j)})^2 \diff 
+        [W^{(j)}]_s \cdot \int_0^t 1^2 \diff [M]_s \\
+        &=\int_0^t(X_s^{(j)})^2 \diff s \cdot [M]_t \\
+        & \leq C \quad \text{a.s.}.
+    \end{aligned}
+    $$
+
+    Hence $\tilde{M}_t$ is also bounded for all $t \geq 0$. To prove $\tilde{M} \in \tilde{M}_T^{c,loc}$, we only need to show that 
+    $$
+    \tilde{E}_T(\tilde{M}_t \mid \mathcal{F}_s) = \tilde{M}_s \quad \text{ a.s.}
+    $$
+    $$
+    LHS = (\text{by Lemma}) = \frac{1}{Z_s(X)}\mathbb{E}(\tilde{M}_t Z_t(X) \mid \mathcal{F}_s).
+    $$
+
+    By IBP, we get 
+    $$
+    \tilde{M}_t Z_t(X) = \tilde{M}_0Z_0(X) + \int_0^t \tilde{M}_s \diff Z_s(X) + \int_0^t Z_s(X) \diff \tilde{M}_s + [\tilde{M},Z]_t.
+    $$
+    Recall $Z_t(X) = e^{\int_0^t X_s \diff W_s - \frac{1}{2} \int_0^t \norm{ X_s }^2 \diff s}$,
+
+    we have 
+    $$
+    \diff Z_t(X) = Z_t(X) X_t \cdot \diff W_t = \sum_{i=1}^d Z_t(X) X_t^{(i)}\diff W_t^{(i)}.
+    $$
+
+    Recall $\diff \tilde{M}_t =\diff M_t - \sum_{i=1}^d X_t^{((i))} \diff [M,W^{(i)}]_t$.
+
+    So $$
+    \begin{aligned}
+        &Z_t(X) \tilde{M}_t \\=& \int_0^t \tilde{M}_s \sum_{i=1}^d Z_s(X) X_s^{(i)} \diff  W_s^{(i)} \\
+        &+ \int_0^t Z_s(X)\left[ \diff M_s - \sum_{i=1}^d X_s^{(i)} \diff [M,W^{(i)}]_s \right] + \int_0^t Z_s(X) X_s^{(i)}\diff [M,W^{(i)}]_s \\
+        =&\int_0^t \tilde{M}_s \sum_{i=1}^d Z_s(X) X_s^{(i)} \diff W_s^{(i)} + \int_0^t Z_s(X) \diff M_s.
+    \end{aligned}
+    $$
+
+    Hence $\tilde{M}_t Z_t(X)$ is a martingale.
+    $$
+    \implies LHS = \frac{1}{Z_s(X)}\tilde{M}_s Z_s(X) = RHS.
+    $$
+    
+    (2) $\diff \tilde{N}_t = \diff N_t = \sum_{i=1}^d X_t^{(i)} \diff [N,W^{(i)}]_t$.
+    
+    $\diff \tilde{M}_t = \diff M_t - \sum_{i=1}^d X_t^{(i)} \diff [M,W^{(i)}]_t$.
+    $$
+    \begin{aligned}
+    \tilde{M}_t \tilde{N}_t =& \tilde{M}_0 \tilde{N}_0 + \int_0^t \tilde{M}_s \diff \tilde{N}_s + \int_0^t \tilde{N}_s \diff \tilde{M}_s + [\tilde{M},\tilde{N}]_t\\
+    =&0 + \int_0^t \tilde{M}_s \left( \diff W_s -\sum_{i=1}^d X_s^{(i)} \diff [N,W^{(i)}]_s \right)\\
+    &+\int_0^t \tilde{N}_s \left( \diff M_s - \sum_{i=1}^d X_s^{(i)}\diff [M,W^{(i)}]_s \right) + [M,N]_t.    \end{aligned}
+    $$
+
+    Then 
+    $$
+    \begin{aligned}
+        \tilde{M}_t \tilde{N}_t - [M,N]_t = \int_0^t \tilde{M}_s \diff N_s
+    \end{aligned}
+    $$
+}
