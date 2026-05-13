@@ -947,7 +947,61 @@ $$
     Then 
     $$
     \begin{aligned}
-        \tilde{M}_t \tilde{N}_t - [M,N]_t = \int_0^t \tilde{M}_s \diff N_s
+        \tilde{M}_t \tilde{N}_t - [M,N]_t =& \int_0^t \tilde{M}_s \diff N_s + \int_0^t \tilde{N}_s \diff M_s - \sum_{i=1}^d \int_0^t X_s^{(i)}  \tilde{M}_s \diff [N,W^{(i)}]_s \\
+        &- \sum_{i=1}^d \int_0^t X_s^{(i)}\tilde{N}_s \diff [M,W^{(i)}]_s.
     \end{aligned}
     $$
+
+    Next 
+    $$
+    \begin{aligned}
+        &Z_t(X) \left[ \tilde{M}_t - \tilde{N}_t - [M,N]_t \right]\\
+        =&\int_0^t Z_s(X)\left[ \tilde{M}_s \diff N_s + \tilde{N}_s \diff M_s - \sum_{i=1}^d X_s^{(i)}\left( \tilde{M}_s \diff [N,W^{(i)}]_s +\tilde{N}_s \diff [M,W^{(i)}]_s \right) \right]\\
+        &+ \int_0^t (\tilde{M}_s \tilde{N}_s - [M,N]_s)\sum_{i=1}^d Z_s(X) X_s^{(i)}\diff W_s^{(i)}\\
+        &+ \int_0^t \sum_{i=1}^d Z_s(X) X_s^{(i)}\left( \tilde{M}_s \diff [N,W^{(i)}]_s + \tilde{N}_s \diff [M,W^{(i)}]_s \right).
+    \end{aligned}
+    $$
+
+    Therefore 
+    $$
+    \tilde{E}_T(\tilde{M}_t \tilde{N}_t - [M,N]_t \mid \mathcal{F}_s) = \frac{1}{Z_s(X)}\mathbb{E}(Z_t(X)(\tilde{M}_t \tilde{N}_t - [M,N]_t) \mid \mathcal{F}_s) = (\tilde{M}_s \tilde{N}_s - [M,N]_s).
+    $$
+
+    This proves $[\tilde{M},\tilde{N}]_t = [M,N]_t$.
+}
+
+Weak solutions constructed by means of the Girsanov Theorem.
+
+\prop{
+    Consider the SDE 
+    $$
+    \diff X_t = \diff W_t + b(t,X_t)\diff t
+    $$
+    for $0 \leq t \leq T$, W is B.M. and $b(t,x)$ is Borel-measurable with
+    $$
+    \norm{ b(t,x) } \leq K(1 + \norm{x })
+    $$
+    for all $0 \leq t \leq T$, $x\in \mathbb{R}^d$.
+
+    Then for any probability measure $\mu$ on $(\mathbb{R}^d, \mathcal{B}(\mathbb{R}^d))$ the SDE has a weak solution ($X,W$), $(\Omega,\mathcal{F},\mathsf{P})$, $\{\mathcal{F}_t\}$ such that 
+    $$
+        \mathsf{P}(X_0 \in \cdot) = \mu.
+    $$
+}
+
+\pf{
+    Let $X=\{X_t, \mathcal{F}_t, t \geq 0\}$ be a B.M. on $(\Omega,\mathcal{F})$ with law $(\mathsf{P}^X)_{X\in \mathbb{R}^d}$ s.t.
+    $$
+    \mathsf{P}^X(X_0 = x) = 1.
+    $$
+
+    By corollary 3.5.16, by assuming 
+    $$
+    \norm{ b(t,x) } \leq K(1 + \norm{ x })
+    $$
+    we get 
+    $$
+    Z_t \triangleq \exp\left( \sum_{i=1}^d \int_0^t b_j(s,X_s) \diff X_s^{(j)} - \frac{1}{2}\int_0^t \norm{ b(s,X_s) }^2 \diff s \right)
+    $$
+    is a martingale.
 }
