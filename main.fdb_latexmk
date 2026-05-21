@@ -1,5 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1778679498.13557 "/Users/zheng/Desktop/SustStochasticAnalysis/main.tex" "main.pdf" "main" 1778679503.73441 0
+["pdflatex"] 1779283402.687 "/Users/zheng/Desktop/SustStochasticAnalysis/main.tex" "main.pdf" "main" 1779283408.03823 0
   "/Users/zheng/Desktop/SustStochasticAnalysis/main.tex" 1772627289.25161 3599 2103264f2dcd1c088da06208148aab70 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc" 1136849721 2900 1537cc8184ad1792082cd229ecc269f4 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/enc/dvips/fontawesome5/fa5free1.enc" 1622837620 3042 0e2b14b9be7d01075a4c4591d5d1781b ""
@@ -312,8 +312,8 @@
   "/usr/local/texlive/2025/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1764178997 5467155 19efa205003f9ecad95fbbaa6ff24da1 ""
   "/usr/local/texlive/2025/texmf-var/web2c/pdftex/pdflatex.fmt" 1764178933 3345728 dc00c2a410a30d0573a4366c75a713c7 ""
   "/usr/local/texlive/2025/texmf.cnf" 1741450484 577 418a7058ec8e006d8704f60ecd22c938 ""
-  "chapter/chapter1.aux" 1778679503.2162 22056 74ea5fee93519b503f22b156e0def3c7 "pdflatex"
-  "chapter/chapter1.tex" 1778679497.6688 44847 e67bd88d5c755320d38f1211dd25d35e ""
+  "chapter/chapter1.aux" 1779283407.36905 22692 8464610cf437ec4d79dd6f94096d7b08 "pdflatex"
+  "chapter/chapter1.tex" 1779283403.66818 56505 3a95a0c715fc88f18f0a64b4a693a5dd ""
   "chapter/chapter2.aux" 0 -1 0 ""
   "chapter/chapter3.aux" 0 -1 0 ""
   "chapter/chapter4.aux" 0 -1 0 ""
@@ -327,10 +327,10 @@
   "chapter/section7.tex" 1775041214.95797 16244 50285c23e8aec2f30c8f33d91ac6291f ""
   "chapter/section8.tex" 1777460732.31878 45614 8b40a3331fd17372929db3fe8175c1e1 ""
   "commands.tex" 1773840097.68965 1473 4e94dcdd1546e00b87338498d1d5b82a ""
-  "main.aux" 1778679503.25245 1637 e494acd05d13b2dd7198e3cbf2f1ba74 "pdflatex"
-  "main.out" 1778679503.26131 2433 cc806948cd4eb638d8dff7746db74874 "pdflatex"
+  "main.aux" 1779283407.40724 1651 eab8a96112c77f7c7c85ba36fc4be49a "pdflatex"
+  "main.out" 1779283407.41467 2729 316b8c4b29fb8af68dbc27f24f3ec9fc "pdflatex"
   "main.tex" 1772627289.25161 3599 2103264f2dcd1c088da06208148aab70 ""
-  "main.toc" 1778679503.26207 1362 4ca3fa298107cc0f6e481a23b40f5a53 "pdflatex"
+  "main.toc" 1779283407.41551 1532 8b409c2427e84bd332bbc8acd55ce5dc "pdflatex"
   "theorems.tex" 1772245318.02929 8766 869bfaec0c8f1debeeda916ab7c2c792 ""
   (generated)
   "chapter/chapter1.aux"

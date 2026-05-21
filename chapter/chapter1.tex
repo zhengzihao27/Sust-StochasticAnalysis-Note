@@ -1126,3 +1126,314 @@ Weak solutions constructed by means of the Girsanov Theorem.
     \end{aligned}
     $$
 }
+
+\section{Harmonic Function}
+
+$\forall~ $smooth function $f:\mathbb{R}^d \to \mathbb{R}$,
+$$
+    \frac{\Delta}{2} f(x) = \lim_{t \downarrow 0} \frac{E^x[f(W_t) - f(x)]}{t}.
+$$
+We call $\frac{\Delta}{2}$ the generator of Brownian mothion.
+$$
+\Delta u \triangleq \sum_{i=1}^{d} \frac{\partial^2 u}{\partial x_i^2}.
+$$
+
+\pf{
+    $$f(W_t) = f(W_0)+\int_0^t \sum_{i=1}^d \frac{\partial f}{\partial x_i}(W_s) \diff W_s^{(i)} + \frac{1}{2}\int_0^t \sum_{i=1}^d \frac{\partial ^2 f}{\partial x_i^2}(W_s) \diff s.$$
+
+    So 
+    $$
+        \frac{1}{t}E^x[f(W_t) - f(W_0)] = \frac{1}{2} \frac{1}{t} \int_0^t E[\Delta f(W_s)] \diff s.
+    $$
+    Let $t \downarrow 0$, we get the limit is $\frac{1}{2}\Delta f(x)$.
+}
+
+A function $u$ defined on some open subset $D \subseteq \mathbb{R}^d$ is called harmonic if $u \in C^2(D)$ and $\Delta u = 0$. 
+
+Let $\{W_t,\mathcal{F}_t, 0 \leq t < \infty\}$, $(\Omega,\mathcal{F})$ and $\{\mathsf{P}^x\}_{x\in \mathbb{R}^d}$ is a d-dim B.M. such that 
+$$
+    \mathsf{P}^x(W_0 = x) = 1.
+$$
+
+For any $D \subseteq \mathbb{R}^d$ open, we set $\tau _D = \inf\{t \geq 0: W_t \notin D\}$.
+
+If $D$ is bounded, then 
+$$
+    \mathsf{P}^x(\tau_D < \infty) = 1, \quad \forall~ x \in D,
+$$
+and $B_{\tau_D} \in \partial D$ with $\partial D$ = topological boundary, $\overline{D} = D \cup \partial D$ is the closure of $D$.
+
+Let $B_r = \{ x\in \mathbb{R}^d: \norm{ x } <r\}$, $B_r(x) = \{y\in \mathbb{R}^d: \norm{ y-x } < r\}$ be the open ball centered at $0/x$ with radius $r > 0$. Volume 
+$$V_r = \frac{2 r^d \pi^{\frac{d}{2}}}{d \Gamma(\frac{d}{2})}.$$
+
+Surface area 
+$$
+S_r \triangleq \frac{2 r^{d-1}\pi^{\frac{d}{2}}}{\Gamma(\frac{d}{2})}.
+$$
+
+Define $\mu_r (\diff x) = \mathsf{P}^0(W_{\tau_{B_r}} \in \diff x)$. Then $\mu_r$ is a measure on $\partial B_r$.
+
+By rotational invariance $\mu_r$ is a uniform measure on $\partial B_r$. In particular, we have
+$$
+\mu_r = \frac{\sigma_r}{S_r}
+$$
+where $\sigma_r(\diff x)=$surface measure on $\partial B_r$.
+
+Recall that for any function $f$,
+$$
+\int_{B_r} f(x) \diff x = \int_0^t \diff  \rho \int_{\partial B_{\rho}} f(x) \sigma_\rho (\diff x) = \int_0^r \diff  \rho \int_{\partial B_{\rho}}f(x) S_\rho \mu_\rho(\diff x).
+$$
+
+\defn{Mean Value Property (MVP)}{
+    A function $u: D \to \mathbb{R}$ has MVP if $\forall~a \in D$, $\forall~ r > 0$ with $B_r(a) \subseteq D$, we have 
+    $$
+    u(a) = \int_{\partial B_r} \mu(a+x) u_r(\diff x) = \int_{\partial B_r(a)} u(x) \mu_r (\diff x).
+    $$
+}
+
+Assume MVP, we have 
+$$
+\int_{B_r(a)} u(x)\diff x = \int_0^t \diff  \rho \int_{\partial B_{\rho}(a)} u(x)S_\rho \mu_\rho(\diff x) = \int_0^r \diff \rho \cdot u(a)S_\rho = V_r \cdot u(a).
+$$
+
+Then 
+$$
+u(a) = \frac{1}{V(r)}\int_{B_r(a)} u(x) \diff x.
+$$
+
+\prop{
+    If $u$ is harmonic on $D$, then $u$ has MVP. And if $u$ has MVP on $D$, then $u$ is harmonic \& $u \in C^\infty.$
+}
+
+\pf{
+    (1). 
+    Assume $\Delta u = 0$, $\forall~ x\in D$. Then $\forall~ r > 0 $ with $\overline{B_r(a)} \subseteq D$, $\forall~ a \in D$.
+
+    By It\^o's formula
+    $$
+    u(W_{t \wedge \tau_{B_r(a)}}) = u(W_0) + \int_0^{t \wedge \tau_{B_r(a)}} \nabla u(W_s) \diff W_s + \frac{1}{2} \int_0^{t\wedge\tau_{B_r(a)}} \Delta u(W_s) \diff s, \quad \forall~ t \geq 0.
+    $$
+
+    By $\nabla u(x)$ is bounded on $\overline{B_r(a)}$, we get 
+    $$
+    E\left[ \int_0^{t \wedge \tau_{B_r(a)}}  \nabla u(W_0) \diff W_s\right].
+    $$
+    
+    Hence 
+    $$
+    E^a\left[ u(W_{t \wedge \tau_{B_r(a)}}) \right] = u(a).
+    $$
+
+    Let $t \to \infty$ to get 
+    $$
+    \begin{aligned}
+        u(a) = \lim_{t \to \infty}E^a\left[ u(W_{t\wedge \tau_{B_r(a)}}) \right] &= E^a\left[ u(W_{\tau_{B_r(a)}}) \right]\\
+        &=E^0 \left[ u(W_{\tau_{B_r}} + a) \right]\\
+        &=\int_{\partial B_r}u(x+a) \mu_r(\diff x).
+    \end{aligned}
+    $$
+
+    (2) If $u$ has MVP, then $\forall~ a \in D$, $\forall~ r >0$ with $\overline{B_r(a)} \subseteq D$,
+    $$
+    u(a) = \int_{\partial B_r(a)} u(x)\mu_r(\diff x).
+    $$
+
+    For any $\varepsilon > 0$, define $g_\varepsilon : \mathbb{R}^d \to \mathbb{R}$ by 
+    $$
+    g_{\varepsilon}(x) = \begin{cases}
+        c(\varepsilon)e^{-\frac{1}{\varepsilon^2 - \norm{ x }^2}}, &\norm{ x } < \varepsilon\\
+        0,& \norm{ x }\geq \varepsilon
+        .
+    \end{cases}
+    $$
+    where $c(\varepsilon)>0$ is a constant s.t.
+    $$
+    \int_{\mathbb{R}^d} g_{\varepsilon}(x) \diff x = \int_{B_\varepsilon}g_{\varepsilon}(x)\diff x = 1.
+    $$
+
+    Mollifier. For any $a \in D$ and $\varepsilon > 0$ with $\overline{B_{\varepsilon}(a)} \subseteq D$, define 
+    $$
+    u_{\varepsilon}(a) \triangleq \int_{B_\varepsilon}u(a+x)g_{\varepsilon}(x) \diff x = \int_{\mathbb{R}^d} u(y) g_{\varepsilon}(y-a) \diff  y.
+    $$
+    Then $u_{\varepsilon}(a) \in C^{\infty}$.
+
+    $$
+    \begin{aligned}
+    \lim_{\delta\downarrow 0}\frac{u_\varepsilon (a+\delta) - u_\varepsilon(a)}{\delta} &= \lim_{\delta\downarrow 0} \int_{\mathbb{R}^d}u(y) \frac{g_{\varepsilon}(y-a-\delta) - g_{\varepsilon}(y-a)}{\delta} \diff y \\
+    &= -\int_{\mathbb{R}^d}u(y)\left( \frac{\diff }{\diff  x}g_{\varepsilon}(x)\Big|_{x=y-a} \right) \diff y.
+    \end{aligned}
+    $$
+
+    And
+    $$
+    \begin{aligned}
+    u_{\varepsilon}(a) &= c(\varepsilon)\int_{B_\varepsilon}u(a+x)e^{-\frac{1}{\varepsilon^2 - \norm{ x }^2}}\diff x \\
+    &=c(\varepsilon)\int_0^\varepsilon S_{\rho}\diff \rho \int_{\partial B_{\rho}} u(a+x) e^{-\frac{1}{\varepsilon^2 - \rho^2}} \mu_\rho(\diff x)\\
+    &=c(\varepsilon)\int_0^\varepsilon S_{\rho}\diff \rho \cdot e^{-\frac{1}{\varepsilon^2 - \rho^2}} u (a) \\
+    &=u(a)\int_0^\varepsilon S_{\rho}c(\varepsilon)e^{-\frac{1}{\varepsilon^2 -\rho^2}}\diff \rho \\
+    &= u(a)\int_{B_\varepsilon}c(\varepsilon)e^{-\frac{1}{\varepsilon^2 - \norm{ x }^2}}\diff x = u(0).
+    \end{aligned}
+    $$
+    
+    So $u(a) = u_{\varepsilon}(0)$ for all $a \in D$ with $\overline{B_\varepsilon(a)} \subseteq D$.
+
+    Then $u \in C^\infty(D)$.
+
+    Next, we will prove $\Delta u = 0$. $\forall~ a \in D$, $\exists~\varepsilon>0$ s.t. $\overline{B_\varepsilon(a)} \subseteq D$. By Taylor's expansion at $a$,
+    $$
+    u(a+y) = u(a) + \sum_{i=1}^d y_i \frac{\partial u}{\partial x_i}(a) + \frac{1}{2}\sum_{i=1}^d \sum_{j=1}^d y_i y_j \frac{\partial ^2 u}{\partial x_i \partial x_j}(a) + o(\norm{ u }^2), \quad y\in \overline{B}_\varepsilon.
+    $$
+
+    By symmetry, 
+    $$\int_{\partial B_\varepsilon} y_i \mu_{\varepsilon}(\diff y) = 0, \quad \int_{\partial B_\varepsilon} y_i y_j \mu_\varepsilon(\diff y) = 0,\quad \forall~i \neq j.
+    $$
+
+    Now integrate $u(a+y)$ over $\partial B_\varepsilon$ to obtain
+    $$
+    \int_{\partial B_\varepsilon} u(a+y) \mu_\varepsilon (\diff y) = u(a) + 0 + \int_{\partial B_\varepsilon} \frac{1}{2}\Delta u(a)\sum_{i=1}^d y_i^2 \mu_\varepsilon (\diff  y) + o(\varepsilon^2).
+    $$
+    
+    For 
+    $$
+    \frac{1}{2} \sum_{i=1}^d \int_{\partial B_\varepsilon} \frac{\partial ^2 u}{\partial x_i^2}(a) \cdot y_i^2 \mu_\varepsilon(\diff y).
+    $$
+
+    Notice that
+    $$
+    \int_{\partial B_\varepsilon} y_i^2 \mu_\varepsilon(\diff  y) = \frac{1}{d} \sum_{i=1}^d \int_{\partial B_\varepsilon} y_i^2 \mu_\varepsilon(\diff y) = \frac{1}{d} \int_{\partial B_\varepsilon}\norm{ y }^2 \mu_\varepsilon(\diff  y) = \frac{1}{d}\varepsilon^2 \cdot 1 = \frac{1}{d}\varepsilon^2.
+    $$
+
+    Hence 
+    $$
+    \frac{1}{2} \sum_{i=1}^d \int_{\partial B_\varepsilon} \frac{\partial ^2 u}{\partial x_i^2}(a) \cdot y_i^2 \mu_\varepsilon(\diff y)= \frac{1}{2}\sum_{i=1}^d \frac{\partial^2 u}{\partial x_i^2}(a) \cdot \frac{\varepsilon^2}{d} =\frac{1}{2}\Delta u(a)\cdot \frac{\varepsilon^2}{d}.
+    $$
+
+    Now we conclude 
+    $$
+    u(a) = \int_{\partial B_\varepsilon}u(a+y)\mu_\varepsilon(\diff  y) = u(a) + \frac{\Delta}{2} u(a)\cdot \frac{\varepsilon^k}{d} + o(\varepsilon^2).
+    $$
+
+    So $ 0 = \frac{\Delta}{2} u(a) \cdot \frac{1}{d} + o(1)$, be letting $\varepsilon \downarrow 0$ to get $\Delta u(a) = 0.$
+    
+}
+
+\subsection{Dirichlet Problem}
+Given an open set $D \subseteq \mathbb{R}^d$, and a continuous function $f$ on $\partial D $, the Dirichlet probability (D.f) is to find $u \in C(\overline{D})$ s.t.
+$$
+    \begin{cases}
+        \Delta u = 0, & \text{in } D \\
+        u =f ,&\text{on } \partial D.
+    \end{cases}
+$$
+
+$$
+\frac{\partial u(t,x)}{\partial t} = \frac{\Delta}{2} u (t,x).
+$$
+
+Heat Equation $u(t,x) = $temperature at $x \in D$ at time $t$.
+
+\textbf{Existence.}
+
+Let $u(x) = E^x[f(W_{\tau_D})]$ for all $x\in \overline{D}$, provided that $E^x \abs{ f(W_{\tau_D}) }< \infty$, $\forall~ x\in D$. Then for $x\in \partial D$, we get 
+$$
+\mathsf{P}^x(\tau_D = 0) = 1
+$$
+by $\tau_D = \inf \{t \geq 0: W_t \notin D\}$. Then 
+$$
+\mathsf{P}^x(W_{\tau_D} = x) = 1,
+$$
+which implies $E^x[f(W_{\tau_D})] = f(x)$.
+
+So $u(x) = f(x)$, $\forall~ x \in \partial D$.
+
+Next, we will prove $\Delta u = 0$, $\forall~ x \in D \Leftrightarrow u$ has MVP.
+
+For all $a \in D$ and $r > 0$ s.t. $\overline{B_r(a)} \subseteq D$, we have 
+$$
+\begin{aligned}
+u(a)= E^a[f(W_{\tau_D})] &= E^a\left[ E^a\left[f(W_{\tau_D})~\middle|~ \mathcal{F}_{\tau_{B_r(a)}}\right] \right]\\
+(\tau_{B_r(a)} \leq \tau_D)~ &= E^a\left[ E^{W_{\tau_{B_r(a)}}}[f(W_{\tau_D})] \right]\\
+&= E^a \left[ u(W_{\tau_{B_r(a)}}) \right]\\
+&= \int_{\partial B_r} u(a+y) \mu_r(\diff y).
+\end{aligned}
+$$
+
+Therefore $u$ has MVP. It remains to prove $u \in C(\overline{D}) $ i.e. $\forall~ a \in \partial D$
+$$
+    \lim_{\substack{x\to a\\ x\in D}}u(x) = u(a) =f(a).
+$$
+
+$\forall~ a \in \partial D$, we need that 
+$$
+\lim_{\substack{x\to a\\ x\in D}} E^x[f(W_{\tau_D})] = f(a).
+$$
+
+
+
+
+
+
+
+
+\textbf{Uniqueness.}
+
+If $f$ is bdd and $\mathsf{P}^a(\tau_D < \infty) = 1$, $\forall~ a \in D$. Then any bounded solution $u$ to Dirichlet Problem (D,f) is given by $u(a) = E^a[f(W_{\tau_D})]$.
+
+\pf{
+    Let $u \in C(\overline{D})$ be bounded and
+    $$
+    \begin{cases}
+        \Delta u = 0, & \text{in } D\\
+        u=f,&\text{on } \partial D .
+    \end{cases}
+    $$
+    For each $n \geq 1$, we let 
+    $$
+    \begin{aligned}
+        D_n &= \{x\in D : \inf_{y\in \partial D}\norm{ x-y } > \frac{1}{n}\}\\
+        &=\{x\in D : d(x,\partial D) > \frac{1}{n}\}.
+    \end{aligned}
+    $$
+
+    By It\^o's formula
+    $$
+    \begin{aligned}
+        u(W_{t\wedge \tau_{D_n} \wedge \tau_{B_n}}) = u(W_0) + \sum_{i=1}^d \int_0^{t \wedge \tau_{D_n} \wedge \tau_{B_n}} \frac{\partial u}{\partial x_i}(W_s) \diff W_s^{(i)}.
+    \end{aligned}
+    $$
+
+    Since $\frac{\partial u}{\partial x_i}(W_s)$ is bounded for all $0 \leq s \leq t \wedge \tau_{B_n} \wedge \tau_{D_n}$, we get 
+    $$
+    E\left[ \int_0^{t\wedge \tau_{D_n} \wedge \tau_{B_n}} \frac{\partial u}{\partial x_i}(W_s)\diff W_s^{(i)} \right] = 0.
+    $$
+
+    Then 
+    $$
+    u(a) = E^a \left[ u(W_{t \wedge \tau_{B_n} \wedge \tau_{D_n}}) \right].
+    $$
+
+    By $\mathsf{P}^a(\tau_D < \infty) = 1$, we have ($t\to \infty, n \to \infty$)
+    $$
+    u(W_{t \wedge \tau_{B_n} \wedge \tau_{D_n}}) \xlongrightarrow{a.s.} u(W_{\tau_D}) = f(W_{\tau_D}).
+    $$
+
+    So by bounded convergence theorem, 
+    $$
+    u(a) = \lim_{n\to \infty} \lim_{t\to \infty} E^a\left[ u(W_{t \wedge \tau_{B_n} \wedge \tau_{D_n}}) \right] = E^a(f(W_{\tau_D})).
+    $$
+
+    
+}
+
+    To prove $\forall~ a \in \partial D$,
+    $$
+    \lim_{\substack{x\to a \\ x\in D}} E^x\left[ f(W_{\tau_{D}}) \right] = f(a.)
+    $$
+
+    Define $\sigma_D = \inf\{t > 0 \colon W_t \notin D\}$. It is obvious that $\tau_D \leq \sigma_D$. 
+    
+    We say a point $a \in \partial D$ is regular for $D$ if $\mathsf{P}^a(\sigma_D = 0) = 1$.
+
+    $\sigma_D = \frac{1}{2} \Leftrightarrow \forall~ 0 < t < \frac{1}{2}$, $W_t \in D$.
+
+    $\sigma_D = 0 \Leftrightarrow \exists~ t_n \downarrow 0$ s.t. $W_{t_n} \notin D$.
