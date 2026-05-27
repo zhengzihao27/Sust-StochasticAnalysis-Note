@@ -1432,8 +1432,76 @@ If $f$ is bdd and $\mathsf{P}^a(\tau_D < \infty) = 1$, $\forall~ a \in D$. Then 
 
     Define $\sigma_D = \inf\{t > 0 \colon W_t \notin D\}$. It is obvious that $\tau_D \leq \sigma_D$. 
     
-    We say a point $a \in \partial D$ is regular for $D$ if $\mathsf{P}^a(\sigma_D = 0) = 1$.
-
+    \defn{regular point}{
+        We say a point $a \in \partial D$ is regular for $D$ if $\mathsf{P}^a(\sigma_D = 0) = 1$.
+    }
+    
     $\sigma_D = \frac{1}{2} \Leftrightarrow \forall~ 0 < t < \frac{1}{2}$, $W_t \in D$.
 
     $\sigma_D = 0 \Leftrightarrow \exists~ t_n \downarrow 0$ s.t. $W_{t_n} \notin D$.
+
+    When $d=1$, $D =(a,b)$. Then $\partial D = \{a,b\}$. By LIL, $a$ and $b$ are both regular points.
+    $$
+    \limsup_{t \downarrow 0} \frac{B_{t} - B_{0}^{n}}{\sqrt{2t \log\log \frac{1}{t}}} = 1 \quad \text{a.s.}
+    $$
+    $\implies \exists~t_{n}\downarrow 0 $ s.t. 
+    $$
+    B_{t} - b \geq (\sqrt{2} - \varepsilon) \sqrt{t_{n} \log\log \frac{1}{t_{n}}} > 0.
+    $$
+
+    \defn{irrgular point}{
+        A point $a \in \partial D$ is irrgular if $\mathsf{P}^{a}(\sigma_{D} = 0) < 1 \Leftrightarrow \mathsf{P}^{a}(\sigma_{D}>0)>0$. 
+    }
+    By Blumenthal 0-1 law, $\mathsf{P}^{a}(\sigma_{D}>0) \in \{0,1\}$. So if $a \in \partial D$ is irrgular, then $\mathsf{P}^{a}(\sigma_{D} > 0) = 1$.
+
+\thmnn{
+    ($d \geq 2$) and fix $a \in \partial D$. The following are equivalent
+    \begin{itemize}
+        \item[(i)] $$
+        \lim_{\substack{x \to a \\ x \in D}} \frac{E^{x}\left[ f(W_{\tau_{D}}) \right]}{u(x)} = f(a)
+        $$
+        holds for every bounded, measurable function $f$ on $\partial D$ s.t. $f$ is continuous at $a$.
+        \item[(ii)] $a$ is regular.
+        \item[(iii)] $\forall~ \varepsilon > 0$, 
+        $$
+        \lim_{\substack{x\to a \\ x \in D}} \mathsf{P}^{x}(\tau_{D} > \varepsilon) = 0.
+        $$ 
+        ($\tau_{D}\xlongrightarrow{\mathsf{P}^{x}}0$ as $x \to a$)
+    \end{itemize}
+}
+
+\pf{
+    (iii)$\implies$(i) By continuity of Brownian path,
+    $$
+    \mathsf{P}^{x}\left( \max_{0 \leq t \leq \varepsilon}\norm{ W_{t} - W_{0} } < r \right) \to 1
+    $$
+    as $\varepsilon \downarrow 0$,
+    and
+    $$
+    \mathsf{P}^{0}\left( \max_{0 \leq t \leq \varepsilon}\norm{ W_{t}} < r \right) \to 1.
+    $$
+    Then 
+    $$
+    \begin{aligned}
+    \mathsf{P}^{x}\left( \norm{ W_{\tau_{D}} - W_{0} } < r  \right) &\geq \mathsf{P}^{x}\left( \max_{0 \leq t \leq \varepsilon} \norm{ W_{t} - W_{0} }< r,~ \tau_{D} \leq \varepsilon \right) \\
+    &\geq \mathsf{P}^{x}\left( \max_{0 \leq t \leq \varepsilon}\norm{ W_{t}- W_{0} }<r \right)- \mathsf{P}^{x}(\tau_{D} > \varepsilon).
+    \end{aligned}
+    $$
+
+    Let $x\in D \to a$ to get 
+    $$
+    \lim_{\substack{x \to a \\ x\in D}} \mathsf{P}^{x}\left( \norm{ W_{\tau_{D}} - W_{0} }<r \right) \geq \mathsf{P}^{0}(\max_{0 \leq t \leq \varepsilon} \norm{ W_{t} }<r) - 0.
+    $$
+
+    $\forall~ \varepsilon > 0$, $\exists~ r > 0$ s.t. $\abs{ f(x) - f(a) } < \varepsilon$ for all $\abs{ x-a }<r$,
+    $$
+    E^{x}\abs{ f(W_{\tau_{D}}) - f(a) } \leq \norm{ f }_{\infty} \cdot E^{x}\left( \mathsf{1}_{\norm{ W_{\tau_{D}} - x }> \frac{r}{2}} \right) + E^{x}\left( \abs{ f(W_{\tau_{D}}) - f(a) } \cdot \mathsf{1}_{\norm{ W_{\tau_{D} - x} } < \frac{r}{2}} \right).
+    $$
+    If we let $\abs{ x-a } < \frac{r}{2}$, then 
+    $$
+    \norm{ W_{\tau_{D}} - a  } \leq \norm{  W_{\tau_{D}} - x } + \norm{ x-a } < r.
+    $$ 
+    $$
+    \implies \abs{ f(W_{\tau_{D}}) - f(a) } < \varepsilon.
+    $$
+}
