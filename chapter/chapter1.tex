@@ -1458,7 +1458,7 @@ If $f$ is bdd and $\mathsf{P}^a(\tau_D < \infty) = 1$, $\forall~ a \in D$. Then 
     ($d \geq 2$) and fix $a \in \partial D$. The following are equivalent
     \begin{itemize}
         \item[(i)] $$
-        \lim_{\substack{x \to a \\ x \in D}} \frac{E^{x}\left[ f(W_{\tau_{D}}) \right]}{u(x)} = f(a)
+        \lim_{\substack{x \to a \\ x \in D}} E^{x}\left[ f(W_{\tau_{D}}) \right] = f(a)
         $$
         holds for every bounded, measurable function $f$ on $\partial D$ s.t. $f$ is continuous at $a$.
         \item[(ii)] $a$ is regular.
@@ -1503,5 +1503,92 @@ If $f$ is bdd and $\mathsf{P}^a(\tau_D < \infty) = 1$, $\forall~ a \in D$. Then 
     $$ 
     $$
     \implies \abs{ f(W_{\tau_{D}}) - f(a) } < \varepsilon.
+    $$
+
+    (ii)$\implies$(iii) Assume $a = 0$ .
+    $$
+    g(x) = \mathsf{P}^x(\sigma_D > \varepsilon).
+    $$
+    Because $\tau_D \leq \sigma_D$, we get 
+    $$
+    \limsup_{\substack{x\to 0 \\ x\in D}} \mathsf{P}^x(\tau_D > \varepsilon) \leq \limsup_{\substack{x\to 0 \\ x \in D}} \mathsf{P}^x(\sigma_D > \varepsilon) \leq \limsup_{\substack{x\to 0 \\ x\in D}} g(x).
+    $$
+    Because $g(0) = 0$, it suffices to prove $g$ is upper semicontinuos, i.e. $\forall~ x_0 \in \mathbb{R}$,
+    $$
+    \limsup_{x\to x_0} g(x) \leq g(x_0).
+    $$
+
+    Note that 
+    $$
+    g(x) = \mathsf{P}^x(\sigma_D > \varepsilon) = \mathsf{P}^x\left( W_s \in D, ~\forall~ 0 < s \leq \varepsilon \right).
+    $$
+    $\forall~ 0 < \delta < \varepsilon$, $$g_\delta(x) = \mathsf{P}^x(W_s \in D,~\forall~ \delta \leq s \leq \varepsilon).$$
+
+    Then (1)$\forall~ x \in \mathbb{R}$, $g_{\delta(x)}\downarrow g(x)$. Next, we will show that (2) $x\mapsto g_\delta(x)$ is continuous.
+
+    Then (1)+(2) $\implies g(x)$ is upper-semicontinuos. 
+
+    Fix $\delta \in (0,\varepsilon)$, we have 
+    $$
+    \begin{aligned}
+    g_\delta(x) &= \mathsf{P}^x\left( W_s\in D,~ \delta \leq s \leq \varepsilon \right) \\
+    &= E^x\left[ \mathsf{P}^{W_{\delta}}\left( W_s \in D,~ 0 \leq s \leq \varepsilon - \delta  \right) \right] \\
+    &= E^x\left[ \mathsf{P}^{W_\delta}\left( \tau_D > \varepsilon - \delta \right) \right]\\
+    &= \int_{\mathbb{R}^d} \mathsf{P}_{\delta}(x,y)\mathsf{P}^y \left( \tau_D > \varepsilon - \delta \right) \diff y.
+    \end{aligned}
+    $$
+
+    So $x\mapsto \int_{\mathbb{R}^d} \mathsf{P}_{\delta}(x,y)\mathsf{P}^y(\tau_D > \varepsilon - \delta) \diff y$ is continuous.
+
+    (i)$\implies$(ii) Assume 0 is not regular, i.e.
+    $$
+    \mathsf{P}^0(\sigma_D = 0 ) = 0 \implies \mathsf{P}^0 (\sigma_D > 0) = 1.
+    $$
+    Because starting from 0,
+    $$
+    \mathsf{P}^0\left( W_t \neq 0,~\forall~t > 0 \right) = 1 \implies \mathsf{P}^0 \left( W_{\sigma_D} = 0 \right) = 0.
+    $$
+    Hence 
+    $$
+    \lim_{r \downarrow 0}\mathsf{P}^0\left( W_{\sigma_D} \in B_r \right) = 0.
+    $$
+
+    Fix $r > 0$ small s.t.
+    $$
+    \mathsf{P}^0\left( W_{\sigma_D} \in B_r \right) < \frac{1}{4}.
+    $$
+    Let $\delta_n \downarrow 0$, $0 < \delta_n < r$. 
+
+    Define
+    $$
+    \tau_n = \inf \{t \geq 0 \colon \norm{ W_t } \geq \delta_n\}.
+    $$
+
+    Then 
+    $$
+    \mathsf{P}^0\left( \tau_n \downarrow 0 \right) = 1.
+    $$
+
+    By 
+    $$
+    \mathsf{P}^0(\sigma_D > 0) = 1,
+    $$
+    we have 
+    $$
+    \lim_{n\to \infty}\mathsf{P}^0(\tau_n < \sigma_D) = 1.
+    $$
+    Since $\tau_n \downarrow 0$, $\sigma_D > 0$, we have $\{\tau_n < \sigma_D\} \subseteq \{\tau_{n+1} < \sigma_D\}$.
+
+    $$
+    \mathsf{P}\left( \bigcup_{n=1}^\infty \{\tau_n < \sigma_D\} \right) = \lim_{n\to \infty}\mathsf{P}(\tau_n < \sigma_D).
+    $$
+
+    $$
+    \mathsf{P}^0\left( \bigcup_{n=1}^\infty \{\tau_n < \sigma _D\} \right) =1 = \lim_{n\to \infty}\mathsf{P}^0(\tau_n < \sigma_D) = 1.
+    $$
+
+    So $\exists~ N \geq 1$ s.t. $\forall~ n \geq N$,
+    $$
+    \mathsf{P}^0(\tau_n < \sigma_D) \geq \frac{1}{2}.
     $$
 }
